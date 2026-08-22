@@ -4,10 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#1d0c22">
-<img
-class="hero-logo"
-src="https://raw.githubusercontent.com/danieltorres-mhcs/assets/refs/heads/main/flibidoo.PNG"
-alt="Flibidoo">
 <title>FlibidooSearch</title>
 
 <style>
@@ -66,35 +62,31 @@ a{color:inherit}
   overflow:hidden
 }
 
-/* Flibidoo logo */
+/* Small hero logo */
 
 .hero-logo{
-  width:min(210px,55vw);
-  height:auto;
+  width:115px;
+  height:115px;
   display:block;
-  margin:0 0 16px;
+  margin:0 0 12px;
   object-fit:contain;
 
-  /*
-    Soft transparent edges around the logo.
-    This fades the outside edges without changing
-    the actual image file.
-  */
+  /* subtle transparent/faded edges */
   -webkit-mask-image:
     radial-gradient(
       ellipse at center,
-      #000 58%,
-      rgba(0,0,0,.96) 68%,
-      rgba(0,0,0,.70) 80%,
-      rgba(0,0,0,0) 100%
+      #000 55%,
+      rgba(0,0,0,.92) 70%,
+      rgba(0,0,0,.45) 88%,
+      transparent 100%
     );
   mask-image:
     radial-gradient(
       ellipse at center,
-      #000 58%,
-      rgba(0,0,0,.96) 68%,
-      rgba(0,0,0,.70) 80%,
-      rgba(0,0,0,0) 100%
+      #000 55%,
+      rgba(0,0,0,.92) 70%,
+      rgba(0,0,0,.45) 88%,
+      transparent 100%
     );
 }
 
@@ -125,19 +117,6 @@ form:focus-within{
   box-shadow:0 0 0 2px rgba(205,184,209,.08)
 }
 
-.search-icon{
-  width:20px;
-  height:20px;
-  margin-left:18px;
-  flex:0 0 auto;
-  opacity:.75
-}
-
-.search-icon circle,
-.search-icon path{
-  stroke:currentColor
-}
-
 input{
   min-width:0;
   flex:1;
@@ -164,7 +143,8 @@ input::placeholder{
   padding:0;
   display:grid;
   place-items:center;
-  cursor:pointer
+  cursor:pointer;
+  font-size:18px
 }
 
 .submit.has-input{
@@ -174,12 +154,6 @@ input::placeholder{
 
 .submit:hover{
   border-color:var(--focus)
-}
-
-.submit-icon{
-  width:18px;
-  height:18px;
-  display:block
 }
 
 .links{
@@ -205,8 +179,6 @@ input::placeholder{
   color:var(--text)
 }
 
-/* Confederacy credit */
-
 .confederacy-credit{
   display:inline-flex;
   align-items:center;
@@ -219,12 +191,12 @@ input::placeholder{
 }
 
 .confederacy-credit img{
-  width:18px;
-  height:18px;
+  width:20px;
+  height:20px;
   display:block;
   object-fit:contain;
-  flex:0 0 18px;
-  border-radius:4px
+  flex:0 0 20px;
+  border-radius:5px
 }
 
 main{
@@ -232,37 +204,60 @@ main{
 }
 
 /* =========================
-   RESULTS
+   RESULTS PAGE
 ========================= */
 
 .results{
-  padding:30px 12px 70px
+  padding:22px 12px 70px
 }
+
+/*
+  TOP RESULTS BAR
+  Logo is intentionally small here.
+*/
 
 .results-head{
   display:flex;
   align-items:center;
   gap:18px;
-  min-height:44px;
+  min-height:52px;
   border-bottom:1px solid var(--line2);
   padding-bottom:14px;
-  margin-bottom:14px
+  margin-bottom:18px
 }
 
 .results-brand{
-  display:inline-flex;
+  display:flex;
   align-items:center;
-  gap:8px;
+  gap:9px;
   text-decoration:none;
   color:inherit;
   white-space:nowrap
 }
 
+/* THIS is the top-bar logo size */
+
 .results-brand img{
-  width:28px;
-  height:28px;
+  width:34px;
+  height:34px;
   object-fit:contain;
-  display:block
+  display:block;
+  flex:0 0 34px;
+
+  -webkit-mask-image:
+    radial-gradient(
+      circle,
+      #000 58%,
+      rgba(0,0,0,.75) 80%,
+      transparent 100%
+    );
+  mask-image:
+    radial-gradient(
+      circle,
+      #000 58%,
+      rgba(0,0,0,.75) 80%,
+      transparent 100%
+    );
 }
 
 .results-brand span{
@@ -288,15 +283,11 @@ main{
 
 .results-search{
   width:min(100%,680px);
-  margin:0 0 28px
+  margin:0 0 22px
 }
 
 .results-search form{
   height:48px
-}
-
-.results-search .search-icon{
-  margin-left:16px
 }
 
 .results-search .submit{
@@ -305,11 +296,15 @@ main{
   margin-right:6px
 }
 
+/* =========================
+   SEARCH TYPES
+========================= */
+
 .search-types{
   display:flex;
   align-items:flex-end;
   gap:0;
-  margin:8px 0 18px;
+  margin:8px 0 22px;
   border-bottom:1px solid rgba(255,255,255,.12);
   height:36px
 }
@@ -325,14 +320,12 @@ main{
   line-height:20px;
   padding:0 12px 10px;
   margin:0;
-  border-radius:0;
   cursor:pointer
 }
 
 .search-type:hover,
 .search-type.active{
-  color:#fff;
-  background:transparent
+  color:#fff
 }
 
 .search-type.active::after{
@@ -346,6 +339,10 @@ main{
   background:currentColor
 }
 
+/* =========================
+   MAIN RESULTS + SIDEBAR
+========================= */
+
 .results-layout{
   display:grid;
   grid-template-columns:minmax(0,1fr) 330px;
@@ -354,7 +351,7 @@ main{
 }
 
 /* =========================
-   WEB RESULTS
+   WEB RESULT
 ========================= */
 
 .result{
@@ -377,8 +374,6 @@ main{
   text-overflow:ellipsis;
   white-space:nowrap
 }
-
-/* Title + favicon */
 
 .result-title-row{
   display:flex;
@@ -427,7 +422,7 @@ main{
   margin-top:7px
 }
 
-/* Result thumbnail / OG image */
+/* OG / thumbnail */
 
 .result-thumbnail{
   position:absolute;
@@ -443,8 +438,111 @@ main{
 
 .result-thumbnail.favicon-fallback{
   object-fit:contain;
-  padding:24px;
+  padding:27px;
   background:rgba(255,255,255,.025)
+}
+
+/* =========================
+   DICTIONARY SIDEBAR
+========================= */
+
+.dictionary{
+  border-left:1px solid var(--line2);
+  padding-left:28px;
+  max-height:72vh;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-width:thin
+}
+
+.dictionary.hidden{
+  display:none!important
+}
+
+.dictionary-title{
+  font-size:25px;
+  font-weight:500;
+  letter-spacing:-.025em;
+  margin:0 0 4px
+}
+
+.dictionary-word{
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:22px
+}
+
+.dictionary-entry{
+  padding:0 0 22px;
+  margin-bottom:22px;
+  border-bottom:1px solid var(--line2)
+}
+
+.dictionary-language{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:8px
+}
+
+.dictionary-pos{
+  font-size:15px;
+  margin-bottom:12px
+}
+
+.dictionary-label{
+  font-size:11px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  margin-bottom:7px
+}
+
+.dictionary-senses,
+.dictionary-relations,
+.dictionary-translations{
+  margin-top:14px
+}
+
+.dictionary-sense{
+  margin:0 0 15px
+}
+
+.dictionary-definition{
+  font-size:14px;
+  line-height:1.55
+}
+
+.dictionary-tags{
+  font-size:11px;
+  color:var(--muted);
+  margin-left:5px
+}
+
+.dictionary-example,
+.dictionary-quote{
+  font-size:13px;
+  line-height:1.5;
+  color:var(--result);
+  margin:7px 0 0 14px
+}
+
+.dictionary-list{
+  margin:0;
+  padding-left:18px
+}
+
+.dictionary-list li{
+  margin:0 0 7px;
+  font-size:13px;
+  line-height:1.45
+}
+
+.dictionary-source,
+.dictionary-loading,
+.dictionary-empty{
+  font-size:12px;
+  line-height:1.5;
+  color:var(--muted)
 }
 
 /* =========================
@@ -458,8 +556,7 @@ main{
 }
 
 .image-result{
-  min-width:0;
-  position:relative
+  min-width:0
 }
 
 .image-result a{
@@ -532,144 +629,8 @@ main{
 }
 
 /* =========================
-   DICTIONARY
+   EMPTY / ERROR / PAGER
 ========================= */
-
-.dictionary{
-  border-left:1px solid var(--line2);
-  padding-left:28px;
-  max-height:70vh;
-  overflow-y:auto;
-  overscroll-behavior:contain;
-  scrollbar-width:thin
-}
-
-.dictionary-title{
-  font-size:22px;
-  font-weight:500;
-  letter-spacing:-.02em;
-  margin:0 0 5px
-}
-
-.dictionary-word{
-  font-size:13px;
-  color:var(--muted);
-  margin-bottom:22px
-}
-
-.dictionary-entry{
-  padding:0 0 24px;
-  margin-bottom:24px;
-  border-bottom:1px solid var(--line2)
-}
-
-.dictionary-language,
-.dictionary-label{
-  font-size:12px;
-  color:var(--muted)
-}
-
-.dictionary-language{
-  margin-bottom:8px
-}
-
-.dictionary-pos{
-  font-size:15px;
-  margin-bottom:12px
-}
-
-.dictionary-senses,
-.dictionary-relations,
-.dictionary-translations{
-  margin-top:14px
-}
-
-.dictionary-label{
-  text-transform:uppercase;
-  letter-spacing:.05em;
-  margin-bottom:7px
-}
-
-.dictionary-list{
-  margin:0;
-  padding-left:18px
-}
-
-.dictionary-list li{
-  margin:0 0 7px
-}
-
-.dictionary-sense{
-  margin:0 0 15px
-}
-
-.dictionary-definition{
-  font-size:14px;
-  line-height:1.55
-}
-
-.dictionary-tags{
-  font-size:12px;
-  color:var(--muted);
-  margin-left:5px
-}
-
-.dictionary-example,
-.dictionary-quote{
-  font-size:13px;
-  line-height:1.5;
-  color:var(--result);
-  margin:7px 0 0 14px
-}
-
-.dictionary-source,
-.dictionary-loading,
-.dictionary-empty{
-  font-size:12px;
-  line-height:1.5;
-  color:var(--muted)
-}
-
-/* =========================
-   WORD OF THE DAY
-========================= */
-
-.wotd-panel{
-  padding:0 0 22px;
-  margin:0 0 22px;
-  border-bottom:1px solid var(--line2)
-}
-
-.wotd-heading{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  margin:0 0 8px;
-  color:#ffb52e;
-  font-size:13px;
-  font-weight:600
-}
-
-.wotd-word{
-  color:#ffe18a;
-  font-size:20px;
-  font-weight:600;
-  line-height:1.25;
-  margin:0 0 5px
-}
-
-.wotd-definition{
-  color:#ffe9a8;
-  font-size:13px;
-  line-height:1.55;
-  margin:0
-}
-
-.wotd-status{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.5
-}
 
 .empty{
   padding:70px 0;
@@ -680,7 +641,6 @@ main{
 .error{
   min-height:120px;
   max-width:680px;
-  margin:0;
   padding:28px 18px;
   display:flex;
   align-items:center;
@@ -723,10 +683,6 @@ main{
   place-items:center;
   padding:24px;
   z-index:10000
-}
-
-.about-overlay.hidden{
-  display:none
 }
 
 .about-card{
@@ -773,10 +729,6 @@ main{
   font-size:14px
 }
 
-.about-card a{
-  color:var(--text)
-}
-
 /* =========================
    RESPONSIVE
 ========================= */
@@ -791,7 +743,6 @@ main{
     order:-1;
     border-left:0;
     border-bottom:1px solid var(--line2);
-    border-top:0;
     padding:0 0 26px;
     margin-bottom:26px;
     max-height:none
@@ -828,7 +779,8 @@ main{
   }
 
   .hero-logo{
-    width:150px
+    width:95px;
+    height:95px
   }
 
   h1{
@@ -836,21 +788,18 @@ main{
     margin-bottom:24px
   }
 
-  form{
-    height:50px
-  }
-
   .results{
-    padding:22px 16px 60px
+    padding:18px 16px 60px
   }
 
   .results-head{
-    gap:12px
+    gap:10px
   }
 
   .results-brand img{
-    width:24px;
-    height:24px
+    width:30px;
+    height:30px;
+    flex-basis:30px
   }
 
   .results-brand span{
@@ -897,9 +846,9 @@ main{
     right:auto;
     width:100%;
     height:150px;
-    margin-top:12px;
-    order:3
+    margin-top:12px
   }
+
 }
 </style>
 </head>
@@ -908,11 +857,23 @@ main{
 
 <main>
 
+<!-- =========================
+     HOME
+========================= -->
+
 <section id="home" class="home shell">
 
   <div class="search-wrap">
 
-    <h1><em><strong>Flibidoo</strong></em>Search</h1>
+    <img
+      class="hero-logo"
+      src="https://raw.githubusercontent.com/danieltorres-mhcs/assets/refs/heads/main/flibidoo.PNG"
+      alt="Flibidoo"
+    >
+
+    <h1>
+      <em><strong>Flibidoo</strong></em>Search
+    </h1>
 
     <form id="searchForm" role="search">
 
@@ -936,18 +897,25 @@ main{
 
     <div class="links">
 
-      <button type="button" id="aboutButton">
+      <button
+        type="button"
+        id="aboutButton"
+      >
         About
       </button>
 
       <span class="confederacy-credit">
-        <span>with love from The Great Confederacy of E</span>
+
+        <span>
+          with love from The Great Confederacy of E
+        </span>
 
         <img
           src="https://raw.githubusercontent.com/danieltorres-mhcs/assets/refs/heads/main/Untitled13_20260821194209.png"
           alt=""
           aria-hidden="true"
         >
+
       </span>
 
     </div>
@@ -957,7 +925,14 @@ main{
 </section>
 
 
-<section id="results" class="results shell hidden">
+<!-- =========================
+     RESULTS
+========================= -->
+
+<section
+  id="results"
+  class="results shell hidden"
+>
 
   <div class="results-head">
 
@@ -966,21 +941,37 @@ main{
       href="/"
       aria-label="FlibidooSearch home"
     >
+
+      <img
+        src="https://raw.githubusercontent.com/danieltorres-mhcs/assets/refs/heads/main/flibidoo.PNG"
+        alt="Flibidoo"
+      >
+
       <span>
         <em><strong>Flibidoo</strong></em>Search
       </span>
+
     </a>
 
-    <div id="queryLabel" class="results-query"></div>
+    <div
+      id="queryLabel"
+      class="results-query"
+    ></div>
 
-    <div id="count" class="count"></div>
+    <div
+      id="count"
+      class="count"
+    ></div>
 
   </div>
 
 
   <div class="results-search">
 
-    <form id="resultsSearchForm" role="search">
+    <form
+      id="resultsSearchForm"
+      role="search"
+    >
 
       <input
         id="resultsQ"
@@ -1003,7 +994,10 @@ main{
   </div>
 
 
-  <nav class="search-types" aria-label="Search type">
+  <nav
+    class="search-types"
+    aria-label="Search type"
+  >
 
     <button
       class="search-type active"
@@ -1035,9 +1029,18 @@ main{
   <div class="results-layout">
 
     <div>
+
       <div id="resultList"></div>
-      <div id="pager" class="pager"></div>
+
+      <div
+        id="pager"
+        class="pager"
+      ></div>
+
     </div>
+
+
+    <!-- DICTIONARY SIDEBAR -->
 
     <aside
       id="dictionary"
@@ -1051,6 +1054,10 @@ main{
 
 </main>
 
+
+<!-- =========================
+     ABOUT
+========================= -->
 
 <div
   id="aboutOverlay"
@@ -1071,11 +1078,13 @@ main{
 
     <h2 id="aboutTitle">About</h2>
 
-    <p>Welcome to FlibidooSearch.</p>
+    <p>
+      Welcome to FlibidooSearch.
+    </p>
 
     <p>
-      You can edit this text directly in the HTML inside the
-      <strong>about-card</strong>.
+      You can edit this text directly in the HTML
+      inside the <strong>about-card</strong>.
     </p>
 
   </div>
@@ -1084,8 +1093,6 @@ main{
 
 
 <script>
-
-const API_BASE='https://search.tiago.zip';
 
 const form=document.querySelector('#searchForm');
 const input=document.querySelector('#q');
@@ -1108,7 +1115,12 @@ let currentPage=0;
 let currentType='web';
 
 
+/* =========================
+   UTILITIES
+========================= */
+
 function esc(s=''){
+
   return String(s).replace(
     /[&<>'"]/g,
     c=>({
@@ -1118,13 +1130,10 @@ function esc(s=''){
       "'":'&#39;',
       '"':'&quot;'
     }[c])
-  )
+  );
+
 }
 
-
-/*
-  Gets the hostname from a result URL.
-*/
 
 function getHostname(url=''){
 
@@ -1136,13 +1145,6 @@ function getHostname(url=''){
 
 }
 
-
-/*
-  Google favicon service.
-
-  This is used as a reliable browser-side favicon
-  fallback without needing another backend request.
-*/
 
 function faviconFor(url=''){
 
@@ -1156,11 +1158,7 @@ function faviconFor(url=''){
 
 
 /*
-  Try the common thumbnail fields returned by
-  different search APIs.
-
-  If your API returns an OG image as one of these
-  fields, it will automatically be used.
+  Look for as many common image fields as possible.
 */
 
 function getResultThumbnail(r,url){
@@ -1182,66 +1180,567 @@ function getResultThumbnail(r,url){
 }
 
 
-function isFallbackThumbnail(src,url){
-
-  if(!src)return true;
+function isFaviconFallback(src,url){
 
   return src===faviconFor(url);
 
 }
 
 
-function updateButtonState(b,v){
-  b.classList.toggle(
-    'has-input',
-    v.trim().length>0
-  );
+/* =========================
+   DICTIONARY
+========================= */
+
+/*
+  Your Worker exposes:
+
+    GET /api/dictionary?word=...
+
+  This function calls that endpoint.
+*/
+
+async function loadDictionary(word){
+
+  word=(word||'').trim();
+
+  dictionary.classList.remove('hidden');
+
+  if(!word){
+
+    dictionary.innerHTML='';
+
+    dictionary.classList.add('hidden');
+
+    return;
+
+  }
+
+
+  dictionary.innerHTML=`
+
+    <div class="dictionary-title">
+      Dictionary
+    </div>
+
+    <div class="dictionary-word">
+      Looking up “${esc(word)}”…
+    </div>
+
+    <div class="dictionary-loading">
+      Loading definition…
+    </div>
+
+  `;
+
+
+  try{
+
+    const response=
+      await fetch(
+        `/api/dictionary?word=${encodeURIComponent(word)}`
+      );
+
+
+    const data=
+      await response.json();
+
+
+    if(
+      !response.ok ||
+      !Array.isArray(data.entries) ||
+      !data.entries.length
+    ){
+
+      dictionary.innerHTML=`
+
+        <div class="dictionary-title">
+          Dictionary
+        </div>
+
+        <div class="dictionary-word">
+          ${esc(word)}
+        </div>
+
+        <div class="dictionary-empty">
+          No dictionary entry found.
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    renderDictionary(word,data);
+
+  }catch(error){
+
+    dictionary.innerHTML=`
+
+      <div class="dictionary-title">
+        Dictionary
+      </div>
+
+      <div class="dictionary-word">
+        ${esc(word)}
+      </div>
+
+      <div class="dictionary-empty">
+        Dictionary temporarily unavailable.
+      </div>
+
+    `;
+
+  }
+
 }
 
 
-/* Update button appearance while typing */
-
-input.addEventListener(
-  'input',
-  ()=>updateButtonState(
-    document.querySelector('#submitButton'),
-    input.value
-  )
-);
-
-resultsInput.addEventListener(
-  'input',
-  ()=>updateButtonState(
-    document.querySelector('#resultsSubmitButton'),
-    resultsInput.value
-  )
-);
-
-
 /*
-  Render results.
+  The Free Dictionary API can return several
+  slightly different shapes.
+
+  This renderer deliberately checks multiple
+  possible property names so the sidebar is
+  resilient to the response format.
 */
+
+function renderDictionary(word,data){
+
+  let html=`
+
+    <div class="dictionary-title">
+      Dictionary
+    </div>
+
+    <div class="dictionary-word">
+      ${esc(word)}
+    </div>
+
+  `;
+
+
+  data.entries.forEach(entry=>{
+
+    const language=
+      entry.language?.name ||
+      entry.language ||
+      entry.lang ||
+      '';
+
+    const partOfSpeech=
+      entry.partOfSpeech ||
+      entry.part_of_speech ||
+      entry.pos ||
+      '';
+
+
+    html+=`
+
+      <article class="dictionary-entry">
+
+        ${
+          language
+            ? `<div class="dictionary-language">
+                ${esc(language)}
+              </div>`
+            : ''
+        }
+
+        ${
+          partOfSpeech
+            ? `<div class="dictionary-pos">
+                ${esc(partOfSpeech)}
+              </div>`
+            : ''
+        }
+
+    `;
+
+
+    /*
+      Definitions can be directly on the entry
+      or nested inside senses.
+    */
+
+    let definitions=
+      entry.definitions ||
+      entry.senses ||
+      [];
+
+
+    if(!Array.isArray(definitions)){
+      definitions=[];
+    }
+
+
+    if(definitions.length){
+
+      html+=`
+
+        <div class="dictionary-senses">
+
+          <div class="dictionary-label">
+            Definitions
+          </div>
+
+      `;
+
+
+      definitions.forEach((sense,index)=>{
+
+        const definition=
+          typeof sense==='string'
+            ? sense
+            : (
+                sense.definition ||
+                sense.meaning ||
+                sense.text ||
+                ''
+              );
+
+        if(!definition)return;
+
+
+        const example=
+          typeof sense==='object'
+            ? (
+                sense.example ||
+                sense.examples?.[0] ||
+                ''
+              )
+            : '';
+
+
+        const tags=
+          typeof sense==='object'
+            ? (
+                sense.tags ||
+                sense.labels ||
+                ''
+              )
+            : '';
+
+
+        html+=`
+
+          <div class="dictionary-sense">
+
+            <div class="dictionary-definition">
+
+              ${index+1}.
+              ${esc(definition)}
+
+              ${
+                tags
+                  ? `<span class="dictionary-tags">
+                      ${esc(
+                        Array.isArray(tags)
+                          ? tags.join(', ')
+                          : tags
+                      )}
+                    </span>`
+                  : ''
+              }
+
+            </div>
+
+            ${
+              example
+                ? `<div class="dictionary-example">
+                    “${esc(example)}”
+                  </div>`
+                : ''
+            }
+
+          </div>
+
+        `;
+
+      });
+
+
+      html+=`</div>`;
+
+    }
+
+
+    /*
+      Synonyms.
+    */
+
+    const synonyms=
+      entry.synonyms ||
+      entry.relations?.synonyms ||
+      [];
+
+
+    if(
+      Array.isArray(synonyms) &&
+      synonyms.length
+    ){
+
+      html+=`
+
+        <div class="dictionary-relations">
+
+          <div class="dictionary-label">
+            Synonyms
+          </div>
+
+          <div class="dictionary-list">
+
+            ${synonyms
+              .slice(0,12)
+              .map(
+                x=>`<span>${esc(
+                  typeof x==='string'
+                    ? x
+                    : x.word||x.text||''
+                )}</span>`
+              )
+              .join(', ')}
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+
+    /*
+      Antonyms.
+    */
+
+    const antonyms=
+      entry.antonyms ||
+      entry.relations?.antonyms ||
+      [];
+
+
+    if(
+      Array.isArray(antonyms) &&
+      antonyms.length
+    ){
+
+      html+=`
+
+        <div class="dictionary-relations">
+
+          <div class="dictionary-label">
+            Antonyms
+          </div>
+
+          <div class="dictionary-list">
+
+            ${antonyms
+              .slice(0,12)
+              .map(
+                x=>`<span>${esc(
+                  typeof x==='string'
+                    ? x
+                    : x.word||x.text||''
+                )}</span>`
+              )
+              .join(', ')}
+
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+
+    html+=`
+
+      </article>
+
+    `;
+
+  });
+
+
+  html+=`
+
+    <div class="dictionary-source">
+      Source: Free Dictionary API
+    </div>
+
+  `;
+
+
+  dictionary.innerHTML=html;
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+async function search(
+  q,
+  page=0,
+  type=currentType
+){
+
+  q=q.trim();
+
+  if(!q)return;
+
+
+  currentQ=q;
+
+  currentPage=
+    Math.max(
+      0,
+      Number(page)||0
+    );
+
+  currentType=type;
+
+
+  document.title=
+    `${q} - FlibidooSearch`;
+
+
+  input.value=q;
+  resultsInput.value=q;
+
+
+  home.classList.add('hidden');
+  results.classList.remove('hidden');
+
+
+  list.innerHTML=
+    '<div class="empty">Searching…</div>';
+
+  count.textContent='';
+
+  label.textContent=
+    `Results for “${q}”`;
+
+  pager.innerHTML='';
+
+
+  /*
+    Dictionary loads alongside the search.
+
+    We only show it on Web searches.
+  */
+
+  if(type==='web'){
+
+    loadDictionary(q);
+
+  }else{
+
+    dictionary.innerHTML='';
+    dictionary.classList.add('hidden');
+
+  }
+
+
+  /*
+    IMPORTANT:
+
+    Call YOUR CLOUDFLARE WORKER:
+
+      /api/search?q=...&type=...&page=...
+
+    NOT Tiago directly.
+  */
+
+  try{
+
+    const response=
+      await fetch(
+        `/api/search?q=${encodeURIComponent(q)}&type=${encodeURIComponent(type)}&page=${currentPage}`,
+        {
+          method:'GET',
+          headers:{
+            'Accept':'application/json'
+          }
+        }
+      );
+
+
+    const data=
+      await response.json();
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error ||
+        'Search failed.'
+      );
+
+    }
+
+
+    render(data);
+
+
+  }catch(error){
+
+    list.innerHTML=`
+
+      <div class="error">
+        ${esc(
+          error.message ||
+          'Search failed. Please try again.'
+        )}
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/* =========================
+   RENDER SEARCH RESULTS
+========================= */
 
 function render(data){
 
   home.classList.add('hidden');
   results.classList.remove('hidden');
 
-  currentType=data.type||currentType;
 
-  label.textContent=data.query
-    ? `Results for “${data.query}”`
-    : '';
+  currentType=
+    data.type ||
+    currentType;
+
+
+  label.textContent=
+    data.query
+      ? `Results for “${data.query}”`
+      : '';
+
 
   let a=[];
 
+
   if(currentType==='web'){
 
-    a=Array.isArray(
-      data.results?.web?.results
-    )
-      ? data.results.web.results
-      : [];
+    a=
+      Array.isArray(data.results)
+        ? data.results
+        : (
+            Array.isArray(
+              data.results?.web?.results
+            )
+              ? data.results.web.results
+              : []
+          );
 
   }
 
@@ -1250,23 +1749,18 @@ function render(data){
     currentType==='news'
   ){
 
-    a=Array.isArray(data.results)
-      ? data.results
-      : [];
+    a=
+      Array.isArray(data.results)
+        ? data.results
+        : [];
 
   }
 
   else if(currentType==='map'){
 
-    const loc=
-      data.results?.locations ??
-      data.results?.map ??
-      data.locations;
-
-    a=Array.isArray(loc)
-      ? loc
-      : Array.isArray(loc?.results)
-        ? loc.results
+    a=
+      Array.isArray(data.results)
+        ? data.results
         : [];
 
   }
@@ -1277,7 +1771,9 @@ function render(data){
       ? `${a.length} results`
       : '';
 
-  resultsInput.value=data.query||'';
+
+  resultsInput.value=
+    data.query||'';
 
   list.innerHTML='';
   pager.innerHTML='';
@@ -1285,11 +1781,11 @@ function render(data){
 
   document
     .querySelectorAll('.search-type')
-    .forEach(b=>{
+    .forEach(button=>{
 
-      b.classList.toggle(
+      button.classList.toggle(
         'active',
-        b.dataset.type===currentType
+        button.dataset.type===currentType
       );
 
     });
@@ -1311,39 +1807,45 @@ function render(data){
 
   if(currentType==='images'){
 
-    const grid=document.createElement('div');
+    const grid=
+      document.createElement('div');
 
     grid.className='image-grid';
 
+
     a.forEach(r=>{
 
-      const u=
+      const url=
         r.url ||
         r.properties?.url ||
         '';
 
-      const img=
+      const image=
         r.thumbnail ||
+        r.image ||
         r.properties?.url ||
         '';
 
-      if(!img)return;
+
+      if(!image)return;
+
 
       const el=
         document.createElement('article');
 
       el.className='image-result';
 
+
       el.innerHTML=`
 
         <a
-          href="${esc(u)}"
+          href="${esc(url)}"
           target="_blank"
           rel="noopener noreferrer"
         >
 
           <img
-            src="${esc(img)}"
+            src="${esc(image)}"
             alt="${esc(r.title||'')}"
             loading="lazy"
             referrerpolicy="no-referrer"
@@ -1352,18 +1854,19 @@ function render(data){
         </a>
 
         <div class="image-result-title">
-          ${esc(r.title||u)}
+          ${esc(r.title||url)}
         </div>
 
         <div class="image-result-source">
           ${esc(
             r.source ||
             r.meta_url?.hostname ||
-            getHostname(u)
+            getHostname(url)
           )}
         </div>
 
       `;
+
 
       grid.appendChild(el);
 
@@ -1385,7 +1888,7 @@ function render(data){
 
 
   /* =========================
-     MAP
+     MAPS
   ========================= */
 
   else if(currentType==='map'){
@@ -1397,18 +1900,17 @@ function render(data){
 
       el.className='map-result';
 
+
       const title=
         r.title ||
         r.name ||
-        r.address?.name ||
-        r.properties?.name ||
         'Map result';
 
-      const u=
+
+      const url=
         r.url ||
-        r.website ||
-        r.properties?.url ||
         '';
+
 
       const addr=
         typeof r.address==='string'
@@ -1421,27 +1923,26 @@ function render(data){
                     )
                     .join(', ')
                 : r.description ||
-                  r.properties?.address ||
                   ''
             );
 
+
       const lat=
         r.lat ??
-        r.latitude ??
-        r.coordinates?.lat ??
-        r.geometry?.coordinates?.[1];
+        r.latitude;
+
 
       const lon=
         r.lon ??
         r.lng ??
-        r.longitude ??
-        r.coordinates?.lon ??
-        r.geometry?.coordinates?.[0];
+        r.longitude;
+
 
       const href=
-        lat!=null&&lon!=null
+        lat!=null &&
+        lon!=null
           ? `https://www.google.com/maps?q=${encodeURIComponent(lat)},${encodeURIComponent(lon)}`
-          : u;
+          : url;
 
 
       el.innerHTML=`
@@ -1476,6 +1977,7 @@ function render(data){
 
       `;
 
+
       list.appendChild(el);
 
     });
@@ -1497,24 +1999,28 @@ function render(data){
       el.className='result';
 
 
-      const u=
+      const url=
         r.url ||
         r.link ||
         '';
 
+
       const host=
         r.meta_url?.hostname ||
-        getHostname(u);
+        getHostname(url);
+
 
       const title=
         r.title ||
-        u ||
+        url ||
         'Untitled result';
 
-      const desc=
+
+      const description=
         r.description ||
         r.content ||
         '';
+
 
       const age=
         r.age ||
@@ -1524,28 +2030,29 @@ function render(data){
 
 
       /*
-        Favicon on the left.
+        Favicon.
       */
 
       const favicon=
         r.favicon ||
         r.favicon_url ||
         r.meta?.favicon ||
-        faviconFor(u);
+        faviconFor(url);
 
 
       /*
-        Thumbnail / OG image on the right.
-
-        API-provided thumbnail is preferred.
-        Favicon is used as fallback.
+        Thumbnail / OG image.
       */
 
       const thumbnail=
-        getResultThumbnail(r,u);
+        getResultThumbnail(r,url);
+
 
       const fallback=
-        isFallbackThumbnail(thumbnail,u);
+        isFaviconFallback(
+          thumbnail,
+          url
+        );
 
 
       el.innerHTML=`
@@ -1553,7 +2060,7 @@ function render(data){
         <div class="result-main">
 
           <div class="result-url">
-            ${esc(host||u)}
+            ${esc(host||url)}
           </div>
 
           <div class="result-title-row">
@@ -1570,7 +2077,7 @@ function render(data){
             <h2>
 
               <a
-                href="${esc(u)}"
+                href="${esc(url)}"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -1581,13 +2088,15 @@ function render(data){
 
           </div>
 
+
           ${
-            desc
+            description
               ? `<p class="snippet">
-                  ${esc(desc)}
+                  ${esc(description)}
                 </p>`
               : ''
           }
+
 
           ${
             age
@@ -1598,6 +2107,7 @@ function render(data){
           }
 
         </div>
+
 
         ${
           thumbnail
@@ -1611,12 +2121,17 @@ function render(data){
                 alt=""
                 loading="lazy"
                 referrerpolicy="no-referrer"
-                onerror="this.onerror=null;this.src='${esc(faviconFor(u))}';this.classList.add('favicon-fallback')"
+                onerror="
+                  this.onerror=null;
+                  this.src='${esc(faviconFor(url))}';
+                  this.classList.add('favicon-fallback')
+                "
               >`
             : ''
         }
 
       `;
+
 
       list.appendChild(el);
 
@@ -1624,6 +2139,10 @@ function render(data){
 
   }
 
+
+  /* =========================
+     PAGINATION
+  ========================= */
 
   const more=
     Boolean(
@@ -1634,38 +2153,38 @@ function render(data){
 
   if(currentPage>0){
 
-    const b=
+    const button=
       document.createElement('button');
 
-    b.textContent='Previous';
+    button.textContent='Previous';
 
-    b.onclick=()=>
+    button.onclick=()=>
       search(
         currentQ,
         currentPage-1,
         currentType
       );
 
-    pager.appendChild(b);
+    pager.appendChild(button);
 
   }
 
 
   if(more){
 
-    const b=
+    const button=
       document.createElement('button');
 
-    b.textContent='Next';
+    button.textContent='Next';
 
-    b.onclick=()=>
+    button.onclick=()=>
       search(
         currentQ,
         currentPage+1,
         currentType
       );
 
-    pager.appendChild(b);
+    pager.appendChild(button);
 
   }
 
@@ -1673,7 +2192,11 @@ function render(data){
   history.replaceState(
     {},
     '',
-    `/?q=${encodeURIComponent(data.query||currentQ)}&type=${encodeURIComponent(currentType)}${
+    `/?q=${encodeURIComponent(
+      data.query||currentQ
+    )}&type=${encodeURIComponent(
+      currentType
+    )}${
       currentPage
         ? `&page=${currentPage}`
         : ''
@@ -1683,108 +2206,9 @@ function render(data){
 }
 
 
-/*
-  Search.
-*/
-
-async function search(
-  q,
-  page=0,
-  type=currentType
-){
-
-  q=q.trim();
-
-  if(!q)return;
-
-  currentQ=q;
-  currentPage=
-    Math.max(0,Number(page)||0);
-
-  currentType=type;
-
-  document.title=
-    `${q} - FlibidooSearch`;
-
-  input.value=q;
-  resultsInput.value=q;
-
-  home.classList.add('hidden');
-  results.classList.remove('hidden');
-
-  list.innerHTML=
-    '<div class="empty">Searching…</div>';
-
-  count.textContent='';
-
-  label.textContent=
-    `Results for “${q}”`;
-
-  pager.innerHTML='';
-
-
-  try{
-
-    const r=
-      await fetch(
-        `${API_BASE}/api`,
-        {
-          method:'POST',
-          headers:{
-            'Content-Type':
-              'application/json'
-          },
-          body:JSON.stringify({
-            query:q,
-            type:
-              type==='map'
-                ? 'web'
-                : type,
-            page:currentPage
-          })
-        }
-      );
-
-
-    const d=
-      await r.json();
-
-    if(!r.ok){
-
-      throw new Error(
-        d.error ||
-        'Search failed'
-      );
-
-    }
-
-    d.type=type;
-
-    render(d);
-
-  }catch(e){
-
-    list.innerHTML=`
-
-      <div class="error">
-
-        ${esc(
-          e.message ||
-          'Search failed. Please try again.'
-        )}
-
-      </div>
-
-    `;
-
-  }
-
-}
-
-
-/*
-  Home search.
-*/
+/* =========================
+   HOME FORM
+========================= */
 
 form.addEventListener(
   'submit',
@@ -1806,9 +2230,9 @@ form.addEventListener(
 );
 
 
-/*
-  Results search.
-*/
+/* =========================
+   RESULTS FORM
+========================= */
 
 resultsForm.addEventListener(
   'submit',
@@ -1833,15 +2257,15 @@ resultsForm.addEventListener(
 );
 
 
-/*
-  Search type buttons.
-*/
+/* =========================
+   TABS
+========================= */
 
 document
   .querySelectorAll('.search-type')
-  .forEach(btn=>{
+  .forEach(button=>{
 
-    btn.addEventListener(
+    button.addEventListener(
       'click',
       ()=>{
 
@@ -1849,7 +2273,7 @@ document
           resultsInput.value ||
           currentQ,
           0,
-          btn.dataset.type
+          button.dataset.type
         );
 
       }
@@ -1858,14 +2282,15 @@ document
   });
 
 
-/*
-  About modal.
-*/
+/* =========================
+   ABOUT
+========================= */
 
 const aboutOverlay=
   document.querySelector(
     '#aboutOverlay'
   );
+
 
 document
   .querySelector('#aboutButton')
@@ -1874,12 +2299,14 @@ document
       'hidden'
     );
 
+
 document
   .querySelector('#aboutClose')
   .onclick=()=>
     aboutOverlay.classList.add(
       'hidden'
     );
+
 
 aboutOverlay.addEventListener(
   'click',
@@ -1913,9 +2340,9 @@ document.addEventListener(
 );
 
 
-/*
-  Initial URL search.
-*/
+/* =========================
+   INITIAL URL
+========================= */
 
 const params=
   new URLSearchParams(
