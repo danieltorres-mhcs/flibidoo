@@ -82,6 +82,7 @@ button{
   display:none!important;
 }
 
+
 /* =========================
    HOME
 ========================= */
@@ -115,11 +116,6 @@ button{
   margin:0 auto 18px;
   object-fit:contain;
 
-  /*
-    Soft transparent edges.
-    The image itself remains intact while the edges
-    fade into the background.
-  */
   -webkit-mask-image:
     radial-gradient(
       ellipse 72% 72% at center,
@@ -128,6 +124,7 @@ button{
       rgba(0,0,0,.5) 86%,
       transparent 100%
     );
+
   mask-image:
     radial-gradient(
       ellipse 72% 72% at center,
@@ -259,6 +256,7 @@ input::placeholder{
   border-radius:5px;
 }
 
+
 /* =========================
    RESULTS
 ========================= */
@@ -334,6 +332,7 @@ main{
   margin-right:7px;
 }
 
+
 /* =========================
    SEARCH TYPES
 ========================= */
@@ -379,6 +378,7 @@ main{
   background:currentColor;
 }
 
+
 /* =========================
    RESULT LAYOUT
 ========================= */
@@ -389,6 +389,7 @@ main{
   gap:42px;
   align-items:start;
 }
+
 
 /* =========================
    WEB RESULTS
@@ -484,6 +485,7 @@ main{
   margin-top:7px;
 }
 
+
 /* =========================
    IMAGES
 ========================= */
@@ -536,8 +538,6 @@ main{
   text-overflow:ellipsis;
 }
 
-/* Long press download animation */
-
 .image-progress{
   position:absolute;
   inset:0;
@@ -572,45 +572,9 @@ main{
   }
 }
 
-/* =========================
-   MAP
-========================= */
-
-.map-result{
-  padding:0 0 22px;
-  margin-bottom:22px;
-  border-bottom:1px solid var(--line2);
-}
-
-.map-result-title{
-  font-size:18px;
-  line-height:1.35;
-  margin:0 0 6px;
-  font-weight:500;
-}
-
-.map-result-title a{
-  text-decoration:none;
-}
-
-.map-result-title a:hover{
-  text-decoration:underline;
-}
-
-.map-result-address{
-  font-size:14px;
-  line-height:1.55;
-  color:var(--result);
-}
-
-.map-result-coords{
-  font-size:12px;
-  color:var(--muted);
-  margin-top:6px;
-}
 
 /* =========================
-   DICTIONARY
+   DICTIONARY SIDEBAR
 ========================= */
 
 .dictionary{
@@ -706,6 +670,7 @@ main{
   color:var(--muted);
 }
 
+
 /* =========================
    WOTD
 ========================= */
@@ -748,11 +713,44 @@ main{
   margin:8px 0 0;
 }
 
-.wotd-status{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.5;
+
+/* =========================
+   MAP
+========================= */
+
+.map-result{
+  padding:0 0 22px;
+  margin-bottom:22px;
+  border-bottom:1px solid var(--line2);
 }
+
+.map-result-title{
+  font-size:18px;
+  line-height:1.35;
+  margin:0 0 6px;
+  font-weight:500;
+}
+
+.map-result-title a{
+  text-decoration:none;
+}
+
+.map-result-title a:hover{
+  text-decoration:underline;
+}
+
+.map-result-address{
+  font-size:14px;
+  line-height:1.55;
+  color:var(--result);
+}
+
+.map-result-coords{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:6px;
+}
+
 
 /* =========================
    GENERAL
@@ -793,6 +791,7 @@ main{
   padding:8px 12px;
   cursor:pointer;
 }
+
 
 /* =========================
    ABOUT
@@ -855,6 +854,7 @@ main{
 .about-card a{
   color:var(--text);
 }
+
 
 /* =========================
    RESPONSIVE
@@ -1153,7 +1153,15 @@ main{
       id="dictionary"
       class="dictionary hidden"
       aria-label="Dictionary results"
-    ></aside>
+    >
+
+      <!-- WOTD ALWAYS GOES FIRST -->
+      <div id="wotdSidebar"></div>
+
+      <!-- STANDARD DICTIONARY GOES SECOND -->
+      <div id="dictionarySidebar"></div>
+
+    </aside>
 
   </div>
 
@@ -1203,6 +1211,7 @@ main{
 
 
 <script>
+
 /* =========================================================
    CONFIGURATION
 ========================================================= */
@@ -1218,21 +1227,44 @@ const WOTD_WORKER =
    DOM
 ========================================================= */
 
-const form = document.querySelector('#searchForm');
-const input = document.querySelector('#q');
+const form =
+  document.querySelector('#searchForm');
 
-const home = document.querySelector('#home');
-const results = document.querySelector('#results');
+const input =
+  document.querySelector('#q');
 
-const list = document.querySelector('#resultList');
-const label = document.querySelector('#queryLabel');
-const count = document.querySelector('#count');
-const pager = document.querySelector('#pager');
+const home =
+  document.querySelector('#home');
 
-const resultsForm = document.querySelector('#resultsSearchForm');
-const resultsInput = document.querySelector('#resultsQ');
+const results =
+  document.querySelector('#results');
 
-const dictionary = document.querySelector('#dictionary');
+const list =
+  document.querySelector('#resultList');
+
+const label =
+  document.querySelector('#queryLabel');
+
+const count =
+  document.querySelector('#count');
+
+const pager =
+  document.querySelector('#pager');
+
+const resultsForm =
+  document.querySelector('#resultsSearchForm');
+
+const resultsInput =
+  document.querySelector('#resultsQ');
+
+const dictionary =
+  document.querySelector('#dictionary');
+
+const wotdSidebar =
+  document.querySelector('#wotdSidebar');
+
+const dictionarySidebar =
+  document.querySelector('#dictionarySidebar');
 
 const submitButton =
   document.querySelector('#submitButton');
@@ -1244,8 +1276,6 @@ const resultsSubmitButton =
 let currentQ = '';
 let currentPage = 0;
 let currentType = 'web';
-
-let currentWotd = null;
 
 
 /* =========================================================
@@ -1278,22 +1308,21 @@ function normalizeUrl(url){
 
   if(!url) return '';
 
-  url = String(url).trim();
-
-  /*
-    Some providers return encoded URLs.
-    Decode them only when doing so produces a valid URL.
-  */
+  url =
+    String(url).trim();
 
   try{
 
-    let decoded = decodeURIComponent(url);
+    const decoded =
+      decodeURIComponent(url);
 
     if(
       /^https?:\/\//i.test(decoded) &&
       decoded.length < url.length
     ){
+
       url = decoded;
+
     }
 
   }catch(_){}
@@ -1306,9 +1335,15 @@ function normalizeUrl(url){
 function hostname(url){
 
   try{
-    return new URL(url).hostname.replace(/^www\./,'');
+
+    return new URL(url)
+      .hostname
+      .replace(/^www\./,'');
+
   }catch(_){
+
     return '';
+
   }
 
 }
@@ -1316,7 +1351,8 @@ function hostname(url){
 
 function faviconFor(url){
 
-  const host = hostname(url);
+  const host =
+    hostname(url);
 
   if(!host) return '';
 
@@ -1331,26 +1367,8 @@ function faviconFor(url){
 
 
 /* =========================================================
-   TEXT / HTML / MARKDOWN CLEANING
+   TEXT / HTML
 ========================================================= */
-
-/*
-  Tiago can return text containing things like:
-
-  &#x27;
-  <strong>
-  <em>
-  **bold**
-  *italic*
-  [link](url)
-
-  and, in some responses, internal marker strings like:
-
-  ***FLIBIDOO*****TAG*****0***
-
-  This function cleans all of that before displaying it.
-*/
-
 
 function removeFlibidooMarkers(text){
 
@@ -1372,135 +1390,113 @@ function decodeEntities(text){
   const textarea =
     document.createElement('textarea');
 
-  textarea.innerHTML = String(text || '');
+  textarea.innerHTML =
+    String(text || '');
 
   return textarea.value;
 
 }
 
 
-/*
-  Convert Markdown to HTML.
-
-  We deliberately only support safe, useful Markdown
-  instead of trying to implement an entire Markdown engine.
-*/
-
 function markdownToHtml(text){
 
-  let s = String(text || '');
+  let s =
+    String(text || '');
 
-  s = removeFlibidooMarkers(s);
+  s =
+    removeFlibidooMarkers(s);
 
-  /*
-    Markdown links.
-  */
 
-  s = s.replace(
-    /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/gi,
-    function(_,label,url){
+  s =
+    s.replace(
+      /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/gi,
+      function(_,label,url){
 
-      return (
-        '<a href="' +
-        esc(normalizeUrl(url)) +
-        '">' +
-        esc(label) +
-        '</a>'
-      );
+        return (
+          '<a href="' +
+          esc(normalizeUrl(url)) +
+          '">' +
+          esc(label) +
+          '</a>'
+        );
 
-    }
-  );
+      }
+    );
 
-  /*
-    Bold.
-  */
 
-  s = s.replace(
-    /\*\*([^*]+)\*\*/g,
-    '<strong>$1</strong>'
-  );
+  s =
+    s.replace(
+      /\*\*([^*]+)\*\*/g,
+      '<strong>$1</strong>'
+    );
 
-  /*
-    Italic.
-  */
 
-  s = s.replace(
-    /(^|[^\*])\*([^*\n]+)\*(?!\*)/g,
-    '$1<em>$2</em>'
-  );
+  s =
+    s.replace(
+      /(^|[^\*])\*([^*\n]+)\*(?!\*)/g,
+      '$1<em>$2</em>'
+    );
 
-  /*
-    Also support __bold__.
-  */
 
-  s = s.replace(
-    /__([^_]+)__/g,
-    '<strong>$1</strong>'
-  );
+  s =
+    s.replace(
+      /__([^_]+)__/g,
+      '<strong>$1</strong>'
+    );
+
 
   return s;
 
 }
 
 
-/*
-  Sanitizes HTML while preserving useful formatting tags.
-
-  Allowed:
-
-  strong
-  b
-  em
-  i
-  u
-  br
-  p
-  a
-*/
-
 function sanitizeFormattedHtml(input){
 
-  let source = String(input || '');
+  let source =
+    String(input || '');
 
-  source = removeFlibidooMarkers(source);
+  source =
+    removeFlibidooMarkers(source);
 
-  source = decodeEntities(source);
+  source =
+    decodeEntities(source);
 
-  /*
-    First convert Markdown syntax while escaping
-    normal text.
-  */
 
-  const token = '___FLIBIDOO_TAG_';
+  const token =
+    '___FLIBIDOO_TAG_';
 
   const tags = [];
 
-  source = source.replace(
-    /<\/?(strong|b|em|i|u|br|p|a)(?:\s[^>]*)?>/gi,
-    function(match){
 
-      const id = tags.length;
+  source =
+    source.replace(
+      /<\/?(strong|b|em|i|u|br|p|a)(?:\s[^>]*)?>/gi,
+      function(match){
 
-      tags.push(match);
+        const id =
+          tags.length;
 
-      return token + id + '___';
+        tags.push(match);
 
-    }
-  );
+        return (
+          token +
+          id +
+          '___'
+        );
 
-  source = esc(source);
+      }
+    );
 
-  /*
-    Put the allowed HTML tags back.
-  */
+
+  source =
+    esc(source);
+
 
   tags.forEach(function(tag,index){
 
-    let safeTag = tag;
+    let safeTag =
+      tag;
 
-    /*
-      Sanitize href attributes on links.
-    */
 
     if(/^<a\b/i.test(safeTag)){
 
@@ -1509,10 +1505,12 @@ function sanitizeFormattedHtml(input){
           /href\s*=\s*["']([^"']*)["']/i
         );
 
+
       const href =
         hrefMatch
           ? normalizeUrl(hrefMatch[1])
           : '';
+
 
       if(
         href &&
@@ -1526,61 +1524,72 @@ function sanitizeFormattedHtml(input){
 
       }else{
 
-        safeTag = '<a>';
+        safeTag =
+          '<a>';
 
       }
 
     }else{
-
-      /*
-        Remove all attributes from every other
-        allowed element.
-      */
 
       const nameMatch =
         safeTag.match(
           /^<\/?\s*([a-z0-9]+)/i
         );
 
+
       const name =
         nameMatch
           ? nameMatch[1].toLowerCase()
           : '';
 
+
       if(/^<\//.test(safeTag)){
-        safeTag = '</' + name + '>';
+
+        safeTag =
+          '</' +
+          name +
+          '>';
+
       }else{
-        safeTag = '<' + name + '>';
+
+        safeTag =
+          '<' +
+          name +
+          '>';
+
       }
 
     }
 
+
     source =
       source.replace(
-        token + index + '___',
+        token +
+        index +
+        '___',
         safeTag
       );
 
   });
 
-  /*
-    Convert Markdown after the HTML has been safely
-    reconstructed.
-
-    We only do Markdown in text-like areas by using
-    a temporary DOM.
-  */
 
   const wrapper =
     document.createElement('div');
 
-  wrapper.innerHTML = source;
+  wrapper.innerHTML =
+    source;
+
 
   function processTextNode(node){
 
-    if(node.nodeType === Node.TEXT_NODE){
+    if(
+      node.nodeType ===
+      Node.TEXT_NODE
+    ){
 
-      const value = node.nodeValue || '';
+      const value =
+        node.nodeValue || '';
+
 
       if(
         value.includes('**') ||
@@ -1594,12 +1603,19 @@ function sanitizeFormattedHtml(input){
             esc(value)
           );
 
+
         const temp =
           document.createElement('span');
 
-        temp.innerHTML = html;
+        temp.innerHTML =
+          html;
 
-        node.replaceWith(...Array.from(temp.childNodes));
+
+        node.replaceWith(
+          ...Array.from(
+            temp.childNodes
+          )
+        );
 
       }
 
@@ -1607,88 +1623,97 @@ function sanitizeFormattedHtml(input){
 
     }
 
-    if(node.nodeType === Node.ELEMENT_NODE){
 
-      /*
-        Never process script/style.
-      */
+    if(
+      node.nodeType ===
+      Node.ELEMENT_NODE
+    ){
 
       if(
         node.tagName === 'SCRIPT' ||
         node.tagName === 'STYLE'
       ){
+
         return;
+
       }
 
-      Array.from(node.childNodes)
-        .forEach(processTextNode);
+
+      Array.from(
+        node.childNodes
+      ).forEach(
+        processTextNode
+      );
 
     }
 
   }
 
-  Array.from(wrapper.childNodes)
-    .forEach(processTextNode);
 
-  /*
-    Force all links to same-tab navigation.
-  */
+  Array.from(
+    wrapper.childNodes
+  ).forEach(
+    processTextNode
+  );
 
-  wrapper.querySelectorAll('a').forEach(function(a){
 
-    const href =
-      normalizeUrl(a.getAttribute('href') || '');
+  wrapper
+    .querySelectorAll('a')
+    .forEach(function(a){
 
-    if(
-      /^https?:\/\//i.test(href)
-    ){
-      a.setAttribute('href',href);
-    }else{
-      a.removeAttribute('href');
-    }
+      const href =
+        normalizeUrl(
+          a.getAttribute('href') || ''
+        );
 
-    a.removeAttribute('target');
-    a.removeAttribute('rel');
 
-  });
+      if(
+        /^https?:\/\//i.test(href)
+      ){
+
+        a.setAttribute(
+          'href',
+          href
+        );
+
+      }else{
+
+        a.removeAttribute(
+          'href'
+        );
+
+      }
+
+
+      a.removeAttribute(
+        'target'
+      );
+
+      a.removeAttribute(
+        'rel'
+      );
+
+    });
+
 
   return wrapper.innerHTML;
 
 }
 
 
-/*
-  A simpler description renderer for result snippets.
-*/
-
 function formatDescription(value){
 
   if(value == null) return '';
 
-  let text = String(value);
-
-  text = removeFlibidooMarkers(text);
-
-  /*
-    Decode encoded apostrophes and similar entities.
-  */
-
-  text = decodeEntities(text);
-
-  /*
-    If the provider gave actual HTML tags,
-    sanitizeFormattedHtml will preserve them.
-
-    If it is plain text, it will still be safely escaped.
-  */
-
-  return sanitizeFormattedHtml(text);
+  return sanitizeFormattedHtml(
+    String(value)
+  );
 
 }
 
 
 /* =========================================================
-   URL / IMAGE HELPERS
+   RESULT HELPERS
 ========================================================= */
 
 function resultImage(result){
@@ -1718,7 +1743,7 @@ function resultUrl(result){
 
 
 /* =========================================================
-   WOTD
+   WOTD QUERY
 ========================================================= */
 
 function isWotdQuery(q){
@@ -1730,6 +1755,7 @@ function isWotdQuery(q){
       .replace(/\s+/g,' ')
       .trim();
 
+
   return (
     s === 'wotd' ||
     s === 'word of the day' ||
@@ -1740,25 +1766,37 @@ function isWotdQuery(q){
 }
 
 
+/* =========================================================
+   GET WOTD
+========================================================= */
+
 async function getWotd(){
 
   try{
 
     const response =
-      await fetch(WOTD_WORKER + '/',{
-        cache:'no-store'
-      });
+      await fetch(
+        WOTD_WORKER + '/',
+        {
+          cache:'no-store'
+        }
+      );
+
 
     if(!response.ok){
       return '';
     }
 
+
     const text =
-      (await response.text()).trim();
+      (await response.text())
+        .trim();
+
 
     if(!text){
       return '';
     }
+
 
     return text;
 
@@ -1771,35 +1809,11 @@ async function getWotd(){
 }
 
 
-/*
-  Check whether the searched word itself is today's WOTD.
-*/
-
-function sameWord(a,b){
-
-  return String(a || '')
-    .trim()
-    .toLowerCase()
-    ===
-    String(b || '')
-    .trim()
-    .toLowerCase();
-
-}
-
-
 /* =========================================================
-   DICTIONARY
+   WOTD PANEL POPULATION
 ========================================================= */
 
-async function loadDictionary(word){
-
-  dictionary.innerHTML = '';
-  dictionary.classList.add('hidden');
-
-  if(!word){
-    return;
-  }
+async function populateWotdPanel(panel,word){
 
   try{
 
@@ -1813,31 +1827,229 @@ async function loadDictionary(word){
         }
       );
 
+
     if(!response.ok){
 
-      /*
-        No dictionary entry is NOT an error that
-        should be displayed to the user.
-      */
-
+      panel.remove();
       return;
 
     }
 
+
     const data =
       await response.json();
+
 
     const entries =
       Array.isArray(data?.entries)
         ? data.entries
         : [];
 
+
+    if(!entries.length){
+
+      panel.remove();
+      return;
+
+    }
+
+
+    /*
+      Prefer English.
+    */
+
+    entries.sort(function(a,b){
+
+      const la =
+        String(
+          a.language ||
+          a.lang ||
+          ''
+        ).toLowerCase();
+
+
+      const lb =
+        String(
+          b.language ||
+          b.lang ||
+          ''
+        ).toLowerCase();
+
+
+      const ae =
+        la === 'en' ||
+        la === 'eng' ||
+        la.includes('english');
+
+
+      const be =
+        lb === 'en' ||
+        lb === 'eng' ||
+        lb.includes('english');
+
+
+      if(ae && !be) return -1;
+      if(!ae && be) return 1;
+
+      return 0;
+
+    });
+
+
+    let definition = '';
+    let example = '';
+
+
+    for(const entry of entries){
+
+      const meanings =
+        Array.isArray(entry.meanings)
+          ? entry.meanings
+          : [];
+
+
+      for(const meaning of meanings){
+
+        const definitions =
+          Array.isArray(
+            meaning.definitions
+          )
+            ? meaning.definitions
+            : [];
+
+
+        for(const def of definitions){
+
+          if(!definition){
+
+            definition =
+              def.definition ||
+              def.text ||
+              def.meaning ||
+              '';
+
+          }
+
+
+          if(!example){
+
+            example =
+              def.example ||
+              def.examples?.[0] ||
+              '';
+
+          }
+
+
+          if(definition) break;
+
+        }
+
+
+        if(definition) break;
+
+      }
+
+
+      if(definition) break;
+
+    }
+
+
+    if(!definition){
+
+      panel.remove();
+      return;
+
+    }
+
+
+    panel.querySelector(
+      '.wotd-word'
+    ).textContent =
+      word;
+
+
+    panel.querySelector(
+      '.wotd-definition'
+    ).innerHTML =
+      formatDescription(
+        definition
+      );
+
+
+    const exampleEl =
+      panel.querySelector(
+        '.wotd-example'
+      );
+
+
+    if(example){
+
+      exampleEl.textContent =
+        '“' +
+        decodeEntities(example) +
+        '”';
+
+    }else{
+
+      exampleEl.remove();
+
+    }
+
+  }catch(_){
+
+    panel.remove();
+
+  }
+
+}
+
+
+/* =========================================================
+   DICTIONARY INTO SIDEBAR
+========================================================= */
+
+async function loadDictionaryInto(
+  word,
+  container
+){
+
+  try{
+
+    const response =
+      await fetch(
+        SEARCH_WORKER +
+        '/api/dictionary?word=' +
+        encodeURIComponent(word),
+        {
+          cache:'no-store'
+        }
+      );
+
+
+    if(!response.ok){
+      return;
+    }
+
+
+    const data =
+      await response.json();
+
+
+    const entries =
+      Array.isArray(data?.entries)
+        ? data.entries
+        : [];
+
+
     if(!entries.length){
       return;
     }
 
+
     /*
-      English first, then everything else.
+      English first.
     */
 
     entries.sort(function(a,b){
@@ -1850,6 +2062,7 @@ async function loadDictionary(word){
           ''
         ).toLowerCase();
 
+
       const lb =
         String(
           b.language ||
@@ -1858,15 +2071,18 @@ async function loadDictionary(word){
           ''
         ).toLowerCase();
 
+
       const ae =
         la === 'en' ||
         la === 'eng' ||
         la.includes('english');
 
+
       const be =
         lb === 'en' ||
         lb === 'eng' ||
         lb.includes('english');
+
 
       if(ae && !be) return -1;
       if(!ae && be) return 1;
@@ -1875,25 +2091,37 @@ async function loadDictionary(word){
 
     });
 
-    renderDictionary(entries,word);
+
+    renderDictionaryInto(
+      entries,
+      word,
+      container
+    );
 
   }catch(_){
 
     /*
-      Dictionary failure should never break search.
+      Dictionary failure must never
+      break WOTD or search.
     */
-
-    dictionary.innerHTML = '';
-    dictionary.classList.add('hidden');
 
   }
 
 }
 
 
-function renderDictionary(entries,word){
+/* =========================================================
+   DICTIONARY RENDERER
+========================================================= */
 
-  dictionary.innerHTML = '';
+function renderDictionaryInto(
+  entries,
+  word,
+  container
+){
+
+  container.innerHTML = '';
+
 
   const title =
     document.createElement('h2');
@@ -1904,7 +2132,9 @@ function renderDictionary(entries,word){
   title.textContent =
     'Dictionary';
 
-  dictionary.appendChild(title);
+  container.appendChild(
+    title
+  );
 
 
   const wordLabel =
@@ -1916,7 +2146,9 @@ function renderDictionary(entries,word){
   wordLabel.textContent =
     word;
 
-  dictionary.appendChild(wordLabel);
+  container.appendChild(
+    wordLabel
+  );
 
 
   entries.forEach(function(entry){
@@ -1927,11 +2159,13 @@ function renderDictionary(entries,word){
     article.className =
       'dictionary-entry';
 
+
     const language =
       entry.language ||
       entry.lang ||
       entry.language_name ||
       '';
+
 
     if(language){
 
@@ -1944,7 +2178,9 @@ function renderDictionary(entries,word){
       lang.textContent =
         language;
 
-      article.appendChild(lang);
+      article.appendChild(
+        lang
+      );
 
     }
 
@@ -1963,6 +2199,7 @@ function renderDictionary(entries,word){
         meaning.pos ||
         '';
 
+
       if(pos){
 
         const posEl =
@@ -1974,13 +2211,17 @@ function renderDictionary(entries,word){
         posEl.textContent =
           pos;
 
-        article.appendChild(posEl);
+        article.appendChild(
+          posEl
+        );
 
       }
 
 
       const definitions =
-        Array.isArray(meaning.definitions)
+        Array.isArray(
+          meaning.definitions
+        )
           ? meaning.definitions
           : [];
 
@@ -2003,7 +2244,9 @@ function renderDictionary(entries,word){
         labelEl.textContent =
           'Definitions';
 
-        senses.appendChild(labelEl);
+        senses.appendChild(
+          labelEl
+        );
 
 
         const listEl =
@@ -2025,6 +2268,7 @@ function renderDictionary(entries,word){
             def.meaning ||
             '';
 
+
           if(definition){
 
             const d =
@@ -2034,7 +2278,9 @@ function renderDictionary(entries,word){
               'dictionary-definition';
 
             d.innerHTML =
-              formatDescription(definition);
+              formatDescription(
+                definition
+              );
 
             li.appendChild(d);
 
@@ -2045,6 +2291,7 @@ function renderDictionary(entries,word){
             def.example ||
             def.examples?.[0] ||
             '';
+
 
           if(example){
 
@@ -2069,8 +2316,13 @@ function renderDictionary(entries,word){
         });
 
 
-        senses.appendChild(listEl);
-        article.appendChild(senses);
+        senses.appendChild(
+          listEl
+        );
+
+        article.appendChild(
+          senses
+        );
 
       }
 
@@ -2078,17 +2330,22 @@ function renderDictionary(entries,word){
 
 
     if(article.textContent.trim()){
-      dictionary.appendChild(article);
+
+      container.appendChild(
+        article
+      );
+
     }
 
   });
 
 
-  if(dictionary.children.length > 2){
-    dictionary.classList.remove('hidden');
-  }else{
-    dictionary.innerHTML = '';
-    dictionary.classList.add('hidden');
+  if(container.children.length > 2){
+
+    dictionary.classList.remove(
+      'hidden'
+    );
+
   }
 
 }
@@ -2098,17 +2355,17 @@ function renderDictionary(entries,word){
    WOTD SIDEBAR
 ========================================================= */
 
-async function renderWotdPanel(word){
+async function showWotdSearch(){
 
-  if(!word){
-    return;
-  }
+  wotdSidebar.innerHTML = '';
+
 
   const panel =
     document.createElement('section');
 
   panel.className =
     'wotd-panel';
+
 
   panel.innerHTML = `
     <div class="wotd-heading">
@@ -2124,162 +2381,176 @@ async function renderWotdPanel(word){
     <p class="wotd-example"></p>
   `;
 
-  dictionary.prepend(panel);
-  dictionary.classList.remove('hidden');
+
+  wotdSidebar.appendChild(
+    panel
+  );
 
 
-  try{
+  dictionary.classList.remove(
+    'hidden'
+  );
 
-    const dictionaryResponse =
-      await fetch(
-        SEARCH_WORKER +
-        '/api/dictionary?word=' +
-        encodeURIComponent(word),
-        {
-          cache:'no-store'
-        }
+
+  const word =
+    await getWotd();
+
+
+  if(!word){
+
+    panel.remove();
+
+    if(
+      !dictionarySidebar.children.length
+    ){
+
+      dictionary.classList.add(
+        'hidden'
       );
 
-    if(!dictionaryResponse.ok){
-      panel.remove();
-      return;
     }
 
-    const data =
-      await dictionaryResponse.json();
+    return;
 
-    const entries =
-      Array.isArray(data?.entries)
-        ? data.entries
-        : [];
+  }
 
-    if(!entries.length){
-      panel.remove();
-      return;
-    }
+
+  await populateWotdPanel(
+    panel,
+    word
+  );
+
+}
+
+
+/* =========================================================
+   STANDARD SIDEBAR LOADER
+========================================================= */
+
+async function loadSidebar(
+  word,
+  includeWotd=true
+){
+
+  /*
+    Clear only the two dedicated areas.
+    WOTD and Dictionary can no longer overwrite
+    one another.
+  */
+
+  wotdSidebar.innerHTML = '';
+  dictionarySidebar.innerHTML = '';
+
+
+  if(!word){
+
+    dictionary.classList.add(
+      'hidden'
+    );
+
+    return;
+
+  }
+
+
+  /*
+    WOTD ALWAYS COMES FIRST.
+  */
+
+  if(includeWotd){
+
+    const panel =
+      document.createElement('section');
+
+    panel.className =
+      'wotd-panel';
+
+
+    panel.innerHTML = `
+      <div class="wotd-heading">
+        Word of the Day
+      </div>
+
+      <div class="wotd-word">
+        Loading…
+      </div>
+
+      <p class="wotd-definition"></p>
+
+      <p class="wotd-example"></p>
+    `;
+
+
+    wotdSidebar.appendChild(
+      panel
+    );
+
+
+    dictionary.classList.remove(
+      'hidden'
+    );
 
 
     /*
-      English first.
+      Get today's WOTD independently.
     */
 
-    entries.sort(function(a,b){
+    getWotd()
+      .then(function(wotdWord){
 
-      const la =
-        String(
-          a.language ||
-          a.lang ||
-          ''
-        ).toLowerCase();
+        if(!wotdWord){
 
-      const lb =
-        String(
-          b.language ||
-          b.lang ||
-          ''
-        ).toLowerCase();
+          panel.remove();
 
-      const ae =
-        la === 'en' ||
-        la === 'eng' ||
-        la.includes('english');
-
-      const be =
-        lb === 'en' ||
-        lb === 'eng' ||
-        lb.includes('english');
-
-      if(ae && !be) return -1;
-      if(!ae && be) return 1;
-
-      return 0;
-
-    });
-
-
-    let definition = '';
-    let example = '';
-
-
-    outer:
-    for(const entry of entries){
-
-      const meanings =
-        Array.isArray(entry.meanings)
-          ? entry.meanings
-          : [];
-
-      for(const meaning of meanings){
-
-        const definitions =
-          Array.isArray(meaning.definitions)
-            ? meaning.definitions
-            : [];
-
-        for(const def of definitions){
-
-          if(!definition){
-
-            definition =
-              def.definition ||
-              def.text ||
-              def.meaning ||
-              '';
-
-          }
-
-          if(!example){
-
-            example =
-              def.example ||
-              def.examples?.[0] ||
-              '';
-
-          }
-
-          if(definition){
-            break outer;
-          }
+          return;
 
         }
 
-      }
 
-    }
+        populateWotdPanel(
+          panel,
+          wotdWord
+        );
 
+      })
+      .catch(function(){
 
-    if(!definition){
-      panel.remove();
-      return;
-    }
+        panel.remove();
 
+      });
 
-    panel.querySelector('.wotd-word')
-      .textContent = word;
-
-    panel.querySelector('.wotd-definition')
-      .innerHTML =
-        formatDescription(definition);
+  }
 
 
-    if(example){
+  /*
+    STANDARD DICTIONARY COMES SECOND.
+  */
 
-      panel.querySelector('.wotd-example')
-        .textContent =
-          '“' +
-          decodeEntities(example) +
-          '”';
+  await loadDictionaryInto(
+    word,
+    dictionarySidebar
+  );
 
-    }else{
 
-      panel.querySelector('.wotd-example')
-        .remove();
+  /*
+    Keep sidebar visible if either
+    WOTD or Dictionary has content.
+  */
 
-    }
+  if(
+    wotdSidebar.children.length ||
+    dictionarySidebar.children.length
+  ){
 
-  }catch(_){
+    dictionary.classList.remove(
+      'hidden'
+    );
 
-    panel.remove();
+  }else{
+
+    dictionary.classList.add(
+      'hidden'
+    );
 
   }
 
@@ -2292,16 +2563,25 @@ async function renderWotdPanel(word){
 
 function render(data){
 
-  home.classList.add('hidden');
-  results.classList.remove('hidden');
+  home.classList.add(
+    'hidden'
+  );
+
+  results.classList.remove(
+    'hidden'
+  );
+
 
   currentType =
-    data.type || currentType;
+    data.type ||
+    currentType;
+
 
   label.textContent =
     data.query
       ? `Results for “${decodeEntities(data.query)}”`
       : '';
+
 
   let a = [];
 
@@ -2311,9 +2591,11 @@ function render(data){
     a =
       Array.isArray(data.results)
         ? data.results
-        : Array.isArray(data.results?.web?.results)
-          ? data.results.web.results
-          : [];
+        : Array.isArray(
+            data.results?.web?.results
+          )
+            ? data.results.web.results
+            : [];
 
   }else if(
     currentType === 'images' ||
@@ -2337,6 +2619,7 @@ function render(data){
   resultsInput.value =
     data.query || '';
 
+
   list.innerHTML = '';
   pager.innerHTML = '';
 
@@ -2354,42 +2637,46 @@ function render(data){
 
 
   /*
-    IMPORTANT:
-    Dictionary is independent of search results.
-    This means it can remain visible even when
-    Tiago returns zero web results.
+    Sidebar behavior:
+    
+    Web search:
+      WOTD first
+      Dictionary second
+
+    Images / News:
+      no dictionary sidebar
   */
 
   const searchedWord =
-    String(data.query || currentQ)
-      .trim();
+    String(
+      data.query ||
+      currentQ
+    ).trim();
 
 
-  /*
-    Load dictionary regardless of result count.
-  */
+  if(currentType === 'web'){
 
-  if(
-    currentType === 'web' &&
-    searchedWord &&
-    !isWotdQuery(searchedWord)
-  ){
+    if(isWotdQuery(searchedWord)){
 
-    loadDictionary(searchedWord);
+      showWotdSearch();
 
-  }
+    }else{
 
+      loadSidebar(
+        searchedWord,
+        true
+      );
 
-  /*
-    WOTD queries.
-  */
+    }
 
-  if(
-    currentType === 'web' &&
-    isWotdQuery(searchedWord)
-  ){
+  }else{
 
-    showWotdSearch();
+    wotdSidebar.innerHTML = '';
+    dictionarySidebar.innerHTML = '';
+
+    dictionary.classList.add(
+      'hidden'
+    );
 
   }
 
@@ -2425,6 +2712,7 @@ function render(data){
       const img =
         resultImage(r);
 
+
       if(!img) return;
 
 
@@ -2437,23 +2725,32 @@ function render(data){
 
       el.innerHTML = `
         <a href="${esc(u || img)}">
+
           <div class="image-box">
+
             <img
               src="${esc(img)}"
               alt="${esc(
-                decodeEntities(r.title || '')
+                decodeEntities(
+                  r.title || ''
+                )
               )}"
               loading="lazy"
               referrerpolicy="no-referrer"
             >
+
             <div class="image-progress"></div>
+
           </div>
+
         </a>
 
         <div class="image-result-title">
           ${esc(
             decodeEntities(
-              r.title || u || ''
+              r.title ||
+              u ||
+              ''
             )
           )}
         </div>
@@ -2480,7 +2777,10 @@ function render(data){
 
         didLongPress = false;
 
-        clearTimeout(pressTimer);
+        clearTimeout(
+          pressTimer
+        );
+
 
         el.classList.add(
           'longpressing'
@@ -2497,9 +2797,11 @@ function render(data){
                 'longpressing'
               );
 
+
               await downloadImage(
                 img,
-                r.title || 'image'
+                r.title ||
+                'image'
               );
 
             },
@@ -2511,7 +2813,9 @@ function render(data){
 
       function cancelPress(){
 
-        clearTimeout(pressTimer);
+        clearTimeout(
+          pressTimer
+        );
 
         pressTimer = null;
 
@@ -2570,7 +2874,9 @@ function render(data){
 
     if(grid.children.length){
 
-      list.appendChild(grid);
+      list.appendChild(
+        grid
+      );
 
     }else{
 
@@ -2599,6 +2905,7 @@ function render(data){
 
       const u =
         resultUrl(r);
+
 
       const host =
         hostname(u);
@@ -2676,9 +2983,7 @@ function render(data){
                 alt=""
                 loading="lazy"
                 referrerpolicy="no-referrer"
-                style="
-                  display:none;
-                "
+                style="display:none;"
               >
             `
             : ''
@@ -2711,32 +3016,9 @@ function render(data){
       `;
 
 
-      /*
-        Same-tab navigation.
-        No target="_blank".
-      */
-
-      const resultLink =
-        el.querySelector('h2 a');
-
-      if(resultLink){
-
-        resultLink.addEventListener(
-          'click',
-          function(){
-
-            /*
-              Let the browser navigate normally
-              in the same tab.
-            */
-
-          }
-        );
-
-      }
-
-
-      list.appendChild(el);
+      list.appendChild(
+        el
+      );
 
     });
 
@@ -2762,6 +3044,7 @@ function render(data){
     button.textContent =
       'Previous';
 
+
     button.onclick =
       function(){
 
@@ -2773,7 +3056,10 @@ function render(data){
 
       };
 
-    pager.appendChild(button);
+
+    pager.appendChild(
+      button
+    );
 
   }
 
@@ -2786,6 +3072,7 @@ function render(data){
     button.textContent =
       'Next';
 
+
     button.onclick =
       function(){
 
@@ -2797,7 +3084,10 @@ function render(data){
 
       };
 
-    pager.appendChild(button);
+
+    pager.appendChild(
+      button
+    );
 
   }
 
@@ -2806,7 +3096,8 @@ function render(data){
     {},
     '',
     `/?q=${encodeURIComponent(
-      data.query || currentQ
+      data.query ||
+      currentQ
     )}&type=${encodeURIComponent(
       currentType
     )}${
@@ -2823,7 +3114,10 @@ function render(data){
    IMAGE DOWNLOAD
 ========================================================= */
 
-async function downloadImage(url,name){
+async function downloadImage(
+  url,
+  name
+){
 
   try{
 
@@ -2836,29 +3130,48 @@ async function downloadImage(url,name){
         }
       );
 
+
     if(!response.ok){
-      throw new Error('Download failed');
+
+      throw new Error(
+        'Download failed'
+      );
+
     }
+
 
     const blob =
       await response.blob();
 
 
     const objectUrl =
-      URL.createObjectURL(blob);
+      URL.createObjectURL(
+        blob
+      );
 
 
     const a =
       document.createElement('a');
 
+
     a.href =
       objectUrl;
 
+
     a.download =
-      String(name || 'image')
-        .replace(/[^\w\-]+/g,'_')
-        .slice(0,80)
-      + '.jpg';
+      String(
+        name ||
+        'image'
+      )
+        .replace(
+          /[^\w\-]+/g,
+          '_'
+        )
+        .slice(
+          0,
+          80
+        ) +
+      '.jpg';
 
 
     document.body.appendChild(a);
@@ -2870,219 +3183,20 @@ async function downloadImage(url,name){
 
     setTimeout(
       function(){
-        URL.revokeObjectURL(objectUrl);
+
+        URL.revokeObjectURL(
+          objectUrl
+        );
+
       },
       1000
     );
 
-  }catch(_){
-
-    /*
-      Some remote image hosts do not allow CORS.
-      Fall back to navigating to the image.
-    */
-
-    window.location.href = url;
-
-  }
-
-}
-
-
-/* =========================================================
-   WOTD SEARCH
-========================================================= */
-
-async function showWotdSearch(){
-
-  dictionary.innerHTML = '';
-
-  dictionary.classList.remove(
-    'hidden'
-  );
-
-
-  const panel =
-    document.createElement('section');
-
-  panel.className =
-    'wotd-panel';
-
-
-  panel.innerHTML = `
-    <div class="wotd-heading">
-      Word of the Day
-    </div>
-
-    <div class="wotd-word">
-      Loading…
-    </div>
-
-    <p class="wotd-definition"></p>
-
-    <p class="wotd-example"></p>
-  `;
-
-
-  dictionary.appendChild(panel);
-
-
-  const word =
-    await getWotd();
-
-
-  if(!word){
-
-    panel.remove();
-
-    return;
-
-  }
-
-
-  panel.querySelector(
-    '.wotd-word'
-  ).textContent = word;
-
-
-  try{
-
-    const response =
-      await fetch(
-        SEARCH_WORKER +
-        '/api/dictionary?word=' +
-        encodeURIComponent(word),
-        {
-          cache:'no-store'
-        }
-      );
-
-
-    if(!response.ok){
-
-      panel.remove();
-
-      return;
-
-    }
-
-
-    const data =
-      await response.json();
-
-
-    const entries =
-      Array.isArray(data?.entries)
-        ? data.entries
-        : [];
-
-
-    if(!entries.length){
-
-      panel.remove();
-
-      return;
-
-    }
-
-
-    let definition = '';
-    let example = '';
-
-
-    for(const entry of entries){
-
-      const meanings =
-        Array.isArray(entry.meanings)
-          ? entry.meanings
-          : [];
-
-
-      for(const meaning of meanings){
-
-        const definitions =
-          Array.isArray(meaning.definitions)
-            ? meaning.definitions
-            : [];
-
-
-        for(const def of definitions){
-
-          if(!definition){
-
-            definition =
-              def.definition ||
-              def.text ||
-              def.meaning ||
-              '';
-
-          }
-
-
-          if(!example){
-
-            example =
-              def.example ||
-              def.examples?.[0] ||
-              '';
-
-          }
-
-
-          if(definition) break;
-
-        }
-
-
-        if(definition) break;
-
-      }
-
-
-      if(definition) break;
-
-    }
-
-
-    if(!definition){
-
-      panel.remove();
-
-      return;
-
-    }
-
-
-    panel.querySelector(
-      '.wotd-definition'
-    ).innerHTML =
-      formatDescription(
-        definition
-      );
-
-
-    const exampleEl =
-      panel.querySelector(
-        '.wotd-example'
-      );
-
-
-    if(example){
-
-      exampleEl.textContent =
-        '“' +
-        decodeEntities(example) +
-        '”';
-
-    }else{
-
-      exampleEl.remove();
-
-    }
 
   }catch(_){
 
-    panel.remove();
+    window.location.href =
+      url;
 
   }
 
@@ -3106,13 +3220,16 @@ async function search(
   if(!q) return;
 
 
-  currentQ = q;
+  currentQ =
+    q;
+
 
   currentPage =
     Math.max(
       0,
       Number(page) || 0
     );
+
 
   currentType =
     type;
@@ -3125,6 +3242,7 @@ async function search(
   input.value =
     q;
 
+
   resultsInput.value =
     q;
 
@@ -3132,6 +3250,7 @@ async function search(
   home.classList.add(
     'hidden'
   );
+
 
   results.classList.remove(
     'hidden'
@@ -3141,21 +3260,32 @@ async function search(
   list.innerHTML =
     '<div class="empty">Searching…</div>';
 
-  count.textContent = '';
+
+  count.textContent =
+    '';
+
 
   label.textContent =
     `Results for “${decodeEntities(q)}”`;
 
-  pager.innerHTML = '';
+
+  pager.innerHTML =
+    '';
 
 
   /*
-    Dictionary/WOTD should not disappear
-    just because Tiago has zero results.
+    Clear sidebar areas independently.
   */
 
-  dictionary.innerHTML = '';
-  dictionary.classList.add('hidden');
+  wotdSidebar.innerHTML =
+    '';
+
+  dictionarySidebar.innerHTML =
+    '';
+
+  dictionary.classList.add(
+    'hidden'
+  );
 
 
   document
@@ -3171,38 +3301,34 @@ async function search(
 
 
   /*
-    Dictionary starts immediately for normal
-    web searches, independently of Tiago.
+    IMPORTANT:
+    
+    Sidebar is loaded BEFORE the search result
+    is finished.
+
+    WOTD first.
+    Dictionary second.
   */
 
-  if(
-    type === 'web' &&
-    !isWotdQuery(q)
-  ){
+  if(type === 'web'){
 
-    loadDictionary(q);
+    if(isWotdQuery(q)){
 
-  }
+      showWotdSearch();
 
+    }else{
 
-  if(
-    type === 'web' &&
-    isWotdQuery(q)
-  ){
+      loadSidebar(
+        q,
+        true
+      );
 
-    showWotdSearch();
+    }
 
   }
 
 
   try{
-
-    /*
-      Worker route:
-      /api/search?q=...&type=...&page=...
-
-      This matches the Worker you supplied.
-    */
 
     const url =
       SEARCH_WORKER +
@@ -3272,21 +3398,18 @@ async function search(
     data.type =
       type;
 
+
     data.query =
       data.query ||
       q;
 
 
-    /*
-      The Worker normalizes web results into
-      data.results, but also tolerate the original
-      Tiago structure.
-    */
-
     if(type === 'web'){
 
       if(
-        !Array.isArray(data.results)
+        !Array.isArray(
+          data.results
+        )
       ){
 
         data.results =
@@ -3304,7 +3427,9 @@ async function search(
     ){
 
       if(
-        !Array.isArray(data.results)
+        !Array.isArray(
+          data.results
+        )
       ){
 
         data.results = [];
@@ -3314,14 +3439,17 @@ async function search(
     }
 
 
-    render(data);
+    render(
+      data
+    );
 
 
   }catch(error){
 
     /*
-      Do NOT wipe the dictionary here.
-      It is intentionally independent.
+      IMPORTANT:
+      Search errors do NOT clear
+      the WOTD or Dictionary sidebar.
     */
 
     list.innerHTML =
@@ -3349,8 +3477,10 @@ form.addEventListener(
 
     e.preventDefault();
 
+
     const q =
       input.value.trim();
+
 
     if(!q) return;
 
@@ -3368,8 +3498,10 @@ resultsForm.addEventListener(
 
     e.preventDefault();
 
+
     const q =
       resultsInput.value.trim();
+
 
     if(q){
 
@@ -3404,11 +3536,6 @@ document
 
         if(!q) return;
 
-
-        /*
-          This directly switches the category
-          without reloading the page.
-        */
 
         search(
           q,
@@ -3528,6 +3655,7 @@ const params =
   new URLSearchParams(
     location.search
   );
+
 
 const initialQuery =
   params.get('q');
