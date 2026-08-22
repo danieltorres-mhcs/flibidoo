@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#1d0c22">
+
+<link rel="icon"
+      href="https://raw.githubusercontent.com/danieltorres-mhcs/assets/refs/heads/main/flibidoo.PNG">
+
 <title>FlibidooSearch</title>
 
 <style>
@@ -18,50 +22,36 @@
   --focus:#cdb8d1;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
-html,
-body{
+html,body{
   margin:0;
   width:100%;
   min-height:100%;
   background:var(--bg);
   color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:Arial,Helvetica,sans-serif
 }
 
 body{
   min-height:100vh;
   display:flex;
   flex-direction:column;
-  overflow-x:hidden;
+  overflow-x:hidden
 }
 
 a{
-  color:inherit;
+  color:inherit
 }
-
-button,
-input{
-  font-family:inherit;
-}
-
-.hidden{
-  display:none!important;
-}
-
-/* =========================================================
-   HOME
-========================================================= */
 
 .shell{
   width:min(100% - 40px,1120px);
   margin:0 auto;
   padding-left:12px;
-  padding-right:12px;
+  padding-right:12px
 }
+
+/* HOME */
 
 #home.home{
   width:100%;
@@ -73,63 +63,36 @@ input{
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  overflow:hidden;
+  overflow:hidden
 }
 
 .home-inner{
-  width:100%;
+  width:min(100%,760px);
   display:flex;
   flex-direction:column;
-  align-items:center;
+  align-items:center
 }
 
 .hero-logo{
-  width:min(300px,68vw);
+  width:min(260px,65vw);
+  max-height:180px;
   height:auto;
-  max-height:170px;
   display:block;
   margin:0 auto 18px;
-  object-fit:contain;
-
-  /*
-    Soft transparent edges.
-    The mask fades the image into the background.
-  */
-  -webkit-mask-image:
-    radial-gradient(
-      ellipse 75% 72% at center,
-      #000 65%,
-      rgba(0,0,0,.9) 74%,
-      rgba(0,0,0,.45) 88%,
-      transparent 100%
-    );
-
-  mask-image:
-    radial-gradient(
-      ellipse 75% 72% at center,
-      #000 65%,
-      rgba(0,0,0,.9) 74%,
-      rgba(0,0,0,.45) 88%,
-      transparent 100%
-    );
+  object-fit:contain
 }
 
-.home-title{
+h1{
   font-size:clamp(38px,5vw,58px);
   line-height:1;
-  margin:0 0 30px;
+  margin:0 0 32px;
   letter-spacing:-.055em;
   font-weight:500;
-  text-align:center;
-}
-
-.home-title strong{
-  font-weight:700;
+  text-align:center
 }
 
 .search-wrap{
-  width:min(100%,760px);
-  margin:0 auto;
+  width:min(100%,760px)
 }
 
 form{
@@ -139,14 +102,13 @@ form{
   border:1px solid var(--line);
   border-radius:28px;
   background:transparent;
-  transition:
-    border-color .15s ease,
-    box-shadow .15s ease;
+  transition:border-color .15s ease,box-shadow .15s ease;
+  width:100%
 }
 
 form:focus-within{
   border-color:var(--focus);
-  box-shadow:0 0 0 2px rgba(205,184,209,.08);
+  box-shadow:0 0 0 2px rgba(205,184,209,.08)
 }
 
 input{
@@ -157,54 +119,42 @@ input{
   background:transparent;
   color:var(--text);
   font-size:16px;
-  padding:0 16px;
+  padding:0 16px
 }
 
 input::placeholder{
-  color:#9e8da1;
+  color:#9e8da1
 }
-
-/* Search arrow */
 
 .submit{
   height:40px;
   width:40px;
-  margin-right:8px;
+  margin-right:7px;
   border:1px solid var(--line);
   background:transparent;
   color:#766679;
   border-radius:50%;
-  padding:0;
+  padding:9px;
   display:grid;
   place-items:center;
   cursor:pointer;
-  flex:0 0 40px;
-  transition:
-    color .15s ease,
-    border-color .15s ease,
-    background .15s ease,
-    transform .15s ease;
+  flex:0 0 40px
 }
 
 .submit.has-input{
   color:var(--text);
-  border-color:var(--focus);
+  border-color:var(--focus)
 }
 
 .submit:hover{
-  border-color:var(--focus);
-  background:rgba(255,255,255,.04);
-}
-
-.submit:active{
-  transform:scale(.94);
+  border-color:var(--focus)
 }
 
 .submit-icon{
-  width:21px;
-  height:21px;
+  width:20px;
+  height:20px;
   display:block;
-  fill:currentColor;
+  fill:currentColor
 }
 
 .links{
@@ -215,7 +165,7 @@ input::placeholder{
   gap:18px;
   margin-top:20px;
   color:var(--muted);
-  font-size:13px;
+  font-size:13px
 }
 
 .links button{
@@ -223,11 +173,11 @@ input::placeholder{
   background:none;
   color:inherit;
   cursor:pointer;
-  padding:0;
+  padding:0
 }
 
 .links button:hover{
-  color:var(--text);
+  color:var(--text)
 }
 
 .confederacy-credit{
@@ -238,28 +188,26 @@ input::placeholder{
   color:var(--muted);
   font-size:12px;
   line-height:1.4;
-  text-align:center;
+  text-align:center
 }
 
 .confederacy-credit img{
-  width:20px;
-  height:20px;
+  width:18px;
+  height:18px;
   display:block;
   object-fit:contain;
-  flex:0 0 20px;
-  border-radius:5px;
+  flex:0 0 18px;
+  border-radius:4px
 }
 
-/* =========================================================
-   RESULTS
-========================================================= */
+/* RESULTS */
 
 main{
-  flex:1;
+  flex:1
 }
 
 .results{
-  padding:30px 12px 70px;
+  padding:30px 12px 70px
 }
 
 .results-head{
@@ -269,7 +217,7 @@ main{
   min-height:44px;
   border-bottom:1px solid var(--line2);
   padding-bottom:14px;
-  margin-bottom:18px;
+  margin-bottom:14px
 }
 
 .results-brand{
@@ -278,20 +226,20 @@ main{
   gap:8px;
   text-decoration:none;
   color:inherit;
-  white-space:nowrap;
+  white-space:nowrap
 }
 
 .results-brand img{
-  width:30px;
-  height:30px;
+  width:28px;
+  height:28px;
   object-fit:contain;
-  display:block;
+  display:block
 }
 
 .results-brand span{
   font-size:15px;
   font-weight:600;
-  letter-spacing:-.01em;
+  letter-spacing:-.01em
 }
 
 .results-query{
@@ -300,47 +248,31 @@ main{
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
-  flex:1;
+  flex:1
 }
 
 .count{
   font-size:13px;
   color:var(--muted);
-  white-space:nowrap;
+  white-space:nowrap
 }
 
 .results-search{
   width:min(100%,760px);
-  margin:0 0 22px;
+  margin:0 0 28px
 }
 
 .results-search form{
-  height:52px;
+  height:52px
 }
-
-.results-search .submit{
-  width:36px;
-  height:36px;
-  flex-basis:36px;
-  margin-right:7px;
-}
-
-.results-search .submit-icon{
-  width:19px;
-  height:19px;
-}
-
-/* =========================================================
-   SEARCH TYPES
-========================================================= */
 
 .search-types{
   display:flex;
   align-items:flex-end;
   gap:0;
-  margin:8px 0 22px;
+  margin:8px 0 18px;
   border-bottom:1px solid rgba(255,255,255,.12);
-  height:38px;
+  height:36px
 }
 
 .search-type{
@@ -352,16 +284,16 @@ main{
   font:inherit;
   font-size:13px;
   line-height:20px;
-  padding:0 14px 10px;
+  padding:0 12px 10px;
   margin:0;
   border-radius:0;
-  cursor:pointer;
+  cursor:pointer
 }
 
 .search-type:hover,
 .search-type.active{
   color:#fff;
-  background:transparent;
+  background:transparent
 }
 
 .search-type.active::after{
@@ -372,45 +304,39 @@ main{
   bottom:-1px;
   height:2px;
   border-radius:2px 2px 0 0;
-  background:currentColor;
+  background:currentColor
 }
-
-/* =========================================================
-   RESULTS LAYOUT
-========================================================= */
 
 .results-layout{
   display:grid;
   grid-template-columns:minmax(0,1fr) 330px;
   gap:42px;
-  align-items:start;
+  align-items:start
 }
 
-/* =========================================================
-   WEB RESULTS
-========================================================= */
+/* WEB RESULTS */
 
 .result{
   padding:0 0 26px;
   margin-bottom:26px;
-  border-bottom:1px solid var(--line2);
+  border-bottom:1px solid var(--line2)
 }
 
-.result-top{
+.result-url-row{
   display:flex;
   align-items:center;
   gap:8px;
   min-width:0;
-  margin-bottom:6px;
+  margin-bottom:7px
 }
 
 .result-favicon{
   width:18px;
   height:18px;
-  border-radius:4px;
   object-fit:contain;
+  border-radius:3px;
   flex:0 0 18px;
-  background:rgba(255,255,255,.04);
+  background:rgba(255,255,255,.04)
 }
 
 .result-url{
@@ -418,23 +344,23 @@ main{
   color:var(--url);
   overflow:hidden;
   text-overflow:ellipsis;
-  white-space:nowrap;
+  white-space:nowrap
 }
 
 .result h2{
   font-size:20px;
-  line-height:1.25;
+  line-height:1.3;
   margin:0 0 7px;
   font-weight:500;
-  letter-spacing:-.02em;
+  letter-spacing:-.02em
 }
 
 .result h2 a{
-  text-decoration:none;
+  text-decoration:none
 }
 
 .result h2 a:hover{
-  text-decoration:underline;
+  text-decoration:underline
 }
 
 .snippet{
@@ -442,123 +368,75 @@ main{
   line-height:1.6;
   color:var(--result);
   margin:0;
-  max-width:760px;
+  max-width:760px
 }
 
-.snippet strong{
-  font-weight:700;
+.snippet strong,
+.snippet b{
+  font-weight:700
 }
 
-.snippet em{
-  font-style:italic;
+.snippet em,
+.snippet i{
+  font-style:italic
 }
 
-.snippet mark{
-  background:rgba(255,205,80,.16);
-  color:inherit;
-  padding:0 2px;
-  border-radius:2px;
+.snippet a{
+  text-decoration:underline
 }
 
 .result-meta{
   font-size:12px;
   color:var(--muted);
-  margin-top:7px;
+  margin-top:7px
 }
 
-/* =========================================================
-   IMAGES
-========================================================= */
+/* IMAGES */
 
 .image-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:28px 22px;
+  gap:28px 22px
 }
 
 .image-result{
   min-width:0;
-  position:relative;
+  position:relative
 }
 
-.image-result-link{
+.image-result a{
   display:block;
-  text-decoration:none;
+  text-decoration:none
 }
 
-.image-result-image-wrap{
+.image-thumb-wrap{
   position:relative;
-  overflow:hidden;
+  overflow:hidden
+}
+
+.image-result img{
+  display:block;
   width:100%;
   aspect-ratio:4/3;
-  background:rgba(255,255,255,.02);
-  border:1px solid var(--line2);
-  cursor:pointer;
-  user-select:none;
-  -webkit-user-select:none;
-  -webkit-touch-callout:none;
-}
-
-.image-result-image-wrap img{
-  display:block;
-  width:100%;
-  height:100%;
   object-fit:cover;
-  border:0;
-  pointer-events:none;
+  border:1px solid var(--line2);
+  background:rgba(255,255,255,.02);
   user-select:none;
-  -webkit-user-drag:none;
+  -webkit-user-drag:none
 }
 
-.longpress-progress{
+/* Long press progress */
+
+.image-progress{
   position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
+  left:0;
+  bottom:0;
+  height:4px;
+  width:0;
+  background:#fff;
+  opacity:.9;
   pointer-events:none;
-  opacity:0;
-  background:rgba(0,0,0,.18);
-  transition:opacity .12s ease;
-}
-
-.longpress-progress.active{
-  opacity:1;
-}
-
-.longpress-ring{
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  background:
-    conic-gradient(
-      rgba(255,255,255,.95) var(--progress,0%),
-      rgba(255,255,255,.18) var(--progress,0%)
-    );
-  padding:4px;
-  transform:scale(.9);
-}
-
-.longpress-ring::after{
-  content:"↓";
-  width:100%;
-  height:100%;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:rgba(29,12,34,.94);
-  color:#fff;
-  font-size:25px;
-  line-height:1;
-}
-
-.image-result-image-wrap.downloading .longpress-ring{
-  animation:downloadPulse .35s ease;
-}
-
-@keyframes downloadPulse{
-  0%{transform:scale(.9)}
-  50%{transform:scale(1.08)}
-  100%{transform:scale(1)}
+  transition:none
 }
 
 .image-result-title{
@@ -567,7 +445,7 @@ main{
   margin-top:9px;
   white-space:nowrap;
   overflow:hidden;
-  text-overflow:ellipsis;
+  text-overflow:ellipsis
 }
 
 .image-result-source{
@@ -576,95 +454,100 @@ main{
   margin-top:4px;
   white-space:nowrap;
   overflow:hidden;
-  text-overflow:ellipsis;
+  text-overflow:ellipsis
 }
 
-/* =========================================================
-   DICTIONARY
-========================================================= */
+/* DICTIONARY */
 
 .dictionary{
   border-left:1px solid var(--line2);
   padding-left:28px;
-  max-height:72vh;
+  max-height:70vh;
   overflow-y:auto;
   overscroll-behavior:contain;
-  scrollbar-width:thin;
+  scrollbar-width:thin
+}
+
+.dictionary.hidden{
+  display:none
 }
 
 .dictionary-title{
   font-size:22px;
   font-weight:500;
   letter-spacing:-.02em;
-  margin:0 0 5px;
+  margin:0 0 5px
 }
 
 .dictionary-word{
   font-size:13px;
   color:var(--muted);
-  margin-bottom:22px;
+  margin-bottom:22px
 }
 
 .dictionary-entry{
   padding:0 0 24px;
   margin-bottom:24px;
-  border-bottom:1px solid var(--line2);
+  border-bottom:1px solid var(--line2)
+}
+
+.dictionary-language,
+.dictionary-label{
+  font-size:12px;
+  color:var(--muted)
 }
 
 .dictionary-language{
-  font-size:12px;
-  color:var(--muted);
-  margin-bottom:8px;
+  margin-bottom:8px
 }
 
 .dictionary-pos{
   font-size:15px;
-  margin-bottom:12px;
+  margin-bottom:12px
 }
 
 .dictionary-senses,
 .dictionary-relations,
 .dictionary-translations{
-  margin-top:14px;
+  margin-top:14px
 }
 
 .dictionary-label{
-  font-size:12px;
-  color:var(--muted);
   text-transform:uppercase;
   letter-spacing:.05em;
-  margin-bottom:7px;
+  margin-bottom:7px
 }
 
 .dictionary-list{
   margin:0;
-  padding-left:18px;
+  padding-left:18px
 }
 
 .dictionary-list li{
-  margin:0 0 7px;
+  margin:0 0 7px
 }
 
 .dictionary-sense{
-  margin:0 0 15px;
+  margin:0 0 15px
 }
 
 .dictionary-definition{
   font-size:14px;
-  line-height:1.55;
+  line-height:1.55
 }
 
 .dictionary-tags{
   font-size:12px;
   color:var(--muted);
-  margin-left:5px;
+  margin-left:5px
 }
 
-.dictionary-example{
+.dictionary-example,
+.dictionary-quote{
   font-size:13px;
   line-height:1.5;
   color:var(--result);
-  margin:7px 0 0 14px;
+  margin:7px 0 0 14px
 }
 
 .dictionary-source,
@@ -672,17 +555,15 @@ main{
 .dictionary-empty{
   font-size:12px;
   line-height:1.5;
-  color:var(--muted);
+  color:var(--muted)
 }
 
-/* =========================================================
-   WORD OF THE DAY
-========================================================= */
+/* WORD OF THE DAY */
 
 .wotd-panel{
   padding:0 0 22px;
   margin:0 0 22px;
-  border-bottom:1px solid var(--line2);
+  border-bottom:1px solid var(--line2)
 }
 
 .wotd-heading{
@@ -692,50 +573,78 @@ main{
   margin:0 0 8px;
   color:#ffb52e;
   font-size:13px;
-  font-weight:600;
+  font-weight:600
 }
 
 .wotd-word{
   color:#fff;
-  font-size:22px;
+  font-size:20px;
   font-weight:600;
   line-height:1.25;
-  margin:0 0 6px;
+  margin:0 0 7px
 }
 
 .wotd-definition{
   color:#ffe9a8;
   font-size:13px;
   line-height:1.55;
-  margin:0;
+  margin:0
 }
 
 .wotd-example{
-  color:#cdbb91;
+  color:#c9b88a;
   font-size:12px;
   line-height:1.5;
-  margin:8px 0 0;
-  font-style:italic;
+  margin:7px 0 0
 }
 
 .wotd-status{
   color:var(--muted);
   font-size:13px;
-  line-height:1.5;
+  line-height:1.5
 }
 
-/* =========================================================
-   MAPS REMOVED
-========================================================= */
+/* MAP */
 
-/* =========================================================
-   EMPTY / ERROR / PAGER
-========================================================= */
+.map-result{
+  padding:0 0 22px;
+  margin-bottom:22px;
+  border-bottom:1px solid var(--line2)
+}
+
+.map-result-title{
+  font-size:18px;
+  line-height:1.35;
+  margin:0 0 6px;
+  font-weight:500
+}
+
+.map-result-title a{
+  text-decoration:none
+}
+
+.map-result-title a:hover{
+  text-decoration:underline
+}
+
+.map-result-address{
+  font-size:14px;
+  line-height:1.55;
+  color:var(--result)
+}
+
+.map-result-coords{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:6px
+}
+
+/* MISC */
 
 .empty{
   padding:70px 0;
   color:var(--muted);
-  text-align:center;
+  text-align:center
 }
 
 .error{
@@ -750,13 +659,13 @@ main{
   border:1px solid var(--line2);
   color:var(--muted);
   font-size:14px;
-  line-height:1.5;
+  line-height:1.5
 }
 
 .pager{
   display:flex;
   gap:8px;
-  padding-top:10px;
+  padding-top:10px
 }
 
 .pager button{
@@ -765,16 +674,14 @@ main{
   color:var(--text);
   border-radius:4px;
   padding:8px 12px;
-  cursor:pointer;
+  cursor:pointer
 }
 
-.pager button:hover{
-  border-color:var(--focus);
+.hidden{
+  display:none!important
 }
 
-/* =========================================================
-   ABOUT
-========================================================= */
+/* ABOUT */
 
 .about-overlay{
   position:fixed;
@@ -783,7 +690,11 @@ main{
   display:grid;
   place-items:center;
   padding:24px;
-  z-index:10000;
+  z-index:10000
+}
+
+.about-overlay.hidden{
+  display:none
 }
 
 .about-card{
@@ -795,7 +706,7 @@ main{
   border:1px solid var(--line);
   border-radius:14px;
   box-shadow:0 20px 60px rgba(0,0,0,.45);
-  padding:30px;
+  padding:30px
 }
 
 .about-close{
@@ -810,38 +721,34 @@ main{
   color:var(--muted);
   font-size:24px;
   line-height:1;
-  cursor:pointer;
+  cursor:pointer
 }
 
 .about-close:hover{
   background:rgba(255,255,255,.08);
-  color:var(--text);
+  color:var(--text)
 }
 
 .about-card h2{
   margin:0 38px 16px 0;
   font-size:25px;
-  font-weight:500;
+  font-weight:500
 }
 
 .about-card p{
   color:var(--result);
   line-height:1.7;
-  font-size:14px;
+  font-size:14px
 }
 
 .about-card a{
-  color:var(--text);
+  color:var(--text)
 }
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
 
 @media(max-width:860px){
 
   .results-layout{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr
   }
 
   .dictionary{
@@ -851,7 +758,7 @@ main{
     border-top:0;
     padding:0 0 26px;
     margin-bottom:26px;
-    max-height:none;
+    max-height:none
   }
 }
 
@@ -859,7 +766,7 @@ main{
 
   .image-grid{
     grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:22px 14px;
+    gap:22px 14px
   }
 }
 
@@ -868,72 +775,71 @@ main{
   .shell{
     width:100%;
     padding-left:16px;
-    padding-right:16px;
+    padding-right:16px
   }
 
   #home.home{
-    padding:20px 16px;
+    padding:20px 16px
   }
 
   .hero-logo{
-    width:210px;
-    max-height:130px;
+    width:190px
   }
 
-  .home-title{
+  h1{
     font-size:38px;
-    margin-bottom:24px;
+    margin-bottom:24px
   }
 
   form{
-    height:52px;
+    height:52px
   }
 
   .results{
-    padding:22px 16px 60px;
+    padding:22px 16px 60px
   }
 
   .results-head{
-    gap:12px;
+    gap:12px
   }
 
   .results-brand img{
     width:24px;
-    height:24px;
+    height:24px
   }
 
   .results-brand span{
-    font-size:14px;
+    font-size:14px
   }
 
   .results-query{
-    font-size:13px;
+    font-size:13px
   }
 
   .search-types{
     overflow-x:auto;
-    scrollbar-width:none;
+    scrollbar-width:none
   }
 
   .search-type{
     padding-left:10px;
     padding-right:10px;
-    font-size:12px;
+    font-size:12px
   }
 
   .about-overlay{
-    padding:16px;
+    padding:16px
   }
 
   .about-card{
-    padding:26px 22px;
+    padding:26px 22px
   }
 }
 
 @media(max-width:460px){
 
   .image-grid{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr
   }
 }
 </style>
@@ -943,10 +849,6 @@ main{
 
 <main>
 
-<!-- =====================================================
-     HOME
-===================================================== -->
-
 <section id="home" class="home shell">
 
   <div class="home-inner">
@@ -954,12 +856,9 @@ main{
     <img
       class="hero-logo"
       src="https://raw.githubusercontent.com/danieltorres-mhcs/assets/refs/heads/main/flibidoo.PNG"
-      alt="Flibidoo"
-    >
+      alt="Flibidoo">
 
-    <h1 class="home-title">
-      <em><strong>Flibidoo</strong></em>Search
-    </h1>
+    <h1><em><strong>Flibidoo</strong></em>Search</h1>
 
     <div class="search-wrap">
 
@@ -971,49 +870,45 @@ main{
           autocomplete="off"
           spellcheck="false"
           placeholder="Search the web"
-          aria-label="Search the web"
-        >
+          aria-label="Search the web">
 
         <button
           class="submit"
           id="submitButton"
           type="submit"
-          aria-label="Search"
-        >
+          aria-label="Search">
+
           <svg
             class="submit-icon"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 640 640"
-            aria-hidden="true"
-          >
+            aria-hidden="true">
+
             <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+
           </svg>
+
         </button>
 
       </form>
 
-      <div class="links">
+    </div>
 
-        <button
-          type="button"
-          id="aboutButton"
-        >
-          About
-        </button>
+    <div class="links">
 
-        <span class="confederacy-credit">
+      <button type="button" id="aboutButton">
+        About
+      </button>
 
-          with love from The Great Confederacy of E
+      <span class="confederacy-credit">
+        with love from The Great Confederacy of E
 
-          <img
-            src="https://raw.githubusercontent.com/danieltorres-mhcs/assets/refs/heads/main/Untitled13_20260821194209.png"
-            alt=""
-            aria-hidden="true"
-          >
+        <img
+          src="https://raw.githubusercontent.com/danieltorres-mhcs/assets/refs/heads/main/Untitled13_20260821194209.png"
+          alt=""
+          aria-hidden="true">
 
-        </span>
-
-      </div>
+      </span>
 
     </div>
 
@@ -1022,24 +917,15 @@ main{
 </section>
 
 
-<!-- =====================================================
-     RESULTS
-===================================================== -->
-
 <section id="results" class="results shell hidden">
 
   <div class="results-head">
 
-    <a
-      class="results-brand"
-      href="/"
-      aria-label="FlibidooSearch home"
-    >
+    <a class="results-brand" href="/" aria-label="FlibidooSearch home">
 
       <img
         src="https://raw.githubusercontent.com/danieltorres-mhcs/assets/refs/heads/main/flibidoo.PNG"
-        alt="Flibidoo"
-      >
+        alt="">
 
       <span>
         <em><strong>Flibidoo</strong></em>Search
@@ -1047,25 +933,16 @@ main{
 
     </a>
 
-    <div
-      id="queryLabel"
-      class="results-query"
-    ></div>
+    <div id="queryLabel" class="results-query"></div>
 
-    <div
-      id="count"
-      class="count"
-    ></div>
+    <div id="count" class="count"></div>
 
   </div>
 
 
   <div class="results-search">
 
-    <form
-      id="resultsSearchForm"
-      role="search"
-    >
+    <form id="resultsSearchForm" role="search">
 
       <input
         id="resultsQ"
@@ -1073,23 +950,22 @@ main{
         autocomplete="off"
         spellcheck="false"
         placeholder="Search the web"
-        aria-label="Search the web"
-      >
+        aria-label="Search the web">
 
       <button
         class="submit"
         id="resultsSubmitButton"
         type="submit"
-        aria-label="Search"
-      >
+        aria-label="Search">
 
         <svg
           class="submit-icon"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 640 640"
-          aria-hidden="true"
-        >
+          aria-hidden="true">
+
           <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+
         </svg>
 
       </button>
@@ -1099,34 +975,17 @@ main{
   </div>
 
 
-  <!-- NO MAPS -->
+  <nav class="search-types" aria-label="Search type">
 
-  <nav
-    class="search-types"
-    aria-label="Search type"
-  >
-
-    <button
-      class="search-type active"
-      data-type="web"
-      type="button"
-    >
+    <button class="search-type active" data-type="web" type="button">
       Web
     </button>
 
-    <button
-      class="search-type"
-      data-type="images"
-      type="button"
-    >
+    <button class="search-type" data-type="images" type="button">
       Images
     </button>
 
-    <button
-      class="search-type"
-      data-type="news"
-      type="button"
-    >
+    <button class="search-type" data-type="news" type="button">
       News
     </button>
 
@@ -1139,19 +998,15 @@ main{
 
       <div id="resultList"></div>
 
-      <div
-        id="pager"
-        class="pager"
-      ></div>
+      <div id="pager" class="pager"></div>
 
     </div>
-
 
     <aside
       id="dictionary"
       class="dictionary hidden"
-      aria-label="Dictionary results"
-    ></aside>
+      aria-label="Dictionary results">
+    </aside>
 
   </div>
 
@@ -1160,17 +1015,12 @@ main{
 </main>
 
 
-<!-- =====================================================
-     ABOUT
-===================================================== -->
-
 <div
   id="aboutOverlay"
   class="about-overlay hidden"
   role="dialog"
   aria-modal="true"
-  aria-labelledby="aboutTitle"
->
+  aria-labelledby="aboutTitle">
 
   <div class="about-card">
 
@@ -1178,21 +1028,17 @@ main{
       id="aboutClose"
       class="about-close"
       type="button"
-      aria-label="Close About"
-    >
+      aria-label="Close About">
       ×
     </button>
 
-    <h2 id="aboutTitle">
-      About
-    </h2>
+    <h2 id="aboutTitle">About</h2>
+
+    <p>Welcome to FlibidooSearch.</p>
 
     <p>
-      Welcome to FlibidooSearch.
-    </p>
-
-    <p>
-      A simple search engine built for the Flibidoo project.
+      You can edit this text directly in the HTML inside the
+      <strong>about-card</strong>.
     </p>
 
   </div>
@@ -1201,11 +1047,12 @@ main{
 
 
 <script>
+
 /* =========================================================
-   CONFIGURATION
+   CONFIG
 ========================================================= */
 
-const WORKER_BASE =
+const API_BASE =
   'https://ancient-unit-5007.daniel-torres-a95.workers.dev';
 
 const WOTD_BASE =
@@ -1256,6 +1103,10 @@ const resultsSubmitButton =
   document.querySelector('#resultsSubmitButton');
 
 
+/* =========================================================
+   STATE
+========================================================= */
+
 let currentQ = '';
 let currentPage = 0;
 let currentType = 'web';
@@ -1265,214 +1116,267 @@ let currentType = 'web';
    BASIC HELPERS
 ========================================================= */
 
-function esc(value=''){
-  return String(value).replace(
-    /[&<>'"]/g,
-    c => ({
-      '&':'&amp;',
-      '<':'&lt;',
-      '>':'&gt;',
-      "'":'&#39;',
-      '"':'&quot;'
-    }[c])
-  );
-}
-
-
 function updateButtonState(button,value){
-  if(!button) return;
 
   button.classList.toggle(
     'has-input',
-    String(value || '').trim().length > 0
+    value.trim().length > 0
   );
+
 }
 
 
-function normalizeUrl(url=''){
-  try{
-    return new URL(url,location.href).href;
-  }catch{
-    return '';
-  }
+/*
+ * Decode entities such as:
+ *
+ * let&#x27;s
+ *
+ * into:
+ *
+ * let's
+ */
+function decodeEntities(value=''){
+
+  const textarea =
+    document.createElement('textarea');
+
+  textarea.innerHTML = String(value);
+
+  return textarea.value;
+
 }
 
 
-function getHostname(url=''){
-  try{
-    return new URL(url).hostname;
-  }catch{
-    return '';
-  }
-}
+/*
+ * Convert basic Markdown into HTML.
+ */
+function markdownToHtml(value=''){
 
-
-function faviconFor(url=''){
-  const host = getHostname(url);
-
-  if(!host) return '';
+  let text =
+    decodeEntities(value);
 
   /*
-   * Google's favicon endpoint is used only as a visual favicon
-   * fallback. It does not affect navigation.
+   * Escape HTML first so arbitrary HTML cannot execute.
    */
-  return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=64`;
-}
-
-
-/* =========================================================
-   SAFE DESCRIPTION FORMATTER
-   Supports:
-     **bold**
-     *italic*
-     __bold__
-     _italic_
-     <strong>
-     <em>
-     <b>
-     <i>
-     <mark>
-     <br>
-     percent-encoded text
-========================================================= */
-
-function decodeRepeated(value=''){
-  let text = String(value);
-
-  for(let i=0;i<3;i++){
-    try{
-      const decoded = decodeURIComponent(text);
-
-      if(decoded === text) break;
-
-      text = decoded;
-    }catch{
-      break;
-    }
-  }
-
-  return text;
-}
-
-
-function formatDescription(value=''){
-  let text = decodeRepeated(value);
+  text = text
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
 
   /*
-   * Escape everything first.
-   * This prevents arbitrary HTML from being injected.
-   */
-  text = esc(text);
-
-  /*
-   * Restore a deliberately small safe set of formatting tags.
+   * Markdown links.
    */
   text = text.replace(
-    /&lt;(strong|b)&gt;([\s\S]*?)&lt;\/(strong|b)&gt;/gi,
-    '<strong>$2</strong>'
-  );
-
-  text = text.replace(
-    /&lt;(em|i)&gt;([\s\S]*?)&lt;\/(em|i)&gt;/gi,
-    '<em>$2</em>'
-  );
-
-  text = text.replace(
-    /&lt;mark&gt;([\s\S]*?)&lt;\/mark&gt;/gi,
-    '<mark>$1</mark>'
-  );
-
-  text = text.replace(
-    /&lt;br\s*\/?&gt;/gi,
-    '<br>'
+    /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+    '<a href="$2">$1</a>'
   );
 
   /*
-   * Markdown-style bold.
+   * Bold.
    */
   text = text.replace(
     /\*\*([\s\S]*?)\*\*/g,
     '<strong>$1</strong>'
   );
 
+  /*
+   * Italic.
+   */
   text = text.replace(
-    /__([\s\S]*?)__/g,
-    '<strong>$1</strong>'
+    /(^|[^\*])\*([^*]+)\*/g,
+    '$1<em>$2</em>'
   );
 
   /*
-   * Markdown-style italic.
+   * Underscore italic.
    */
   text = text.replace(
-    /(^|[^\*])\*([^*\n]+)\*(?!\*)/g,
+    /(^|[^_])_([^_]+)_/g,
     '$1<em>$2</em>'
   );
 
+  /*
+   * New lines.
+   */
   text = text.replace(
-    /(^|[^_])_([^_\n]+)_(?!_)/g,
-    '$1<em>$2</em>'
+    /\r?\n/g,
+    '<br>'
   );
 
   return text;
 }
 
 
-/* =========================================================
-   WOTD
-========================================================= */
+/*
+ * Safely allow useful HTML formatting from search descriptions.
+ *
+ * Allowed:
+ *
+ * strong
+ * b
+ * em
+ * i
+ * u
+ * br
+ * a
+ *
+ * Everything else becomes plain text.
+ */
+function richText(value=''){
 
-function isWotdQuery(query=''){
-  const q = query
-    .toLowerCase()
-    .replace(/[^\p{L}\p{N}\s]/gu,' ')
-    .replace(/\s+/g,' ')
-    .trim();
+  const source =
+    decodeEntities(value);
 
-  return (
-    q === 'wotd' ||
-    q === 'word of the day' ||
-    q.includes('word of the day') ||
-    q.includes('wotd')
-  );
+  const html =
+    markdownToHtml(source);
+
+  const doc =
+    new DOMParser().parseFromString(
+      `<div>${html}</div>`,
+      'text/html'
+    );
+
+  const root =
+    doc.body.firstElementChild;
+
+  const allowed =
+    new Set([
+      'STRONG',
+      'B',
+      'EM',
+      'I',
+      'U',
+      'BR',
+      'A'
+    ]);
+
+  root
+    .querySelectorAll('*')
+    .forEach(node=>{
+
+      if(!allowed.has(node.tagName)){
+
+        node.replaceWith(
+          document.createTextNode(
+            node.textContent
+          )
+        );
+
+        return;
+      }
+
+      if(node.tagName === 'A'){
+
+        const href =
+          node.getAttribute('href') || '';
+
+        if(!/^https?:\/\//i.test(href)){
+
+          node.replaceWith(
+            document.createTextNode(
+              node.textContent
+            )
+          );
+
+          return;
+        }
+
+        node.setAttribute(
+          'href',
+          href
+        );
+
+        node.setAttribute(
+          'rel',
+          'noopener noreferrer'
+        );
+
+        /*
+         * Same-tab navigation.
+         */
+        node.removeAttribute('target');
+      }
+
+      [...node.attributes]
+        .forEach(attr=>{
+
+          if(
+            node.tagName !== 'A' ||
+            attr.name !== 'href' ||
+            attr.name === 'target'
+          ){
+
+            if(
+              node.tagName !== 'A' ||
+              attr.name !== 'href'
+            ){
+              node.removeAttribute(
+                attr.name
+              );
+            }
+
+          }
+
+        });
+
+    });
+
+  return root.innerHTML;
 }
 
 
-async function getWotdWord(){
+/* =========================================================
+   URL / FAVICON
+========================================================= */
+
+function getHostname(url){
+
   try{
 
-    const response = await fetch(
-      `${WOTD_BASE}/`,
-      {
-        method:'GET',
-        headers:{
-          'Accept':'text/plain'
-        },
-        cache:'no-store'
-      }
-    );
-
-    const text =
-      await response.text();
-
-    if(!response.ok){
-      return '';
-    }
-
-    const word =
-      text.trim();
-
-    if(
-      !word ||
-      word.toLowerCase().includes('failed')
-    ){
-      return '';
-    }
-
-    return word;
+    return new URL(url).hostname;
 
   }catch{
+
     return '';
+
   }
+
+}
+
+
+function faviconFor(url){
+
+  const host =
+    getHostname(url);
+
+  if(!host)
+    return '';
+
+  /*
+   * Google's favicon endpoint is used as the
+   * reliable fallback.
+   */
+  return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=64`;
+}
+
+
+/* =========================================================
+   OG THUMBNAIL
+========================================================= */
+
+function getThumbnail(result){
+
+  return (
+    result.thumbnail ||
+    result.image ||
+    result.image_url ||
+    result.properties?.thumbnail ||
+    result.properties?.image ||
+    ''
+  );
+
 }
 
 
@@ -1480,679 +1384,418 @@ async function getWotdWord(){
    DICTIONARY
 ========================================================= */
 
-async function fetchDictionary(word){
+async function loadDictionary(word){
 
-  if(!word) return null;
+  word =
+    word.trim();
+
+  if(!word){
+    dictionary.classList.add('hidden');
+    return;
+  }
+
+  dictionary.classList.remove('hidden');
+
+  dictionary.innerHTML =
+    '<div class="dictionary-loading">Looking up definition…</div>';
 
   try{
 
     const response =
       await fetch(
-        `${WORKER_BASE}/api/dictionary?word=${encodeURIComponent(word)}`,
-        {
-          headers:{
-            'Accept':'application/json'
-          },
-          cache:'no-store'
-        }
+        `${API_BASE}/api/dictionary?word=${encodeURIComponent(word)}`
       );
 
     const text =
       await response.text();
 
-    let data = null;
+    let data = {};
 
     try{
-      data = JSON.parse(text);
+      data =
+        text ? JSON.parse(text) : {};
     }catch{
-      return null;
+
+      dictionary.classList.add('hidden');
+      return;
+
     }
 
     if(!response.ok){
-      return null;
+
+      dictionary.classList.add('hidden');
+      return;
+
     }
 
-    if(
-      !data ||
-      !Array.isArray(data.entries) ||
-      !data.entries.length
-    ){
-      return null;
-    }
-
-    return data;
-
-  }catch{
-    return null;
-  }
-}
-
-
-function dictionaryLanguage(entry){
-  return (
-    entry.language?.name ||
-    entry.language ||
-    entry.lang ||
-    entry.locale ||
-    ''
-  );
-}
-
-
-function isEnglishEntry(entry){
-
-  const language =
-    dictionaryLanguage(entry)
-      .toLowerCase();
-
-  return (
-    language === 'english' ||
-    language === 'en' ||
-    language.startsWith('english ')
-  );
-}
-
-
-function getEntries(data){
-
-  if(!data) return [];
-
-  let entries =
-    Array.isArray(data.entries)
-      ? [...data.entries]
-      : [];
-
-  /*
-   * English always first.
-   */
-  entries.sort((a,b)=>{
-    const ae = isEnglishEntry(a) ? 0 : 1;
-    const be = isEnglishEntry(b) ? 0 : 1;
-
-    return ae - be;
-  });
-
-  return entries;
-}
-
-
-function renderDictionary(data,word){
-
-  dictionary.innerHTML = '';
-
-  const entries =
-    getEntries(data);
-
-  if(!entries.length){
-    dictionary.classList.add('hidden');
-    return;
-  }
-
-  dictionary.classList.remove('hidden');
-
-  const title =
-    document.createElement('h2');
-
-  title.className =
-    'dictionary-title';
-
-  title.textContent =
-    'Dictionary';
-
-  dictionary.appendChild(title);
-
-
-  const wordLabel =
-    document.createElement('div');
-
-  wordLabel.className =
-    'dictionary-word';
-
-  wordLabel.textContent =
-    word;
-
-  dictionary.appendChild(wordLabel);
-
-
-  /*
-   * Don't show an unlimited number of duplicate language entries.
-   */
-  entries.slice(0,8).forEach(entry=>{
-
-    const article =
-      document.createElement('article');
-
-    article.className =
-      'dictionary-entry';
-
-
-    const language =
-      dictionaryLanguage(entry);
-
-    if(language){
-
-      const lang =
-        document.createElement('div');
-
-      lang.className =
-        'dictionary-language';
-
-      lang.textContent =
-        language;
-
-      article.appendChild(lang);
-    }
-
-
-    const meanings =
-      Array.isArray(entry.meanings)
-        ? entry.meanings
+    const entries =
+      Array.isArray(data.entries)
+        ? data.entries
         : [];
 
+    if(!entries.length){
 
-    meanings.slice(0,6).forEach(meaning=>{
+      dictionary.classList.add('hidden');
+      return;
 
-      const pos =
-        meaning.partOfSpeech ||
-        meaning.part_of_speech ||
-        '';
+    }
 
-      if(pos){
+    renderDictionary(
+      word,
+      entries
+    );
 
-        const posEl =
-          document.createElement('div');
+  }catch{
 
-        posEl.className =
-          'dictionary-pos';
+    dictionary.classList.add('hidden');
 
-        posEl.textContent =
-          pos;
+  }
 
-        article.appendChild(posEl);
-      }
+}
 
 
-      const senses =
-        Array.isArray(meaning.senses)
-          ? meaning.senses
-          : [];
+function renderDictionary(word,entries){
 
+  /*
+   * English first.
+   */
+  const sorted =
+    [...entries].sort((a,b)=>{
 
-      senses.slice(0,8).forEach(sense=>{
+      const al =
+        String(
+          a.language ||
+          a.lang ||
+          a.language_code ||
+          ''
+        ).toLowerCase();
 
-        const definition =
-          sense.definition ||
-          sense.def ||
-          sense.meaning ||
-          '';
+      const bl =
+        String(
+          b.language ||
+          b.lang ||
+          b.language_code ||
+          ''
+        ).toLowerCase();
 
-        if(!definition) return;
+      const ae =
+        al.includes('english') ||
+        al === 'en' ||
+        al.startsWith('en-');
 
+      const be =
+        bl.includes('english') ||
+        bl === 'en' ||
+        bl.startsWith('en-');
 
-        const senseEl =
-          document.createElement('div');
+      if(ae && !be) return -1;
+      if(!ae && be) return 1;
 
-        senseEl.className =
-          'dictionary-sense';
-
-
-        const definitionEl =
-          document.createElement('div');
-
-        definitionEl.className =
-          'dictionary-definition';
-
-        definitionEl.innerHTML =
-          formatDescription(definition);
-
-        senseEl.appendChild(
-          definitionEl
-        );
-
-
-        const example =
-          sense.example ||
-          sense.examples?.[0] ||
-          '';
-
-        if(example){
-
-          const exampleEl =
-            document.createElement('div');
-
-          exampleEl.className =
-            'dictionary-example';
-
-          exampleEl.textContent =
-            `“${decodeRepeated(example)}”`;
-
-          senseEl.appendChild(
-            exampleEl
-          );
-        }
-
-
-        article.appendChild(
-          senseEl
-        );
-
-      });
+      return 0;
 
     });
 
+  let html = `
+    <h2 class="dictionary-title">
+      Dictionary
+    </h2>
 
-    dictionary.appendChild(article);
+    <div class="dictionary-word">
+      ${escapeHtml(word)}
+    </div>
+  `;
+
+  sorted.forEach(entry=>{
+
+    const language =
+      entry.language ||
+      entry.lang ||
+      entry.language_code ||
+      '';
+
+    const pos =
+      entry.partOfSpeech ||
+      entry.part_of_speech ||
+      entry.pos ||
+      '';
+
+    const senses =
+      entry.senses ||
+      entry.meanings ||
+      [];
+
+    html += `
+      <section class="dictionary-entry">
+
+        ${
+          language
+            ? `<div class="dictionary-language">
+                 ${escapeHtml(language)}
+               </div>`
+            : ''
+        }
+
+        ${
+          pos
+            ? `<div class="dictionary-pos">
+                 ${escapeHtml(pos)}
+               </div>`
+            : ''
+        }
+    `;
+
+    if(Array.isArray(senses)){
+
+      senses
+        .slice(0,8)
+        .forEach(sense=>{
+
+          const definition =
+            sense.definition ||
+            sense.def ||
+            sense.meaning ||
+            '';
+
+          const example =
+            sense.example ||
+            sense.examples?.[0] ||
+            '';
+
+          if(!definition)
+            return;
+
+          html += `
+            <div class="dictionary-sense">
+
+              <div class="dictionary-definition">
+                ${richText(definition)}
+              </div>
+
+              ${
+                example
+                  ? `<div class="dictionary-example">
+                       ${richText(example)}
+                     </div>`
+                  : ''
+              }
+
+            </div>
+          `;
+
+        });
+
+    }
+
+    html += `
+      </section>
+    `;
 
   });
+
+  dictionary.innerHTML =
+    html;
+
+}
+
+
+function escapeHtml(value=''){
+
+  return String(value)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+
 }
 
 
 /* =========================================================
-   WOTD PANEL
+   WORD OF THE DAY
 ========================================================= */
 
-async function renderWotdPanel(word){
+async function getWotd(){
 
-  const data =
-    await fetchDictionary(word);
+  try{
 
-  const panel =
-    document.createElement('div');
+    const response =
+      await fetch(
+        `${WOTD_BASE}/`
+      );
 
-  panel.className =
-    'wotd-panel';
+    if(!response.ok)
+      return null;
+
+    const word =
+      (await response.text()).trim();
+
+    if(!word ||
+       word.toLowerCase().includes('failed'))
+      return null;
+
+    return word;
+
+  }catch{
+
+    return null;
+
+  }
+
+}
 
 
-  const heading =
-    document.createElement('div');
+function isWotdQuery(query){
 
-  heading.className =
-    'wotd-heading';
+  const q =
+    query.toLowerCase().trim();
 
-  heading.textContent =
-    '● Word of the Day';
-
-  panel.appendChild(
-    heading
+  return (
+    q === 'wotd' ||
+    q === 'word of the day' ||
+    q.includes('word of the day') ||
+    /\bwotd\b/.test(q)
   );
 
+}
 
-  const wordEl =
-    document.createElement('div');
 
-  wordEl.className =
-    'wotd-word';
+async function renderWotdPanel(){
 
-  wordEl.textContent =
-    word;
+  const word =
+    await getWotd();
 
-  panel.appendChild(
-    wordEl
-  );
-
+  if(!word)
+    return;
 
   let definition = '';
   let example = '';
 
+  try{
 
-  if(data){
+    const response =
+      await fetch(
+        `${API_BASE}/api/dictionary?word=${encodeURIComponent(word)}`
+      );
 
-    const entries =
-      getEntries(data);
+    if(response.ok){
 
-    /*
-     * Prefer English for WOTD too.
-     */
-    const english =
-      entries.find(isEnglishEntry) ||
-      entries[0];
+      const data =
+        await response.json();
 
-
-    const meanings =
-      Array.isArray(english?.meanings)
-        ? english.meanings
-        : [];
-
-
-    for(const meaning of meanings){
-
-      const senses =
-        Array.isArray(meaning.senses)
-          ? meaning.senses
+      const entries =
+        Array.isArray(data.entries)
+          ? data.entries
           : [];
 
-      const sense =
-        senses.find(
-          s =>
-            s.definition ||
-            s.def ||
-            s.meaning
-        );
+      /*
+       * Prefer English.
+       */
+      const entry =
+        entries.find(e=>{
 
-      if(sense){
+          const lang =
+            String(
+              e.language ||
+              e.lang ||
+              ''
+            ).toLowerCase();
+
+          return (
+            lang.includes('english') ||
+            lang === 'en'
+          );
+
+        }) || entries[0];
+
+      const senses =
+        entry?.senses ||
+        entry?.meanings ||
+        [];
+
+      const first =
+        Array.isArray(senses)
+          ? senses.find(
+              s=>s.definition ||
+                  s.def ||
+                  s.meaning
+            )
+          : null;
+
+      if(first){
 
         definition =
-          sense.definition ||
-          sense.def ||
-          sense.meaning ||
+          first.definition ||
+          first.def ||
+          first.meaning ||
           '';
 
         example =
-          sense.example ||
-          sense.examples?.[0] ||
+          first.example ||
+          first.examples?.[0] ||
           '';
 
-        if(definition) break;
       }
+
     }
-  }
 
+  }catch{}
 
-  if(definition){
+  const panel =
+    document.createElement('section');
 
-    const definitionEl =
-      document.createElement('p');
+  panel.className =
+    'wotd-panel';
 
-    definitionEl.className =
-      'wotd-definition';
+  panel.innerHTML = `
 
-    definitionEl.innerHTML =
-      formatDescription(definition);
+    <div class="wotd-heading">
+      Word of the Day!
+    </div>
 
-    panel.appendChild(
-      definitionEl
-    );
-  }
+    <div class="wotd-word">
+      ${escapeHtml(word)}
+    </div>
 
+    ${
+      definition
+        ? `<div class="wotd-definition">
+             ${richText(definition)}
+           </div>`
+        : ''
+    }
 
-  if(example){
+    ${
+      example
+        ? `<div class="wotd-example">
+             ${richText(example)}
+           </div>`
+        : ''
+    }
 
-    const exampleEl =
-      document.createElement('p');
+  `;
 
-    exampleEl.className =
-      'wotd-example';
-
-    exampleEl.textContent =
-      `“${decodeRepeated(example)}”`;
-
-    panel.appendChild(
-      exampleEl
-    );
-  }
-
+  dictionary.classList.remove(
+    'hidden'
+  );
 
   dictionary.prepend(panel);
-  dictionary.classList.remove('hidden');
+
 }
 
 
-/* =========================================================
-   SHOW DICTIONARY FOR A NORMAL SEARCH
-========================================================= */
+async function checkIfCurrentWordIsWotd(query){
 
-async function updateDictionaryForQuery(query){
+  const wotd =
+    await getWotd();
 
-  dictionary.innerHTML = '';
+  if(!wotd)
+    return false;
 
-  const requestedWotd =
-    isWotdQuery(query);
+  return (
+    query.trim().toLowerCase() ===
+    wotd.trim().toLowerCase()
+  );
 
-  /*
-   * If they explicitly searched WOTD,
-   * get today's word first.
-   */
-  if(requestedWotd){
-
-    const word =
-      await getWotdWord();
-
-    if(word){
-
-      await renderWotdPanel(word);
-
-      /*
-       * Also show the normal dictionary underneath it.
-       */
-      const data =
-        await fetchDictionary(word);
-
-      if(data){
-        renderDictionaryBelowWotd(
-          data,
-          word
-        );
-      }
-
-      return;
-    }
-
-    dictionary.classList.add('hidden');
-    return;
-  }
-
-
-  /*
-   * Normal search.
-   */
-  const data =
-    await fetchDictionary(query);
-
-  if(data){
-
-    renderDictionary(
-      data,
-      query
-    );
-
-  }else{
-
-    dictionary.classList.add('hidden');
-
-  }
-
-
-  /*
-   * Check whether the searched word itself
-   * is today's WOTD.
-   */
-  try{
-
-    const today =
-      await getWotdWord();
-
-    if(
-      today &&
-      today.trim().toLowerCase() ===
-      query.trim().toLowerCase()
-    ){
-
-      /*
-       * If the normal dictionary exists,
-       * put WOTD above it.
-       */
-      if(!dictionary.classList.contains('hidden')){
-
-        await renderWotdPanel(
-          today
-        );
-
-      }else{
-
-        await renderWotdPanel(
-          today
-        );
-
-      }
-    }
-
-  }catch{
-    /* WOTD failure should never break search. */
-  }
-}
-
-
-function renderDictionaryBelowWotd(data,word){
-
-  const entries =
-    getEntries(data);
-
-  if(!entries.length) return;
-
-
-  const title =
-    document.createElement('h2');
-
-  title.className =
-    'dictionary-title';
-
-  title.textContent =
-    'Dictionary';
-
-  dictionary.appendChild(title);
-
-
-  const wordLabel =
-    document.createElement('div');
-
-  wordLabel.className =
-    'dictionary-word';
-
-  wordLabel.textContent =
-    word;
-
-  dictionary.appendChild(wordLabel);
-
-
-  entries.slice(0,8).forEach(entry=>{
-
-    const article =
-      document.createElement('article');
-
-    article.className =
-      'dictionary-entry';
-
-
-    const language =
-      dictionaryLanguage(entry);
-
-    if(language){
-
-      const lang =
-        document.createElement('div');
-
-      lang.className =
-        'dictionary-language';
-
-      lang.textContent =
-        language;
-
-      article.appendChild(lang);
-    }
-
-
-    const meanings =
-      Array.isArray(entry.meanings)
-        ? entry.meanings
-        : [];
-
-
-    meanings.slice(0,5).forEach(meaning=>{
-
-      const pos =
-        meaning.partOfSpeech ||
-        meaning.part_of_speech ||
-        '';
-
-      if(pos){
-
-        const posEl =
-          document.createElement('div');
-
-        posEl.className =
-          'dictionary-pos';
-
-        posEl.textContent =
-          pos;
-
-        article.appendChild(posEl);
-      }
-
-
-      const senses =
-        Array.isArray(meaning.senses)
-          ? meaning.senses
-          : [];
-
-
-      senses.slice(0,6).forEach(sense=>{
-
-        const definition =
-          sense.definition ||
-          sense.def ||
-          sense.meaning ||
-          '';
-
-        if(!definition) return;
-
-
-        const senseEl =
-          document.createElement('div');
-
-        senseEl.className =
-          'dictionary-sense';
-
-
-        const definitionEl =
-          document.createElement('div');
-
-        definitionEl.className =
-          'dictionary-definition';
-
-        definitionEl.innerHTML =
-          formatDescription(definition);
-
-        senseEl.appendChild(
-          definitionEl
-        );
-
-
-        const example =
-          sense.example ||
-          sense.examples?.[0] ||
-          '';
-
-        if(example){
-
-          const exampleEl =
-            document.createElement('div');
-
-          exampleEl.className =
-            'dictionary-example';
-
-          exampleEl.textContent =
-            `“${decodeRepeated(example)}”`;
-
-          senseEl.appendChild(
-            exampleEl
-          );
-        }
-
-
-        article.appendChild(
-          senseEl
-        );
-
-      });
-
-    });
-
-
-    dictionary.appendChild(
-      article
-    );
-
-  });
 }
 
 
@@ -2167,10 +1810,10 @@ async function search(
 ){
 
   q =
-    String(q || '').trim();
+    q.trim();
 
-  if(!q) return;
-
+  if(!q)
+    return;
 
   currentQ =
     q;
@@ -2182,21 +1825,16 @@ async function search(
     );
 
   currentType =
-    ['web','images','news'].includes(type)
-      ? type
-      : 'web';
-
+    type;
 
   document.title =
     `${q} - FlibidooSearch`;
-
 
   input.value =
     q;
 
   resultsInput.value =
     q;
-
 
   home.classList.add(
     'hidden'
@@ -2205,7 +1843,6 @@ async function search(
   results.classList.remove(
     'hidden'
   );
-
 
   list.innerHTML =
     '<div class="empty">Searching…</div>';
@@ -2219,120 +1856,119 @@ async function search(
   pager.innerHTML =
     '';
 
-
-  document
-    .querySelectorAll('.search-type')
-    .forEach(button=>{
-      button.classList.toggle(
-        'active',
-        button.dataset.type ===
-        currentType
-      );
-    });
-
+  dictionary.classList.add(
+    'hidden'
+  );
 
   /*
-   * Dictionary is independent from search results.
-   * Start it immediately so it can still appear if
-   * Tiago returns zero results.
+   * Load dictionary independently.
+   * This means dictionary still appears even
+   * when the search itself has zero results.
    */
-  updateDictionaryForQuery(q)
-    .catch(()=>{
-      dictionary.classList.add(
-        'hidden'
-      );
-    });
+  const dictionaryPromise =
+    isWotdQuery(q)
+      ? renderWotdPanel()
+      : loadDictionary(q);
 
+  /*
+   * If the query itself is the current WOTD,
+   * put the WOTD panel above its dictionary.
+   */
+  if(!isWotdQuery(q)){
+
+    checkIfCurrentWordIsWotd(q)
+      .then(isWotd=>{
+
+        if(isWotd){
+
+          dictionary.innerHTML = '';
+
+          renderWotdPanel()
+            .then(()=>loadDictionary(q));
+
+        }
+
+      });
+
+  }
 
   try{
 
-    const endpoint =
-      `${WORKER_BASE}/api/search?q=${
-        encodeURIComponent(q)
-      }&type=${
-        encodeURIComponent(currentType)
-      }&page=${
-        currentPage
-      }`;
-
+    const url =
+      `${API_BASE}/api/search` +
+      `?q=${encodeURIComponent(q)}` +
+      `&type=${encodeURIComponent(type)}` +
+      `&page=${currentPage}`;
 
     const response =
-      await fetch(
-        endpoint,
-        {
-          method:'GET',
-          headers:{
-            'Accept':'application/json'
-          },
-          cache:'no-store'
-        }
-      );
-
+      await fetch(url);
 
     const text =
       await response.text();
 
-
-    let data = null;
+    let data = {};
 
     try{
 
       data =
-        JSON.parse(text);
+        text ? JSON.parse(text) : {};
 
     }catch{
 
       throw new Error(
-        `Search endpoint returned ${
-          response.status
-        }: invalid JSON`
+        `Search endpoint returned invalid JSON (${response.status}).`
       );
-    }
 
+    }
 
     if(!response.ok){
 
       throw new Error(
-        data?.error ||
-        `Search endpoint returned ${response.status}`
+        data.error ||
+        `Search endpoint returned ${response.status}.`
       );
+
     }
-
-
-    if(!data){
-
-      throw new Error(
-        'Search returned an empty response.'
-      );
-    }
-
 
     data.type =
-      currentType;
+      type;
 
-    render(
-      data
+    render(data);
+
+    await dictionaryPromise;
+
+    history.replaceState(
+      {},
+      '',
+      `/?q=${encodeURIComponent(q)}` +
+      `&type=${encodeURIComponent(type)}` +
+      (
+        currentPage
+          ? `&page=${currentPage}`
+          : ''
+      )
     );
-
 
   }catch(error){
 
-    /*
-     * Dictionary remains visible.
-     * Only the search-result area gets the error.
-     */
-    list.innerHTML =
-      `<div class="error">${
-        esc(
-          error?.message ||
+    list.innerHTML = `
+      <div class="error">
+        ${escapeHtml(
+          error.message ||
           'Search failed. Please try again.'
-        )
-      }</div>`;
+        )}
+      </div>
+    `;
 
-    count.textContent =
-      '';
+    /*
+     * Do NOT remove the dictionary if search fails.
+     */
+    try{
+      await dictionaryPromise;
+    }catch{}
 
   }
+
 }
 
 
@@ -2350,20 +1986,16 @@ function render(data){
     'hidden'
   );
 
-
   currentType =
     data.type ||
     currentType;
-
 
   label.textContent =
     data.query
       ? `Results for “${data.query}”`
       : '';
 
-
   let a = [];
-
 
   if(currentType === 'web'){
 
@@ -2372,11 +2004,13 @@ function render(data){
         data.results
       )
         ? data.results
-        : Array.isArray(
-            data.results?.web?.results
-          )
-          ? data.results.web.results
-          : [];
+        : (
+            Array.isArray(
+              data.results?.web?.results
+            )
+              ? data.results.web.results
+              : []
+          );
 
   }else if(
     currentType === 'images' ||
@@ -2392,16 +2026,13 @@ function render(data){
 
   }
 
-
   count.textContent =
     a.length
       ? `${a.length} results`
       : '';
 
-
   resultsInput.value =
     data.query || '';
-
 
   list.innerHTML =
     '';
@@ -2409,35 +2040,31 @@ function render(data){
   pager.innerHTML =
     '';
 
-
   document
     .querySelectorAll('.search-type')
     .forEach(button=>{
+
       button.classList.toggle(
         'active',
         button.dataset.type ===
         currentType
       );
+
     });
 
 
-  /*
-   * Empty search results do NOT hide dictionary.
-   */
   if(!a.length){
 
     list.innerHTML =
       '<div class="empty">No results found.</div>';
 
-  }else if(
-    currentType === 'images'
-  ){
+  }else if(currentType === 'images'){
 
     renderImages(a);
 
   }else{
 
-    renderTextResults(a);
+    renderWebOrNews(a);
 
   }
 
@@ -2448,117 +2075,82 @@ function render(data){
       data.hasMore
     );
 
-
   if(currentPage > 0){
 
     const button =
-      document.createElement(
-        'button'
-      );
+      document.createElement('button');
 
     button.textContent =
       'Previous';
 
     button.onclick =
-      () =>
-        search(
-          currentQ,
-          currentPage - 1,
-          currentType
-        );
+      ()=>search(
+        currentQ,
+        currentPage - 1,
+        currentType
+      );
 
     pager.appendChild(
       button
     );
-  }
 
+  }
 
   if(more){
 
     const button =
-      document.createElement(
-        'button'
-      );
+      document.createElement('button');
 
     button.textContent =
       'Next';
 
     button.onclick =
-      () =>
-        search(
-          currentQ,
-          currentPage + 1,
-          currentType
-        );
+      ()=>search(
+        currentQ,
+        currentPage + 1,
+        currentType
+      );
 
     pager.appendChild(
       button
     );
+
   }
 
-
-  history.replaceState(
-    {},
-    '',
-    `/?q=${
-      encodeURIComponent(
-        data.query ||
-        currentQ
-      )
-    }&type=${
-      encodeURIComponent(
-        currentType
-      )
-    }${
-      currentPage
-        ? `&page=${currentPage}`
-        : ''
-    }`
-  );
 }
 
 
 /* =========================================================
-   TEXT RESULTS
+   WEB / NEWS
 ========================================================= */
 
-function renderTextResults(a){
+function renderWebOrNews(a){
 
   a.forEach(r=>{
 
     const el =
-      document.createElement(
-        'article'
-      );
+      document.createElement('article');
 
     el.className =
       'result';
 
-
-    const u =
+    const url =
       r.url ||
       r.link ||
       '';
 
-
     const host =
       r.meta_url?.hostname ||
-      getHostname(u) ||
-      '';
-
+      getHostname(url);
 
     const title =
       r.title ||
-      r.name ||
-      u;
-
+      url;
 
     const desc =
       r.description ||
       r.content ||
-      r.snippet ||
       '';
-
 
     const age =
       r.age ||
@@ -2566,82 +2158,83 @@ function renderTextResults(a){
       r.published ||
       '';
 
-
     const favicon =
       r.favicon ||
-      r.favicon_url ||
-      faviconFor(u);
+      faviconFor(url);
 
-
-    /*
-     * NO target="_blank".
-     *
-     * Clicking the result therefore stays in
-     * the current tab.
-     */
     el.innerHTML = `
 
-      <div class="result-top">
+      <div class="result-url-row">
 
         ${
           favicon
-            ? `
-              <img
-                class="result-favicon"
-                src="${esc(favicon)}"
-                alt=""
-                loading="lazy"
-                referrerpolicy="no-referrer"
-              >
-            `
+            ? `<img
+                 class="result-favicon"
+                 src="${escapeHtml(favicon)}"
+                 alt=""
+                 loading="lazy"
+                 referrerpolicy="no-referrer">`
             : ''
         }
 
         <div class="result-url">
-          ${esc(host || u)}
+          ${escapeHtml(host || url)}
         </div>
 
       </div>
 
-
       <h2>
-
-        <a href="${esc(u)}">
-          ${esc(title)}
+        <a href="${escapeHtml(url)}">
+          ${escapeHtml(title)}
         </a>
-
       </h2>
-
 
       ${
         desc
-          ? `
-            <p class="snippet">
-              ${formatDescription(desc)}
-            </p>
-          `
+          ? `<p class="snippet">
+               ${richText(desc)}
+             </p>`
           : ''
       }
 
-
       ${
         age
-          ? `
-            <div class="result-meta">
-              ${esc(decodeRepeated(age))}
-            </div>
-          `
+          ? `<div class="result-meta">
+               ${escapeHtml(age)}
+             </div>`
           : ''
       }
 
     `;
 
+    /*
+     * Explicitly force same-tab navigation.
+     */
+    const link =
+      el.querySelector('h2 a');
+
+    if(link){
+
+      link.removeAttribute(
+        'target'
+      );
+
+      link.addEventListener(
+        'click',
+        ()=>{
+          window.location.href =
+            link.href;
+        }
+      );
+
+    }
 
     list.appendChild(
       el
     );
 
   });
+
 }
 
 
@@ -2652,115 +2245,195 @@ function renderTextResults(a){
 function renderImages(a){
 
   const grid =
-    document.createElement(
-      'div'
-    );
+    document.createElement('div');
 
   grid.className =
     'image-grid';
 
-
   a.forEach(r=>{
 
-    const u =
+    const url =
       r.url ||
       r.properties?.url ||
-      r.link ||
       '';
 
-
-    /*
-     * Tiago may expose thumbnail under different fields.
-     */
     const img =
-      r.thumbnail ||
-      r.thumbnail_url ||
-      r.image ||
-      r.image_url ||
-      r.properties?.thumbnail ||
-      r.properties?.url ||
-      '';
+      getThumbnail(r);
 
-
-    if(!img) return;
-
-
-    const el =
-      document.createElement(
-        'article'
-      );
-
-    el.className =
-      'image-result';
-
+    if(!img)
+      return;
 
     const title =
       r.title ||
-      u;
-
+      url;
 
     const source =
       r.source ||
       r.meta_url?.hostname ||
-      getHostname(u) ||
-      '';
+      getHostname(url);
 
+    const el =
+      document.createElement('article');
+
+    el.className =
+      'image-result';
 
     el.innerHTML = `
 
-      <a
-        href="${esc(u)}"
-        class="image-result-link"
-      >
+      <a href="${escapeHtml(img)}">
 
-        <div class="image-result-image-wrap">
+        <div class="image-thumb-wrap">
 
           <img
-            src="${esc(img)}"
-            alt="${esc(title)}"
+            src="${escapeHtml(img)}"
+            alt="${escapeHtml(title)}"
             loading="lazy"
             referrerpolicy="no-referrer"
-            draggable="false"
-          >
+            draggable="false">
 
-          <div class="longpress-progress">
-
-            <div
-              class="longpress-ring"
-            ></div>
-
-          </div>
+          <div class="image-progress"></div>
 
         </div>
 
       </a>
 
-
       <div class="image-result-title">
-        ${esc(title)}
+        ${escapeHtml(title)}
       </div>
 
-
       <div class="image-result-source">
-        ${esc(source)}
+        ${escapeHtml(source)}
       </div>
 
     `;
 
+    const anchor =
+      el.querySelector('a');
+
+    const image =
+      el.querySelector('img');
+
+    const progress =
+      el.querySelector(
+        '.image-progress'
+      );
+
+    let timer = null;
+    let startedAt = 0;
+    let longPressTriggered = false;
+
+    function cancelLongPress(){
+
+      if(timer){
+
+        clearInterval(timer);
+        timer = null;
+
+      }
+
+      progress.style.width =
+        '0';
+
+    }
+
+    function startLongPress(){
+
+      longPressTriggered =
+        false;
+
+      startedAt =
+        Date.now();
+
+      timer =
+        setInterval(()=>{
+
+          const elapsed =
+            Date.now() -
+            startedAt;
+
+          const percent =
+            Math.min(
+              100,
+              (elapsed / 2000) * 100
+            );
+
+          progress.style.width =
+            `${percent}%`;
+
+          if(percent >= 100){
+
+            clearInterval(timer);
+            timer = null;
+
+            longPressTriggered =
+              true;
+
+            downloadImage(
+              img,
+              title
+            );
+
+            setTimeout(
+              ()=>{
+                progress.style.width =
+                  '0';
+              },
+              250
+            );
+
+          }
+
+        },20);
+
+    }
+
+    image.addEventListener(
+      'pointerdown',
+      startLongPress
+    );
+
+    image.addEventListener(
+      'pointerup',
+      ()=>{
+        if(!longPressTriggered)
+          cancelLongPress();
+      }
+    );
+
+    image.addEventListener(
+      'pointerleave',
+      cancelLongPress
+    );
+
+    image.addEventListener(
+      'pointercancel',
+      cancelLongPress
+    );
+
+    /*
+     * Prevent normal click from being swallowed.
+     * Clicking goes to the image URL in the same tab.
+     */
+    anchor.addEventListener(
+      'click',
+      e=>{
+
+        if(longPressTriggered){
+
+          e.preventDefault();
+          longPressTriggered =
+            false;
+
+        }
+
+      }
+    );
 
     grid.appendChild(
       el
     );
 
-
-    setupImageLongPress(
-      el,
-      img,
-      title
-    );
-
   });
-
 
   if(grid.children.length){
 
@@ -2774,279 +2447,7 @@ function renderImages(a){
       '<div class="empty">No images found.</div>';
 
   }
-}
 
-
-/* =========================================================
-   IMAGE LONG PRESS
-========================================================= */
-
-const LONG_PRESS_TIME =
-  2000;
-
-
-function setupImageLongPress(
-  el,
-  imageUrl,
-  title
-){
-
-  const wrap =
-    el.querySelector(
-      '.image-result-image-wrap'
-    );
-
-  const progress =
-    el.querySelector(
-      '.longpress-progress'
-    );
-
-  const ring =
-    el.querySelector(
-      '.longpress-ring'
-    );
-
-  const link =
-    el.querySelector(
-      '.image-result-link'
-    );
-
-
-  let timer =
-    null;
-
-  let animation =
-    null;
-
-  let startTime =
-    0;
-
-  let triggered =
-    false;
-
-
-  function reset(){
-
-    if(timer){
-      clearTimeout(timer);
-      timer = null;
-    }
-
-    if(animation){
-      cancelAnimationFrame(
-        animation
-      );
-
-      animation = null;
-    }
-
-    wrap.classList.remove(
-      'downloading'
-    );
-
-    progress.classList.remove(
-      'active'
-    );
-
-    ring.style.setProperty(
-      '--progress',
-      '0%'
-    );
-
-    startTime = 0;
-  }
-
-
-  function update(){
-
-    if(!startTime) return;
-
-    const elapsed =
-      performance.now() -
-      startTime;
-
-    const percent =
-      Math.min(
-        elapsed /
-        LONG_PRESS_TIME,
-        1
-      );
-
-
-    ring.style.setProperty(
-      '--progress',
-      `${percent * 100}%`
-    );
-
-
-    if(percent < 1){
-
-      animation =
-        requestAnimationFrame(
-          update
-        );
-    }
-  }
-
-
-  function begin(event){
-
-    if(
-      event.type ===
-      'mousedown' &&
-      event.button !== 0
-    ){
-      return;
-    }
-
-
-    triggered =
-      false;
-
-
-    reset();
-
-
-    startTime =
-      performance.now();
-
-
-    progress.classList.add(
-      'active'
-    );
-
-
-    animation =
-      requestAnimationFrame(
-        update
-      );
-
-
-    timer =
-      setTimeout(
-        async ()=>{
-
-          triggered =
-            true;
-
-          ring.style.setProperty(
-            '--progress',
-            '100%'
-          );
-
-          wrap.classList.add(
-            'downloading'
-          );
-
-
-          await downloadImage(
-            imageUrl,
-            title
-          );
-
-
-          setTimeout(
-            reset,
-            250
-          );
-
-        },
-        LONG_PRESS_TIME
-      );
-  }
-
-
-  function end(event){
-
-    if(triggered){
-
-      event?.preventDefault();
-      event?.stopPropagation();
-
-      reset();
-
-      return;
-    }
-
-
-    reset();
-  }
-
-
-  wrap.addEventListener(
-    'contextmenu',
-    event=>{
-      event.preventDefault();
-    }
-  );
-
-
-  wrap.addEventListener(
-    'touchstart',
-    begin,
-    {passive:true}
-  );
-
-
-  wrap.addEventListener(
-    'touchend',
-    end,
-    {passive:false}
-  );
-
-
-  wrap.addEventListener(
-    'touchcancel',
-    reset,
-    {passive:true}
-  );
-
-
-  wrap.addEventListener(
-    'mousedown',
-    begin
-  );
-
-
-  wrap.addEventListener(
-    'mouseup',
-    end
-  );
-
-
-  wrap.addEventListener(
-    'mouseleave',
-    ()=>{
-      if(!triggered){
-        reset();
-      }
-    }
-  );
-
-
-  wrap.addEventListener(
-    'dragstart',
-    event=>{
-      event.preventDefault();
-    }
-  );
-
-
-  link.addEventListener(
-    'click',
-    event=>{
-
-      if(triggered){
-
-        event.preventDefault();
-        event.stopPropagation();
-
-        triggered =
-          false;
-      }
-
-    }
-  );
 }
 
 
@@ -3056,164 +2457,68 @@ function setupImageLongPress(
 
 async function downloadImage(
   url,
-  title='image'
+  title
 ){
 
   try{
 
     const response =
-      await fetch(
-        url,
-        {
-          mode:'cors',
-          credentials:'omit'
-        }
-      );
+      await fetch(url);
 
-
-    if(!response.ok){
-      throw new Error(
-        'Image request failed'
-      );
-    }
-
+    if(!response.ok)
+      throw new Error();
 
     const blob =
       await response.blob();
 
+    const objectUrl =
+      URL.createObjectURL(blob);
 
-    const blobUrl =
-      URL.createObjectURL(
-        blob
+    const a =
+      document.createElement('a');
+
+    a.href =
+      objectUrl;
+
+    a.download =
+      sanitizeFilename(
+        title || 'flibidoo-image'
       );
-
-
-    const anchor =
-      document.createElement(
-        'a'
-      );
-
-
-    anchor.href =
-      blobUrl;
-
-
-    anchor.download =
-      makeFilename(
-        title,
-        blob.type
-      );
-
 
     document.body.appendChild(
-      anchor
+      a
     );
 
+    a.click();
 
-    anchor.click();
+    a.remove();
 
-
-    anchor.remove();
-
-
-    setTimeout(
-      ()=>{
-        URL.revokeObjectURL(
-          blobUrl
-        );
-      },
-      5000
+    URL.revokeObjectURL(
+      objectUrl
     );
-
 
   }catch{
 
     /*
-     * Cross-origin hosts may reject the blob fetch.
-     * Fall back to the actual image URL.
+     * If CORS prevents direct download,
+     * navigate to the image instead.
      */
-    const anchor =
-      document.createElement(
-        'a'
-      );
-
-
-    anchor.href =
+    window.location.href =
       url;
 
-
-    anchor.download =
-      makeFilename(
-        title
-      );
-
-
-    document.body.appendChild(
-      anchor
-    );
-
-
-    anchor.click();
-
-
-    anchor.remove();
-
   }
+
 }
 
 
-function makeFilename(
-  title,
-  mime=''
-){
+function sanitizeFilename(value){
 
-  let name =
-    String(title || 'image')
-      .replace(
-        /[<>:"/\\|?*\x00-\x1F]/g,
-        ''
-      )
-      .replace(
-        /\s+/g,
-        ' '
-      )
-      .trim()
-      .slice(0,100);
+  return String(value)
+    .replace(/[\\/:*?"<>|]+/g,' ')
+    .trim()
+    .slice(0,120) ||
+    'flibidoo-image';
 
-
-  if(!name){
-    name = 'image';
-  }
-
-
-  let ext = '';
-
-
-  if(mime.includes('png')){
-    ext = '.png';
-
-  }else if(
-    mime.includes('jpeg') ||
-    mime.includes('jpg')
-  ){
-
-    ext = '.jpg';
-
-  }else if(
-    mime.includes('webp')
-  ){
-
-    ext = '.webp';
-
-  }else if(
-    mime.includes('gif')
-  ){
-
-    ext = '.gif';
-  }
-
-
-  return name + ext;
 }
 
 
@@ -3221,22 +2526,41 @@ function makeFilename(
    FORM EVENTS
 ========================================================= */
 
+input.addEventListener(
+  'input',
+  ()=>{
+    updateButtonState(
+      submitButton,
+      input.value
+    );
+  }
+);
+
+resultsInput.addEventListener(
+  'input',
+  ()=>{
+    updateButtonState(
+      resultsSubmitButton,
+      resultsInput.value
+    );
+  }
+);
+
+
 form.addEventListener(
   'submit',
-  event=>{
+  e=>{
 
-    event.preventDefault();
+    e.preventDefault();
 
     const q =
       input.value.trim();
 
     if(q){
 
-      search(
-        q,
-        0,
-        'web'
-      );
+      location.href =
+        `/?q=${encodeURIComponent(q)}` +
+        `&type=web&page=0`;
 
     }
 
@@ -3246,9 +2570,9 @@ form.addEventListener(
 
 resultsForm.addEventListener(
   'submit',
-  event=>{
+  e=>{
 
-    event.preventDefault();
+    e.preventDefault();
 
     const q =
       resultsInput.value.trim();
@@ -3267,10 +2591,6 @@ resultsForm.addEventListener(
 );
 
 
-/* =========================================================
-   CATEGORY SWITCHING
-========================================================= */
-
 document
   .querySelectorAll('.search-type')
   .forEach(button=>{
@@ -3280,49 +2600,23 @@ document
       ()=>{
 
         const q =
-          resultsInput.value.trim() ||
+          resultsInput.value ||
           currentQ;
 
+        if(q){
 
-        if(!q) return;
+          search(
+            q,
+            0,
+            button.dataset.type
+          );
 
-
-        search(
-          q,
-          0,
-          button.dataset.type
-        );
+        }
 
       }
     );
 
   });
-
-
-/* =========================================================
-   INPUT BUTTON STATE
-========================================================= */
-
-input.addEventListener(
-  'input',
-  ()=>{
-    updateButtonState(
-      submitButton,
-      input.value
-    );
-  }
-);
-
-
-resultsInput.addEventListener(
-  'input',
-  ()=>{
-    updateButtonState(
-      resultsSubmitButton,
-      resultsInput.value
-    );
-  }
-);
 
 
 /* =========================================================
@@ -3334,33 +2628,29 @@ const aboutOverlay =
     '#aboutOverlay'
   );
 
-
 document
   .querySelector('#aboutButton')
   .onclick =
-    ()=>{
-      aboutOverlay.classList.remove(
-        'hidden'
-      );
-    };
-
+  ()=>{
+    aboutOverlay.classList.remove(
+      'hidden'
+    );
+  };
 
 document
   .querySelector('#aboutClose')
   .onclick =
-    ()=>{
-      aboutOverlay.classList.add(
-        'hidden'
-      );
-    };
-
+  ()=>{
+    aboutOverlay.classList.add(
+      'hidden'
+    );
+  };
 
 aboutOverlay.addEventListener(
   'click',
-  event=>{
-
+  e=>{
     if(
-      event.target ===
+      e.target ===
       aboutOverlay
     ){
 
@@ -3369,19 +2659,14 @@ aboutOverlay.addEventListener(
       );
 
     }
-
   }
 );
 
-
 document.addEventListener(
   'keydown',
-  event=>{
+  e=>{
 
-    if(
-      event.key ===
-      'Escape'
-    ){
+    if(e.key === 'Escape'){
 
       aboutOverlay.classList.add(
         'hidden'
@@ -3394,7 +2679,7 @@ document.addEventListener(
 
 
 /* =========================================================
-   INITIAL QUERY
+   INITIAL URL
 ========================================================= */
 
 const params =
@@ -3402,18 +2687,16 @@ const params =
     location.search
   );
 
-
 const initialQuery =
   params.get('q');
 
-
 const initialType =
-  ['web','images','news'].includes(
-    params.get('type')
-  )
-    ? params.get('type')
-    : 'web';
-
+  ['web','images','news']
+    .includes(
+      params.get('type')
+    )
+      ? params.get('type')
+      : 'web';
 
 if(initialQuery){
 
@@ -3425,14 +2708,8 @@ if(initialQuery){
     initialType
   );
 
-}else{
-
-  updateButtonState(
-    submitButton,
-    input.value
-  );
-
 }
+
 </script>
 
 </body>
