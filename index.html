@@ -8,783 +8,474 @@
 
 <style>
 :root{
-  --bg:#1d0c22;
-  --text:#f5eef7;
-  --muted:#b9aabb;
-  --line:#5a4560;
-  --line2:#39283d;
-  --result:#e7dce9;
-  --url:#b8a2bc;
-  --focus:#cdb8d1;
+  --bg:#1d0c22;--text:#f5eef7;--muted:#b9aabb;--line:#5a4560;
+  --line2:#39283d;--result:#e7dce9;--url:#b8a2bc;--focus:#cdb8d1;
 }
-
 *{box-sizing:border-box}
-
 html,body{
-  margin:0;
-  width:100%;
-  min-height:100%;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
+  margin:0;width:100%;min-height:100%;background:var(--bg);color:var(--text);
+  font-family:Arial,Helvetica,sans-serif
 }
-
 body{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  overflow-x:hidden;
+  min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;
+  position:relative
 }
-
+body::before,
+body::after{
+  content:"";position:fixed;pointer-events:none;z-index:-1;
+  width:34vw;height:34vw;max-width:520px;max-height:520px;
+  filter:blur(90px);opacity:.12
+}
+body::before{left:-18vw;top:-18vw;background:#9b4db2}
+body::after{right:-18vw;bottom:-18vw;background:#5c3470}
 a{color:inherit}
-
+button,input{font-family:inherit}
 .shell{
-  width:min(100% - 40px,1120px);
-  margin:0 auto;
-  padding-left:12px;
-  padding-right:12px;
+  width:min(100% - 40px,1120px);margin:0 auto;
+  padding-left:12px;padding-right:12px
 }
-
 #home.home{
-  width:100%;
-  height:100vh;
-  min-height:100vh;
-  margin:0;
-  padding:24px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
+  width:100%;height:100vh;min-height:100vh;margin:0;padding:24px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  overflow:hidden
 }
-
+.search-wrap{width:min(100%,680px)}
 .hero-logo{
-  width:min(210px,55vw);
-  height:auto;
-  display:block;
-  margin:0 0 12px;
-  object-fit:contain;
+  width:min(210px,55vw);height:auto;display:block;
+  margin:0 auto 18px;object-fit:contain
 }
-
 h1{
-  font-size:clamp(34px,5vw,54px);
-  line-height:1;
-  margin:0 0 30px;
-  letter-spacing:-.055em;
-  font-weight:500;
+  font-size:clamp(34px,5vw,54px);line-height:1;margin:0 0 30px;
+  letter-spacing:-.055em;font-weight:500;text-align:center
 }
-
-.search-wrap{
-  width:min(100%,680px);
-}
-
 form{
-  display:flex;
-  align-items:center;
-  height:54px;
-  border:1px solid var(--line);
-  border-radius:28px;
-  background:transparent;
-  transition:border-color .15s ease,box-shadow .15s ease;
+  display:flex;align-items:center;height:54px;border:1px solid var(--line);
+  border-radius:28px;background:transparent;
+  transition:border-color .15s ease,box-shadow .15s ease
 }
-
 form:focus-within{
   border-color:var(--focus);
-  box-shadow:0 0 0 2px rgba(205,184,209,.08);
+  box-shadow:0 0 0 2px rgba(205,184,209,.08)
 }
-
 .search-icon{
-  width:20px;
-  height:20px;
-  margin-left:18px;
-  flex:0 0 auto;
-  opacity:.75;
+  width:20px;height:20px;margin-left:18px;flex:0 0 auto;opacity:.75
 }
-
-.search-icon circle,
-.search-icon path{
-  stroke:currentColor;
-}
-
+.search-icon circle,.search-icon path{stroke:currentColor}
 input{
-  min-width:0;
-  flex:1;
-  border:0;
-  outline:0;
-  background:transparent;
-  color:var(--text);
-  font-size:16px;
-  padding:0 14px;
+  min-width:0;flex:1;border:0;outline:0;background:transparent;
+  color:var(--text);font-size:16px;padding:0 14px
 }
-
-input::placeholder{
-  color:#9e8da1;
-}
-
+input::placeholder{color:#9e8da1}
 .submit{
-  height:38px;
-  width:38px;
-  margin-right:8px;
-  border:1px solid var(--line);
-  background:transparent;
-  color:#766679;
-  border-radius:50%;
-  padding:0;
-  display:grid;
-  place-items:center;
-  cursor:pointer;
+  height:38px;width:38px;margin-right:8px;border:1px solid var(--line);
+  background:transparent;color:#766679;border-radius:50%;padding:0;
+  display:grid;place-items:center;cursor:pointer
 }
-
-.submit.has-input{
-  color:var(--text);
-  border-color:var(--focus);
-}
-
-.submit:hover{
-  border-color:var(--focus);
-}
-
-.submit-icon{
-  width:18px;
-  height:18px;
-  display:block;
-}
-
+.submit.has-input{color:var(--text);border-color:var(--focus)}
+.submit:hover{border-color:var(--focus)}
 .links{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:18px;
-  margin-top:20px;
-  color:var(--muted);
-  font-size:13px;
+  display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
+  gap:18px;margin-top:20px;color:var(--muted);font-size:13px
 }
-
 .links button{
-  border:0;
-  background:none;
-  color:inherit;
-  cursor:pointer;
-  padding:0;
+  border:0;background:none;color:inherit;cursor:pointer;padding:0
 }
-
-.links button:hover{
-  color:var(--text);
-}
-
+.links button:hover{color:var(--text)}
 .confederacy-credit{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.4;
-  text-align:center;
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  color:var(--muted);font-size:12px;line-height:1.4;text-align:center
 }
-
-/* EXACT FLAG IMAGE — emoji sized */
-.confederacy-flag{
-  width:18px;
-  height:18px;
-  display:inline-block;
-  object-fit:contain;
-  vertical-align:-4px;
-  flex:0 0 18px;
-  border-radius:4px;
+.confederacy-credit img{
+  width:18px;height:18px;display:block;object-fit:contain;
+  flex:0 0 18px;border-radius:4px
 }
-
-main{
-  flex:1;
-}
-
-.results{
-  padding:30px 12px 70px;
-}
-
+main{flex:1}
+.results{padding:30px 12px 70px}
 .results-head{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  min-height:44px;
-  border-bottom:1px solid var(--line2);
-  padding-bottom:14px;
-  margin-bottom:14px;
+  display:flex;align-items:center;gap:18px;min-height:44px;
+  border-bottom:1px solid var(--line2);padding-bottom:14px;margin-bottom:14px
 }
-
 .results-brand{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  text-decoration:none;
-  color:inherit;
-  white-space:nowrap;
+  display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+  color:inherit;white-space:nowrap
 }
-
 .results-brand img{
-  width:28px;
-  height:28px;
-  object-fit:contain;
-  display:block;
+  width:28px;height:28px;object-fit:contain;display:block
 }
-
 .results-brand span{
-  font-size:15px;
-  font-weight:600;
-  letter-spacing:-.01em;
+  font-size:15px;font-weight:600;letter-spacing:-.01em
 }
-
 .results-query{
-  font-size:14px;
-  color:var(--muted);
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  flex:1;
+  font-size:14px;color:var(--muted);overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;flex:1
 }
-
-.count{
-  font-size:13px;
-  color:var(--muted);
-  white-space:nowrap;
-}
-
-.results-search{
-  width:min(100%,680px);
-  margin:0 0 28px;
-}
-
-.results-search form{
-  height:48px;
-}
-
-.results-search .search-icon{
-  margin-left:16px;
-}
-
-.results-search .submit{
-  width:34px;
-  height:34px;
-  margin-right:6px;
-}
+.count{font-size:13px;color:var(--muted);white-space:nowrap}
+.results-search{width:min(100%,680px);margin:0 0 28px}
+.results-search form{height:48px}
+.results-search .search-icon{margin-left:16px}
+.results-search .submit{width:34px;height:34px;margin-right:6px}
 
 .search-types{
-  display:flex;
-  align-items:flex-end;
-  gap:0;
-  margin:8px 0 18px;
-  border-bottom:1px solid rgba(255,255,255,.12);
-  height:36px;
+  display:flex;align-items:flex-end;gap:0;margin:8px 0 18px;
+  border-bottom:1px solid rgba(255,255,255,.12);height:36px
 }
-
 .search-type{
-  position:relative;
-  appearance:none;
-  border:0;
-  background:transparent;
-  color:rgba(255,255,255,.62);
-  font:inherit;
-  font-size:13px;
-  line-height:20px;
-  padding:0 12px 10px;
-  margin:0;
-  border-radius:0;
-  cursor:pointer;
+  position:relative;appearance:none;border:0;background:transparent;
+  color:rgba(255,255,255,.62);font:inherit;font-size:13px;
+  line-height:20px;padding:0 12px 10px;margin:0;border-radius:0;cursor:pointer
 }
-
-.search-type:hover,
-.search-type.active{
-  color:#fff;
-  background:transparent;
+.search-type:hover,.search-type.active{
+  color:#fff;background:transparent
 }
-
 .search-type.active::after{
-  content:"";
-  position:absolute;
-  left:10px;
-  right:10px;
-  bottom:-1px;
-  height:2px;
-  border-radius:2px 2px 0 0;
-  background:currentColor;
+  content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:2px;
+  border-radius:2px 2px 0 0;background:currentColor
 }
 
 .results-layout{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) 330px;
-  gap:42px;
-  align-items:start;
+  display:grid;grid-template-columns:minmax(0,1fr) 330px;
+  gap:42px;align-items:start
 }
-
 .result{
-  padding:0 0 26px;
-  margin-bottom:26px;
-  border-bottom:1px solid var(--line2);
+  padding:0 0 26px;margin-bottom:26px;border-bottom:1px solid var(--line2)
 }
-
 .result-url{
-  font-size:13px;
-  color:var(--url);
-  margin-bottom:6px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+  font-size:13px;color:var(--url);margin-bottom:6px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap
 }
-
 .result h2{
-  font-size:20px;
-  line-height:1.25;
-  margin:0 0 7px;
-  font-weight:500;
-  letter-spacing:-.02em;
+  font-size:20px;line-height:1.25;margin:0 0 7px;font-weight:500;
+  letter-spacing:-.02em
 }
-
-.result h2 a{
-  text-decoration:none;
-}
-
-.result h2 a:hover{
-  text-decoration:underline;
-}
-
+.result h2 a{text-decoration:none}
+.result h2 a:hover{text-decoration:underline}
 .snippet{
-  font-size:14px;
-  line-height:1.6;
-  color:var(--result);
-  margin:0;
-  max-width:760px;
+  font-size:14px;line-height:1.6;color:var(--result);
+  margin:0;max-width:760px
 }
-
 .result-meta{
-  font-size:12px;
-  color:var(--muted);
-  margin-top:7px;
+  font-size:12px;color:var(--muted);margin-top:7px
 }
-
+.result-tags{
+  display:flex;flex-wrap:wrap;gap:6px;margin-top:9px
+}
+.result-tag{
+  font-size:11px;line-height:1.3;color:var(--muted);
+  border:1px solid var(--line2);padding:3px 7px
+}
 .image-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:28px 22px;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:28px 22px
 }
-
-.image-result{
-  min-width:0;
-  position:relative;
-}
-
-.image-result a{
-  display:block;
-  text-decoration:none;
-}
-
+.image-result{min-width:0;position:relative}
+.image-result a{display:block;text-decoration:none}
 .image-result img{
-  display:block;
-  width:100%;
-  aspect-ratio:4/3;
-  object-fit:cover;
-  border:1px solid var(--line2);
-  background:rgba(255,255,255,.02);
+  display:block;width:100%;aspect-ratio:4/3;object-fit:cover;
+  border:1px solid var(--line2);background:rgba(255,255,255,.02)
 }
-
 .image-result-title{
-  font-size:14px;
-  line-height:1.4;
-  margin-top:9px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  font-size:14px;line-height:1.4;margin-top:9px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
 }
-
 .image-result-source{
-  font-size:12px;
-  color:var(--muted);
-  margin-top:4px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  font-size:12px;color:var(--muted);margin-top:4px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
 }
 
+/* Dictionary */
 .dictionary{
-  border-left:1px solid var(--line2);
-  padding-left:28px;
-  max-height:70vh;
-  overflow-y:auto;
-  overscroll-behavior:contain;
-  scrollbar-width:thin;
+  border-left:1px solid var(--line2);padding-left:28px;
+  max-height:70vh;overflow-y:auto;overscroll-behavior:contain;
+  scrollbar-width:thin
 }
-
 .dictionary-title{
-  font-size:22px;
-  font-weight:500;
-  letter-spacing:-.02em;
-  margin:0 0 5px;
+  font-size:22px;font-weight:500;letter-spacing:-.02em;margin:0 0 5px
 }
-
 .dictionary-word{
-  font-size:13px;
-  color:var(--muted);
-  margin-bottom:22px;
+  font-size:13px;color:var(--muted);margin-bottom:22px
 }
-
 .dictionary-entry{
-  padding:0 0 24px;
-  margin-bottom:24px;
+  padding:0 0 24px;margin-bottom:24px;border-bottom:1px solid var(--line2)
+}
+.dictionary-language,.dictionary-label{
+  font-size:12px;color:var(--muted)
+}
+.dictionary-language{margin-bottom:8px}
+.dictionary-pos{font-size:15px;margin-bottom:12px}
+.dictionary-senses,.dictionary-relations,.dictionary-translations{
+  margin-top:14px
+}
+.dictionary-label{
+  text-transform:uppercase;letter-spacing:.05em;margin-bottom:7px
+}
+.dictionary-list{margin:0;padding-left:18px}
+.dictionary-list li{margin:0 0 7px}
+.dictionary-sense{margin:0 0 15px}
+.dictionary-definition{font-size:14px;line-height:1.55}
+.dictionary-tags{font-size:12px;color:var(--muted);margin-left:5px}
+.dictionary-example,.dictionary-quote{
+  font-size:13px;line-height:1.5;color:var(--result);
+  margin:7px 0 0 14px
+}
+.dictionary-source,.dictionary-loading,.dictionary-empty{
+  font-size:12px;line-height:1.5;color:var(--muted)
+}
+
+/* Translator */
+.translator{
+  width:100%;margin:0 0 28px;
   border-bottom:1px solid var(--line2);
+  padding:0 0 26px
+}
+.translator.hidden{display:none}
+.translator-top{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;margin-bottom:14px
+}
+.translator-title{
+  font-size:16px;font-weight:500
+}
+.translator-controls{
+  display:flex;align-items:center;gap:8px
+}
+.translator-select{
+  border:0;border-bottom:1px solid var(--line);
+  background:transparent;color:var(--text);
+  padding:6px 4px;font-size:13px;outline:0;max-width:190px
+}
+.translator-select option{
+  background:#24132a;color:var(--text)
+}
+.translator-swap{
+  width:32px;height:32px;border:1px solid var(--line);
+  border-radius:50%;background:transparent;color:var(--muted);
+  cursor:pointer;font-size:16px;display:grid;place-items:center
+}
+.translator-swap:hover{
+  border-color:var(--focus);color:var(--text)
+}
+.translator-boxes{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:22px
+}
+.translator-side{
+  min-width:0
+}
+.translator-text{
+  width:100%;min-height:150px;resize:vertical;
+  border:1px solid var(--line2);outline:0;background:transparent;
+  color:var(--text);padding:13px;font:inherit;font-size:14px;
+  line-height:1.55;border-radius:0
+}
+.translator-text:focus{
+  border-color:var(--focus)
+}
+.translator-text::placeholder{color:#9e8da1}
+.translator-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;margin-top:8px
+}
+.translator-count{
+  font-size:11px;color:var(--muted)
+}
+.translator-button{
+  border:1px solid var(--line);background:transparent;
+  color:var(--text);padding:8px 14px;cursor:pointer;
+  font-size:13px
+}
+.translator-button:hover{border-color:var(--focus)}
+.translator-status{
+  font-size:12px;color:var(--muted);line-height:1.5;margin-top:9px
+}
+.translator-result{
+  white-space:pre-wrap;min-height:150px;
+  border:1px solid var(--line2);padding:13px;
+  font-size:14px;line-height:1.55;color:var(--result);
+  overflow-wrap:anywhere
 }
 
-.dictionary-language,
-.dictionary-label{
-  font-size:12px;
-  color:var(--muted);
+/* Word of the day */
+.wotd-panel{
+  padding:0 0 22px;margin:0 0 22px;border-bottom:1px solid var(--line2)
 }
-
-.dictionary-language{
-  margin-bottom:8px;
+.wotd-heading{
+  display:flex;align-items:center;gap:8px;margin:0 0 8px;
+  color:#ffb52e;font-size:13px;font-weight:600
 }
-
-.dictionary-pos{
-  font-size:15px;
-  margin-bottom:12px;
+.wotd-word{
+  color:#ffe18a;font-size:20px;font-weight:600;
+  line-height:1.25;margin:0 0 5px
 }
-
-.dictionary-senses,
-.dictionary-relations,
-.dictionary-translations{
-  margin-top:14px;
+.wotd-definition{
+  color:#ffe9a8;font-size:13px;line-height:1.55;margin:0
 }
-
-.dictionary-label{
-  text-transform:uppercase;
-  letter-spacing:.05em;
-  margin-bottom:7px;
+.wotd-status{
+  color:var(--muted);font-size:13px;line-height:1.5
 }
-
-.dictionary-list{
-  margin:0;
-  padding-left:18px;
-}
-
-.dictionary-list li{
-  margin:0 0 7px;
-}
-
-.dictionary-sense{
-  margin:0 0 15px;
-}
-
-.dictionary-definition{
-  font-size:14px;
-  line-height:1.55;
-}
-
-.dictionary-tags{
-  font-size:12px;
-  color:var(--muted);
-  margin-left:5px;
-}
-
-.dictionary-example,
-.dictionary-quote{
-  font-size:13px;
-  line-height:1.5;
-  color:var(--result);
-  margin:7px 0 0 14px;
-}
-
-.dictionary-source,
-.dictionary-loading,
-.dictionary-empty{
-  font-size:12px;
-  line-height:1.5;
-  color:var(--muted);
-}
-
 .empty{
-  padding:70px 0;
-  color:var(--muted);
-  text-align:center;
+  padding:70px 0;color:var(--muted);text-align:center
 }
-
 .error{
-  min-height:120px;
-  max-width:680px;
-  margin:0;
-  padding:28px 18px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  border:1px solid var(--line2);
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.5;
+  min-height:120px;max-width:680px;margin:0;padding:28px 18px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  border:1px solid var(--line2);color:var(--muted);
+  font-size:14px;line-height:1.5
 }
-
 .pager{
-  display:flex;
-  gap:8px;
-  padding-top:10px;
+  display:flex;gap:8px;padding-top:10px
 }
-
 .pager button{
-  border:1px solid var(--line);
-  background:transparent;
-  color:var(--text);
-  border-radius:4px;
-  padding:8px 12px;
-  cursor:pointer;
+  border:1px solid var(--line);background:transparent;color:var(--text);
+  border-radius:4px;padding:8px 12px;cursor:pointer
 }
-
-.hidden{
-  display:none!important;
-}
+.hidden{display:none!important}
 
 /* About */
 .about-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.62);
-  display:grid;
-  place-items:center;
-  padding:24px;
-  z-index:10000;
+  position:fixed;inset:0;background:rgba(0,0,0,.62);
+  display:grid;place-items:center;padding:24px;z-index:10000
 }
-
-.about-overlay.hidden{
-  display:none;
-}
-
+.about-overlay.hidden{display:none}
 .about-card{
-  position:relative;
-  width:min(100%,560px);
-  max-height:min(80vh,700px);
-  overflow:auto;
-  background:#24132a;
-  border:1px solid var(--line);
-  border-radius:14px;
-  box-shadow:0 20px 60px rgba(0,0,0,.45);
-  padding:30px;
+  position:relative;width:min(100%,560px);max-height:min(80vh,700px);
+  overflow:auto;background:#24132a;border:1px solid var(--line);
+  border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.45);padding:30px
 }
-
 .about-close{
-  position:absolute;
-  top:10px;
-  right:10px;
-  width:34px;
-  height:34px;
-  border:0;
-  border-radius:50%;
-  background:transparent;
-  color:var(--muted);
-  font-size:24px;
-  line-height:1;
-  cursor:pointer;
+  position:absolute;top:10px;right:10px;width:34px;height:34px;
+  border:0;border-radius:50%;background:transparent;color:var(--muted);
+  font-size:24px;line-height:1;cursor:pointer
 }
-
 .about-close:hover{
-  background:rgba(255,255,255,.08);
-  color:var(--text);
+  background:rgba(255,255,255,.08);color:var(--text)
 }
-
 .about-card h2{
-  margin:0 38px 16px 0;
-  font-size:25px;
-  font-weight:500;
+  margin:0 38px 16px 0;font-size:25px;font-weight:500
 }
-
 .about-card p{
-  color:var(--result);
-  line-height:1.7;
-  font-size:14px;
+  color:var(--result);line-height:1.7;font-size:14px
 }
+.about-card a{color:var(--text)}
 
-.about-card a{
-  color:var(--text);
-}
-
-/* Responsive */
 @media(max-width:860px){
-  .results-layout{
-    grid-template-columns:1fr;
+  .shell{
+    width:100%;
+    padding-left:24px;
+    padding-right:24px
   }
-
-  /* Dictionary appears FIRST on mobile/tablet */
+  .results-layout{grid-template-columns:1fr}
   .dictionary{
-    order:-1;
-    border-left:0;
-    border-bottom:1px solid var(--line2);
-    border-top:0;
-    padding:0 0 26px;
-    margin-bottom:26px;
-    max-height:none;
+    order:-1;border-left:0;border-bottom:1px solid var(--line2);
+    border-top:0;padding:0 0 26px;margin-bottom:26px;
+    max-height:none
   }
+  .translator-boxes{
+    grid-template-columns:1fr
+  }
+  .translator-result{min-height:120px}
 }
 
 @media(max-width:760px){
-  .shell{
-    width:100%;
-    padding-left:20px;
-    padding-right:20px;
-  }
-
-  #home.home{
-    padding:24px 20px;
-  }
-
   .image-grid{
     grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:22px 14px;
+    gap:22px 14px
+  }
+  .results{
+    padding-left:24px;
+    padding-right:24px
   }
 }
 
 @media(max-width:640px){
   .shell{
     width:100%;
-    padding-left:16px;
-    padding-right:16px;
+    padding-left:20px;
+    padding-right:20px
   }
-
   #home.home{
-    padding:20px 16px;
+    padding:24px 20px
   }
-
-  .hero-logo{
-    width:150px;
-  }
-
+  .hero-logo{width:min(180px,55vw)}
   h1{
     font-size:36px;
-    margin-bottom:24px;
+    margin-bottom:24px
   }
-
-  form{
-    height:50px;
-  }
-
+  form{height:50px}
   .results{
-    padding:22px 16px 60px;
+    padding:22px 20px 60px
   }
-
-  .results-head{
-    gap:12px;
-  }
-
+  .results-head{gap:12px}
   .results-brand img{
-    width:24px;
-    height:24px;
+    width:24px;height:24px
   }
-
-  .results-brand span{
-    font-size:14px;
-  }
-
-  .results-query{
-    font-size:13px;
-  }
-
+  .results-brand span{font-size:14px}
+  .results-query{font-size:13px}
   .search-types{
     overflow-x:auto;
-    scrollbar-width:none;
+    scrollbar-width:none
   }
-
   .search-type{
     padding-left:10px;
     padding-right:10px;
-    font-size:12px;
+    font-size:12px
   }
-
-  .about-overlay{
-    padding:16px;
+  .translator-top{
+    align-items:flex-start;
+    flex-direction:column
   }
-
-  .about-card{
-    padding:26px 22px;
+  .translator-controls{
+    width:100%;
+    justify-content:space-between
   }
-
-  .dictionary{
-    padding-bottom:22px;
-    margin-bottom:22px;
+  .translator-select{
+    flex:1;max-width:none
   }
-
-  .result{
-    padding-bottom:22px;
-    margin-bottom:22px;
-  }
+  .about-overlay{padding:16px}
+  .about-card{padding:26px 22px}
 }
 
 @media(max-width:460px){
   .shell{
-    padding-left:14px;
-    padding-right:14px;
+    padding-left:16px;
+    padding-right:16px
   }
-
   #home.home{
-    padding-left:14px;
-    padding-right:14px;
+    padding-left:16px;
+    padding-right:16px
   }
-
-  .image-grid{
-    grid-template-columns:1fr;
-  }
-
-  .links{
-    gap:12px;
-  }
-
-  .confederacy-credit{
-    max-width:100%;
-  }
-}
-
-@media(max-width:360px){
-  h1{
-    font-size:32px;
-  }
-
   .results{
-    padding-left:12px;
-    padding-right:12px;
+    padding-left:16px;
+    padding-right:16px
   }
-
+  .image-grid{
+    grid-template-columns:1fr
+  }
   .results-head{
-    gap:8px;
+    flex-wrap:wrap
   }
-
   .results-query{
-    min-width:0;
-  }
-
-  .count{
-    display:none;
-  }
-
-  input{
-    font-size:15px;
-    padding-left:10px;
-    padding-right:8px;
-  }
-
-  .submit{
-    width:36px;
-    height:36px;
+    order:3;
+    flex-basis:100%
   }
 }
 </style>
 </head>
 
 <body>
-
 <main>
 
 <section id="home" class="home shell">
-
   <div class="search-wrap">
+
+    <img
+      class="hero-logo"
+      src="https://github.com/danieltorres-mhcs/assets/blob/main/flibidoo.PNG?raw=true"
+      alt="FlibidooSearch"
+    >
 
     <h1><em><strong>Flibidoo</strong></em>Search</h1>
 
     <form id="searchForm" role="search">
-
       <input
         id="q"
         name="q"
@@ -793,74 +484,44 @@ main{
         placeholder="Search the web"
         aria-label="Search the web"
       >
-
-      <button
-        class="submit"
-        id="submitButton"
-        type="submit"
-        aria-label="Search"
-      >→</button>
-
+      <button class="submit" id="submitButton" type="submit" aria-label="Search">→</button>
     </form>
 
     <div class="links">
-
-      <button
-        type="button"
-        id="aboutButton"
-      >About</button>
+      <button type="button" id="aboutButton">About</button>
 
       <span class="confederacy-credit">
-
         <img
-          class="confederacy-flag"
           src="https://raw.githubusercontent.com/danieltorres-mhcs/assets/ref/heads/main/Untitled13_2026081194209.png"
-          alt="The Great Confederacy of E"
+          alt=""
+          aria-hidden="true"
         >
-
-        <span>with love from The Great Confederacy of E</span>
-
+        with love from The Great Confederacy of E
       </span>
-
     </div>
 
   </div>
-
 </section>
-
 
 <section id="results" class="results shell hidden">
 
   <div class="results-head">
 
-    <a
-      class="results-brand"
-      href="/"
-      aria-label="FlibidooSearch home"
-    >
+    <a class="results-brand" href="/" aria-label="FlibidooSearch home">
+      <img
+        src="https://github.com/danieltorres-mhcs/assets/blob/main/flibidoo.PNG?raw=true"
+        alt="FlibidooSearch"
+      >
       <span><em><strong>Flibidoo</strong></em>Search</span>
     </a>
 
-    <div
-      id="queryLabel"
-      class="results-query"
-    ></div>
-
-    <div
-      id="count"
-      class="count"
-    ></div>
+    <div id="queryLabel" class="results-query"></div>
+    <div id="count" class="count"></div>
 
   </div>
 
-
   <div class="results-search">
-
-    <form
-      id="resultsSearchForm"
-      role="search"
-    >
-
+    <form id="resultsSearchForm" role="search">
       <input
         id="resultsQ"
         name="q"
@@ -869,58 +530,24 @@ main{
         placeholder="Search the web"
         aria-label="Search the web"
       >
-
-      <button
-        class="submit"
-        id="resultsSubmitButton"
-        type="submit"
-        aria-label="Search"
-      >→</button>
-
+      <button class="submit" id="resultsSubmitButton" type="submit" aria-label="Search">→</button>
     </form>
-
   </div>
 
-
-  <nav
-    class="search-types"
-    aria-label="Search type"
-  >
-
-    <button
-      class="search-type active"
-      data-type="web"
-      type="button"
-    >Web</button>
-
-    <button
-      class="search-type"
-      data-type="images"
-      type="button"
-    >Images</button>
-
-    <button
-      class="search-type"
-      data-type="news"
-      type="button"
-    >News</button>
-
+  <nav class="search-types" aria-label="Search type">
+    <button class="search-type active" data-type="web" type="button">Web</button>
+    <button class="search-type" data-type="images" type="button">Images</button>
+    <button class="search-type" data-type="news" type="button">News</button>
   </nav>
 
+  <div id="translator" class="translator hidden"></div>
 
   <div class="results-layout">
 
     <div>
-
       <div id="resultList"></div>
-
-      <div
-        id="pager"
-        class="pager"
-      ></div>
-
+      <div id="pager" class="pager"></div>
     </div>
-
 
     <aside
       id="dictionary"
@@ -929,11 +556,9 @@ main{
     ></aside>
 
   </div>
-
 </section>
 
 </main>
-
 
 <div
   id="aboutOverlay"
@@ -942,7 +567,6 @@ main{
   aria-modal="true"
   aria-labelledby="aboutTitle"
 >
-
   <div class="about-card">
 
     <button
@@ -952,35 +576,23 @@ main{
       aria-label="Close About"
     >×</button>
 
+    <!-- EDIT THIS CARD CONTENT -->
     <h2 id="aboutTitle">About</h2>
-
     <p>Welcome to FlibidooSearch.</p>
-
-    <p>
-      You can edit this text directly in the HTML inside the
-      <strong>about-card</strong>.
-    </p>
+    <p>You can edit this text directly in the HTML inside the <strong>about-card</strong>.</p>
 
   </div>
-
 </div>
 
-
 <script>
+/* =========================================================
+   FlibidooSearch
+   ========================================================= */
 
-/*
- * IMPORTANT:
- * This is your Cloudflare Worker.
- *
- * Search:
- *   https://flibidoo-search.devs.surf/api/search
- *
- * Dictionary:
- *   https://flibidoo-search.devs.surf/api/dictionary
- */
-
-const API_BASE='https://flibidoo-search.devs.surf';
-
+const API_BASE='https://search.tiago.zip';
+const SEARCH_WORKER='https://flibidoo-search.devs.surf';
+const TRANSLATOR_BASE='https://flibidtranslate.daniel-torres-a95.workers.dev/';
+const BANGS_URL='https://services.helium.imput.net/bangs.json';
 
 const form=document.querySelector('#searchForm');
 const input=document.querySelector('#q');
@@ -997,112 +609,526 @@ const resultsForm=document.querySelector('#resultsSearchForm');
 const resultsInput=document.querySelector('#resultsQ');
 
 const dictionary=document.querySelector('#dictionary');
-
+const translator=document.querySelector('#translator');
 
 let currentQ='';
 let currentPage=0;
 let currentType='web';
 
+let bangs=null;
+
+
+/* =========================================================
+   Helpers
+   ========================================================= */
 
 function esc(s=''){
-  return String(s).replace(
-    /[&<>'"]/g,
-    c=>({
-      '&':'&amp;',
-      '<':'&lt;',
-      '>':'&gt;',
-      "'":'&#39;',
-      '"':'&quot;'
-    }[c])
-  );
+  return String(s).replace(/[&<>'"]/g,c=>({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    "'":'&#39;',
+    '"':'&quot;'
+  }[c]))
 }
 
+function enc(s=''){
+  return encodeURIComponent(String(s))
+}
 
 function updateButtonState(b,v){
-  b.classList.toggle(
-    'has-input',
-    v.trim().length>0
-  );
+  b.classList.toggle('has-input',v.trim().length>0)
+}
+
+function sleep(ms){
+  return new Promise(resolve=>setTimeout(resolve,ms))
 }
 
 
-/*
- * DICTIONARY
- *
- * Always attempts to load the dictionary,
- * even when the main search has no results.
- */
+/* =========================================================
+   Bangs
+   ========================================================= */
+
+async function loadBangs(){
+  if(bangs)return bangs;
+
+  try{
+    const r=await fetch(BANGS_URL,{
+      method:'GET',
+      headers:{'Accept':'application/json'},
+      cache:'force-cache'
+    });
+
+    if(!r.ok)throw new Error('Bangs unavailable');
+
+    bangs=await r.json();
+    return bangs;
+  }catch(_){
+    bangs=null;
+    return null;
+  }
+}
+
+function findBang(query){
+  const q=query.trim();
+  if(!q.startsWith('!'))return null;
+
+  const first=q.split(/\s+/)[0].toLowerCase();
+
+  if(!bangs)return null;
+
+  let listData=[];
+
+  if(Array.isArray(bangs)){
+    listData=bangs;
+  }else if(Array.isArray(bangs.bangs)){
+    listData=bangs.bangs;
+  }else if(Array.isArray(bangs.data)){
+    listData=bangs.data;
+  }else if(typeof bangs==='object'){
+    listData=Object.values(bangs);
+  }
+
+  for(const b of listData){
+    if(!b || typeof b!=='object')continue;
+
+    const triggers=[
+      b.t,
+      b.trigger,
+      b.bang,
+      b.shortcut,
+      b.key
+    ].filter(Boolean).map(String);
+
+    const normalized=triggers.map(x=>{
+      x=x.toLowerCase();
+      return x.startsWith('!')?x:'!'+x;
+    });
+
+    if(normalized.includes(first)){
+      const template=
+        b.url||
+        b.url_template||
+        b.urlTemplate||
+        b.template||
+        b.href||
+        b.u||
+        '';
+
+      if(template){
+        return {template,first};
+      }
+    }
+  }
+
+  return null;
+}
+
+function buildBangUrl(bang,query){
+  const first=query.trim().split(/\s+/)[0];
+  const terms=query.trim().slice(first.length).trim();
+  const encoded=encodeURIComponent(terms);
+
+  return bang.template
+    .replace(/\{\{?s\}\}?/gi,encoded)
+    .replace(/\{\{?query\}\}?/gi,encoded)
+    .replace(/\{\{?q\}\}?/gi,encoded)
+    .replace(/%s/g,encoded);
+}
+
+async function tryBang(query){
+  const first=query.trim().split(/\s+/)[0];
+  if(!first.startsWith('!'))return false;
+
+  const data=await loadBangs();
+  if(!data)return false;
+
+  const bang=findBang(query);
+  if(!bang)return false;
+
+  const url=buildBangUrl(bang,query);
+
+  if(url && /^https?:\/\//i.test(url)){
+    location.href=url;
+    return true;
+  }
+
+  return false;
+}
+
+
+/* =========================================================
+   Translation
+   ========================================================= */
+
+const LANGUAGES=[
+  ['auto','Auto-detect'],
+  ['en','English'],
+  ['es','Spanish'],
+  ['fr','French'],
+  ['de','German'],
+  ['it','Italian'],
+  ['pt','Portuguese'],
+  ['ru','Russian'],
+  ['uk','Ukrainian'],
+  ['pl','Polish'],
+  ['nl','Dutch'],
+  ['sv','Swedish'],
+  ['da','Danish'],
+  ['no','Norwegian'],
+  ['fi','Finnish'],
+  ['cs','Czech'],
+  ['sk','Slovak'],
+  ['ro','Romanian'],
+  ['hu','Hungarian'],
+  ['tr','Turkish'],
+  ['el','Greek'],
+  ['bg','Bulgarian'],
+  ['ca','Catalan'],
+  ['ja','Japanese'],
+  ['ko','Korean'],
+  ['zh','Chinese'],
+  ['ar','Arabic'],
+  ['he','Hebrew'],
+  ['hi','Hindi'],
+  ['id','Indonesian'],
+  ['ms','Malay'],
+  ['vi','Vietnamese'],
+  ['th','Thai'],
+  ['tl','Tagalog'],
+  ['sw','Swahili']
+];
+
+function languageOptions(selected){
+  return LANGUAGES.map(([code,name])=>
+    `<option value="${esc(code)}" ${code===selected?'selected':''}>${esc(name)}</option>`
+  ).join('');
+}
+
+function languageName(code){
+  return LANGUAGES.find(x=>x[0]===code)?.[1]||code;
+}
+
+function detectTranslationMode(q){
+  const raw=q.trim();
+  const lower=raw.toLowerCase();
+
+  let inputLang='auto';
+  let outputLang='en';
+
+  const toEnglish=lower.match(/^(.+?)\s+to\s+english\s*$/i);
+  const englishTo=lower.match(/^english\s+to\s+(.+?)\s*$/i);
+
+  if(toEnglish){
+    const name=toEnglish[1].trim();
+    const found=LANGUAGES.find(x=>
+      x[1].toLowerCase()===name.toLowerCase()
+    );
+    if(found && found[0]!=='auto'){
+      inputLang=found[0];
+      outputLang='en';
+    }
+  }else if(englishTo){
+    const name=englishTo[1].trim();
+    const found=LANGUAGES.find(x=>
+      x[1].toLowerCase()===name.toLowerCase()
+    );
+    if(found && found[0]!=='auto'){
+      inputLang='en';
+      outputLang=found[0];
+    }
+  }
+
+  return {inputLang,outputLang};
+}
+
+function isTranslationQuery(q){
+  const lower=q.trim().toLowerCase();
+
+  if(
+    lower==='translate'||
+    lower==='translator'||
+    lower.startsWith('translate ')||
+    lower.startsWith('translator ')||
+    /\s+to\s+english$/i.test(lower)||
+    /^english\s+to\s+/i.test(lower)
+  ){
+    return true;
+  }
+
+  return false;
+}
+
+function translationTextFromQuery(q){
+  const raw=q.trim();
+
+  if(/^translate$/i.test(raw)||/^translator$/i.test(raw)){
+    return '';
+  }
+
+  let text=raw
+    .replace(/^translate\s+/i,'')
+    .replace(/^translator\s+/i,'');
+
+  text=text
+    .replace(/\s+to\s+english$/i,'')
+    .replace(/^english\s+to\s+.+?\s*/i,'');
+
+  return text.trim();
+}
+
+function renderTranslator(q){
+  const mode=detectTranslationMode(q);
+  const initial=translationTextFromQuery(q);
+
+  translator.classList.remove('hidden');
+
+  translator.innerHTML=`
+    <div class="translator-top">
+      <div class="translator-title">Translate</div>
+
+      <div class="translator-controls">
+        <select id="translateSource" class="translator-select" aria-label="Input language">
+          ${languageOptions(mode.inputLang)}
+        </select>
+
+        <button
+          id="translateSwap"
+          class="translator-swap"
+          type="button"
+          aria-label="Switch languages"
+          title="Switch languages"
+        >⇄</button>
+
+        <select id="translateTarget" class="translator-select" aria-label="Output language">
+          ${languageOptions(mode.outputLang)}
+        </select>
+      </div>
+    </div>
+
+    <div class="translator-boxes">
+
+      <div class="translator-side">
+        <textarea
+          id="translateInput"
+          class="translator-text"
+          maxlength="2000"
+          placeholder="Enter text to translate…"
+          aria-label="Text to translate"
+        >${esc(initial).slice(0,2000)}</textarea>
+
+        <div class="translator-bottom">
+          <span id="translateCount" class="translator-count">0 / 2000</span>
+          <button id="translateButton" class="translator-button" type="button">
+            Translate
+          </button>
+        </div>
+      </div>
+
+      <div class="translator-side">
+        <div id="translateOutput" class="translator-result"></div>
+        <div id="translateStatus" class="translator-status"></div>
+      </div>
+
+    </div>
+  `;
+
+  const source=document.querySelector('#translateSource');
+  const target=document.querySelector('#translateTarget');
+  const text=document.querySelector('#translateInput');
+  const output=document.querySelector('#translateOutput');
+  const status=document.querySelector('#translateStatus');
+  const button=document.querySelector('#translateButton');
+  const swap=document.querySelector('#translateSwap');
+  const charCount=document.querySelector('#translateCount');
+
+  function updateCount(){
+    charCount.textContent=`${text.value.length} / 2000`;
+  }
+
+  updateCount();
+
+  text.addEventListener('input',updateCount);
+
+  swap.addEventListener('click',()=>{
+    const oldSource=source.value;
+    const oldTarget=target.value;
+
+    if(oldSource==='auto'){
+      source.value=oldTarget;
+      target.value='auto';
+    }else{
+      source.value=oldTarget;
+      target.value=oldSource;
+    }
+
+    const oldText=text.value;
+    const oldOutput=output.textContent;
+
+    text.value=oldOutput||oldText;
+    output.textContent=oldText;
+
+    updateCount();
+  });
+
+  async function doTranslate(){
+    const value=text.value.slice(0,2000);
+
+    if(!value.trim()){
+      output.textContent='';
+      status.textContent='Enter something to translate.';
+      return;
+    }
+
+    button.disabled=true;
+    status.textContent='Translating…';
+
+    try{
+      const payload={
+        q:value,
+        source:source.value||'auto',
+        target:target.value||'en',
+        format:'text'
+      };
+
+      let response=null;
+      let body=null;
+
+      try{
+        response=await fetch(TRANSLATOR_BASE,{
+          method:'POST',
+          headers:{
+            'Content-Type':'application/json',
+            'Accept':'application/json'
+          },
+          body:JSON.stringify(payload)
+        });
+
+        const raw=await response.text();
+
+        try{
+          body=JSON.parse(raw);
+        }catch(_){
+          body={translatedText:raw};
+        }
+      }catch(_){
+        response=null;
+      }
+
+      if(!response || !response.ok){
+        const params=new URLSearchParams({
+          q:value,
+          langpair:`${payload.source}|${payload.target}`
+        });
+
+        const fallback=await fetch(
+          `https://api.mymemory.translated.net/get?${params.toString()}`,
+          {headers:{'Accept':'application/json'}}
+        );
+
+        const fallbackData=await fallback.json();
+
+        if(!fallback.ok){
+          throw new Error(
+            fallbackData?.responseDetails||
+            'Translation service unavailable.'
+          );
+        }
+
+        body={
+          translatedText:
+            fallbackData?.responseData?.translatedText||
+            fallbackData?.matches?.[0]?.translation||
+            ''
+        };
+      }
+
+      const translated=
+        body?.translatedText||
+        body?.translation||
+        body?.translated||
+        body?.data?.translatedText||
+        body?.data?.translation||
+        '';
+
+      if(!translated){
+        throw new Error('The translation service returned no translation.');
+      }
+
+      output.textContent=translated;
+      status.textContent=
+        `${languageName(source.value)} → ${languageName(target.value)}`;
+
+    }catch(e){
+      output.textContent='';
+      status.textContent=
+        e.message||'Translation failed. Please try again.';
+    }finally{
+      button.disabled=false;
+    }
+  }
+
+  button.addEventListener('click',doTranslate);
+
+  if(initial){
+    setTimeout(doTranslate,0);
+  }
+}
+
+
+/* =========================================================
+   Dictionary
+   ========================================================= */
 
 async function loadDictionary(word){
+  const clean=word.trim();
 
   dictionary.classList.remove('hidden');
 
+  if(!clean){
+    dictionary.innerHTML=`
+      <div class="dictionary-title">Dictionary</div>
+      <div class="dictionary-empty">Search for a word to see its definition.</div>
+    `;
+    return;
+  }
+
   dictionary.innerHTML=`
     <div class="dictionary-title">Dictionary</div>
-    <div class="dictionary-word">${esc(word)}</div>
-    <div class="dictionary-loading">Loading…</div>
+    <div class="dictionary-word">${esc(clean)}</div>
+    <div class="dictionary-loading">Loading definition…</div>
   `;
 
   try{
-
-    const response=await fetch(
-      `${API_BASE}/api/dictionary?word=${encodeURIComponent(word)}`,
+    const r=await fetch(
+      `${SEARCH_WORKER}/api/dictionary?word=${encodeURIComponent(clean)}`,
       {
-        method:'GET',
-        headers:{
-          'Accept':'application/json'
-        }
+        headers:{'Accept':'application/json'}
       }
     );
 
-    const data=await response.json();
-
-    if(!response.ok){
-      throw new Error(
-        data?.error || 'Dictionary unavailable.'
-      );
+    if(!r.ok){
+      throw new Error('Dictionary unavailable.');
     }
 
-    renderDictionary(data,word);
+    const data=await r.json();
+    renderDictionary(data,clean);
 
-  }catch(error){
-
+  }catch(_){
     dictionary.innerHTML=`
       <div class="dictionary-title">Dictionary</div>
-      <div class="dictionary-word">${esc(word)}</div>
-      <div class="dictionary-empty">
-        Dictionary unavailable.
-      </div>
-    `;
-
-  }
-
-}
-
-
-function renderDictionary(data,word){
-
-  const entries=
-    Array.isArray(data?.entries)
-      ? data.entries
-      : [];
-
-  if(!entries.length){
-
-    dictionary.innerHTML=`
-      <div class="dictionary-title">Dictionary</div>
-      <div class="dictionary-word">${esc(word)}</div>
+      <div class="dictionary-word">${esc(clean)}</div>
       <div class="dictionary-empty">
         No dictionary entry found.
       </div>
     `;
-
-    return;
   }
+}
 
+function renderDictionary(data,word){
+  const entries=Array.isArray(data?.entries)?data.entries:[];
 
   dictionary.innerHTML='';
-
 
   const title=document.createElement('div');
   title.className='dictionary-title';
@@ -1115,160 +1141,201 @@ function renderDictionary(data,word){
   dictionary.appendChild(title);
   dictionary.appendChild(wordEl);
 
+  if(!entries.length){
+    const empty=document.createElement('div');
+    empty.className='dictionary-empty';
+    empty.textContent='No dictionary entry found.';
+    dictionary.appendChild(empty);
+    return;
+  }
 
-  entries.forEach(entry=>{
+  entries.slice(0,8).forEach(entry=>{
+    const el=document.createElement('section');
+    el.className='dictionary-entry';
 
-    const entryEl=document.createElement('section');
-    entryEl.className='dictionary-entry';
+    const lang=entry.language?.name||
+      entry.language?.code||
+      entry.lang||
+      '';
 
+    const pos=entry.partOfSpeech||
+      entry.part_of_speech||
+      entry.pos||
+      '';
 
-    if(entry.language){
+    let html='';
 
-      const language=document.createElement('div');
-      language.className='dictionary-language';
-      language.textContent=entry.language;
-
-      entryEl.appendChild(language);
-
+    if(lang){
+      html+=`<div class="dictionary-language">${esc(lang)}</div>`;
     }
 
-
-    if(entry.partOfSpeech){
-
-      const pos=document.createElement('div');
-      pos.className='dictionary-pos';
-      pos.textContent=entry.partOfSpeech;
-
-      entryEl.appendChild(pos);
-
+    if(pos){
+      html+=`<div class="dictionary-pos">${esc(pos)}</div>`;
     }
-
 
     const senses=
-      Array.isArray(entry.senses)
-        ? entry.senses
-        : [];
+      entry.senses||
+      entry.meanings||
+      entry.definitions||
+      [];
 
+    if(Array.isArray(senses)&&senses.length){
 
-    if(senses.length){
+      html+=`<div class="dictionary-senses">
+        <div class="dictionary-label">Definitions</div>
+      `;
 
-      const sensesWrap=document.createElement('div');
-      sensesWrap.className='dictionary-senses';
-
-
-      const labelEl=document.createElement('div');
-      labelEl.className='dictionary-label';
-      labelEl.textContent='Definitions';
-
-      sensesWrap.appendChild(labelEl);
-
-
-      senses.forEach(sense=>{
-
-        const senseEl=document.createElement('div');
-        senseEl.className='dictionary-sense';
-
-
+      senses.slice(0,10).forEach((sense,index)=>{
         const definition=
-          sense.definition ||
-          sense.gloss ||
-          sense.meaning ||
-          '';
+          typeof sense==='string'
+            ?sense
+            :sense.definition||
+             sense.gloss||
+             sense.text||
+             '';
 
+        if(!definition)return;
 
-        if(definition){
+        const tags=
+          Array.isArray(sense.tags)
+            ?` <span class="dictionary-tags">[${esc(sense.tags.join(', '))}]</span>`
+            :'';
 
-          const def=document.createElement('div');
-          def.className='dictionary-definition';
-          def.textContent=definition;
+        const examples=
+          sense.examples||
+          sense.example||
+          [];
 
-          senseEl.appendChild(def);
+        html+=`
+          <div class="dictionary-sense">
+            <div class="dictionary-definition">
+              ${index+1}. ${esc(definition)}${tags}
+            </div>
+        `;
 
+        if(Array.isArray(examples)){
+          examples.slice(0,2).forEach(example=>{
+            const text=
+              typeof example==='string'
+                ?example
+                :example.text||
+                 example.example||
+                 '';
+
+            if(text){
+              html+=`<div class="dictionary-example">“${esc(text)}”</div>`;
+            }
+          });
+        }else if(typeof examples==='string'){
+          html+=`<div class="dictionary-example">“${esc(examples)}”</div>`;
         }
 
-
-        if(sense.example){
-
-          const example=document.createElement('div');
-          example.className='dictionary-example';
-          example.textContent=`“${sense.example}”`;
-
-          senseEl.appendChild(example);
-
-        }
-
-
-        sensesWrap.appendChild(senseEl);
-
+        html+='</div>';
       });
 
-
-      entryEl.appendChild(sensesWrap);
-
+      html+='</div>';
     }
 
+    const synonyms=
+      entry.synonyms||
+      entry.relations?.synonyms||
+      [];
 
-    if(
-      Array.isArray(entry.translations) &&
-      entry.translations.length
-    ){
-
-      const translations=document.createElement('div');
-      translations.className='dictionary-translations';
-
-
-      const translationLabel=document.createElement('div');
-      translationLabel.className='dictionary-label';
-      translationLabel.textContent='Translations';
-
-
-      translations.appendChild(translationLabel);
-
-
-      const ul=document.createElement('ul');
-      ul.className='dictionary-list';
-
-
-      entry.translations
-        .slice(0,20)
-        .forEach(t=>{
-
-          const li=document.createElement('li');
-
-          if(typeof t==='string'){
-            li.textContent=t;
-          }else{
-            li.textContent=
-              t.translation ||
-              t.text ||
-              t.word ||
-              JSON.stringify(t);
-          }
-
-          ul.appendChild(li);
-
-        });
-
-
-      translations.appendChild(ul);
-      entryEl.appendChild(translations);
-
+    if(Array.isArray(synonyms)&&synonyms.length){
+      html+=`
+        <div class="dictionary-relations">
+          <div class="dictionary-label">Synonyms</div>
+          <div class="dictionary-definition">${esc(synonyms.join(', '))}</div>
+        </div>
+      `;
     }
 
+    const antonyms=
+      entry.antonyms||
+      entry.relations?.antonyms||
+      [];
 
-    dictionary.appendChild(entryEl);
+    if(Array.isArray(antonyms)&&antonyms.length){
+      html+=`
+        <div class="dictionary-relations">
+          <div class="dictionary-label">Antonyms</div>
+          <div class="dictionary-definition">${esc(antonyms.join(', '))}</div>
+        </div>
+      `;
+    }
 
+    const translations=
+      entry.translations||
+      [];
+
+    if(Array.isArray(translations)&&translations.length){
+      html+=`
+        <div class="dictionary-translations">
+          <div class="dictionary-label">Translations</div>
+          <ul class="dictionary-list">
+            ${translations.slice(0,12).map(t=>{
+              const text=
+                typeof t==='string'
+                  ?t
+                  :t.translation||
+                   t.text||
+                   t.word||
+                   '';
+              return text?`<li>${esc(text)}</li>`:'';
+            }).join('')}
+          </ul>
+        </div>
+      `;
+    }
+
+    if(!html){
+      html=`
+        <div class="dictionary-empty">
+          Dictionary data was returned, but no definitions were available.
+        </div>
+      `;
+    }
+
+    el.innerHTML=html;
+    dictionary.appendChild(el);
   });
 
+  if(data.source){
+    const source=document.createElement('div');
+    source.className='dictionary-source';
+    source.textContent=`Source: ${data.source}`;
+    dictionary.appendChild(source);
+  }
 }
 
 
-/*
- * RENDER SEARCH RESULTS
- */
+/* =========================================================
+   Result rendering
+   ========================================================= */
+
+function getTags(r){
+  const tags=[];
+
+  if(Array.isArray(r.tags)){
+    tags.push(...r.tags);
+  }
+
+  if(Array.isArray(r.categories)){
+    tags.push(...r.categories);
+  }
+
+  if(typeof r.tag==='string'){
+    tags.push(r.tag);
+  }
+
+  return [...new Set(
+    tags
+      .map(x=>typeof x==='string'?x:(x?.name||x?.label||''))
+      .filter(Boolean)
+  )].slice(0,8);
+}
 
 function render(data){
-
   home.classList.add('hidden');
   results.classList.remove('hidden');
 
@@ -1276,114 +1343,76 @@ function render(data){
 
   label.textContent=
     data.query
-      ? `Results for “${data.query}”`
-      : '';
-
+      ?`Results for “${data.query}”`
+      :'';
 
   let a=[];
 
-
   if(currentType==='web'){
+    a=Array.isArray(data.results)
+      ?data.results
+      :Array.isArray(data.results?.web?.results)
+        ?data.results.web.results
+        :[];
 
-    a=
-      Array.isArray(data.results)
-        ? data.results
-        : Array.isArray(data.results?.web?.results)
-          ? data.results.web.results
-          : [];
+    if(!a.length && Array.isArray(data.results?.mixed)){
+      a=data.results.mixed;
+    }
 
-  }else if(
-    currentType==='images' ||
-    currentType==='news'
-  ){
-
-    a=
-      Array.isArray(data.results)
-        ? data.results
-        : [];
-
+  }else if(currentType==='images'||currentType==='news'){
+    a=Array.isArray(data.results)
+      ?data.results
+      :[];
   }
 
-
-  count.textContent=
-    a.length
-      ? `${a.length} results`
-      : '';
-
+  count.textContent=a.length?`${a.length} results`:'';
 
   resultsInput.value=data.query||'';
 
   list.innerHTML='';
   pager.innerHTML='';
 
-
   document
     .querySelectorAll('.search-type')
-    .forEach(b=>{
+    .forEach(b=>
       b.classList.toggle(
         'active',
         b.dataset.type===currentType
-      );
-    });
-
-
-  /*
-   * Dictionary is loaded independently.
-   * Therefore it still appears if the search has zero results.
-   */
-  if(data.query){
-    loadDictionary(data.query);
-  }
-
-
-  if(!a.length){
-
-    list.innerHTML=
-      '<div class="empty">No results found.</div>';
-
-    history.replaceState(
-      {},
-      '',
-      `/?q=${encodeURIComponent(data.query||currentQ)}`+
-      `&type=${encodeURIComponent(currentType)}`+
-      `${currentPage?`&page=${currentPage}`:''}`
+      )
     );
 
-    return;
+  /*
+   * Dictionary is deliberately loaded/rendered independently.
+   * This means it remains visible even when the web search
+   * has zero results.
+   */
+  loadDictionary(data.query||currentQ);
+
+  if(isTranslationQuery(data.query||currentQ)){
+    renderTranslator(data.query||currentQ);
+  }else{
+    translator.classList.add('hidden');
+    translator.innerHTML='';
   }
 
-
-  /*
-   * IMAGES
-   */
+  if(!a.length){
+    list.innerHTML='<div class="empty">No results found.</div>';
+    return;
+  }
 
   if(currentType==='images'){
 
     const grid=document.createElement('div');
-
     grid.className='image-grid';
 
-
     a.forEach(r=>{
-
-      const u=
-        r.url ||
-        r.properties?.url ||
-        '';
-
-      const img=
-        r.thumbnail ||
-        r.properties?.url ||
-        '';
-
+      const u=r.url||r.properties?.url||'';
+      const img=r.thumbnail||r.properties?.url||'';
 
       if(!img)return;
 
-
       const el=document.createElement('article');
-
       el.className='image-result';
-
 
       el.innerHTML=`
         <a
@@ -1404,90 +1433,45 @@ function render(data){
         </div>
 
         <div class="image-result-source">
-          ${esc(
-            r.source ||
-            r.meta_url?.hostname ||
-            ''
-          )}
+          ${esc(r.source||r.meta_url?.hostname||'')}
         </div>
       `;
 
-
       grid.appendChild(el);
-
     });
 
-
     if(grid.children.length){
-
       list.appendChild(grid);
-
     }else{
-
-      list.innerHTML=
-        '<div class="empty">No images found.</div>';
-
+      list.innerHTML='<div class="empty">No images found.</div>';
     }
-
-
-  /*
-   * WEB / NEWS
-   */
 
   }else{
 
     a.forEach(r=>{
-
       const el=document.createElement('article');
-
       el.className='result';
 
+      const u=r.url||'';
+      const host=r.meta_url?.hostname||'';
+      const title=r.title||u;
+      const desc=r.description||r.content||'';
+      const age=r.age||r.publishedDate||r.published_date||'';
+      const tags=getTags(r);
 
-      const u=
-        r.url ||
-        '';
+      let tagsHtml='';
 
-      const host=
-        r.meta_url?.hostname ||
-        '';
-
-      const title=
-        r.title ||
-        u;
-
-      const desc=
-        r.description ||
-        r.content ||
-        '';
-
-      const age=
-        r.age ||
-        r.publishedDate ||
-        '';
-
-
-      /*
-       * Keep description/tag information intact.
-       */
-      let tagHtml='';
-
-
-      if(Array.isArray(r.tags)){
-
-        tagHtml=
-          r.tags
-            .map(tag=>`
-              <span class="dictionary-tags">
-                ${esc(tag)}
-              </span>
-            `)
-            .join('');
-
+      if(tags.length){
+        tagsHtml=`
+          <div class="result-tags">
+            ${tags.map(tag=>`
+              <span class="result-tag">${esc(tag)}</span>
+            `).join('')}
+          </div>
+        `;
       }
 
-
       el.innerHTML=`
-
         <div class="result-url">
           ${esc(host||u)}
         </div>
@@ -1497,343 +1481,261 @@ function render(data){
             href="${esc(u)}"
             target="_blank"
             rel="noopener noreferrer"
-          >
-            ${esc(title)}
-          </a>
+          >${esc(title)}</a>
         </h2>
 
         ${
           desc
-            ? `
-              <p class="snippet">
-                ${esc(desc)}
-                ${tagHtml}
-              </p>
-            `
-            : ''
+            ?`<p class="snippet">${esc(desc)}</p>`
+            :''
         }
 
         ${
           age
-            ? `
-              <div class="result-meta">
-                ${esc(age)}
-              </div>
-            `
-            : ''
+            ?`<div class="result-meta">${esc(age)}</div>`
+            :''
         }
 
+        ${tagsHtml}
       `;
 
-
       list.appendChild(el);
-
     });
-
   }
 
-
-  const more=
-    Boolean(
-      data.more_results_available ||
-      data.hasMore
-    );
-
+  const more=Boolean(
+    data.more_results_available||
+    data.hasMore
+  );
 
   if(currentPage>0){
-
     const b=document.createElement('button');
-
     b.textContent='Previous';
-
-    b.onclick=()=>{
+    b.onclick=()=>
       search(
         currentQ,
         currentPage-1,
         currentType
       );
-    };
-
     pager.appendChild(b);
-
   }
 
-
   if(more){
-
     const b=document.createElement('button');
-
     b.textContent='Next';
-
-    b.onclick=()=>{
+    b.onclick=()=>
       search(
         currentQ,
         currentPage+1,
         currentType
       );
-    };
-
     pager.appendChild(b);
-
   }
-
 
   history.replaceState(
     {},
     '',
-    `/?q=${encodeURIComponent(data.query||currentQ)}`+
-    `&type=${encodeURIComponent(currentType)}`+
-    `${currentPage?`&page=${currentPage}`:''}`
+    `/?q=${enc(data.query||currentQ)}&type=${enc(currentType)}${
+      currentPage
+        ?`&page=${currentPage}`
+        :''
+    }`
   );
-
 }
 
 
-/*
- * SEARCH
- *
- * IMPORTANT:
- * Uses YOUR Worker:
- *
- * /api/search?q=...&type=...&page=...
- *
- * It does NOT POST directly to search.tiago.zip.
- */
+/* =========================================================
+   Search
+   ========================================================= */
 
-async function search(
-  q,
-  page=0,
-  type=currentType
-){
-
+async function search(q,page=0,type=currentType){
   q=q.trim();
 
   if(!q)return;
 
-
   currentQ=q;
-
-  currentPage=
-    Math.max(
-      0,
-      Number(page)||0
-    );
-
+  currentPage=Math.max(
+    0,
+    Number(page)||0
+  );
   currentType=type;
 
-
-  document.title=
-    `${q} - FlibidooSearch`;
-
+  document.title=`${q} - FlibidooSearch`;
 
   input.value=q;
   resultsInput.value=q;
 
-
   /*
-   * Immediately switch away from home.
-   * This prevents the old "stays on homescreen while fetching"
-   * behavior.
+   * Switch immediately.
+   * This prevents the home screen from sitting there
+   * while the request is being made.
    */
-
   home.classList.add('hidden');
   results.classList.remove('hidden');
 
-
-  list.innerHTML=
-    '<div class="empty">Searching…</div>';
-
+  list.innerHTML='<div class="empty">Searching…</div>';
   count.textContent='';
-
-  label.textContent=
-    `Results for “${q}”`;
-
+  label.textContent=`Results for “${q}”`;
   pager.innerHTML='';
 
-
-  /*
-   * Dictionary starts independently so it can show
-   * even while the web request is loading.
-   */
+  if(isTranslationQuery(q)){
+    renderTranslator(q);
+  }else{
+    translator.classList.add('hidden');
+    translator.innerHTML='';
+  }
 
   loadDictionary(q);
 
-
   try{
 
+    /*
+     * Use the FlibidooSearch worker.
+     * The worker itself talks to Tiago, avoiding browser
+     * CORS/TLS problems with direct client-side requests.
+     */
     const url=
-      `${API_BASE}/api/search`+
+      `${SEARCH_WORKER}/api/search`+
       `?q=${encodeURIComponent(q)}`+
       `&type=${encodeURIComponent(type)}`+
       `&page=${encodeURIComponent(currentPage)}`;
 
-
-    const r=await fetch(
-      url,
-      {
-        method:'GET',
-        headers:{
-          'Accept':'application/json'
-        }
-      }
-    );
-
+    const r=await fetch(url,{
+      method:'GET',
+      headers:{
+        'Accept':'application/json'
+      },
+      cache:'no-store'
+    });
 
     const body=await r.text();
-
 
     let d;
 
     try{
-
       d=JSON.parse(body);
-
     }catch(_){
-
       throw new Error(
-        'Search Worker returned invalid JSON.'
+        'Search server returned invalid JSON.'
       );
-
     }
-
 
     if(!r.ok){
-
       throw new Error(
-        d?.error ||
-        'Search failed. Please try again.'
+        d.error||
+        'Search temporarily unavailable.'
       );
-
     }
-
 
     d.type=type;
     d.query=d.query||q;
 
-
     render(d);
-
 
   }catch(e){
 
+    /*
+     * Only the search result area is replaced with the error.
+     * The translator and dictionary remain usable.
+     */
     list.innerHTML=`
       <div class="error">
         ${esc(
-          e.message ||
+          e.message||
           'Search failed. Please try again.'
         )}
       </div>
     `;
 
-    /*
-     * Do NOT remove the dictionary if search fails.
-     */
     loadDictionary(q);
 
+    if(isTranslationQuery(q)){
+      renderTranslator(q);
+    }
   }
-
 }
 
 
-/*
- * HOME SEARCH
- */
+/* =========================================================
+   Events
+   ========================================================= */
 
-form.addEventListener(
-  'submit',
-  e=>{
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
 
-    e.preventDefault();
+  const q=input.value.trim();
 
-    const q=input.value.trim();
+  if(!q)return;
 
-    if(q){
+  if(await tryBang(q))return;
 
-      /*
-       * Move immediately to results page.
-       */
-      location.href=
-        `/?q=${encodeURIComponent(q)}`+
-        `&type=web&page=0`;
+  location.href=
+    `/?q=${encodeURIComponent(q)}`+
+    `&type=web&page=0`;
+});
 
-    }
+resultsForm.addEventListener('submit',async e=>{
+  e.preventDefault();
 
-  }
-);
+  const q=resultsInput.value.trim();
 
+  if(!q)return;
 
-/*
- * RESULTS SEARCH
- */
+  if(await tryBang(q))return;
 
-resultsForm.addEventListener(
-  'submit',
-  e=>{
+  search(q,0,currentType);
+});
 
-    e.preventDefault();
+document
+  .querySelectorAll('.search-type')
+  .forEach(btn=>
+    btn.addEventListener('click',async()=>{
+      const q=resultsInput.value||currentQ;
 
-    const q=
-      resultsInput.value.trim();
-
-    if(q){
+      if(await tryBang(q))return;
 
       search(
         q,
         0,
-        currentType
+        btn.dataset.type
       );
+    })
+  );
 
-    }
 
-  }
+/* =========================================================
+   Search button state
+   ========================================================= */
+
+input.addEventListener(
+  'input',
+  ()=>updateButtonState(
+    document.querySelector('#submitButton'),
+    input.value
+  )
+);
+
+resultsInput.addEventListener(
+  'input',
+  ()=>updateButtonState(
+    document.querySelector('#resultsSubmitButton'),
+    resultsInput.value
+  )
 );
 
 
-/*
- * WEB / IMAGES / NEWS
- */
-
-document
-  .querySelectorAll('.search-type')
-  .forEach(btn=>{
-
-    btn.addEventListener(
-      'click',
-      ()=>{
-
-        search(
-          resultsInput.value||currentQ,
-          0,
-          btn.dataset.type
-        );
-
-      }
-    );
-
-  });
-
-
-/*
- * ABOUT
- */
+/* =========================================================
+   About
+   ========================================================= */
 
 const aboutOverlay=
   document.querySelector('#aboutOverlay');
 
+document.querySelector('#aboutButton').onclick=
+  ()=>aboutOverlay.classList.remove('hidden');
 
-document
-  .querySelector('#aboutButton')
-  .onclick=()=>{
-    aboutOverlay.classList.remove('hidden');
-  };
-
-
-document
-  .querySelector('#aboutClose')
-  .onclick=()=>{
-    aboutOverlay.classList.add('hidden');
-  };
-
+document.querySelector('#aboutClose').onclick=
+  ()=>aboutOverlay.classList.add('hidden');
 
 aboutOverlay.addEventListener(
   'click',
@@ -1843,7 +1745,6 @@ aboutOverlay.addEventListener(
     }
   }
 );
-
 
 document.addEventListener(
   'keydown',
@@ -1855,36 +1756,45 @@ document.addEventListener(
 );
 
 
-/*
- * INITIAL URL
- */
+/* =========================================================
+   Initial URL
+   ========================================================= */
 
-const params=
-  new URLSearchParams(
-    location.search
-  );
-
-const initialQuery=
-  params.get('q');
-
+const params=new URLSearchParams(location.search);
+const initialQuery=params.get('q');
 
 if(initialQuery){
 
+  const initialType=
+    ['web','images','news'].includes(
+      params.get('type')
+    )
+      ?params.get('type')
+      :'web';
+
+  /*
+   * Render results immediately rather than leaving the
+   * homepage visible while the first request is pending.
+   */
   search(
     initialQuery,
-    Number(
-      params.get('page')||0
-    ),
-    ['web','images','news']
-      .includes(
-        params.get('type')
-      )
-      ? params.get('type')
-      : 'web'
+    Number(params.get('page')||0),
+    initialType
   );
 
-}
+}else{
 
+  /*
+   * Keep the dictionary area available internally,
+   * but don't show the results page until a search exists.
+   */
+  dictionary.innerHTML=`
+    <div class="dictionary-title">Dictionary</div>
+    <div class="dictionary-empty">
+      Search for a word to see its definition.
+    </div>
+  `;
+}
 </script>
 
 </body>
