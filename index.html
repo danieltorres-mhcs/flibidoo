@@ -4,7 +4,20 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#1d0c22" />
+
   <title>FlibidooSearch</title>
+
+  <!-- FlibidooSearch favicon -->
+  <link
+    rel="icon"
+    type="image/png"
+    href="https://github.com/danieltorres-mhcs/assets/blob/main/flibidoo.PNG?raw=true"
+  />
+
+  <link
+    rel="apple-touch-icon"
+    href="https://github.com/danieltorres-mhcs/assets/blob/main/flibidoo.PNG?raw=true"
+  />
 
   <style>
     :root{
@@ -16,37 +29,42 @@
       --accent:#f5eef7;
       --result:#e7dce9;
       --url:#b8a2bc;
-      --focus:#cdb8d1
+      --focus:#cdb8d1;
     }
 
-    *{box-sizing:border-box}
+    *{
+      box-sizing:border-box;
+    }
 
-    html,body{
+    html,
+    body{
       margin:0;
       min-height:100%;
       background:var(--bg);
       color:var(--text);
-      font-family:Arial,Helvetica,sans-serif
+      font-family:Arial,Helvetica,sans-serif;
     }
 
     body{
       min-height:100vh;
       display:flex;
-      flex-direction:column
+      flex-direction:column;
     }
 
-    a{color:inherit}
+    a{
+      color:inherit;
+    }
 
     .shell{
       width:min(100% - 40px,1120px);
-      margin:0 auto
+      margin:0 auto;
     }
 
     header{
       height:64px;
       border-bottom:1px solid var(--line2);
       display:flex;
-      align-items:center
+      align-items:center;
     }
 
     .brand{
@@ -55,7 +73,7 @@
       gap:10px;
       text-decoration:none;
       font-weight:600;
-      letter-spacing:-.01em
+      letter-spacing:-.01em;
     }
 
     .brand img{
@@ -63,12 +81,24 @@
       height:34px;
       object-fit:contain;
       display:block;
-      mask-image:linear-gradient(to bottom,#000 0%,#000 74%,transparent 100%);
-      -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 74%,transparent 100%);
-      border-radius:0 0 11px 11px
+      mask-image:linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 74%,
+        transparent 100%
+      );
+      -webkit-mask-image:linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 74%,
+        transparent 100%
+      );
+      border-radius:0 0 11px 11px;
     }
 
-    main{flex:1}
+    main{
+      flex:1;
+    }
 
     .home{
       min-height:calc(100vh - 120px);
@@ -76,7 +106,7 @@
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      padding:54px 0 100px
+      padding:54px 0 100px;
     }
 
     .hero-logo{
@@ -84,9 +114,19 @@
       height:auto;
       display:block;
       margin-bottom:12px;
-      mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 100%);
-      -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 100%);
-      border-radius:0 0 34px 34px
+      mask-image:linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 78%,
+        transparent 100%
+      );
+      -webkit-mask-image:linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 78%,
+        transparent 100%
+      );
+      border-radius:0 0 34px 34px;
     }
 
     h1{
@@ -94,11 +134,11 @@
       line-height:1;
       margin:0 0 30px;
       letter-spacing:-.055em;
-      font-weight:500
+      font-weight:500;
     }
 
     .search-wrap{
-      width:min(100%,680px)
+      width:min(100%,680px);
     }
 
     form{
@@ -108,12 +148,14 @@
       border:1px solid var(--line);
       border-radius:28px;
       background:transparent;
-      transition:border-color .15s ease,box-shadow .15s ease
+      transition:
+        border-color .15s ease,
+        box-shadow .15s ease;
     }
 
     form:focus-within{
       border-color:var(--focus);
-      box-shadow:0 0 0 2px rgba(205,184,209,.08)
+      box-shadow:0 0 0 2px rgba(205,184,209,.08);
     }
 
     .search-icon{
@@ -121,12 +163,12 @@
       height:20px;
       margin-left:18px;
       flex:0 0 auto;
-      opacity:.75
+      opacity:.75;
     }
 
     .search-icon circle,
     .search-icon path{
-      stroke:currentColor
+      stroke:currentColor;
     }
 
     input{
@@ -137,11 +179,11 @@
       background:transparent;
       color:var(--text);
       font-size:16px;
-      padding:0 14px
+      padding:0 14px;
     }
 
     input::placeholder{
-      color:#9e8da1
+      color:#9e8da1;
     }
 
     .submit{
@@ -158,21 +200,23 @@
       font-size:20px;
       line-height:1;
       cursor:pointer;
-      transition:color .15s ease,border-color .15s ease
+      transition:
+        color .15s ease,
+        border-color .15s ease;
     }
 
     .submit.has-input{
       color:var(--text);
-      border-color:var(--focus)
+      border-color:var(--focus);
     }
 
     .submit:hover{
-      border-color:var(--focus)
+      border-color:var(--focus);
     }
 
     .submit:focus-visible{
       outline:2px solid var(--focus);
-      outline-offset:2px
+      outline-offset:2px;
     }
 
     .links{
@@ -180,7 +224,7 @@
       gap:18px;
       margin-top:20px;
       color:var(--muted);
-      font-size:13px
+      font-size:13px;
     }
 
     .links button{
@@ -188,15 +232,19 @@
       background:none;
       color:inherit;
       cursor:pointer;
-      padding:0
+      padding:0;
     }
 
     .links button:hover{
-      color:var(--text)
+      color:var(--text);
     }
 
+    /* =====================================================
+       RESULTS
+       ===================================================== */
+
     .results{
-      padding:30px 0 70px
+      padding:30px 0 70px;
     }
 
     .results-head{
@@ -205,81 +253,118 @@
       justify-content:space-between;
       border-bottom:1px solid var(--line2);
       padding-bottom:14px;
-      margin-bottom:14px
+      margin-bottom:14px;
     }
 
     .count{
       font-size:13px;
-      color:var(--muted)
+      color:var(--muted);
     }
 
     .results-search{
       width:min(100%,680px);
-      margin:0 0 28px
+      margin:0 0 28px;
     }
 
     .results-search form{
-      height:48px
+      height:48px;
     }
 
     .results-search .search-icon{
-      margin-left:16px
+      margin-left:16px;
     }
 
     .results-search .submit{
       width:34px;
       height:34px;
-      margin-right:6px
+      margin-right:6px;
     }
+
+    /* =====================================================
+       RESULTS LAYOUT
+
+       Desktop:
+       results | dictionary
+
+       Portrait tablet/phone:
+       dictionary
+       results
+       ===================================================== */
 
     .results-layout{
       display:grid;
       grid-template-columns:minmax(0,1fr) 330px;
+      grid-template-areas:"results dictionary";
       gap:42px;
-      align-items:start
+      align-items:start;
+      transition:
+        grid-template-columns .25s ease,
+        gap .25s ease;
+    }
+
+    .results-layout > div:first-child{
+      grid-area:results;
+      min-width:0;
     }
 
     .dictionary{
+      grid-area:dictionary;
+      min-width:0;
+
       border-left:1px solid var(--line2);
-      padding-left:28px
+      padding-left:28px;
+
+      max-height:50vh;
+      overflow-y:auto;
+      overscroll-behavior:contain;
+      scrollbar-width:thin;
+    }
+
+    .dictionary::-webkit-scrollbar{
+      width:6px;
+    }
+
+    .dictionary::-webkit-scrollbar-thumb{
+      background:rgba(255,255,255,.2);
+      border-radius:6px;
     }
 
     .dictionary.hidden{
-      display:none
+      display:none;
     }
 
     .dictionary-title{
       font-size:22px;
       font-weight:500;
       letter-spacing:-.02em;
-      margin:0 0 5px
+      margin:0 0 5px;
     }
 
     .dictionary-word{
       font-size:13px;
       color:var(--muted);
-      margin-bottom:22px
+      margin-bottom:22px;
     }
 
     .dictionary-entry{
       padding:0 0 24px;
       margin-bottom:24px;
-      border-bottom:1px solid var(--line2)
+      border-bottom:1px solid var(--line2);
     }
 
     .dictionary-entry:last-child{
-      border-bottom:0
+      border-bottom:0;
     }
 
     .dictionary-language{
       font-size:13px;
       color:var(--muted);
-      margin-bottom:8px
+      margin-bottom:8px;
     }
 
     .dictionary-pos{
       font-size:15px;
-      margin-bottom:12px
+      margin-bottom:12px;
     }
 
     .dictionary-pronunciations,
@@ -287,7 +372,7 @@
     .dictionary-senses,
     .dictionary-relations,
     .dictionary-translations{
-      margin-top:14px
+      margin-top:14px;
     }
 
     .dictionary-label{
@@ -295,69 +380,203 @@
       color:var(--muted);
       text-transform:uppercase;
       letter-spacing:.05em;
-      margin-bottom:7px
+      margin-bottom:7px;
     }
 
     .dictionary-list{
       margin:0;
-      padding-left:18px
+      padding-left:18px;
     }
 
     .dictionary-list li{
-      margin:0 0 7px
+      margin:0 0 7px;
     }
 
     .dictionary-sense{
-      margin:0 0 15px
+      margin:0 0 15px;
     }
 
     .dictionary-definition{
       font-size:14px;
-      line-height:1.55
+      line-height:1.55;
     }
 
     .dictionary-tags{
       font-size:12px;
       color:var(--muted);
-      margin-left:5px
+      margin-left:5px;
     }
 
     .dictionary-example{
       font-size:13px;
       line-height:1.5;
       color:var(--result);
-      margin:7px 0 0 14px
+      margin:7px 0 0 14px;
     }
 
     .dictionary-quote{
       font-size:13px;
       line-height:1.5;
       color:var(--muted);
-      margin:7px 0 0 14px
+      margin:7px 0 0 14px;
     }
 
     .dictionary-source{
       font-size:12px;
       line-height:1.5;
       color:var(--muted);
-      padding-top:4px
+      padding-top:4px;
     }
 
     .dictionary-source a{
-      color:inherit
+      color:inherit;
     }
 
     .dictionary-loading,
     .dictionary-empty{
       font-size:13px;
       color:var(--muted);
-      line-height:1.5
+      line-height:1.5;
     }
+
+    /* =====================================================
+       STICKY DICTIONARY
+       Desktop = sticky
+       ===================================================== */
+
+    @media (min-width:861px){
+
+      .dictionary{
+        position:sticky;
+        top:24px;
+        align-self:start;
+      }
+    }
+
+    /* =====================================================
+       TABLET LANDSCAPE
+       Sticky dictionary stays on right
+       ===================================================== */
+
+    @media (min-width:641px) and (max-width:860px) and (orientation:landscape){
+
+      .results-layout{
+        grid-template-columns:minmax(0,1fr) 300px;
+        grid-template-areas:"results dictionary";
+        gap:30px;
+      }
+
+      .dictionary{
+        position:sticky;
+        top:20px;
+        align-self:start;
+
+        border-left:1px solid var(--line2);
+        border-top:0;
+        padding:0 0 0 24px;
+
+        max-height:calc(100vh - 40px);
+      }
+    }
+
+    /* =====================================================
+       PORTRAIT TABLET + PHONE
+
+       Dictionary ABOVE results
+       NOT sticky
+       ===================================================== */
+
+    @media (max-width:860px) and (orientation:portrait){
+
+      .results-layout{
+        grid-template-columns:minmax(0,1fr);
+        grid-template-areas:
+          "dictionary"
+          "results";
+
+        gap:28px;
+      }
+
+      .dictionary{
+        position:static;
+
+        border-left:0;
+        border-top:1px solid var(--line2);
+        padding:26px 0 0;
+
+        max-height:45vh;
+        overflow-y:auto;
+      }
+
+      .results-layout > div:first-child{
+        width:100%;
+      }
+    }
+
+    /* Also handle narrow screens that don't report orientation */
+    @media (max-width:640px){
+
+      .results-layout{
+        grid-template-columns:minmax(0,1fr);
+        grid-template-areas:
+          "dictionary"
+          "results";
+
+        gap:22px;
+      }
+
+      .dictionary{
+        position:static;
+
+        border-left:0;
+        border-top:1px solid var(--line2);
+        padding:22px 0 0;
+
+        max-height:42vh;
+      }
+    }
+
+    /* =====================================================
+       TRANSLATE SUGGESTION
+       ===================================================== */
+
+    .translate-message{
+      display:none;
+      margin:0 0 22px;
+      padding:12px 14px;
+
+      border:1px solid var(--line2);
+      border-radius:10px;
+
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+
+      background:rgba(255,255,255,.018);
+    }
+
+    .translate-message.visible{
+      display:block;
+    }
+
+    .translate-message a{
+      color:var(--text);
+      text-decoration:none;
+      font-weight:600;
+    }
+
+    .translate-message a:hover{
+      text-decoration:underline;
+    }
+
+    /* =====================================================
+       RESULT ITEMS
+       ===================================================== */
 
     .result{
       padding:0 0 26px;
       margin-bottom:26px;
-      border-bottom:1px solid var(--line2)
+      border-bottom:1px solid var(--line2);
     }
 
     .result-url{
@@ -366,7 +585,7 @@
       margin-bottom:6px;
       overflow:hidden;
       text-overflow:ellipsis;
-      white-space:nowrap
+      white-space:nowrap;
     }
 
     .result h2{
@@ -374,15 +593,15 @@
       line-height:1.25;
       margin:0 0 7px;
       font-weight:500;
-      letter-spacing:-.02em
+      letter-spacing:-.02em;
     }
 
     .result h2 a{
-      text-decoration:none
+      text-decoration:none;
     }
 
     .result h2 a:hover{
-      text-decoration:underline
+      text-decoration:underline;
     }
 
     .snippet{
@@ -390,24 +609,24 @@
       line-height:1.6;
       color:var(--result);
       margin:0;
-      max-width:760px
+      max-width:760px;
     }
 
     .empty,
     .error{
       padding:70px 0;
       color:var(--muted);
-      text-align:center
+      text-align:center;
     }
 
     .error{
-      color:#d9bfcf
+      color:#d9bfcf;
     }
 
     .pager{
       display:flex;
       gap:8px;
-      padding-top:10px
+      padding-top:10px;
     }
 
     .pager button{
@@ -416,12 +635,16 @@
       color:var(--text);
       border-radius:4px;
       padding:8px 12px;
-      cursor:pointer
+      cursor:pointer;
     }
 
     .pager button:hover{
-      border-color:var(--focus)
+      border-color:var(--focus);
     }
+
+    /* =====================================================
+       FOOTER
+       ===================================================== */
 
     footer{
       height:56px;
@@ -430,140 +653,103 @@
       align-items:center;
       justify-content:space-between;
       color:var(--muted);
-      font-size:12px
+      font-size:12px;
     }
 
     .footer-links{
       display:flex;
-      gap:16px
+      gap:16px;
     }
 
     .footer-links a{
-      text-decoration:none
+      text-decoration:none;
     }
 
     .footer-links a:hover{
       text-decoration:underline;
-      color:var(--text)
+      color:var(--text);
     }
 
     .hidden{
-      display:none!important
+      display:none!important;
     }
 
-    @media(max-width:860px){
-      .results-layout{
-        grid-template-columns:1fr
-      }
-
-      .dictionary{
-        border-left:0;
-        border-top:1px solid var(--line2);
-        padding:26px 0 0
-      }
-    }
-
-    @media(max-width:640px){
-      .shell{
-        width:min(100% - 24px,1120px)
-      }
-
-      header{
-        height:58px
-      }
-
-      .home{
-        padding-top:25px
-      }
-
-      .hero-logo{
-        width:150px
-      }
-
-      h1{
-        font-size:36px;
-        margin-bottom:24px
-      }
-
-      form{
-        height:50px
-      }
-
-      .submit{
-        width:38px;
-        padding:0
-      }
-
-      .results{
-        padding-top:22px
-      }
-
-      .footer-links{
-        gap:10px
-      }
-    }
-  </style>
-
-  <style id="flibidoo-minimal-update">
-    body{
-      background:#1d0c22
-    }
-
-    header,
-    footer,
-    .removed-topbar,
-    .removed-bottombar,
-    .removed-top-bar,
-    .removed-bottom-bar{
-      display:none!important
-    }
-
-    main,
-    .main,
-    .search-page,
-    .search-container{
-      min-height:100vh
-    }
+    /* =====================================================
+       LOGO UPDATE
+       ===================================================== */
 
     .logo,
     .brand-logo,
     img[alt*="Flibidoo" i],
     img[src*="flibidoo" i]{
       border-radius:0!important;
-      -webkit-mask-image:
-        linear-gradient(to right,transparent 0%,black 7%,black 93%,transparent 100%),
-        linear-gradient(to bottom,transparent 0%,black 7%,black 93%,transparent 100%);
-      mask-image:
-        linear-gradient(to right,transparent 0%,black 7%,black 93%,transparent 100%),
-        linear-gradient(to bottom,transparent 0%,black 7%,black 93%,transparent 100%);
-      -webkit-mask-composite:source-in;
-      mask-composite:intersect
-    }
-  </style>
 
-  <style id="flibidoo-icon-update">
+      -webkit-mask-image:
+        linear-gradient(
+          to right,
+          transparent 0%,
+          black 7%,
+          black 93%,
+          transparent 100%
+        ),
+        linear-gradient(
+          to bottom,
+          transparent 0%,
+          black 7%,
+          black 93%,
+          transparent 100%
+        );
+
+      mask-image:
+        linear-gradient(
+          to right,
+          transparent 0%,
+          black 7%,
+          black 93%,
+          transparent 100%
+        ),
+        linear-gradient(
+          to bottom,
+          transparent 0%,
+          black 7%,
+          black 93%,
+          transparent 100%
+        );
+
+      -webkit-mask-composite:source-in;
+      mask-composite:intersect;
+    }
+
+    /* =====================================================
+       SUBMIT ICON
+       ===================================================== */
+
     .submit-icon{
       width:18px;
       height:18px;
       display:block;
-      transition:color .15s ease,opacity .15s ease
+      transition:
+        color .15s ease,
+        opacity .15s ease;
     }
 
     .submit{
-      color:var(--muted)
+      color:var(--muted);
     }
 
     .submit.has-input{
-      color:var(--text)
+      color:var(--text);
     }
-  </style>
 
-  <style id="flibidoo-results-ui">
+    /* =====================================================
+       RESULTS HEADER
+       ===================================================== */
+
     .results-header{
       display:flex;
       align-items:center;
       gap:18px;
-      min-height:44px
+      min-height:44px;
     }
 
     .results-brand{
@@ -572,20 +758,20 @@
       gap:8px;
       text-decoration:none;
       color:inherit;
-      white-space:nowrap
+      white-space:nowrap;
     }
 
     .results-brand img{
       width:28px;
       height:28px;
       object-fit:contain;
-      display:block
+      display:block;
     }
 
     .results-brand span{
       font-size:15px;
       font-weight:600;
-      letter-spacing:-.01em
+      letter-spacing:-.01em;
     }
 
     .results-query-label{
@@ -593,72 +779,20 @@
       color:var(--muted);
       overflow:hidden;
       text-overflow:ellipsis;
-      white-space:nowrap
+      white-space:nowrap;
     }
 
-    .search-types{
-      display:flex;
-      align-items:center;
-      gap:4px;
-      margin:10px 0 18px
-    }
+    /* =====================================================
+       SEARCH TYPE NAVIGATION
+       ===================================================== */
 
-    .search-type{
-      appearance:none;
-      border:0;
-      background:transparent;
-      color:var(--muted);
-      font:inherit;
-      font-size:13px;
-      font-weight:500;
-      padding:7px 11px;
-      border-radius:7px;
-      cursor:pointer
-    }
-
-    .search-type:hover{
-      background:rgba(255,255,255,.055);
-      color:var(--text)
-    }
-
-    .search-type.active{
-      background:rgba(255,255,255,.09);
-      color:var(--text)
-    }
-
-    .search-type:focus-visible{
-      outline:1px solid currentColor;
-      outline-offset:1px
-    }
-
-    @media(max-width:650px){
-      .results-header{
-        gap:12px
-      }
-
-      .results-brand img{
-        width:24px;
-        height:24px
-      }
-
-      .results-brand span{
-        font-size:14px
-      }
-
-      .results-query-label{
-        font-size:13px
-      }
-    }
-  </style>
-
-  <style id="flibidoo-google-nav">
     .search-types{
       display:flex;
       align-items:flex-end;
       gap:0;
       margin:8px 0 18px;
       border-bottom:1px solid rgba(255,255,255,.12);
-      height:36px
+      height:36px;
     }
 
     .search-type{
@@ -674,17 +808,17 @@
       margin:0;
       border-radius:0;
       cursor:pointer;
-      transition:color .12s ease
+      transition:color .12s ease;
     }
 
     .search-type:hover{
       color:rgba(255,255,255,.9);
-      background:transparent
+      background:transparent;
     }
 
     .search-type.active{
       color:#fff;
-      background:transparent
+      background:transparent;
     }
 
     .search-type.active::after{
@@ -695,78 +829,20 @@
       bottom:-1px;
       height:2px;
       border-radius:2px 2px 0 0;
-      background:currentColor
+      background:currentColor;
     }
 
     .search-type:focus-visible{
       outline:1px solid rgba(255,255,255,.55);
-      outline-offset:-2px
+      outline-offset:-2px;
     }
 
-    @media(max-width:650px){
-      .search-types{
-        overflow-x:auto;
-        scrollbar-width:none
-      }
+    /* =====================================================
+       FAVICONS
+       ===================================================== */
 
-      .search-types::-webkit-scrollbar{
-        display:none
-      }
-
-      .search-type{
-        padding-left:10px;
-        padding-right:10px;
-        font-size:12px
-      }
-    }
-  </style>
-
-  <style id="flibidoo-definition-fallback">
-    .results-layout{
-      align-items:start
-    }
-
-    .dictionary{
-      max-height:50vh;
-      overflow-y:auto;
-      overscroll-behavior:contain;
-      scrollbar-width:thin
-    }
-
-    .dictionary::-webkit-scrollbar{
-      width:6px
-    }
-
-    .dictionary::-webkit-scrollbar-thumb{
-      background:rgba(255,255,255,.2);
-      border-radius:6px
-    }
-
-    .error{
-      min-height:120px;
-      max-width:680px;
-      margin:0;
-      padding:28px 18px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      border:1px solid var(--line2);
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.5
-    }
-
-    @media(max-width:860px){
-      .dictionary{
-        max-height:45vh
-      }
-    }
-  </style>
-
-  <style id="flibidoo-result-favicons">
     .result-item{
-      position:relative
+      position:relative;
     }
 
     .result-site-icon{
@@ -775,82 +851,54 @@
       flex:0 0 28px;
       object-fit:contain;
       border-radius:4px;
-      display:block
+      display:block;
     }
 
     .result-url-row{
       display:flex;
       align-items:center;
       gap:7px;
-      min-width:0
+      min-width:0;
     }
 
     .result-url-row .result-url{
       overflow:hidden;
       text-overflow:ellipsis;
-      white-space:nowrap
+      white-space:nowrap;
     }
 
     .result-meta{
       display:flex;
       align-items:center;
       gap:8px;
-      min-width:0
-    }
-  </style>
-
-  <style id="flibidoo-dictionary-fallback">
-    .dictionary-fallback{
-      max-height:50vh;
-      overflow-y:auto;
-      padding:14px 16px;
-      box-sizing:border-box
+      min-width:0;
     }
 
-    .dictionary-word{
-      font-size:22px;
-      font-weight:600;
-      margin-bottom:8px
+    .result-favicon{
+      width:18px;
+      height:18px;
+      object-fit:contain;
+      vertical-align:-4px;
+      margin-right:7px;
     }
 
-    .dictionary-pos{
-      font-size:12px;
-      color:rgba(255,255,255,.58);
-      margin:12px 0 4px
-    }
+    /* =====================================================
+       RESULT TYPE LAYOUTS
+       ===================================================== */
 
-    .dictionary-definition{
-      font-size:14px;
-      line-height:1.5
-    }
-
-    .dictionary-example{
-      font-size:13px;
-      color:rgba(255,255,255,.65);
-      margin-top:7px
-    }
-
-    .dictionary-line{
-      font-size:13px;
-      line-height:1.5;
-      margin-top:7px
-    }
-  </style>
-
-  <style id="flibidoo-result-type-layouts">
     .image-grid{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:28px 22px
+      gap:28px 22px;
     }
 
     .image-result{
-      min-width:0
+      min-width:0;
     }
 
     .image-result a{
       display:block;
-      text-decoration:none
+      text-decoration:none;
     }
 
     .image-result img{
@@ -859,7 +907,7 @@
       aspect-ratio:4/3;
       object-fit:cover;
       border:1px solid var(--line2);
-      background:rgba(255,255,255,.02)
+      background:rgba(255,255,255,.02);
     }
 
     .image-result-title{
@@ -868,7 +916,7 @@
       margin-top:9px;
       white-space:nowrap;
       overflow:hidden;
-      text-overflow:ellipsis
+      text-overflow:ellipsis;
     }
 
     .image-result-source{
@@ -877,85 +925,60 @@
       margin-top:4px;
       white-space:nowrap;
       overflow:hidden;
-      text-overflow:ellipsis
+      text-overflow:ellipsis;
     }
 
     .map-result{
       padding:0 0 22px;
       margin-bottom:22px;
-      border-bottom:1px solid var(--line2)
+      border-bottom:1px solid var(--line2);
     }
 
     .map-result-title{
       font-size:18px;
       line-height:1.35;
       margin:0 0 6px;
-      font-weight:500
+      font-weight:500;
     }
 
     .map-result-title a{
-      text-decoration:none
+      text-decoration:none;
     }
 
     .map-result-title a:hover{
-      text-decoration:underline
+      text-decoration:underline;
     }
 
     .map-result-address{
       font-size:14px;
       line-height:1.55;
-      color:var(--result)
+      color:var(--result);
     }
 
     .map-result-coords{
       font-size:12px;
       color:var(--muted);
-      margin-top:6px
+      margin-top:6px;
     }
 
-    .result-favicon{
-      width:18px;
-      height:18px;
-      object-fit:contain;
-      vertical-align:-4px;
-      margin-right:7px
-    }
+    /* =====================================================
+       MEDIA
+       ===================================================== */
 
-    @media(max-width:760px){
-      .image-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:22px 14px
-      }
-    }
-
-    @media(max-width:460px){
-      .image-grid{
-        grid-template-columns:1fr
-      }
-    }
-  </style>
-
-  <style id="flibidoo-result-media-fix">
     .result-inline-thumb{
       margin-top:10px;
-      max-width:260px
+      max-width:260px;
     }
 
     .result-inline-thumb img{
       display:block;
       width:100%;
       max-height:150px;
-      object-fit:cover
-    }
-
-    .result-meta{
-      font-size:12px;
-      color:var(--muted);
-      margin-top:7px
+      object-fit:cover;
     }
 
     .flibidoo-suggest-wrap{
-      position:relative
+      position:relative;
     }
 
     .flibidoo-suggestions{
@@ -966,15 +989,204 @@
       z-index:100;
       background:#1d0c22;
       border:1px solid rgba(255,255,255,.14);
-      overflow:hidden
+      overflow:hidden;
+    }
+
+    /* =====================================================
+       DICTIONARY FALLBACK
+       ===================================================== */
+
+    .dictionary-fallback{
+      max-height:50vh;
+      overflow-y:auto;
+      padding:14px 16px;
+      box-sizing:border-box;
+    }
+
+    .dictionary-line{
+      font-size:13px;
+      line-height:1.5;
+      margin-top:7px;
+    }
+
+    /* =====================================================
+       AUTOCOMPLETE
+       ===================================================== */
+
+    .flibidoo-suggestions{
+      border-radius:8px;
+      box-shadow:0 8px 20px rgba(0,0,0,.25);
+    }
+
+    .flibidoo-suggestion{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      width:100%;
+      border:0;
+      background:transparent;
+      color:#fff;
+      text-align:left;
+      padding:10px 13px;
+      font:inherit;
+      font-size:13px;
+      cursor:pointer;
+    }
+
+    .flibidoo-suggestion:hover,
+    .flibidoo-suggestion.active{
+      background:rgba(255,255,255,.07);
+    }
+
+    .flibidoo-suggestion img{
+      width:24px;
+      height:24px;
+      object-fit:cover;
+      border-radius:50%;
+    }
+
+    .flibidoo-suggestion small{
+      display:block;
+      color:rgba(255,255,255,.55);
+      margin-top:2px;
+    }
+
+    /* =====================================================
+       RESPONSIVE PADDING
+       ===================================================== */
+
+    @media(max-width:1120px){
+
+      .shell{
+        width:min(
+          calc(100% - 48px),
+          1120px
+        );
+      }
+    }
+
+    @media(max-width:860px){
+
+      .shell{
+        width:min(
+          calc(100% - 40px),
+          1120px
+        );
+      }
+
+      .results{
+        padding-top:26px;
+      }
+    }
+
+    @media(max-width:640px){
+
+      .shell{
+        width:calc(100% - 28px);
+        max-width:none;
+      }
+
+      header{
+        height:58px;
+      }
+
+      .home{
+        padding-top:25px;
+        padding-left:7px;
+        padding-right:7px;
+      }
+
+      .hero-logo{
+        width:150px;
+      }
+
+      h1{
+        font-size:36px;
+        margin-bottom:24px;
+      }
+
+      form{
+        height:50px;
+      }
+
+      .submit{
+        width:38px;
+        padding:0;
+      }
+
+      .results{
+        padding-top:22px;
+        padding-left:2px;
+        padding-right:2px;
+      }
+
+      .results-search{
+        width:100%;
+      }
+
+      .search-types{
+        overflow-x:auto;
+        scrollbar-width:none;
+      }
+
+      .search-types::-webkit-scrollbar{
+        display:none;
+      }
+
+      .search-type{
+        padding-left:10px;
+        padding-right:10px;
+        font-size:12px;
+      }
+
+      .results-head{
+        gap:10px;
+      }
+
+      .results-brand img{
+        width:24px;
+        height:24px;
+      }
+
+      .results-brand span{
+        font-size:14px;
+      }
+
+      .results-query-label,
+      .results-query{
+        font-size:13px;
+      }
+
+      .image-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:22px 14px;
+      }
+    }
+
+    @media(max-width:460px){
+
+      .shell{
+        width:calc(100% - 24px);
+      }
+
+      .image-grid{
+        grid-template-columns:1fr;
+      }
+
+      .dictionary{
+        max-height:40vh;
+      }
     }
   </style>
-
 </head>
 
 <body>
 
 <main>
+
+  <!-- =====================================================
+       HOME
+       ===================================================== -->
 
   <section id="home" class="home shell">
 
@@ -1050,14 +1262,23 @@
       </form>
 
       <div class="links">
-        <button type="button" id="lucky">I'm Feeling Lucky</button>
-        <button type="button" id="clear">Clear</button>
+        <button type="button" id="lucky">
+          I'm Feeling Lucky
+        </button>
+
+        <button type="button" id="clear">
+          Clear
+        </button>
       </div>
 
     </div>
 
   </section>
 
+
+  <!-- =====================================================
+       RESULTS
+       ===================================================== -->
 
   <section id="results" class="results shell hidden">
 
@@ -1072,19 +1293,29 @@
           src="https://github.com/danieltorres-mhcs/assets/blob/main/flibidoo.PNG?raw=true"
           alt="FlibidooSearch"
         />
+
         <span>FlibidooSearch</span>
       </a>
 
-      <div id="queryLabel" class="results-query"></div>
+      <div
+        id="queryLabel"
+        class="results-query"
+      ></div>
 
-      <div id="count" class="count"></div>
+      <div
+        id="count"
+        class="count"
+      ></div>
 
     </div>
 
 
     <div class="results-search">
 
-      <form id="resultsSearchForm" role="search">
+      <form
+        id="resultsSearchForm"
+        role="search"
+      >
 
         <svg
           class="search-icon"
@@ -1150,7 +1381,12 @@
     </div>
 
 
-    <nav class="search-types" aria-label="Search type">
+    <!-- Search category navigation -->
+
+    <nav
+      class="search-types"
+      aria-label="Search type"
+    >
 
       <button
         class="search-type active"
@@ -1187,15 +1423,41 @@
     </nav>
 
 
+    <!-- Automatic translation suggestion -->
+
+    <div
+      id="translateMessage"
+      class="translate-message"
+      role="status"
+      aria-live="polite"
+    >
+      I think you need
+      <a
+        href="https://flibidoo-translate.devs.surf"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        FlibidooTranslate
+      </a>
+      for that.
+    </div>
+
+
+    <!-- Results + Dictionary -->
+
     <div class="results-layout">
 
       <div>
 
         <div id="resultList"></div>
 
-        <div id="pager" class="pager"></div>
+        <div
+          id="pager"
+          class="pager"
+        ></div>
 
       </div>
+
 
       <aside
         id="dictionary"
@@ -1211,58 +1473,17 @@
 
 
 <script>
+/* =========================================================
+   FLIBIDOO SEARCH WORKER
+   ========================================================= */
 
-/*
-|--------------------------------------------------------------------------
-| FLIBIDOO WORKER
-|--------------------------------------------------------------------------
-|
-| Your HTML is hosted on:
-|
-| https://flibidoo-search.devs.surf
-|
-| Your API Worker is hosted on:
-|
-| https://ancient-unit-5007.daniel-torres-a95.workers.dev
-|
-*/
-
-const WORKER_URL =
+const WORKER_BASE =
   'https://ancient-unit-5007.daniel-torres-a95.workers.dev';
 
 
-/*
-|--------------------------------------------------------------------------
-| API helper
-|--------------------------------------------------------------------------
-*/
-
-function workerAPI(path, params = {}) {
-
-  const url = new URL(
-    WORKER_URL.replace(/\/+$/, '') + path
-  );
-
-  Object.entries(params).forEach(([key, value]) => {
-
-    if (
-      value !== undefined &&
-      value !== null
-    ) {
-      url.searchParams.set(key, value);
-    }
-
-  });
-
-  return url.toString();
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Elements
-|--------------------------------------------------------------------------
-*/
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
 
 const form =
   document.querySelector('#searchForm');
@@ -1303,20 +1524,20 @@ const resultsSubmitButton =
 const dictionary =
   document.querySelector('#dictionary');
 
+const translateMessage =
+  document.querySelector('#translateMessage');
+
 
 let currentQ = '';
 let currentPage = 1;
 let currentType = 'web';
 
 
-/*
-|--------------------------------------------------------------------------
-| Utility functions
-|--------------------------------------------------------------------------
-*/
+/* =========================================================
+   UTILITIES
+   ========================================================= */
 
-function esc(s = '') {
-
+function esc(s=''){
   return String(s).replace(
     /[&<>'"]/g,
     c => ({
@@ -1327,95 +1548,90 @@ function esc(s = '') {
       '"':'&quot;'
     }[c])
   );
-
 }
 
 
-function updateButtonState(button, value) {
-
+function updateButtonState(button,value){
   button.classList.toggle(
     'has-input',
     value.trim().length > 0
   );
-
 }
 
 
-function normalize(s = '') {
-
+function normalize(s=''){
   return s
     .toLowerCase()
     .trim()
-    .replace(/[“”"'.,!?;:()[\]{}]/g, '')
-    .replace(/\s+/g, ' ');
-
+    .replace(/[“”"'.,!?;:()[\]{}]/g,'')
+    .replace(/\s+/g,' ');
 }
 
 
-function levenshtein(a, b) {
+function levenshtein(a,b){
 
   const prev =
     Array.from(
-      {length:b.length + 1},
-      (_,i) => i
+      {length:b.length+1},
+      (_,i)=>i
     );
 
-  for (let i = 1; i <= a.length; i++) {
+  for(let i=1;i<=a.length;i++){
 
-    let cur = [i];
+    let cur=[i];
 
-    for (let j = 1; j <= b.length; j++) {
+    for(let j=1;j<=b.length;j++){
 
-      cur[j] = Math.min(
-        cur[j - 1] + 1,
-        prev[j] + 1,
-        prev[j - 1] +
-          (a[i - 1] === b[j - 1] ? 0 : 1)
+      cur[j]=Math.min(
+        cur[j-1]+1,
+        prev[j]+1,
+        prev[j-1]+(
+          a[i-1]===b[j-1]
+            ?0
+            :1
+        )
       );
-
     }
 
-    for (
-      let j = 0;
-      j <= b.length;
+    for(
+      let j=0;
+      j<=b.length;
       j++
-    ) {
-      prev[j] = cur[j];
+    ){
+      prev[j]=cur[j];
     }
-
   }
 
   return prev[b.length];
-
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| Dictionary detection
-|--------------------------------------------------------------------------
-*/
+/* =========================================================
+   DICTIONARY QUERY DETECTION
+   ========================================================= */
 
-function dictionaryWord(query) {
+function dictionaryWord(query){
 
-  const q = normalize(query);
+  const q=normalize(query);
 
-  if (!q) return null;
+  if(!q){
+    return null;
+  }
 
-  if (q.split(' ').length === 1) {
+  if(q.split(' ').length===1){
     return q;
   }
 
-  const tokens =
-    q.split(' ').filter(Boolean);
+  const tokens=q
+    .split(' ')
+    .filter(Boolean);
 
-  const candidates = new Set();
+  const candidates=new Set();
 
-  for (const t of tokens) {
+  for(const t of tokens){
 
-    if (
-      /^[a-z][a-z'-]*$/i.test(t)
-    ) {
+    if(/^[a-z][a-z'-]*$/i.test(t)){
+
       candidates.add(
         t.replace(
           /^['-]+|['-]+$/g,
@@ -1423,12 +1639,11 @@ function dictionaryWord(query) {
         )
       );
     }
-
   }
 
-  for (const word of candidates) {
+  for(const word of candidates){
 
-    const templates = [
+    const templates=[
       `meaning of ${word}`,
       `${word} meaning`,
       `${word} means`,
@@ -1436,33 +1651,134 @@ function dictionaryWord(query) {
       `definition of ${word}`
     ];
 
-    for (const template of templates) {
+    for(
+      const template of templates
+    ){
 
-      if (
-        levenshtein(q, template) <= 3
-      ) {
+      if(
+        levenshtein(
+          q,
+          template
+        )<=3
+      ){
         return word;
       }
-
     }
-
   }
 
   return null;
-
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| Render search results
-|--------------------------------------------------------------------------
-*/
+/* =========================================================
+   TRANSLATE REQUEST DETECTION
+   =========================================================
 
-function render(data) {
+   Detects things such as:
+
+   translate hello to spanish
+   translator english to french
+   translated to english
+   hello to english
+   english to japanese
+   say hello in spanish
+   say hello in japanese
+   ========================================================= */
+
+function isTranslationQuery(query){
+
+  const q = String(query || '')
+    .trim()
+    .toLowerCase();
+
+  if(!q){
+    return false;
+  }
+
+
+  /*
+   * Explicit translation words
+   */
+
+  if(
+    /\btranslate\b/.test(q) ||
+    /\btranslator\b/.test(q) ||
+    /\btranslated\b/.test(q)
+  ){
+    return true;
+  }
+
+
+  /*
+   * "... to english"
+   *
+   * Example:
+   * hello to english
+   * translate this to english
+   */
+
+  if(
+    /\bto\s+(?:the\s+)?english\b/.test(q)
+  ){
+    return true;
+  }
+
+
+  /*
+   * "english to ..."
+   *
+   * Example:
+   * english to spanish
+   * english to japanese
+   */
+
+  if(
+    /\benglish\s+to\s+[a-z-]+/.test(q)
+  ){
+    return true;
+  }
+
+
+  /*
+   * "say ____ in ____"
+   *
+   * Example:
+   * say hello in spanish
+   * say good morning in japanese
+   * say thank you in french
+   */
+
+  if(
+    /\bsay\s+.+\s+in\s+[a-z][a-z-]*(?:\s+[a-z][a-z-]*)?$/i.test(q)
+  ){
+    return true;
+  }
+
+
+  return false;
+}
+
+
+function updateTranslateMessage(query){
+
+  if(
+    translateMessage &&
+    isTranslationQuery(query)
+  ){
+    translateMessage.classList.add('visible');
+  }else if(translateMessage){
+    translateMessage.classList.remove('visible');
+  }
+}
+
+
+/* =========================================================
+   RENDER SEARCH RESULTS
+   ========================================================= */
+
+function render(data){
 
   home.classList.add('hidden');
-
   results.classList.remove('hidden');
 
   currentType =
@@ -1491,44 +1807,45 @@ function render(data) {
     resultsInput.value
   );
 
+  updateTranslateMessage(
+    data.query || currentQ
+  );
+
   document
     .querySelectorAll('.search-type')
-    .forEach(b =>
-      b.classList.toggle(
-        'active',
-        b.dataset.type === currentType
-      )
+    .forEach(
+      b =>
+        b.classList.toggle(
+          'active',
+          b.dataset.type===currentType
+        )
     );
 
-  list.innerHTML = '';
+  list.innerHTML='';
+  pager.innerHTML='';
 
-  pager.innerHTML = '';
 
-
-  if (!resultsArray.length) {
+  if(!resultsArray.length){
 
     list.innerHTML =
       '<div class="empty">No results found.</div>';
 
     return;
-
   }
 
 
-  /*
-  |--------------------------------------------------------------------------
-  | Images
-  |--------------------------------------------------------------------------
-  */
+  /* =======================================================
+     IMAGES
+     ======================================================= */
 
-  if (currentType === 'images') {
+  if(currentType==='images'){
 
     const grid =
       document.createElement('div');
 
-    grid.className = 'image-grid';
+    grid.className='image-grid';
 
-    resultsArray.forEach(r => {
+    resultsArray.forEach(r=>{
 
       const u =
         r.url ||
@@ -1540,29 +1857,30 @@ function render(data) {
         r.properties?.url ||
         '';
 
-      if (!img) return;
+      if(!img){
+        return;
+      }
 
       const el =
         document.createElement('article');
 
-      el.className =
-        'image-result';
+      el.className='image-result';
 
-      el.innerHTML = `
+      el.innerHTML=`
         <a
           href="${esc(u)}"
           rel="noopener noreferrer"
         >
           <img
             src="${esc(img)}"
-            alt="${esc(r.title || '')}"
+            alt="${esc(r.title||'')}"
             loading="lazy"
             referrerpolicy="no-referrer"
           >
         </a>
 
         <div class="image-result-title">
-          ${esc(r.title || u)}
+          ${esc(r.title||u)}
         </div>
 
         <div class="image-result-source">
@@ -1575,45 +1893,34 @@ function render(data) {
       `;
 
       grid.appendChild(el);
-
     });
 
-    if (grid.children.length) {
+
+    if(grid.children.length){
 
       list.appendChild(grid);
 
-    } else {
+    }else{
 
-      const empty =
-        document.createElement('div');
-
-      empty.className = 'empty';
-
-      empty.textContent =
-        'No images found.';
-
-      list.appendChild(empty);
-
+      list.innerHTML =
+        '<div class="empty">No images found.</div>';
     }
 
   }
 
 
-  /*
-  |--------------------------------------------------------------------------
-  | Maps
-  |--------------------------------------------------------------------------
-  */
+  /* =======================================================
+     MAPS
+     ======================================================= */
 
-  else if (currentType === 'map') {
+  else if(currentType==='map'){
 
-    resultsArray.forEach(r => {
+    resultsArray.forEach(r=>{
 
       const el =
         document.createElement('article');
 
-      el.className =
-        'map-result';
+      el.className='map-result';
 
       const u =
         r.url || '';
@@ -1623,12 +1930,15 @@ function render(data) {
 
       const address =
         r.address
-          ? Object.values(r.address)
+          ? Object
+              .values(r.address)
               .filter(Boolean)
               .join(', ')
-          : (r.description || '');
+          : (
+              r.description || ''
+            );
 
-      el.innerHTML = `
+      el.innerHTML=`
         <h2 class="map-result-title">
           <a
             href="${esc(u)}"
@@ -1644,34 +1954,33 @@ function render(data) {
 
         ${
           r.lat && r.lon
-            ? `<div class="map-result-coords">
+            ? `
+              <div class="map-result-coords">
                 ${esc(r.lat)}, ${esc(r.lon)}
-              </div>`
+              </div>
+            `
             : ''
         }
       `;
 
       list.appendChild(el);
-
     });
 
   }
 
 
-  /*
-  |--------------------------------------------------------------------------
-  | Web / News
-  |--------------------------------------------------------------------------
-  */
+  /* =======================================================
+     WEB / NEWS
+     ======================================================= */
 
-  else {
+  else{
 
-    resultsArray.forEach(r => {
+    resultsArray.forEach(r=>{
 
       const el =
         document.createElement('article');
 
-      el.className = 'result';
+      el.className='result';
 
       const u =
         r.url || '';
@@ -1700,19 +2009,22 @@ function render(data) {
         r.thumbnail ||
         '';
 
-      el.innerHTML = `
+
+      el.innerHTML=`
 
         <div class="result-url">
 
           ${
             favicon
-              ? `<img
+              ? `
+                <img
                   class="result-favicon"
                   src="${esc(favicon)}"
                   alt=""
                   loading="lazy"
                   referrerpolicy="no-referrer"
-                >`
+                >
+              `
               : ''
           }
 
@@ -1721,6 +2033,7 @@ function render(data) {
           </span>
 
         </div>
+
 
         <h2>
           <a
@@ -1731,49 +2044,54 @@ function render(data) {
           </a>
         </h2>
 
+
         ${
           description
-            ? `<p class="snippet">
+            ? `
+              <p class="snippet">
                 ${window.flibidooRichText(description)}
-              </p>`
+              </p>
+            `
             : ''
         }
+
 
         ${
           age
-            ? `<div class="result-meta">
+            ? `
+              <div class="result-meta">
                 ${esc(age)}
-              </div>`
+              </div>
+            `
             : ''
         }
 
+
         ${
           thumb
-            ? `<div class="result-inline-thumb">
+            ? `
+              <div class="result-inline-thumb">
                 <img
                   src="${esc(thumb)}"
                   alt=""
                   loading="lazy"
                   referrerpolicy="no-referrer"
                 >
-              </div>`
+              </div>
+            `
             : ''
         }
 
       `;
 
       list.appendChild(el);
-
     });
-
   }
 
 
-  /*
-  |--------------------------------------------------------------------------
-  | Pagination
-  |--------------------------------------------------------------------------
-  */
+  /* =======================================================
+     PAGINATION
+     ======================================================= */
 
   const hasMore =
     Boolean(
@@ -1782,43 +2100,39 @@ function render(data) {
     );
 
 
-  if (currentPage > 0) {
+  if(currentPage>0){
 
     const b =
       document.createElement('button');
 
-    b.textContent =
-      'Previous';
+    b.textContent='Previous';
 
-    b.onclick = () =>
+    b.onclick=() =>
       search(
         currentQ,
-        currentPage - 1,
+        currentPage-1,
         currentType
       );
 
     pager.appendChild(b);
-
   }
 
 
-  if (hasMore) {
+  if(hasMore){
 
     const b =
       document.createElement('button');
 
-    b.textContent =
-      'Next';
+    b.textContent='Next';
 
-    b.onclick = () =>
+    b.onclick=() =>
       search(
         currentQ,
-        currentPage + 1,
+        currentPage+1,
         currentType
       );
 
     pager.appendChild(b);
-
   }
 
 
@@ -1829,44 +2143,52 @@ function render(data) {
       data.query || currentQ
     )}&type=${encodeURIComponent(
       currentType
-    )}&page=${currentPage}`
+    )}${
+      currentPage
+        ? `&page=${currentPage}`
+        : ''
+    }`
   );
-
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| Dictionary renderer
-|--------------------------------------------------------------------------
-*/
+/* =========================================================
+   DICTIONARY
+   ========================================================= */
 
-function dictionaryTags(tags) {
+function dictionaryTags(tags){
 
   return Array.isArray(tags) &&
     tags.length
 
-    ? ` <span class="dictionary-tags">
+    ? `
+      <span class="dictionary-tags">
         (${tags.map(esc).join(', ')})
-      </span>`
+      </span>
+    `
 
     : '';
-
 }
 
 
-function renderSense(sense, depth = 0) {
+function renderSense(
+  sense,
+  depth=0
+){
 
-  if (!sense) return '';
+  if(!sense){
+    return '';
+  }
 
-  let html =
-    `<div
+  let html=`
+    <div
       class="dictionary-sense"
       style="margin-left:${Math.min(depth,3)*12}px"
-    >`;
+    >
+  `;
 
 
-  if (sense.definition) {
+  if(sense.definition){
 
     html += `
       <div class="dictionary-definition">
@@ -1874,34 +2196,30 @@ function renderSense(sense, depth = 0) {
         ${dictionaryTags(sense.tags)}
       </div>
     `;
-
   }
 
 
-  if (Array.isArray(sense.examples)) {
+  if(Array.isArray(sense.examples)){
 
-    sense.examples.forEach(x => {
+    sense.examples.forEach(x=>{
 
-      if (x) {
+      if(x){
 
         html += `
           <div class="dictionary-example">
             “${esc(x)}”
           </div>
         `;
-
       }
-
     });
-
   }
 
 
-  if (Array.isArray(sense.quotes)) {
+  if(Array.isArray(sense.quotes)){
 
-    sense.quotes.forEach(q => {
+    sense.quotes.forEach(q=>{
 
-      if (q?.text) {
+      if(q?.text){
 
         html += `
           <div class="dictionary-quote">
@@ -1913,21 +2231,19 @@ function renderSense(sense, depth = 0) {
             }
           </div>
         `;
-
       }
-
     });
-
   }
 
 
-  if (
+  if(
     Array.isArray(sense.synonyms) &&
     sense.synonyms.length
-  ) {
+  ){
 
     html += `
       <div class="dictionary-relations">
+
         <div class="dictionary-label">
           Synonyms
         </div>
@@ -1935,19 +2251,20 @@ function renderSense(sense, depth = 0) {
         <div>
           ${sense.synonyms.map(esc).join(', ')}
         </div>
+
       </div>
     `;
-
   }
 
 
-  if (
+  if(
     Array.isArray(sense.antonyms) &&
     sense.antonyms.length
-  ) {
+  ){
 
     html += `
       <div class="dictionary-relations">
+
         <div class="dictionary-label">
           Antonyms
         </div>
@@ -1955,16 +2272,16 @@ function renderSense(sense, depth = 0) {
         <div>
           ${sense.antonyms.map(esc).join(', ')}
         </div>
+
       </div>
     `;
-
   }
 
 
-  if (
+  if(
     Array.isArray(sense.translations) &&
     sense.translations.length
-  ) {
+  ){
 
     html += `
       <div class="dictionary-translations">
@@ -1976,9 +2293,10 @@ function renderSense(sense, depth = 0) {
         <ul class="dictionary-list">
     `;
 
-    sense.translations.forEach(t => {
 
-      if (t?.word) {
+    sense.translations.forEach(t=>{
+
+      if(t?.word){
 
         html += `
           <li>
@@ -1991,57 +2309,54 @@ function renderSense(sense, depth = 0) {
             ${esc(t.word)}
           </li>
         `;
-
       }
-
     });
+
 
     html += `
         </ul>
+
       </div>
     `;
-
   }
 
 
-  if (Array.isArray(sense.subsenses)) {
+  if(Array.isArray(sense.subsenses)){
 
-    sense.subsenses.forEach(sub => {
-
-      html +=
-        renderSense(
-          sub,
-          depth + 1
-        );
-
-    });
-
+    sense.subsenses.forEach(
+      sub =>
+        html +=
+          renderSense(
+            sub,
+            depth+1
+          )
+    );
   }
 
 
-  return html + '</div>';
-
+  return html+'</div>';
 }
 
 
-function renderDictionary(data) {
+function renderDictionary(data){
 
-  if (
+  if(
     !data?.entries?.length
-  ) {
+  ){
 
-    dictionary.classList.add('hidden');
+    dictionary.classList.add(
+      'hidden'
+    );
 
-    dictionary.innerHTML = '';
+    dictionary.innerHTML='';
 
     return;
-
   }
 
 
-  let html = `
+  let html=`
     <h2 class="dictionary-title">
-      ${esc(data.word || '')}
+      ${esc(data.word||'')}
     </h2>
 
     <div class="dictionary-word">
@@ -2050,7 +2365,7 @@ function renderDictionary(data) {
   `;
 
 
-  data.entries.forEach(entry => {
+  data.entries.forEach(entry=>{
 
     html += `
       <section class="dictionary-entry">
@@ -2062,7 +2377,7 @@ function renderDictionary(data) {
       entry.language?.code;
 
 
-    if (language) {
+    if(language){
 
       html += `
         <div class="dictionary-language">
@@ -2074,25 +2389,23 @@ function renderDictionary(data) {
           }
         </div>
       `;
-
     }
 
 
-    if (entry.partOfSpeech) {
+    if(entry.partOfSpeech){
 
       html += `
         <div class="dictionary-pos">
           ${esc(entry.partOfSpeech)}
         </div>
       `;
-
     }
 
 
-    if (
+    if(
       Array.isArray(entry.pronunciations) &&
       entry.pronunciations.length
-    ) {
+    ){
 
       html += `
         <div class="dictionary-pronunciations">
@@ -2104,9 +2417,10 @@ function renderDictionary(data) {
           <ul class="dictionary-list">
       `;
 
-      entry.pronunciations.forEach(p => {
 
-        if (p?.text) {
+      entry.pronunciations.forEach(p=>{
+
+        if(p?.text){
 
           html += `
             <li>
@@ -2119,23 +2433,21 @@ function renderDictionary(data) {
               ${dictionaryTags(p.tags)}
             </li>
           `;
-
         }
-
       });
+
 
       html += `
           </ul>
         </div>
       `;
-
     }
 
 
-    if (
+    if(
       Array.isArray(entry.forms) &&
       entry.forms.length
-    ) {
+    ){
 
       html += `
         <div class="dictionary-forms">
@@ -2147,9 +2459,10 @@ function renderDictionary(data) {
           <ul class="dictionary-list">
       `;
 
-      entry.forms.forEach(f => {
 
-        if (f?.word) {
+      entry.forms.forEach(f=>{
+
+        if(f?.word){
 
           html += `
             <li>
@@ -2157,23 +2470,22 @@ function renderDictionary(data) {
               ${dictionaryTags(f.tags)}
             </li>
           `;
-
         }
-
       });
+
 
       html += `
           </ul>
+
         </div>
       `;
-
     }
 
 
-    if (
+    if(
       Array.isArray(entry.senses) &&
       entry.senses.length
-    ) {
+    ){
 
       html += `
         <div class="dictionary-senses">
@@ -2183,23 +2495,23 @@ function renderDictionary(data) {
           </div>
       `;
 
-      entry.senses.forEach(s => {
 
-        html += renderSense(s);
+      entry.senses.forEach(
+        s =>
+          html += renderSense(s)
+      );
 
-      });
 
       html += `
         </div>
       `;
-
     }
 
 
-    if (
+    if(
       Array.isArray(entry.synonyms) &&
       entry.synonyms.length
-    ) {
+    ){
 
       html += `
         <div class="dictionary-relations">
@@ -2214,14 +2526,13 @@ function renderDictionary(data) {
 
         </div>
       `;
-
     }
 
 
-    if (
+    if(
       Array.isArray(entry.antonyms) &&
       entry.antonyms.length
-    ) {
+    ){
 
       html += `
         <div class="dictionary-relations">
@@ -2236,118 +2547,115 @@ function renderDictionary(data) {
 
         </div>
       `;
-
     }
 
 
     html += `
       </section>
     `;
-
   });
 
 
-  if (data.source) {
+  if(data.source){
 
     html += `
       <div class="dictionary-source">
+
         Source:
         ${
           data.source.url
-            ? `<a
+            ? `
+              <a
                 href="${esc(data.source.url)}"
                 rel="noopener noreferrer"
               >
                 ${esc(data.source.url)}
-              </a>`
+              </a>
+            `
             : ''
         }
 
         ${
           data.source.license
-            ? `<br>
+            ? `
+              <br>
               License:
               ${
                 data.source.license.url
-                  ? `<a
-                      href="${esc(
-                        data.source.license.url
-                      )}"
+                  ? `
+                    <a
+                      href="${esc(data.source.license.url)}"
                       rel="noopener noreferrer"
                     >
                       ${esc(
                         data.source.license.name ||
                         'License'
                       )}
-                    </a>`
+                    </a>
+                  `
                   : esc(
                       data.source.license.name ||
                       ''
                     )
-              }`
+              }
+            `
             : ''
         }
 
       </div>
     `;
-
   }
 
 
-  dictionary.innerHTML = html;
+  dictionary.innerHTML=html;
 
-  dictionary.classList.remove('hidden');
-
+  dictionary.classList.remove(
+    'hidden'
+  );
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| Dictionary API
-|--------------------------------------------------------------------------
-|
-| IMPORTANT:
-| This now goes to your Worker.
-|
-*/
-
-async function loadDictionary(q) {
+async function loadDictionary(q){
 
   const word =
     dictionaryWord(q);
 
-  if (!word) {
 
-    dictionary.classList.add('hidden');
+  if(!word){
 
-    dictionary.innerHTML = '';
+    dictionary.classList.add(
+      'hidden'
+    );
+
+    dictionary.innerHTML='';
 
     return;
-
   }
 
 
-  dictionary.classList.remove('hidden');
+  dictionary.classList.remove(
+    'hidden'
+  );
 
   dictionary.innerHTML =
     '<div class="dictionary-loading">Looking up the definition…</div>';
 
 
-  try {
+  try{
 
     const r =
       await fetch(
-        workerAPI('/api/dictionary', {
-          word
-        })
+        `${WORKER_BASE}/api/dictionary?word=${encodeURIComponent(word)}`
       );
 
-    if (!r.ok) {
 
-      dictionary.classList.add('hidden');
+    if(!r.ok){
+
+      dictionary.classList.add(
+        'hidden'
+      );
 
       return;
-
     }
 
 
@@ -2355,61 +2663,54 @@ async function loadDictionary(q) {
       await r.json();
 
 
-    if (data?.entries?.length) {
+    if(data?.entries?.length){
 
       renderDictionary(data);
 
-    } else {
+    }else{
 
-      dictionary.classList.add('hidden');
+      dictionary.classList.add(
+        'hidden'
+      );
 
-      dictionary.innerHTML = '';
-
+      dictionary.innerHTML='';
     }
 
-  } catch (error) {
+  }catch{
 
-    console.error(
-      'Dictionary request failed:',
-      error
+    dictionary.classList.add(
+      'hidden'
     );
 
-    dictionary.classList.add('hidden');
-
-    dictionary.innerHTML = '';
-
+    dictionary.innerHTML='';
   }
-
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| Main search
-|--------------------------------------------------------------------------
-*/
+/* =========================================================
+   SEARCH
+   ========================================================= */
 
 async function search(
   q,
-  page = 0,
-  type = currentType
-) {
+  page=0,
+  type=currentType
+){
 
-  q = q.trim();
+  q=q.trim();
 
-  if (!q) return;
-
-
-  currentQ = q;
-
-  currentPage = page;
-
-  currentType = type;
+  if(!q){
+    return;
+  }
 
 
-  input.value = q;
+  currentQ=q;
+  currentPage=page;
+  currentType=type;
 
-  resultsInput.value = q;
+
+  input.value=q;
+  resultsInput.value=q;
 
 
   updateButtonState(
@@ -2423,63 +2724,56 @@ async function search(
   );
 
 
-  home.classList.add('hidden');
+  updateTranslateMessage(q);
 
-  results.classList.remove('hidden');
+
+  home.classList.add(
+    'hidden'
+  );
+
+  results.classList.remove(
+    'hidden'
+  );
 
 
   list.innerHTML =
     '<div class="empty">Searching…</div>';
 
-  count.textContent = '';
+
+  count.textContent='';
 
   label.textContent =
     `Results for “${q}”`;
 
-  pager.innerHTML = '';
+  pager.innerHTML='';
 
 
   document
     .querySelectorAll('.search-type')
-    .forEach(b =>
-      b.classList.toggle(
-        'active',
-        b.dataset.type === currentType
-      )
+    .forEach(
+      b =>
+        b.classList.toggle(
+          'active',
+          b.dataset.type===currentType
+        )
     );
 
 
   /*
-  |--------------------------------------------------------------------------
-  | Start dictionary independently
-  |--------------------------------------------------------------------------
-  */
+   * Dictionary runs independently.
+   */
 
   const dictionaryPromise =
-    currentType === 'web'
+    currentType==='web'
       ? loadDictionary(q)
       : Promise.resolve();
 
 
-  try {
-
-    /*
-     * THIS IS THE IMPORTANT CHANGE:
-     *
-     * Before:
-     * fetch(`/api/search?...`)
-     *
-     * Now:
-     * fetch(`https://ancient-unit-5007...workers.dev/api/search?...`)
-     */
+  try{
 
     const r =
       await fetch(
-        workerAPI('/api/search', {
-          q,
-          page,
-          type: currentType
-        })
+        `${WORKER_BASE}/api/search?q=${encodeURIComponent(q)}&page=${page}&type=${encodeURIComponent(currentType)}`
       );
 
 
@@ -2487,23 +2781,18 @@ async function search(
       await r.json();
 
 
-    if (!r.ok) {
+    if(!r.ok){
 
       throw new Error(
-        d.error || 'Search failed'
+        d.error ||
+        'Search failed'
       );
-
     }
 
 
     render(d);
 
-  } catch (e) {
-
-    console.error(
-      'Search request failed:',
-      e
-    );
+  }catch(e){
 
     list.innerHTML =
       `<div class="error">
@@ -2512,29 +2801,31 @@ async function search(
           'Search failed. Please try again.'
         )}
       </div>`;
-
   }
 
 
   await dictionaryPromise;
-
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| Input state
-|--------------------------------------------------------------------------
-*/
+/* =========================================================
+   INPUT EVENTS
+   ========================================================= */
 
 input.addEventListener(
   'input',
-  () =>
+  ()=>{
     updateButtonState(
       submitButton,
       input.value
-    )
+    );
+
+    updateTranslateMessage(
+      input.value
+    );
+  }
 );
+
 
 updateButtonState(
   submitButton,
@@ -2544,12 +2835,18 @@ updateButtonState(
 
 resultsInput.addEventListener(
   'input',
-  () =>
+  ()=>{
     updateButtonState(
       resultsSubmitButton,
       resultsInput.value
-    )
+    );
+
+    updateTranslateMessage(
+      resultsInput.value
+    );
+  }
 );
+
 
 updateButtonState(
   resultsSubmitButton,
@@ -2557,16 +2854,13 @@ updateButtonState(
 );
 
 
-/*
-|--------------------------------------------------------------------------
-| Search forms
-|--------------------------------------------------------------------------
-*/
+/* =========================================================
+   FORMS
+   ========================================================= */
 
 form.addEventListener(
   'submit',
-  e => {
-
+  e=>{
     e.preventDefault();
 
     search(
@@ -2574,15 +2868,13 @@ form.addEventListener(
       1,
       currentType
     );
-
   }
 );
 
 
 resultsForm.addEventListener(
   'submit',
-  e => {
-
+  e=>{
     e.preventDefault();
 
     search(
@@ -2590,22 +2882,19 @@ resultsForm.addEventListener(
       0,
       currentType
     );
-
   }
 );
 
 
-/*
-|--------------------------------------------------------------------------
-| Clear
-|--------------------------------------------------------------------------
-*/
+/* =========================================================
+   CLEAR
+   ========================================================= */
 
 document
   .querySelector('#clear')
-  .onclick = () => {
+  .onclick=()=>{
 
-    input.value = '';
+    input.value='';
 
     input.focus();
 
@@ -2614,34 +2903,31 @@ document
       input.value
     );
 
+    updateTranslateMessage('');
   };
 
 
-/*
-|--------------------------------------------------------------------------
-| I'm Feeling Lucky
-|--------------------------------------------------------------------------
-*/
+/* =========================================================
+   I'M FEELING LUCKY
+   ========================================================= */
 
 document
   .querySelector('#lucky')
-  .onclick = async () => {
+  .onclick=async()=>{
 
     const q =
       input.value.trim();
 
-    if (!q) return;
+    if(!q){
+      return;
+    }
 
 
-    try {
+    try{
 
       const r =
         await fetch(
-          workerAPI('/api/search', {
-            q,
-            page: 1,
-            type: currentType
-          })
+          `${WORKER_BASE}/api/search?q=${encodeURIComponent(q)}&page=1&type=${encodeURIComponent(currentType)}`
         );
 
 
@@ -2649,78 +2935,64 @@ document
         await r.json();
 
 
-      if (
-        d.results?.[0]?.url
-      ) {
+      if(d.results?.[0]?.url){
 
         location.href =
           d.results[0].url;
 
-      } else {
+      }else{
 
         search(
           q,
           1,
           currentType
         );
-
       }
 
-    } catch {
+    }catch{
 
       search(
         q,
         1,
         currentType
       );
-
     }
-
   };
 
 
-/*
-|--------------------------------------------------------------------------
-| Search type buttons
-|--------------------------------------------------------------------------
-*/
+/* =========================================================
+   SEARCH TYPES
+   ========================================================= */
 
 document
   .querySelectorAll('.search-type')
-  .forEach(btn => {
+  .forEach(btn=>{
 
     btn.addEventListener(
       'click',
-      () => {
-
+      ()=>{
         search(
           resultsInput.value ||
           currentQ,
           0,
           btn.dataset.type
         );
-
       }
     );
-
   });
 
 
-/*
-|--------------------------------------------------------------------------
-| URL query initialization
-|--------------------------------------------------------------------------
-*/
+/* =========================================================
+   INITIAL URL SEARCH
+   ========================================================= */
 
 const params =
   new URLSearchParams(
     location.search
   );
 
-
 const initialQuery =
   params.get('q');
-
 
 const initialPage =
   Math.max(
@@ -2729,7 +3001,6 @@ const initialPage =
       params.get('page') || 0
     )
   );
-
 
 const initialType =
   [
@@ -2744,65 +3015,67 @@ const initialType =
     : 'web';
 
 
-if (initialQuery) {
+if(initialQuery){
 
   search(
     initialQuery,
     initialPage,
     initialType
   );
-
 }
-
 </script>
 
 
-<script id="flibidoo-favicon-links">
+<!-- =======================================================
+     FAVICON HELPERS
+     ======================================================= -->
 
-function flibidooFavicon(url) {
+<script>
+function flibidooFavicon(url){
 
-  try {
+  try{
 
     const u =
       new URL(url);
 
     return (
-      `https://www.google.com/s2/favicons` +
-      `?domain=${encodeURIComponent(u.hostname)}` +
+      `https://www.google.com/s2/favicons?domain=` +
+      `${encodeURIComponent(u.hostname)}` +
       `&sz=64`
     );
 
-  } catch (_) {
+  }catch(_){
 
     return '';
-
   }
-
 }
 
 
-function flibidooResultIcon(url) {
+function flibidooResultIcon(url){
 
   const src =
     flibidooFavicon(url);
 
   return src
-    ? `<img
+    ? `
+      <img
         class="result-site-icon"
         src="${src}"
         alt=""
         loading="lazy"
         referrerpolicy="no-referrer"
-      >`
+      >
+    `
     : '';
-
 }
-
 </script>
 
 
-<script id="flibidoo-independent-dictionary">
+<!-- =======================================================
+     INDEPENDENT DICTIONARY FALLBACK
+     ======================================================= -->
 
+<script>
 (() => {
 
   const DICT_BASE =
@@ -2821,11 +3094,14 @@ function flibidooResultIcon(url) {
     );
 
 
-  function dictionaryQuery(q) {
+  function dictionaryQuery(q){
 
-    q = (q || '').trim();
+    q=(q||'').trim();
 
-    if (!q) return '';
+    if(!q){
+      return '';
+    }
+
 
     const m =
       q.match(
@@ -2835,91 +3111,96 @@ function flibidooResultIcon(url) {
         /^(.+?)\s+(?:meaning|means|definition)$/i
       );
 
+
     return m
       ? m[1].trim()
       : q;
-
   }
 
 
-  function looksLikeDefinition(q) {
+  function looksLikeDefinition(q){
 
     const clean =
-      (q || '').trim();
+      (q||'').trim();
+
 
     return (
       /^[A-Za-z][A-Za-z'-]{0,31}$/.test(clean) ||
-      /^(?:meaning of|definition of)\s+[A-Za-z][A-Za-z'-]{0,31}$/i.test(clean) ||
-      /^[A-Za-z][A-Za-z'-]{0,31}\s+(?:meaning|means|definition)$/i.test(clean)
-    );
 
+      /^(?:meaning of|definition of)\s+[A-Za-z][A-Za-z'-]{0,31}$/i
+        .test(clean) ||
+
+      /^[A-Za-z][A-Za-z'-]{0,31}\s+(?:meaning|means|definition)$/i
+        .test(clean)
+    );
   }
 
 
-  async function loadDictionaryIndependent(q) {
+  async function loadDictionary(q){
 
-    if (
+    if(
       !dictEl ||
       !looksLikeDefinition(q)
-    ) return;
+    ){
+      return;
+    }
 
 
     const word =
       dictionaryQuery(q);
 
-    if (!word) return;
+
+    if(!word){
+      return;
+    }
 
 
-    try {
-
-      /*
-       * This independent dictionary request
-       * also goes directly to your Worker.
-       */
+    try{
 
       const r =
         await fetch(
-          workerAPI('/api/dictionary', {
-            word
-          })
+          DICT_BASE +
+          encodeURIComponent(word)
         );
 
 
-      if (!r.ok) return;
+      if(!r.ok){
+        return;
+      }
 
 
       const data =
         await r.json();
 
 
-      if (
+      if(
         !data ||
         !Array.isArray(data.entries) ||
         !data.entries.length
-      ) return;
+      ){
+        return;
+      }
 
 
-      if (
+      if(
         typeof window.showDictionary ===
         'function'
-      ) {
+      ){
 
         window.showDictionary(data);
 
         return;
-
       }
 
 
-      if (
+      if(
         typeof window.renderDictionary ===
         'function'
-      ) {
+      ){
 
         window.renderDictionary(data);
 
         return;
-
       }
 
 
@@ -2928,18 +3209,30 @@ function flibidooResultIcon(url) {
           .flatMap(
             e =>
               (e.senses || [])
-                .map(sense => ({
-                  pos:
-                    e.partOfSpeech || '',
-                  definition:
-                    sense.definition || '',
-                  examples:
-                    sense.examples || [],
-                  synonyms:
-                    sense.synonyms || [],
-                  antonyms:
-                    sense.antonyms || []
-                }))
+                .map(
+                  sense=>({
+
+                    pos:
+                      e.partOfSpeech ||
+                      '',
+
+                    definition:
+                      sense.definition ||
+                      '',
+
+                    examples:
+                      sense.examples ||
+                      [],
+
+                    synonyms:
+                      sense.synonyms ||
+                      [],
+
+                    antonyms:
+                      sense.antonyms ||
+                      []
+                  })
+                )
           )
           .filter(
             x =>
@@ -2950,95 +3243,103 @@ function flibidooResultIcon(url) {
           );
 
 
-      dictEl.innerHTML = `
+      dictEl.innerHTML=`
         <div class="dictionary-fallback">
 
           <div class="dictionary-word">
             ${escapeHtml(
-              data.word || word
+              data.word ||
+              word
             )}
           </div>
 
-          ${entries.map(e => `
+          ${
+            entries.map(
+              e => `
 
-            <section>
+                <section>
 
-              ${
-                e.pos
-                  ? `<div class="dictionary-pos">
-                      ${escapeHtml(e.pos)}
-                    </div>`
-                  : ''
-              }
+                  ${
+                    e.pos
+                      ? `
+                        <div class="dictionary-pos">
+                          ${escapeHtml(e.pos)}
+                        </div>
+                      `
+                      : ''
+                  }
 
-              ${
-                e.definition
-                  ? `<div class="dictionary-definition">
-                      ${escapeHtml(
-                        e.definition
-                      )}
-                    </div>`
-                  : ''
-              }
+                  ${
+                    e.definition
+                      ? `
+                        <div class="dictionary-definition">
+                          ${escapeHtml(e.definition)}
+                        </div>
+                      `
+                      : ''
+                  }
 
-              ${e.examples
-                .map(
-                  x =>
-                    `<div class="dictionary-example">
-                      “${escapeHtml(x)}”
-                    </div>`
-                )
-                .join('')}
+                  ${
+                    e.examples
+                      .map(
+                        x =>
+                          `
+                            <div class="dictionary-example">
+                              “${escapeHtml(x)}”
+                            </div>
+                          `
+                      )
+                      .join('')
+                  }
 
-              ${
-                e.synonyms.length
-                  ? `<div class="dictionary-line">
-                      <b>Synonyms:</b>
-                      ${e.synonyms
-                        .map(escapeHtml)
-                        .join(', ')}
-                    </div>`
-                  : ''
-              }
+                  ${
+                    e.synonyms.length
+                      ? `
+                        <div class="dictionary-line">
+                          <b>Synonyms:</b>
+                          ${e.synonyms.map(escapeHtml).join(', ')}
+                        </div>
+                      `
+                      : ''
+                  }
 
-              ${
-                e.antonyms.length
-                  ? `<div class="dictionary-line">
-                      <b>Antonyms:</b>
-                      ${e.antonyms
-                        .map(escapeHtml)
-                        .join(', ')}
-                    </div>`
-                  : ''
-              }
+                  ${
+                    e.antonyms.length
+                      ? `
+                        <div class="dictionary-line">
+                          <b>Antonyms:</b>
+                          ${e.antonyms.map(escapeHtml).join(', ')}
+                        </div>
+                      `
+                      : ''
+                  }
 
-            </section>
-
-          `).join('')}
+                </section>
+              `
+            ).join('')
+          }
 
         </div>
       `;
 
 
-      dictEl.hidden = false;
+      dictEl.hidden=false;
 
-    } catch (_) {
+    }catch(_){
 
       /*
-       * Dictionary failure must never
-       * break normal search.
+       * Dictionary failure never blocks
+       * web search.
        */
-
     }
-
   }
 
 
-  function escapeHtml(v) {
+  function escapeHtml(v){
 
     return String(v).replace(
       /[&<>"']/g,
-      c => ({
+      c=>({
         '&':'&amp;',
         '<':'&lt;',
         '>':'&gt;',
@@ -3046,38 +3347,34 @@ function flibidooResultIcon(url) {
         "'":'&#39;'
       }[c])
     );
-
   }
 
 
   window.flibidooLoadDictionary =
-    loadDictionaryIndependent;
+    loadDictionary;
 
 
   document.addEventListener(
     'keydown',
-    e => {
+    e=>{
 
-      if (
-        e.key === 'Enter' &&
+      if(
+        e.key==='Enter' &&
         e.target.matches(
           'input,textarea'
         )
-      ) {
+      ){
 
         const q =
           e.target.value;
 
-        if (
+        if(
           looksLikeDefinition(q)
-        ) {
+        ){
 
-          loadDictionaryIndependent(q);
-
+          loadDictionary(q);
         }
-
       }
-
     },
     true
   );
@@ -3086,73 +3383,20 @@ function flibidooResultIcon(url) {
   window.addEventListener(
     'flibidoo:search',
     e =>
-      loadDictionaryIndependent(
+      loadDictionary(
         e.detail?.query || ''
       )
   );
 
 })();
-
 </script>
 
 
-<style id="flibidoo-autocomplete">
+<!-- =======================================================
+     AUTOCOMPLETE
+     ======================================================= -->
 
-.flibidoo-suggest-wrap{
-  position:relative
-}
-
-.flibidoo-suggestions{
-  position:absolute;
-  left:0;
-  right:0;
-  top:calc(100% + 4px);
-  z-index:50;
-  background:#1d0c22;
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:8px;
-  overflow:hidden;
-  box-shadow:0 8px 20px rgba(0,0,0,.25)
-}
-
-.flibidoo-suggestion{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  width:100%;
-  border:0;
-  background:transparent;
-  color:#fff;
-  text-align:left;
-  padding:10px 13px;
-  font:inherit;
-  font-size:13px;
-  cursor:pointer
-}
-
-.flibidoo-suggestion:hover,
-.flibidoo-suggestion.active{
-  background:rgba(255,255,255,.07)
-}
-
-.flibidoo-suggestion img{
-  width:24px;
-  height:24px;
-  object-fit:cover;
-  border-radius:50%
-}
-
-.flibidoo-suggestion small{
-  display:block;
-  color:rgba(255,255,255,.55);
-  margin-top:2px
-}
-
-</style>
-
-
-<script id="flibidoo-tiago-autocomplete">
-
+<script>
 (() => {
 
   const inputs =
@@ -3163,33 +3407,31 @@ function flibidooResultIcon(url) {
     ];
 
 
-  if (!inputs.length) return;
+  if(!inputs.length){
+    return;
+  }
 
 
-  let timer = null;
-
-  let controller = null;
-
-  let selected = -1;
-
-  let items = [];
+  let timer=null;
+  let controller=null;
+  let selected=-1;
+  let items=[];
 
 
-  const esc =
-    v =>
-      String(v ?? '').replace(
-        /[&<>"']/g,
-        c => ({
-          '&':'&amp;',
-          '<':'&lt;',
-          '>':'&gt;',
-          '"':'&quot;',
-          "'":'&#39;'
-        }[c])
-      );
+  const esc=v =>
+    String(v??'').replace(
+      /[&<>"']/g,
+      c=>({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#39;'
+      }[c])
+    );
 
 
-  function setup(input) {
+  function setup(input){
 
     const wrap =
       input.closest('form') ||
@@ -3204,60 +3446,54 @@ function flibidooResultIcon(url) {
     const box =
       document.createElement('div');
 
+
     box.className =
       'flibidoo-suggestions';
 
-    box.hidden = true;
+    box.hidden=true;
 
     wrap.appendChild(box);
 
 
-    function close() {
+    function close(){
 
-      box.hidden = true;
-
-      box.innerHTML = '';
-
-      selected = -1;
-
+      box.hidden=true;
+      box.innerHTML='';
+      selected=-1;
     }
 
 
-    function choose(q) {
+    function choose(q){
 
-      input.value = q;
+      input.value=q;
 
       close();
 
       const f =
         input.closest('form');
 
-      if (f) {
+      if(f){
         f.requestSubmit();
       }
-
     }
 
 
-    async function load() {
+    async function load(){
 
       const q =
         input.value.trim();
 
 
-      if (q.length < 2) {
+      if(q.length<2){
 
         close();
 
         return;
-
       }
 
 
-      if (controller) {
-
+      if(controller){
         controller.abort();
-
       }
 
 
@@ -3265,19 +3501,11 @@ function flibidooResultIcon(url) {
         new AbortController();
 
 
-      try {
-
-        /*
-         * AUTOCOMPLETE NOW USES:
-         *
-         * https://ancient-unit-5007.daniel-torres-a95.workers.dev/api/suggest
-         */
+      try{
 
         const r =
           await fetch(
-            workerAPI('/api/suggest', {
-              q
-            }),
+            `${WORKER_BASE}/api/suggest?q=${encodeURIComponent(q)}`,
             {
               signal:
                 controller.signal
@@ -3285,10 +3513,8 @@ function flibidooResultIcon(url) {
           );
 
 
-        if (!r.ok) {
-
+        if(!r.ok){
           throw new Error();
-
         }
 
 
@@ -3297,78 +3523,75 @@ function flibidooResultIcon(url) {
 
 
         items =
-          Array.isArray(
-            d.suggestions
-          )
-            ? d.suggestions.slice(
-                0,
-                8
-              )
+          Array.isArray(d.suggestions)
+            ? d.suggestions.slice(0,8)
             : [];
 
 
-        if (!items.length) {
+        if(!items.length){
 
           close();
 
           return;
-
         }
 
 
         box.innerHTML =
-          items
-            .map(
-              (x,i) => `
+          items.map(
+            (x,i)=>`
 
-                <button
-                  class="flibidoo-suggestion"
-                  type="button"
-                  data-i="${i}"
-                >
+              <button
+                class="flibidoo-suggestion"
+                type="button"
+                data-i="${i}"
+              >
+
+                ${
+                  x.img
+                    ? `
+                      <img
+                        src="${esc(x.img)}"
+                        alt=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer"
+                      >
+                    `
+                    : ''
+                }
+
+                <span>
+
+                  ${esc(x.query)}
 
                   ${
-                    x.img
-                      ? `<img
-                          src="${esc(x.img)}"
-                          alt=""
-                          loading="lazy"
-                          referrerpolicy="no-referrer"
-                        >`
+                    x.entity &&
+                    x.desc
+                      ? `
+                        <small>
+                          ${esc(x.desc)}
+                        </small>
+                      `
                       : ''
                   }
 
-                  <span>
-                    ${esc(x.query)}
+                </span>
 
-                    ${
-                      x.entity &&
-                      x.desc
-                        ? `<small>
-                            ${esc(x.desc)}
-                          </small>`
-                        : ''
-                    }
+              </button>
 
-                  </span>
-
-                </button>
-
-              `
-            )
-            .join('');
+            `
+          ).join('');
 
 
-        box.hidden = false;
+        box.hidden=false;
 
 
         box
           .querySelectorAll('button')
-          .forEach(btn => {
+          .forEach(btn=>{
 
             btn.addEventListener(
               'mousedown',
-              e => {
+              e=>{
 
                 e.preventDefault();
 
@@ -3379,25 +3602,21 @@ function flibidooResultIcon(url) {
                     )
                   ].query
                 );
-
               }
             );
-
           });
 
 
-      } catch (_) {
+      }catch(_){
 
         close();
-
       }
-
     }
 
 
     input.addEventListener(
       'input',
-      () => {
+      ()=>{
 
         clearTimeout(timer);
 
@@ -3406,48 +3625,43 @@ function flibidooResultIcon(url) {
             load,
             180
           );
-
       }
     );
 
 
     input.addEventListener(
       'keydown',
-      e => {
+      e=>{
 
-        if (box.hidden) return;
+        if(box.hidden){
+          return;
+        }
 
 
-        if (e.key === 'ArrowDown') {
+        if(e.key==='ArrowDown'){
 
           e.preventDefault();
 
           selected =
             Math.min(
-              selected + 1,
-              items.length - 1
+              selected+1,
+              items.length-1
             );
 
-        }
-
-        else if (
-          e.key === 'ArrowUp'
-        ) {
+        }else if(e.key==='ArrowUp'){
 
           e.preventDefault();
 
           selected =
             Math.max(
-              selected - 1,
+              selected-1,
               -1
             );
 
-        }
-
-        else if (
-          e.key === 'Enter' &&
-          selected >= 0
-        ) {
+        }else if(
+          e.key==='Enter' &&
+          selected>=0
+        ){
 
           e.preventDefault();
 
@@ -3455,69 +3669,64 @@ function flibidooResultIcon(url) {
             items[selected].query
           );
 
-        }
-
-        else if (
-          e.key === 'Escape'
-        ) {
+        }else if(
+          e.key==='Escape'
+        ){
 
           close();
 
           return;
-
         }
 
 
         box
           .querySelectorAll('button')
           .forEach(
-            (btn,i) =>
+            (btn,i)=>
               btn.classList.toggle(
                 'active',
-                i === selected
+                i===selected
               )
           );
-
       }
     );
 
 
     document.addEventListener(
       'click',
-      e => {
+      e=>{
 
-        if (
-          !wrap.contains(e.target)
-        ) {
-
+        if(!wrap.contains(e.target)){
           close();
-
         }
-
       }
     );
-
   }
 
 
   inputs.forEach(setup);
 
 })();
-
 </script>
 
 
-<script id="flibidoo-rich-description">
+<!-- =======================================================
+     RICH DESCRIPTION RENDERER
+     ======================================================= -->
 
+<script>
 (() => {
 
   window.flibidooRichText =
-    function(value) {
+    function(value){
 
       let src =
         String(value ?? '');
 
-      if (!src) return '';
+
+      if(!src){
+        return '';
+      }
 
 
       const ta =
@@ -3525,50 +3734,46 @@ function flibidooResultIcon(url) {
           'textarea'
         );
 
-      ta.innerHTML = src;
 
-      src = ta.value;
+      ta.innerHTML=src;
+
+      src=ta.value;
 
 
       src =
         src
-
           .replace(
             /<\s*(script|iframe|object|embed|form|input|button|textarea|select|style|link|meta|svg|math)[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi,
             ''
           )
-
           .replace(
             /<\s*(script|iframe|object|embed|form|input|button|textarea|select|style|link|meta|svg|math)[^>]*\/?>/gi,
             ''
           )
-
           .replace(
             /\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi,
             ''
           )
-
           .replace(
             /\s+(href|src)\s*=\s*(['"])\s*javascript:[\s\S]*?\2/gi,
             ''
           );
 
 
-      const allowed = [];
+      const allowed=[];
 
 
       src =
         src.replace(
           /<\/?(strong|b|em|i|u|s|del|mark|small|br|code|kbd|sub|sup|a)(?:\s+[^>]*)?>/gi,
-          m => {
+          m=>{
 
             const idx =
-              allowed.push(m) - 1;
+              allowed.push(m)-1;
 
-            return (
-              `@@FLIBIDOO_TAG_${idx}@@`
-            );
-
+            return `
+              @@FLIBIDOO_TAG_${idx}@@
+            `;
           }
         );
 
@@ -3658,7 +3863,7 @@ function flibidooResultIcon(url) {
       src =
         src.replace(
           /@@FLIBIDOO_TAG_(\d+)@@/g,
-          (_, i) =>
+          (_,i)=>
             allowed[
               Number(i)
             ] || ''
@@ -3669,11 +3874,9 @@ function flibidooResultIcon(url) {
         /\r?\n/g,
         '<br>'
       );
-
     };
 
 })();
-
 </script>
 
 </body>
