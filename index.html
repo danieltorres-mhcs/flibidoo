@@ -4,20 +4,46 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#1d0c22">
-<link rel="icon" href="https://github.com/danieltorres-mhcs/assets/blob/main/flibidoo.PNG?raw=true">
 <title>FlibidooSearch</title>
 
 <style>
 :root{
-  --bg:#1d0c22;--text:#f5eef7;--muted:#b9aabb;--line:#5a4560;
-  --line2:#39283d;--result:#e7dce9;--url:#b8a2bc;--focus:#cdb8d1;
+  --bg:#1d0c22;
+  --text:#f5eef7;
+  --muted:#b9aabb;
+  --line:#5a4560;
+  --line2:#39283d;
+  --result:#e7dce9;
+  --url:#b8a2bc;
+  --focus:#cdb8d1;
 }
+
 *{box-sizing:border-box}
-html,body{margin:0;width:100%;min-height:100%;background:var(--bg);color:var(--text);
-font-family:Arial,Helvetica,sans-serif}
-body{min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+
+html,body{
+  margin:0;
+  width:100%;
+  min-height:100%;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  overflow-x:hidden;
+}
+
 a{color:inherit}
-.shell{width:min(100% - 40px,1120px);margin:0 auto;padding-left:12px;padding-right:12px}
+
+.shell{
+  width:min(100% - 40px,1120px);
+  margin:0 auto;
+  padding-left:12px;
+  padding-right:12px;
+}
 
 #home.home{
   width:100%;
@@ -29,7 +55,7 @@ a{color:inherit}
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  overflow:hidden
+  overflow:hidden;
 }
 
 .hero-logo{
@@ -37,7 +63,7 @@ a{color:inherit}
   height:auto;
   display:block;
   margin:0 0 12px;
-  object-fit:contain
+  object-fit:contain;
 }
 
 h1{
@@ -45,10 +71,12 @@ h1{
   line-height:1;
   margin:0 0 30px;
   letter-spacing:-.055em;
-  font-weight:500
+  font-weight:500;
 }
 
-.search-wrap{width:min(100%,680px)}
+.search-wrap{
+  width:min(100%,680px);
+}
 
 form{
   display:flex;
@@ -57,12 +85,12 @@ form{
   border:1px solid var(--line);
   border-radius:28px;
   background:transparent;
-  transition:border-color .15s ease,box-shadow .15s ease
+  transition:border-color .15s ease,box-shadow .15s ease;
 }
 
 form:focus-within{
   border-color:var(--focus);
-  box-shadow:0 0 0 2px rgba(205,184,209,.08)
+  box-shadow:0 0 0 2px rgba(205,184,209,.08);
 }
 
 .search-icon{
@@ -70,10 +98,13 @@ form:focus-within{
   height:20px;
   margin-left:18px;
   flex:0 0 auto;
-  opacity:.75
+  opacity:.75;
 }
 
-.search-icon circle,.search-icon path{stroke:currentColor}
+.search-icon circle,
+.search-icon path{
+  stroke:currentColor;
+}
 
 input{
   min-width:0;
@@ -83,10 +114,12 @@ input{
   background:transparent;
   color:var(--text);
   font-size:16px;
-  padding:0 14px
+  padding:0 14px;
 }
 
-input::placeholder{color:#9e8da1}
+input::placeholder{
+  color:#9e8da1;
+}
 
 .submit{
   height:38px;
@@ -99,20 +132,22 @@ input::placeholder{color:#9e8da1}
   padding:0;
   display:grid;
   place-items:center;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .submit.has-input{
   color:var(--text);
-  border-color:var(--focus)
+  border-color:var(--focus);
 }
 
-.submit:hover{border-color:var(--focus)}
+.submit:hover{
+  border-color:var(--focus);
+}
 
 .submit-icon{
   width:18px;
   height:18px;
-  display:block
+  display:block;
 }
 
 .links{
@@ -123,7 +158,7 @@ input::placeholder{color:#9e8da1}
   gap:18px;
   margin-top:20px;
   color:var(--muted);
-  font-size:13px
+  font-size:13px;
 }
 
 .links button{
@@ -131,10 +166,12 @@ input::placeholder{color:#9e8da1}
   background:none;
   color:inherit;
   cursor:pointer;
-  padding:0
+  padding:0;
 }
 
-.links button:hover{color:var(--text)}
+.links button:hover{
+  color:var(--text);
+}
 
 .confederacy-credit{
   display:inline-flex;
@@ -144,22 +181,26 @@ input::placeholder{color:#9e8da1}
   color:var(--muted);
   font-size:12px;
   line-height:1.4;
-  text-align:center
+  text-align:center;
 }
 
-.confederacy-credit img{
+/* EXACT FLAG IMAGE — emoji sized */
+.confederacy-flag{
   width:18px;
   height:18px;
-  display:block;
+  display:inline-block;
   object-fit:contain;
+  vertical-align:-4px;
   flex:0 0 18px;
-  border-radius:4px
+  border-radius:4px;
 }
 
-main{flex:1}
+main{
+  flex:1;
+}
 
 .results{
-  padding:30px 12px 70px
+  padding:30px 12px 70px;
 }
 
 .results-head{
@@ -169,7 +210,7 @@ main{flex:1}
   min-height:44px;
   border-bottom:1px solid var(--line2);
   padding-bottom:14px;
-  margin-bottom:14px
+  margin-bottom:14px;
 }
 
 .results-brand{
@@ -178,20 +219,20 @@ main{flex:1}
   gap:8px;
   text-decoration:none;
   color:inherit;
-  white-space:nowrap
+  white-space:nowrap;
 }
 
 .results-brand img{
   width:28px;
   height:28px;
   object-fit:contain;
-  display:block
+  display:block;
 }
 
 .results-brand span{
   font-size:15px;
   font-weight:600;
-  letter-spacing:-.01em
+  letter-spacing:-.01em;
 }
 
 .results-query{
@@ -200,27 +241,32 @@ main{flex:1}
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
-  flex:1
+  flex:1;
 }
 
 .count{
   font-size:13px;
   color:var(--muted);
-  white-space:nowrap
+  white-space:nowrap;
 }
 
 .results-search{
   width:min(100%,680px);
-  margin:0 0 28px
+  margin:0 0 28px;
 }
 
-.results-search form{height:48px}
-.results-search .search-icon{margin-left:16px}
+.results-search form{
+  height:48px;
+}
+
+.results-search .search-icon{
+  margin-left:16px;
+}
 
 .results-search .submit{
   width:34px;
   height:34px;
-  margin-right:6px
+  margin-right:6px;
 }
 
 .search-types{
@@ -229,7 +275,7 @@ main{flex:1}
   gap:0;
   margin:8px 0 18px;
   border-bottom:1px solid rgba(255,255,255,.12);
-  height:36px
+  height:36px;
 }
 
 .search-type{
@@ -244,12 +290,13 @@ main{flex:1}
   padding:0 12px 10px;
   margin:0;
   border-radius:0;
-  cursor:pointer
+  cursor:pointer;
 }
 
-.search-type:hover,.search-type.active{
+.search-type:hover,
+.search-type.active{
   color:#fff;
-  background:transparent
+  background:transparent;
 }
 
 .search-type.active::after{
@@ -260,20 +307,20 @@ main{flex:1}
   bottom:-1px;
   height:2px;
   border-radius:2px 2px 0 0;
-  background:currentColor
+  background:currentColor;
 }
 
 .results-layout{
   display:grid;
   grid-template-columns:minmax(0,1fr) 330px;
   gap:42px;
-  align-items:start
+  align-items:start;
 }
 
 .result{
   padding:0 0 26px;
   margin-bottom:26px;
-  border-bottom:1px solid var(--line2)
+  border-bottom:1px solid var(--line2);
 }
 
 .result-url{
@@ -282,7 +329,7 @@ main{flex:1}
   margin-bottom:6px;
   overflow:hidden;
   text-overflow:ellipsis;
-  white-space:nowrap
+  white-space:nowrap;
 }
 
 .result h2{
@@ -290,52 +337,45 @@ main{flex:1}
   line-height:1.25;
   margin:0 0 7px;
   font-weight:500;
-  letter-spacing:-.02em
+  letter-spacing:-.02em;
 }
 
-.result h2 a{text-decoration:none}
-.result h2 a:hover{text-decoration:underline}
+.result h2 a{
+  text-decoration:none;
+}
+
+.result h2 a:hover{
+  text-decoration:underline;
+}
 
 .snippet{
   font-size:14px;
   line-height:1.6;
   color:var(--result);
   margin:0;
-  max-width:760px
+  max-width:760px;
 }
 
 .result-meta{
   font-size:12px;
   color:var(--muted);
-  margin-top:7px
-}
-
-.result-tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-top:8px
-}
-
-.result-tag{
-  color:var(--muted);
-  font-size:11px
+  margin-top:7px;
 }
 
 .image-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:28px 22px
+  gap:28px 22px;
 }
 
 .image-result{
   min-width:0;
-  position:relative
+  position:relative;
 }
 
 .image-result a{
   display:block;
-  text-decoration:none
+  text-decoration:none;
 }
 
 .image-result img{
@@ -344,7 +384,7 @@ main{flex:1}
   aspect-ratio:4/3;
   object-fit:cover;
   border:1px solid var(--line2);
-  background:rgba(255,255,255,.02)
+  background:rgba(255,255,255,.02);
 }
 
 .image-result-title{
@@ -353,7 +393,7 @@ main{flex:1}
   margin-top:9px;
   white-space:nowrap;
   overflow:hidden;
-  text-overflow:ellipsis
+  text-overflow:ellipsis;
 }
 
 .image-result-source{
@@ -362,7 +402,7 @@ main{flex:1}
   margin-top:4px;
   white-space:nowrap;
   overflow:hidden;
-  text-overflow:ellipsis
+  text-overflow:ellipsis;
 }
 
 .dictionary{
@@ -371,71 +411,77 @@ main{flex:1}
   max-height:70vh;
   overflow-y:auto;
   overscroll-behavior:contain;
-  scrollbar-width:thin
+  scrollbar-width:thin;
 }
 
 .dictionary-title{
   font-size:22px;
   font-weight:500;
   letter-spacing:-.02em;
-  margin:0 0 5px
+  margin:0 0 5px;
 }
 
 .dictionary-word{
   font-size:13px;
   color:var(--muted);
-  margin-bottom:22px
+  margin-bottom:22px;
 }
 
 .dictionary-entry{
   padding:0 0 24px;
   margin-bottom:24px;
-  border-bottom:1px solid var(--line2)
+  border-bottom:1px solid var(--line2);
 }
 
 .dictionary-language,
 .dictionary-label{
   font-size:12px;
-  color:var(--muted)
+  color:var(--muted);
 }
 
-.dictionary-language{margin-bottom:8px}
+.dictionary-language{
+  margin-bottom:8px;
+}
 
 .dictionary-pos{
   font-size:15px;
-  margin-bottom:12px
+  margin-bottom:12px;
 }
 
 .dictionary-senses,
 .dictionary-relations,
 .dictionary-translations{
-  margin-top:14px
+  margin-top:14px;
 }
 
 .dictionary-label{
   text-transform:uppercase;
   letter-spacing:.05em;
-  margin-bottom:7px
+  margin-bottom:7px;
 }
 
 .dictionary-list{
   margin:0;
-  padding-left:18px
+  padding-left:18px;
 }
 
-.dictionary-list li{margin:0 0 7px}
+.dictionary-list li{
+  margin:0 0 7px;
+}
 
-.dictionary-sense{margin:0 0 15px}
+.dictionary-sense{
+  margin:0 0 15px;
+}
 
 .dictionary-definition{
   font-size:14px;
-  line-height:1.55
+  line-height:1.55;
 }
 
 .dictionary-tags{
   font-size:12px;
   color:var(--muted);
-  margin-left:5px
+  margin-left:5px;
 }
 
 .dictionary-example,
@@ -443,7 +489,7 @@ main{flex:1}
   font-size:13px;
   line-height:1.5;
   color:var(--result);
-  margin:7px 0 0 14px
+  margin:7px 0 0 14px;
 }
 
 .dictionary-source,
@@ -451,50 +497,13 @@ main{flex:1}
 .dictionary-empty{
   font-size:12px;
   line-height:1.5;
-  color:var(--muted)
-}
-
-.wotd-panel{
-  padding:0 0 22px;
-  margin:0 0 22px;
-  border-bottom:1px solid var(--line2)
-}
-
-.wotd-heading{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  margin:0 0 8px;
-  color:#ffb52e;
-  font-size:13px;
-  font-weight:600
-}
-
-.wotd-word{
-  color:#ffe18a;
-  font-size:20px;
-  font-weight:600;
-  line-height:1.25;
-  margin:0 0 5px
-}
-
-.wotd-definition{
-  color:#ffe9a8;
-  font-size:13px;
-  line-height:1.55;
-  margin:0
-}
-
-.wotd-status{
   color:var(--muted);
-  font-size:13px;
-  line-height:1.5
 }
 
 .empty{
   padding:70px 0;
   color:var(--muted);
-  text-align:center
+  text-align:center;
 }
 
 .error{
@@ -509,13 +518,13 @@ main{flex:1}
   border:1px solid var(--line2);
   color:var(--muted);
   font-size:14px;
-  line-height:1.5
+  line-height:1.5;
 }
 
 .pager{
   display:flex;
   gap:8px;
-  padding-top:10px
+  padding-top:10px;
 }
 
 .pager button{
@@ -524,180 +533,14 @@ main{flex:1}
   color:var(--text);
   border-radius:4px;
   padding:8px 12px;
-  cursor:pointer
-}
-
-.hidden{display:none!important}
-
-/* Translator */
-
-.translator-panel{
-  width:min(100%,680px);
-  margin:0 0 28px;
-  padding:0 0 24px;
-  border-bottom:1px solid var(--line2)
-}
-
-.translator-heading{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:14px;
-  margin-bottom:12px
-}
-
-.translator-title{
-  font-size:15px;
-  font-weight:500;
-  margin:0
-}
-
-.translator-languages{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) 38px minmax(0,1fr);
-  align-items:center;
-  gap:8px;
-  margin-bottom:10px
-}
-
-.translator-language{
-  min-width:0;
-  height:38px;
-  border:1px solid var(--line);
-  border-radius:4px;
-  background:transparent;
-  color:var(--text);
-  padding:0 10px;
-  outline:0;
-  font:inherit;
-  font-size:13px
-}
-
-.translator-language:focus{
-  border-color:var(--focus)
-}
-
-.translator-swap{
-  width:34px;
-  height:34px;
-  border:1px solid var(--line);
-  border-radius:50%;
-  background:transparent;
-  color:var(--muted);
-  display:grid;
-  place-items:center;
   cursor:pointer;
-  padding:0
 }
 
-.translator-swap:hover{
-  color:var(--text);
-  border-color:var(--focus)
-}
-
-.translator-fields{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:12px
-}
-
-.translator-field{
-  min-width:0
-}
-
-.translator-field textarea{
-  width:100%;
-  min-height:150px;
-  resize:vertical;
-  border:1px solid var(--line);
-  border-radius:4px;
-  background:transparent;
-  color:var(--text);
-  padding:12px;
-  outline:0;
-  font:inherit;
-  font-size:14px;
-  line-height:1.55
-}
-
-.translator-field textarea:focus{
-  border-color:var(--focus)
-}
-
-.translator-field textarea::placeholder{
-  color:#9e8da1
-}
-
-.translator-output{
-  white-space:pre-wrap;
-  overflow-wrap:anywhere
-}
-
-.translator-bottom{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin-top:8px
-}
-
-.translator-counter{
-  font-size:11px;
-  color:var(--muted)
-}
-
-.translator-button{
-  height:36px;
-  border:1px solid var(--line);
-  border-radius:4px;
-  background:transparent;
-  color:var(--text);
-  padding:0 15px;
-  cursor:pointer
-}
-
-.translator-button:hover{
-  border-color:var(--focus)
-}
-
-.translator-status{
-  font-size:12px;
-  color:var(--muted);
-  min-height:18px;
-  margin-top:7px
-}
-
-.translator-language-list{
-  position:absolute;
-  z-index:20;
-  width:min(320px,90vw);
-  max-height:260px;
-  overflow-y:auto;
-  margin-top:4px;
-  border:1px solid var(--line);
-  background:var(--bg);
-  padding:6px 0
-}
-
-.translator-language-option{
-  display:block;
-  width:100%;
-  border:0;
-  background:transparent;
-  color:var(--text);
-  text-align:left;
-  padding:8px 10px;
-  cursor:pointer;
-  font:inherit;
-  font-size:13px
-}
-
-.translator-language-option:hover{
-  background:rgba(255,255,255,.06)
+.hidden{
+  display:none!important;
 }
 
 /* About */
-
 .about-overlay{
   position:fixed;
   inset:0;
@@ -705,10 +548,12 @@ main{flex:1}
   display:grid;
   place-items:center;
   padding:24px;
-  z-index:10000
+  z-index:10000;
 }
 
-.about-overlay.hidden{display:none}
+.about-overlay.hidden{
+  display:none;
+}
 
 .about-card{
   position:relative;
@@ -719,7 +564,7 @@ main{flex:1}
   border:1px solid var(--line);
   border-radius:14px;
   box-shadow:0 20px 60px rgba(0,0,0,.45);
-  padding:30px
+  padding:30px;
 }
 
 .about-close{
@@ -734,35 +579,37 @@ main{flex:1}
   color:var(--muted);
   font-size:24px;
   line-height:1;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .about-close:hover{
   background:rgba(255,255,255,.08);
-  color:var(--text)
+  color:var(--text);
 }
 
 .about-card h2{
   margin:0 38px 16px 0;
   font-size:25px;
-  font-weight:500
+  font-weight:500;
 }
 
 .about-card p{
   color:var(--result);
   line-height:1.7;
-  font-size:14px
+  font-size:14px;
 }
 
-.about-card a{color:var(--text)}
+.about-card a{
+  color:var(--text);
+}
 
+/* Responsive */
 @media(max-width:860px){
-
   .results-layout{
-    grid-template-columns:1fr
+    grid-template-columns:1fr;
   }
 
-  /* Mobile/tablet: dictionary appears first */
+  /* Dictionary appears FIRST on mobile/tablet */
   .dictionary{
     order:-1;
     border-left:0;
@@ -770,172 +617,169 @@ main{flex:1}
     border-top:0;
     padding:0 0 26px;
     margin-bottom:26px;
-    max-height:none
-  }
-
-  .translator-panel{
-    width:100%
+    max-height:none;
   }
 }
 
 @media(max-width:760px){
+  .shell{
+    width:100%;
+    padding-left:20px;
+    padding-right:20px;
+  }
+
+  #home.home{
+    padding:24px 20px;
+  }
 
   .image-grid{
     grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:22px 14px
+    gap:22px 14px;
   }
 }
 
 @media(max-width:640px){
-
   .shell{
     width:100%;
     padding-left:16px;
-    padding-right:16px
+    padding-right:16px;
   }
 
   #home.home{
-    padding:20px 16px
+    padding:20px 16px;
   }
 
-  .hero-logo{width:150px}
+  .hero-logo{
+    width:150px;
+  }
 
   h1{
     font-size:36px;
-    margin-bottom:24px
+    margin-bottom:24px;
   }
 
-  form{height:50px}
+  form{
+    height:50px;
+  }
 
   .results{
-    padding:22px 16px 60px
+    padding:22px 16px 60px;
   }
 
   .results-head{
-    gap:12px
+    gap:12px;
   }
 
   .results-brand img{
     width:24px;
-    height:24px
+    height:24px;
   }
 
   .results-brand span{
-    font-size:14px
+    font-size:14px;
   }
 
   .results-query{
-    font-size:13px
+    font-size:13px;
   }
 
   .search-types{
     overflow-x:auto;
-    scrollbar-width:none
+    scrollbar-width:none;
   }
 
   .search-type{
     padding-left:10px;
     padding-right:10px;
-    font-size:12px
-  }
-
-  .translator-languages{
-    grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr);
-    gap:5px
-  }
-
-  .translator-fields{
-    grid-template-columns:1fr
-  }
-
-  .translator-field textarea{
-    min-height:120px
+    font-size:12px;
   }
 
   .about-overlay{
-    padding:16px
+    padding:16px;
   }
 
   .about-card{
-    padding:26px 22px
-  }
-}
-
-@media(max-width:520px){
-
-  .shell{
-    padding-left:18px;
-    padding-right:18px
+    padding:26px 22px;
   }
 
-  #home.home{
-    padding-left:18px;
-    padding-right:18px
+  .dictionary{
+    padding-bottom:22px;
+    margin-bottom:22px;
   }
 
-  .results{
-    padding-left:18px;
-    padding-right:18px
-  }
-
-  .translator-panel{
-    width:100%
-  }
-
-  .translator-languages{
-    grid-template-columns:1fr;
-    gap:7px
-  }
-
-  .translator-swap{
-    justify-self:center;
-    transform:rotate(90deg)
+  .result{
+    padding-bottom:22px;
+    margin-bottom:22px;
   }
 }
 
 @media(max-width:460px){
-
-  .image-grid{
-    grid-template-columns:1fr
-  }
-}
-
-@media(max-width:380px){
-
   .shell{
     padding-left:14px;
-    padding-right:14px
+    padding-right:14px;
   }
 
   #home.home{
     padding-left:14px;
-    padding-right:14px
+    padding-right:14px;
   }
 
-  .results{
-    padding-left:14px;
-    padding-right:14px
+  .image-grid{
+    grid-template-columns:1fr;
   }
 
   .links{
-    gap:14px
+    gap:12px;
+  }
+
+  .confederacy-credit{
+    max-width:100%;
+  }
+}
+
+@media(max-width:360px){
+  h1{
+    font-size:32px;
+  }
+
+  .results{
+    padding-left:12px;
+    padding-right:12px;
+  }
+
+  .results-head{
+    gap:8px;
+  }
+
+  .results-query{
+    min-width:0;
+  }
+
+  .count{
+    display:none;
+  }
+
+  input{
+    font-size:15px;
+    padding-left:10px;
+    padding-right:8px;
+  }
+
+  .submit{
+    width:36px;
+    height:36px;
   }
 }
 </style>
 </head>
 
 <body>
+
 <main>
 
 <section id="home" class="home shell">
 
   <div class="search-wrap">
-
-    <img
-      class="hero-logo"
-      src="https://github.com/danieltorres-mhcs/assets/blob/main/flibidoo.PNG?raw=true"
-      alt="Flibidoo"
-    >
 
     <h1><em><strong>Flibidoo</strong></em>Search</h1>
 
@@ -969,13 +813,12 @@ main{flex:1}
       <span class="confederacy-credit">
 
         <img
-          src="https://github.com/danieltorres-mhcs/assets/blob/main/confederacy.png?raw=true"
-          alt=""
+          class="confederacy-flag"
+          src="https://raw.githubusercontent.com/danieltorres-mhcs/assets/ref/heads/main/Untitled13_2026081194209.png"
+          alt="The Great Confederacy of E"
         >
 
-        <span>
-          with love from The Great Confederacy of E
-        </span>
+        <span>with love from The Great Confederacy of E</span>
 
       </span>
 
@@ -995,16 +838,7 @@ main{flex:1}
       href="/"
       aria-label="FlibidooSearch home"
     >
-
-      <img
-        src="https://github.com/danieltorres-mhcs/assets/blob/main/flibidoo.PNG?raw=true"
-        alt="Flibidoo"
-      >
-
-      <span>
-        <em><strong>Flibidoo</strong></em>Search
-      </span>
-
+      <span><em><strong>Flibidoo</strong></em>Search</span>
     </a>
 
     <div
@@ -1074,119 +908,6 @@ main{flex:1}
   </nav>
 
 
-  <div
-    id="translator"
-    class="translator-panel hidden"
-  >
-
-    <div class="translator-heading">
-
-      <h2 class="translator-title">
-        Translator
-      </h2>
-
-    </div>
-
-
-    <div class="translator-languages">
-
-      <div style="position:relative">
-
-        <input
-          id="translateFrom"
-          class="translator-language"
-          value="Auto Detect"
-          autocomplete="off"
-          aria-label="Input language"
-        >
-
-        <div
-          id="translateFromList"
-          class="translator-language-list hidden"
-        ></div>
-
-      </div>
-
-
-      <button
-        id="translateSwap"
-        class="translator-swap"
-        type="button"
-        aria-label="Switch languages"
-        title="Switch languages"
-      >↔</button>
-
-
-      <div style="position:relative">
-
-        <input
-          id="translateTo"
-          class="translator-language"
-          value="English"
-          autocomplete="off"
-          aria-label="Output language"
-        >
-
-        <div
-          id="translateToList"
-          class="translator-language-list hidden"
-        ></div>
-
-      </div>
-
-    </div>
-
-
-    <div class="translator-fields">
-
-      <div class="translator-field">
-
-        <textarea
-          id="translateInput"
-          maxlength="2000"
-          rows="7"
-          placeholder="Enter text to translate…"
-        ></textarea>
-
-        <div class="translator-bottom">
-
-          <div class="translator-counter">
-            <span id="translateCount">0</span>/2000
-          </div>
-
-          <button
-            id="translateButton"
-            class="translator-button"
-            type="button"
-          >Translate</button>
-
-        </div>
-
-      </div>
-
-
-      <div class="translator-field">
-
-        <textarea
-          id="translateOutput"
-          class="translator-output"
-          rows="7"
-          readonly
-          placeholder="Translation"
-        ></textarea>
-
-        <div
-          id="translatorStatus"
-          class="translator-status"
-        ></div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
   <div class="results-layout">
 
     <div>
@@ -1200,9 +921,10 @@ main{flex:1}
 
     </div>
 
+
     <aside
       id="dictionary"
-      class="dictionary hidden"
+      class="dictionary"
       aria-label="Dictionary results"
     ></aside>
 
@@ -1230,8 +952,6 @@ main{flex:1}
       aria-label="Close About"
     >×</button>
 
-    <!-- EDIT THIS CARD CONTENT -->
-
     <h2 id="aboutTitle">About</h2>
 
     <p>Welcome to FlibidooSearch.</p>
@@ -1248,94 +968,46 @@ main{flex:1}
 
 <script>
 
-/* =========================================================
-   CONFIG
-   ========================================================= */
+/*
+ * IMPORTANT:
+ * This is your Cloudflare Worker.
+ *
+ * Search:
+ *   https://flibidoo-search.devs.surf/api/search
+ *
+ * Dictionary:
+ *   https://flibidoo-search.devs.surf/api/dictionary
+ */
 
-const API_BASE =
-  'https://flibidtranslate.daniel-torres-a95.workers.dev';
-
-
-/* =========================================================
-   ELEMENTS
-   ========================================================= */
-
-const form =
-  document.querySelector('#searchForm');
-
-const input =
-  document.querySelector('#q');
-
-const home =
-  document.querySelector('#home');
-
-const results =
-  document.querySelector('#results');
-
-const list =
-  document.querySelector('#resultList');
-
-const label =
-  document.querySelector('#queryLabel');
-
-const count =
-  document.querySelector('#count');
-
-const pager =
-  document.querySelector('#pager');
-
-const resultsForm =
-  document.querySelector('#resultsSearchForm');
-
-const resultsInput =
-  document.querySelector('#resultsQ');
-
-const dictionary =
-  document.querySelector('#dictionary');
-
-const translator =
-  document.querySelector('#translator');
-
-const translateFrom =
-  document.querySelector('#translateFrom');
-
-const translateTo =
-  document.querySelector('#translateTo');
-
-const translateInput =
-  document.querySelector('#translateInput');
-
-const translateOutput =
-  document.querySelector('#translateOutput');
-
-const translateButton =
-  document.querySelector('#translateButton');
-
-const translateSwap =
-  document.querySelector('#translateSwap');
-
-const translateCount =
-  document.querySelector('#translateCount');
-
-const translatorStatus =
-  document.querySelector('#translatorStatus');
+const API_BASE='https://flibidoo-search.devs.surf';
 
 
-let currentQ = '';
-let currentPage = 0;
-let currentType = 'web';
-let bangs = [];
+const form=document.querySelector('#searchForm');
+const input=document.querySelector('#q');
+
+const home=document.querySelector('#home');
+const results=document.querySelector('#results');
+
+const list=document.querySelector('#resultList');
+const label=document.querySelector('#queryLabel');
+const count=document.querySelector('#count');
+const pager=document.querySelector('#pager');
+
+const resultsForm=document.querySelector('#resultsSearchForm');
+const resultsInput=document.querySelector('#resultsQ');
+
+const dictionary=document.querySelector('#dictionary');
 
 
-/* =========================================================
-   ESCAPE
-   ========================================================= */
+let currentQ='';
+let currentPage=0;
+let currentType='web';
+
 
 function esc(s=''){
-
   return String(s).replace(
     /[&<>'"]/g,
-    c => ({
+    c=>({
       '&':'&amp;',
       '<':'&lt;',
       '>':'&gt;',
@@ -1343,683 +1015,38 @@ function esc(s=''){
       '"':'&quot;'
     }[c])
   );
-
 }
 
 
-/* =========================================================
-   BUTTON STATE
-   ========================================================= */
-
 function updateButtonState(b,v){
-
   b.classList.toggle(
     'has-input',
     v.trim().length>0
   );
-
 }
 
 
-/* =========================================================
-   BANGS
-   ========================================================= */
+/*
+ * DICTIONARY
+ *
+ * Always attempts to load the dictionary,
+ * even when the main search has no results.
+ */
 
-async function loadBangs(){
+async function loadDictionary(word){
+
+  dictionary.classList.remove('hidden');
+
+  dictionary.innerHTML=`
+    <div class="dictionary-title">Dictionary</div>
+    <div class="dictionary-word">${esc(word)}</div>
+    <div class="dictionary-loading">Loading…</div>
+  `;
 
   try{
 
-    const r =
-      await fetch(
-        'https://services.helium.imput.net/bangs.json'
-      );
-
-    if(!r.ok){
-      throw new Error();
-    }
-
-    const data =
-      await r.json();
-
-    bangs =
-      Array.isArray(data)
-        ? data
-        : [];
-
-  }catch{
-
-    bangs=[];
-
-  }
-
-}
-
-
-function resolveBang(query){
-
-  const match =
-    query.match(
-      /^!(\S+)(?:\s+(.*))?$/
-    );
-
-  if(!match){
-    return null;
-  }
-
-  const trigger =
-    match[1].toLowerCase();
-
-  const searchTerms =
-    (match[2] || '').trim();
-
-  if(!searchTerms){
-    return null;
-  }
-
-  const bang =
-    bangs.find(item =>
-      Array.isArray(item.ts) &&
-      item.ts.some(
-        t =>
-          String(t).toLowerCase() ===
-          trigger
-      )
-    );
-
-  if(!bang || !bang.u){
-    return null;
-  }
-
-  return bang.u.replace(
-    /\{searchTerms\}/g,
-    encodeURIComponent(searchTerms)
-  );
-
-}
-
-
-/* =========================================================
-   TRANSLATOR LANGUAGES
-   ========================================================= */
-
-const TRANSLATION_LANGUAGES = [
-
-  ['Auto Detect','auto'],
-
-  ['English','en'],
-  ['Spanish','es'],
-  ['French','fr'],
-  ['German','de'],
-  ['Italian','it'],
-  ['Portuguese','pt'],
-  ['Dutch','nl'],
-  ['Russian','ru'],
-  ['Ukrainian','uk'],
-  ['Polish','pl'],
-  ['Czech','cs'],
-  ['Slovak','sk'],
-  ['Romanian','ro'],
-  ['Hungarian','hu'],
-  ['Greek','el'],
-  ['Turkish','tr'],
-  ['Arabic','ar'],
-  ['Hebrew','he'],
-  ['Persian','fa'],
-
-  ['Chinese','zh'],
-  ['Japanese','ja'],
-  ['Korean','ko'],
-
-  ['Hindi','hi'],
-  ['Bengali','bn'],
-  ['Urdu','ur'],
-
-  ['Indonesian','id'],
-  ['Malay','ms'],
-  ['Filipino','tl'],
-  ['Vietnamese','vi'],
-  ['Thai','th'],
-
-  ['Swedish','sv'],
-  ['Norwegian','no'],
-  ['Danish','da'],
-  ['Finnish','fi'],
-
-  ['Bulgarian','bg'],
-  ['Croatian','hr'],
-  ['Serbian','sr'],
-  ['Slovenian','sl'],
-
-  ['Estonian','et'],
-  ['Latvian','lv'],
-  ['Lithuanian','lt'],
-
-  ['Catalan','ca'],
-  ['Slovenian','sl'],
-
-  ['Swahili','sw'],
-  ['Afrikaans','af'],
-
-  ['Latin','la']
-];
-
-
-const languageAliases = {
-
-  auto:'auto',
-  autodetect:'auto',
-  'auto detect':'auto',
-
-  english:'en',
-  eng:'en',
-
-  spanish:'es',
-  espanol:'es',
-  español:'es',
-
-  french:'fr',
-
-  german:'de',
-  deutsch:'de',
-
-  italian:'it',
-
-  portuguese:'pt',
-
-  dutch:'nl',
-
-  russian:'ru',
-
-  ukrainian:'uk',
-
-  polish:'pl',
-
-  czech:'cs',
-
-  slovak:'sk',
-
-  romanian:'ro',
-
-  hungarian:'hu',
-
-  greek:'el',
-
-  turkish:'tr',
-
-  arabic:'ar',
-
-  hebrew:'he',
-
-  persian:'fa',
-
-  chinese:'zh',
-  mandarin:'zh',
-
-  japanese:'ja',
-
-  korean:'ko',
-
-  hindi:'hi',
-
-  bengali:'bn',
-
-  urdu:'ur',
-
-  indonesian:'id',
-
-  malay:'ms',
-
-  filipino:'tl',
-  tagalog:'tl',
-
-  vietnamese:'vi',
-
-  thai:'th',
-
-  swedish:'sv',
-
-  norwegian:'no',
-
-  danish:'da',
-
-  finnish:'fi',
-
-  bulgarian:'bg',
-
-  croatian:'hr',
-
-  serbian:'sr',
-
-  slovenian:'sl',
-
-  estonian:'et',
-
-  latvian:'lv',
-
-  lithuanian:'lt',
-
-  catalan:'ca',
-
-  swahili:'sw',
-
-  afrikaans:'af',
-
-  latin:'la'
-};
-
-
-function languageCode(value){
-
-  const clean =
-    String(value || '')
-      .trim()
-      .toLowerCase();
-
-  return (
-    languageAliases[clean] ||
-    TRANSLATION_LANGUAGES.find(
-      x =>
-        x[0].toLowerCase() === clean
-    )?.[1] ||
-    clean
-  );
-
-}
-
-
-function languageName(code){
-
-  const found =
-    TRANSLATION_LANGUAGES.find(
-      x => x[1] === code
-    );
-
-  return found
-    ? found[0]
-    : code;
-}
-
-
-/* =========================================================
-   TRANSLATOR LANGUAGE PICKERS
-   ========================================================= */
-
-function setupLanguagePicker(
-  inputElement,
-  listElement
-){
-
-  function renderOptions(filter=''){
-
-    const clean =
-      filter
-        .trim()
-        .toLowerCase();
-
-    listElement.innerHTML='';
-
-    TRANSLATION_LANGUAGES
-      .filter(item =>
-        !clean ||
-        item[0]
-          .toLowerCase()
-          .includes(clean)
-      )
-      .forEach(item => {
-
-        const button =
-          document.createElement('button');
-
-        button.type='button';
-        button.className=
-          'translator-language-option';
-
-        button.textContent=item[0];
-
-        button.addEventListener(
-          'click',
-          () => {
-
-            inputElement.value =
-              item[0];
-
-            listElement.classList.add(
-              'hidden'
-            );
-
-          }
-        );
-
-        listElement.appendChild(button);
-
-      });
-
-  }
-
-
-  inputElement.addEventListener(
-    'focus',
-    () => {
-
-      renderOptions(
-        inputElement.value === 'Auto Detect'
-          ? ''
-          : inputElement.value
-      );
-
-      listElement.classList.remove(
-        'hidden'
-      );
-
-    }
-  );
-
-
-  inputElement.addEventListener(
-    'input',
-    () => {
-
-      renderOptions(
-        inputElement.value
-      );
-
-      listElement.classList.remove(
-        'hidden'
-      );
-
-    }
-  );
-
-
-  document.addEventListener(
-    'click',
-    e => {
-
-      if(
-        e.target !== inputElement &&
-        !listElement.contains(e.target)
-      ){
-
-        listElement.classList.add(
-          'hidden'
-        );
-
-      }
-
-    }
-  );
-
-}
-
-
-setupLanguagePicker(
-  translateFrom,
-  document.querySelector(
-    '#translateFromList'
-  )
-);
-
-setupLanguagePicker(
-  translateTo,
-  document.querySelector(
-    '#translateToList'
-  )
-);
-
-
-/* =========================================================
-   TRANSLATOR QUERY DETECTION
-   ========================================================= */
-
-function translatorQueryInfo(q){
-
-  const clean =
-    q.trim().toLowerCase();
-
-  if(
-    clean === 'translate' ||
-    clean === 'translator'
-  ){
-
-    return {
-      from:'auto',
-      to:'en'
-    };
-
-  }
-
-
-  const toEnglish =
-    clean.match(
-      /^(.+?)\s+to\s+english$/
-    );
-
-  if(toEnglish){
-
-    const from =
-      languageCode(
-        toEnglish[1]
-      );
-
-    if(
-      from &&
-      from !== toEnglish[1]
-    ){
-
-      return {
-        from,
-        to:'en'
-      };
-
-    }
-
-  }
-
-
-  const englishTo =
-    clean.match(
-      /^english\s+to\s+(.+?)$/
-    );
-
-  if(englishTo){
-
-    const to =
-      languageCode(
-        englishTo[1]
-      );
-
-    if(
-      to &&
-      to !== englishTo[1]
-    ){
-
-      return {
-        from:'en',
-        to
-      };
-
-    }
-
-  }
-
-
-  const translateLanguage =
-    clean.match(
-      /^(?:translate|translator)\s+(.+)$/
-    );
-
-  if(translateLanguage){
-
-    const from =
-      languageCode(
-        translateLanguage[1]
-      );
-
-    if(
-      from &&
-      from !== translateLanguage[1]
-    ){
-
-      return {
-        from,
-        to:'en'
-      };
-
-    }
-
-  }
-
-
-  return null;
-
-}
-
-
-function showTranslator(info){
-
-  translator.classList.remove(
-    'hidden'
-  );
-
-  const from =
-    info?.from || 'auto';
-
-  const to =
-    info?.to || 'en';
-
-  translateFrom.value =
-    languageName(from);
-
-  translateTo.value =
-    languageName(to);
-
-}
-
-
-function hideTranslator(){
-
-  translator.classList.add(
-    'hidden'
-  );
-
-}
-
-
-function applyTranslatorQuery(q){
-
-  const info =
-    translatorQueryInfo(q);
-
-  if(info){
-
-    showTranslator(info);
-
-  }else{
-
-    hideTranslator();
-
-  }
-
-  return info;
-
-}
-
-
-/* =========================================================
-   TRANSLATOR
-   ========================================================= */
-
-translateInput.addEventListener(
-  'input',
-  () => {
-
-    if(
-      translateInput.value.length >
-      2000
-    ){
-
-      translateInput.value =
-        translateInput.value.slice(
-          0,
-          2000
-        );
-
-    }
-
-    translateCount.textContent =
-      translateInput.value.length;
-
-  }
-);
-
-
-translateSwap.addEventListener(
-  'click',
-  () => {
-
-    const from =
-      languageCode(
-        translateFrom.value
-      );
-
-    const to =
-      languageCode(
-        translateTo.value
-      );
-
-    if(from === 'auto'){
-
-      translateFrom.value =
-        languageName(to);
-
-      translateTo.value =
-        'Auto Detect';
-
-    }else{
-
-      translateFrom.value =
-        languageName(to);
-
-      translateTo.value =
-        languageName(from);
-
-    }
-
-    const oldInput =
-      translateInput.value;
-
-    translateInput.value =
-      translateOutput.value;
-
-    translateOutput.value =
-      oldInput;
-
-    translateCount.textContent =
-      translateInput.value.length;
-
-  }
-);
-
-
-async function translateText(
-  text,
-  from,
-  to
-){
-
-  text =
-    String(text || '')
-      .slice(0,2000);
-
-  const endpoint =
-    `${API_BASE}/api/translate?` +
-    `text=${encodeURIComponent(text)}` +
-    `&from=${encodeURIComponent(from)}` +
-    `&to=${encodeURIComponent(to)}`;
-
-  const response =
-    await fetch(
-      endpoint,
+    const response=await fetch(
+      `${API_BASE}/api/dictionary?word=${encodeURIComponent(word)}`,
       {
         method:'GET',
         headers:{
@@ -2028,445 +1055,352 @@ async function translateText(
       }
     );
 
-  const data =
-    await response.json();
+    const data=await response.json();
 
-  if(!response.ok){
-
-    throw new Error(
-      data.error ||
-      'Translation failed.'
-    );
-
-  }
-
-  return (
-    data?.responseData?.translatedText ||
-    ''
-  );
-
-}
-
-
-translateButton.addEventListener(
-  'click',
-  async () => {
-
-    const text =
-      translateInput.value
-        .slice(0,2000)
-        .trim();
-
-    if(!text){
-
-      translateOutput.value='';
-      translatorStatus.textContent=
-        'Enter something to translate.';
-
-      return;
-
-    }
-
-    const from =
-      languageCode(
-        translateFrom.value
+    if(!response.ok){
+      throw new Error(
+        data?.error || 'Dictionary unavailable.'
       );
-
-    const to =
-      languageCode(
-        translateTo.value
-      );
-
-    if(from === to && from !== 'auto'){
-
-      translateOutput.value=text;
-
-      translatorStatus.textContent=
-        'The input and output languages are the same.';
-
-      return;
-
     }
 
-    translateButton.disabled=true;
+    renderDictionary(data,word);
 
-    translatorStatus.textContent=
-      'Translating…';
+  }catch(error){
 
-    translateOutput.value='';
-
-    try{
-
-      const translated =
-        await translateText(
-          text,
-          from,
-          to
-        );
-
-      translateOutput.value =
-        translated;
-
-      translatorStatus.textContent='';
-
-    }catch(e){
-
-      translatorStatus.textContent =
-        e.message ||
-        'Translation failed.';
-
-    }finally{
-
-      translateButton.disabled=false;
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   DICTIONARY
-   ========================================================= */
-
-async function loadDictionary(word){
-
-  dictionary.classList.remove(
-    'hidden'
-  );
-
-  dictionary.innerHTML =
-    '<div class="dictionary-loading">' +
-    'Loading dictionary…' +
-    '</div>';
-
-  try{
-
-    const r =
-      await fetch(
-        `${API_BASE}/api/dictionary?word=${
-          encodeURIComponent(word)
-        }`,
-        {
-          headers:{
-            'Accept':'application/json'
-          }
-        }
-      );
-
-    if(!r.ok){
-      throw new Error();
-    }
-
-    const data =
-      await r.json();
-
-    renderDictionary(
-      data,
-      word
-    );
-
-  }catch{
-
-    dictionary.innerHTML =
-      `<h2 class="dictionary-title">${
-        esc(word)
-      }</h2>
+    dictionary.innerHTML=`
+      <div class="dictionary-title">Dictionary</div>
+      <div class="dictionary-word">${esc(word)}</div>
       <div class="dictionary-empty">
         Dictionary unavailable.
-      </div>`;
+      </div>
+    `;
 
   }
 
 }
 
 
-function renderDictionary(
-  data,
-  word
-){
+function renderDictionary(data,word){
 
-  const entries =
+  const entries=
     Array.isArray(data?.entries)
       ? data.entries
       : [];
 
-  dictionary.innerHTML='';
-
-  const title =
-    document.createElement('h2');
-
-  title.className=
-    'dictionary-title';
-
-  title.textContent=word;
-
-  dictionary.appendChild(title);
-
   if(!entries.length){
 
-    const empty =
-      document.createElement('div');
-
-    empty.className=
-      'dictionary-empty';
-
-    empty.textContent=
-      'No dictionary entry found.';
-
-    dictionary.appendChild(empty);
-
-    return;
-
-  }
-
-  entries.forEach(entry => {
-
-    const article =
-      document.createElement('article');
-
-    article.className=
-      'dictionary-entry';
-
-    const language =
-      entry.language ||
-      entry.lang ||
-      '';
-
-    const pos =
-      entry.partOfSpeech ||
-      entry.pos ||
-      '';
-
-    article.innerHTML=`
-
-      ${
-        language
-          ? `<div class="dictionary-language">
-              ${esc(language)}
-            </div>`
-          : ''
-      }
-
-      ${
-        pos
-          ? `<div class="dictionary-pos">
-              ${esc(pos)}
-            </div>`
-          : ''
-      }
-
+    dictionary.innerHTML=`
+      <div class="dictionary-title">Dictionary</div>
+      <div class="dictionary-word">${esc(word)}</div>
+      <div class="dictionary-empty">
+        No dictionary entry found.
+      </div>
     `;
 
-    const meanings =
-      entry.meanings ||
-      entry.senses ||
-      [];
+    return;
+  }
 
-    if(Array.isArray(meanings)){
 
-      const list =
-        document.createElement('ol');
+  dictionary.innerHTML='';
 
-      list.className=
-        'dictionary-list';
 
-      meanings
-        .slice(0,10)
-        .forEach(meaning => {
+  const title=document.createElement('div');
+  title.className='dictionary-title';
+  title.textContent='Dictionary';
 
-          const li =
-            document.createElement('li');
+  const wordEl=document.createElement('div');
+  wordEl.className='dictionary-word';
+  wordEl.textContent=word;
 
-          const definition =
-            typeof meaning === 'string'
-              ? meaning
-              : meaning.definition ||
-                meaning.gloss ||
-                '';
+  dictionary.appendChild(title);
+  dictionary.appendChild(wordEl);
 
-          li.innerHTML =
-            `<div class="dictionary-definition">
-              ${esc(definition)}
-            </div>`;
 
-          if(
-            meaning?.tags &&
-            Array.isArray(meaning.tags)
-          ){
+  entries.forEach(entry=>{
 
-            li.innerHTML +=
-              `<div class="dictionary-tags">
-                ${meaning.tags
-                  .map(tag => esc(tag))
-                  .join(' · ')}
-              </div>`;
+    const entryEl=document.createElement('section');
+    entryEl.className='dictionary-entry';
 
-          }
 
-          list.appendChild(li);
+    if(entry.language){
 
-        });
+      const language=document.createElement('div');
+      language.className='dictionary-language';
+      language.textContent=entry.language;
 
-      article.appendChild(list);
+      entryEl.appendChild(language);
 
     }
 
-    dictionary.appendChild(article);
+
+    if(entry.partOfSpeech){
+
+      const pos=document.createElement('div');
+      pos.className='dictionary-pos';
+      pos.textContent=entry.partOfSpeech;
+
+      entryEl.appendChild(pos);
+
+    }
+
+
+    const senses=
+      Array.isArray(entry.senses)
+        ? entry.senses
+        : [];
+
+
+    if(senses.length){
+
+      const sensesWrap=document.createElement('div');
+      sensesWrap.className='dictionary-senses';
+
+
+      const labelEl=document.createElement('div');
+      labelEl.className='dictionary-label';
+      labelEl.textContent='Definitions';
+
+      sensesWrap.appendChild(labelEl);
+
+
+      senses.forEach(sense=>{
+
+        const senseEl=document.createElement('div');
+        senseEl.className='dictionary-sense';
+
+
+        const definition=
+          sense.definition ||
+          sense.gloss ||
+          sense.meaning ||
+          '';
+
+
+        if(definition){
+
+          const def=document.createElement('div');
+          def.className='dictionary-definition';
+          def.textContent=definition;
+
+          senseEl.appendChild(def);
+
+        }
+
+
+        if(sense.example){
+
+          const example=document.createElement('div');
+          example.className='dictionary-example';
+          example.textContent=`“${sense.example}”`;
+
+          senseEl.appendChild(example);
+
+        }
+
+
+        sensesWrap.appendChild(senseEl);
+
+      });
+
+
+      entryEl.appendChild(sensesWrap);
+
+    }
+
+
+    if(
+      Array.isArray(entry.translations) &&
+      entry.translations.length
+    ){
+
+      const translations=document.createElement('div');
+      translations.className='dictionary-translations';
+
+
+      const translationLabel=document.createElement('div');
+      translationLabel.className='dictionary-label';
+      translationLabel.textContent='Translations';
+
+
+      translations.appendChild(translationLabel);
+
+
+      const ul=document.createElement('ul');
+      ul.className='dictionary-list';
+
+
+      entry.translations
+        .slice(0,20)
+        .forEach(t=>{
+
+          const li=document.createElement('li');
+
+          if(typeof t==='string'){
+            li.textContent=t;
+          }else{
+            li.textContent=
+              t.translation ||
+              t.text ||
+              t.word ||
+              JSON.stringify(t);
+          }
+
+          ul.appendChild(li);
+
+        });
+
+
+      translations.appendChild(ul);
+      entryEl.appendChild(translations);
+
+    }
+
+
+    dictionary.appendChild(entryEl);
 
   });
 
 }
 
 
-/* =========================================================
-   RENDER SEARCH RESULTS
-   ========================================================= */
+/*
+ * RENDER SEARCH RESULTS
+ */
 
 function render(data){
 
   home.classList.add('hidden');
-
   results.classList.remove('hidden');
 
-  currentType =
-    data.type ||
-    currentType;
+  currentType=data.type||currentType;
 
-  label.textContent =
+  label.textContent=
     data.query
       ? `Results for “${data.query}”`
       : '';
 
-  applyTranslatorQuery(
-    data.query || currentQ
-  );
-
-  loadDictionary(
-    data.query || currentQ
-  );
 
   let a=[];
 
-  if(currentType === 'web'){
 
-    a =
-      Array.isArray(
-        data.results?.web?.results
-      )
-        ? data.results.web.results
-        : Array.isArray(data.results)
-          ? data.results
+  if(currentType==='web'){
+
+    a=
+      Array.isArray(data.results)
+        ? data.results
+        : Array.isArray(data.results?.web?.results)
+          ? data.results.web.results
           : [];
 
   }else if(
-    currentType === 'images' ||
-    currentType === 'news'
+    currentType==='images' ||
+    currentType==='news'
   ){
 
-    a =
+    a=
       Array.isArray(data.results)
         ? data.results
         : [];
 
   }
 
-  count.textContent =
+
+  count.textContent=
     a.length
       ? `${a.length} results`
       : '';
 
-  resultsInput.value =
-    data.query || '';
+
+  resultsInput.value=data.query||'';
 
   list.innerHTML='';
   pager.innerHTML='';
 
+
   document
     .querySelectorAll('.search-type')
-    .forEach(b =>
+    .forEach(b=>{
       b.classList.toggle(
         'active',
-        b.dataset.type ===
-        currentType
-      )
-    );
+        b.dataset.type===currentType
+      );
+    });
+
+
+  /*
+   * Dictionary is loaded independently.
+   * Therefore it still appears if the search has zero results.
+   */
+  if(data.query){
+    loadDictionary(data.query);
+  }
 
 
   if(!a.length){
 
-    list.innerHTML =
-      '<div class="empty">' +
-      'No results found.' +
-      '</div>';
+    list.innerHTML=
+      '<div class="empty">No results found.</div>';
 
     history.replaceState(
       {},
       '',
-      `/?q=${
-        encodeURIComponent(
-          data.query || currentQ
-        )
-      }&type=${
-        encodeURIComponent(currentType)
-      }${
-        currentPage
-          ? `&page=${currentPage}`
-          : ''
-      }`
+      `/?q=${encodeURIComponent(data.query||currentQ)}`+
+      `&type=${encodeURIComponent(currentType)}`+
+      `${currentPage?`&page=${currentPage}`:''}`
     );
 
     return;
-
   }
 
 
-  if(currentType === 'images'){
+  /*
+   * IMAGES
+   */
 
-    const grid =
-      document.createElement('div');
+  if(currentType==='images'){
+
+    const grid=document.createElement('div');
 
     grid.className='image-grid';
 
-    a.forEach(r => {
 
-      const u =
+    a.forEach(r=>{
+
+      const u=
         r.url ||
         r.properties?.url ||
         '';
 
-      const img =
+      const img=
         r.thumbnail ||
         r.properties?.url ||
         '';
 
+
       if(!img)return;
 
-      const el =
-        document.createElement('article');
 
-      el.className=
-        'image-result';
+      const el=document.createElement('article');
+
+      el.className='image-result';
+
 
       el.innerHTML=`
-
         <a
           href="${esc(u)}"
           target="_blank"
           rel="noopener noreferrer"
         >
-
           <img
             src="${esc(img)}"
-            alt="${esc(r.title || '')}"
+            alt="${esc(r.title||'')}"
             loading="lazy"
             referrerpolicy="no-referrer"
           >
-
         </a>
 
         <div class="image-result-title">
-          ${esc(r.title || u)}
+          ${esc(r.title||u)}
         </div>
 
         <div class="image-result-source">
@@ -2476,12 +1410,13 @@ function render(data){
             ''
           )}
         </div>
-
       `;
+
 
       grid.appendChild(el);
 
     });
+
 
     if(grid.children.length){
 
@@ -2489,67 +1424,72 @@ function render(data){
 
     }else{
 
-      list.innerHTML =
-        '<div class="empty">' +
-        'No images found.' +
-        '</div>';
+      list.innerHTML=
+        '<div class="empty">No images found.</div>';
 
     }
 
 
+  /*
+   * WEB / NEWS
+   */
+
   }else{
 
-    a.forEach(r => {
+    a.forEach(r=>{
 
-      const el =
-        document.createElement('article');
+      const el=document.createElement('article');
 
       el.className='result';
 
-      const u =
-        r.url || '';
 
-      const host =
+      const u=
+        r.url ||
+        '';
+
+      const host=
         r.meta_url?.hostname ||
         '';
 
-      const title =
+      const title=
         r.title ||
         u;
 
-      const desc =
+      const desc=
         r.description ||
         r.content ||
-        r.snippet ||
         '';
 
-      const age =
+      const age=
         r.age ||
         r.publishedDate ||
         '';
 
-      const tags =
-        Array.isArray(r.tags)
-          ? r.tags
-          : [];
 
-      const tagHTML =
-        tags.length
-          ? `
-            <div class="result-tags">
-              ${tags.map(tag =>
-                `<span class="result-tag">
-                  ${esc(tag)}
-                </span>`
-              ).join(' · ')}
-            </div>
-          `
-          : '';
+      /*
+       * Keep description/tag information intact.
+       */
+      let tagHtml='';
+
+
+      if(Array.isArray(r.tags)){
+
+        tagHtml=
+          r.tags
+            .map(tag=>`
+              <span class="dictionary-tags">
+                ${esc(tag)}
+              </span>
+            `)
+            .join('');
+
+      }
+
 
       el.innerHTML=`
 
         <div class="result-url">
-          ${esc(host || u)}
+          ${esc(host||u)}
         </div>
 
         <h2>
@@ -2564,23 +1504,27 @@ function render(data){
 
         ${
           desc
-            ? `<p class="snippet">
+            ? `
+              <p class="snippet">
                 ${esc(desc)}
-              </p>`
+                ${tagHtml}
+              </p>
+            `
             : ''
         }
 
-        ${tagHTML}
-
         ${
           age
-            ? `<div class="result-meta">
+            ? `
+              <div class="result-meta">
                 ${esc(age)}
-              </div>`
+              </div>
+            `
             : ''
         }
 
       `;
+
 
       list.appendChild(el);
 
@@ -2589,27 +1533,26 @@ function render(data){
   }
 
 
-  const more =
+  const more=
     Boolean(
       data.more_results_available ||
       data.hasMore
     );
 
 
-  if(currentPage > 0){
+  if(currentPage>0){
 
-    const b =
-      document.createElement('button');
+    const b=document.createElement('button');
 
     b.textContent='Previous';
 
-    b.onclick =
-      () =>
-        search(
-          currentQ,
-          currentPage - 1,
-          currentType
-        );
+    b.onclick=()=>{
+      search(
+        currentQ,
+        currentPage-1,
+        currentType
+      );
+    };
 
     pager.appendChild(b);
 
@@ -2618,18 +1561,17 @@ function render(data){
 
   if(more){
 
-    const b =
-      document.createElement('button');
+    const b=document.createElement('button');
 
     b.textContent='Next';
 
-    b.onclick =
-      () =>
-        search(
-          currentQ,
-          currentPage + 1,
-          currentType
-        );
+    b.onclick=()=>{
+      search(
+        currentQ,
+        currentPage+1,
+        currentType
+      );
+    };
 
     pager.appendChild(b);
 
@@ -2639,25 +1581,24 @@ function render(data){
   history.replaceState(
     {},
     '',
-    `/?q=${
-      encodeURIComponent(
-        data.query || currentQ
-      )
-    }&type=${
-      encodeURIComponent(currentType)
-    }${
-      currentPage
-        ? `&page=${currentPage}`
-        : ''
-    }`
+    `/?q=${encodeURIComponent(data.query||currentQ)}`+
+    `&type=${encodeURIComponent(currentType)}`+
+    `${currentPage?`&page=${currentPage}`:''}`
   );
 
 }
 
 
-/* =========================================================
-   SEARCH
-   ========================================================= */
+/*
+ * SEARCH
+ *
+ * IMPORTANT:
+ * Uses YOUR Worker:
+ *
+ * /api/search?q=...&type=...&page=...
+ *
+ * It does NOT POST directly to search.tiago.zip.
+ */
 
 async function search(
   q,
@@ -2669,52 +1610,50 @@ async function search(
 
   if(!q)return;
 
+
   currentQ=q;
 
-  currentPage =
+  currentPage=
     Math.max(
       0,
-      Number(page) || 0
+      Number(page)||0
     );
 
-  currentType =
-    ['web','images','news']
-      .includes(type)
-      ? type
-      : 'web';
+  currentType=type;
 
-  document.title =
+
+  document.title=
     `${q} - FlibidooSearch`;
 
-  input.value=q;
 
+  input.value=q;
   resultsInput.value=q;
 
+
   /*
-   * Switch immediately so the user does not
-   * remain on the home screen while waiting.
+   * Immediately switch away from home.
+   * This prevents the old "stays on homescreen while fetching"
+   * behavior.
    */
 
   home.classList.add('hidden');
-
   results.classList.remove('hidden');
 
-  label.textContent =
-    `Results for “${q}”`;
 
-  applyTranslatorQuery(q);
-
-  list.innerHTML =
+  list.innerHTML=
     '<div class="empty">Searching…</div>';
 
   count.textContent='';
 
+  label.textContent=
+    `Results for “${q}”`;
+
   pager.innerHTML='';
 
+
   /*
-   * Dictionary is independent from the search
-   * results, so it still appears when there
-   * are zero web results.
+   * Dictionary starts independently so it can show
+   * even while the web request is loading.
    */
 
   loadDictionary(q);
@@ -2722,283 +1661,226 @@ async function search(
 
   try{
 
-    const endpoint =
-      `${API_BASE}/api/search?` +
-      `q=${encodeURIComponent(q)}` +
-      `&type=${encodeURIComponent(
-        currentType
-      )}` +
-      `&page=${encodeURIComponent(
-        currentPage
-      )}`;
+    const url=
+      `${API_BASE}/api/search`+
+      `?q=${encodeURIComponent(q)}`+
+      `&type=${encodeURIComponent(type)}`+
+      `&page=${encodeURIComponent(currentPage)}`;
 
 
-    const r =
-      await fetch(
-        endpoint,
-        {
-          method:'GET',
-          headers:{
-            'Accept':'application/json'
-          }
+    const r=await fetch(
+      url,
+      {
+        method:'GET',
+        headers:{
+          'Accept':'application/json'
         }
-      );
+      }
+    );
 
 
-    const d =
-      await r.json();
+    const body=await r.text();
 
 
-    if(!r.ok){
+    let d;
+
+    try{
+
+      d=JSON.parse(body);
+
+    }catch(_){
 
       throw new Error(
-        d.error ||
-        'Search failed.'
+        'Search Worker returned invalid JSON.'
       );
 
     }
 
 
-    d.type =
-      currentType;
+    if(!r.ok){
+
+      throw new Error(
+        d?.error ||
+        'Search failed. Please try again.'
+      );
+
+    }
+
+
+    d.type=type;
+    d.query=d.query||q;
+
 
     render(d);
 
 
   }catch(e){
 
-    list.innerHTML =
-      `<div class="error">
+    list.innerHTML=`
+      <div class="error">
         ${esc(
           e.message ||
           'Search failed. Please try again.'
         )}
-      </div>`;
+      </div>
+    `;
+
+    /*
+     * Do NOT remove the dictionary if search fails.
+     */
+    loadDictionary(q);
 
   }
 
 }
 
 
-/* =========================================================
-   HOME SEARCH
-   ========================================================= */
+/*
+ * HOME SEARCH
+ */
 
 form.addEventListener(
   'submit',
-  e => {
+  e=>{
 
     e.preventDefault();
 
-    const q =
-      input.value.trim();
+    const q=input.value.trim();
 
-    if(!q)return;
+    if(q){
 
-
-    const bangUrl =
-      resolveBang(q);
-
-
-    if(bangUrl){
-
-      window.location.href =
-        bangUrl;
-
-      return;
+      /*
+       * Move immediately to results page.
+       */
+      location.href=
+        `/?q=${encodeURIComponent(q)}`+
+        `&type=web&page=0`;
 
     }
-
-
-    location.href =
-      `/?q=${
-        encodeURIComponent(q)
-      }&type=web&page=0`;
 
   }
 );
 
 
-/* =========================================================
-   RESULTS SEARCH
-   ========================================================= */
+/*
+ * RESULTS SEARCH
+ */
 
 resultsForm.addEventListener(
   'submit',
-  e => {
+  e=>{
 
     e.preventDefault();
 
-    const q =
+    const q=
       resultsInput.value.trim();
 
-    if(!q)return;
+    if(q){
 
-
-    const bangUrl =
-      resolveBang(q);
-
-
-    if(bangUrl){
-
-      window.location.href =
-        bangUrl;
-
-      return;
+      search(
+        q,
+        0,
+        currentType
+      );
 
     }
-
-
-    search(
-      q,
-      0,
-      currentType
-    );
 
   }
 );
 
 
-/* =========================================================
-   SEARCH TYPE BUTTONS
-   ========================================================= */
+/*
+ * WEB / IMAGES / NEWS
+ */
 
 document
   .querySelectorAll('.search-type')
-  .forEach(
-    btn =>
-      btn.addEventListener(
-        'click',
-        () =>
-          search(
-            resultsInput.value ||
-            currentQ,
-            0,
-            btn.dataset.type
-          )
-      )
-  );
+  .forEach(btn=>{
+
+    btn.addEventListener(
+      'click',
+      ()=>{
+
+        search(
+          resultsInput.value||currentQ,
+          0,
+          btn.dataset.type
+        );
+
+      }
+    );
+
+  });
 
 
-/* =========================================================
-   INPUT BUTTON STATES
-   ========================================================= */
+/*
+ * ABOUT
+ */
 
-input.addEventListener(
-  'input',
-  () =>
-    updateButtonState(
-      document.querySelector(
-        '#submitButton'
-      ),
-      input.value
-    )
-);
+const aboutOverlay=
+  document.querySelector('#aboutOverlay');
 
-resultsInput.addEventListener(
-  'input',
-  () =>
-    updateButtonState(
-      document.querySelector(
-        '#resultsSubmitButton'
-      ),
-      resultsInput.value
-    )
-);
-
-
-/* =========================================================
-   ABOUT
-   ========================================================= */
-
-const aboutOverlay =
-  document.querySelector(
-    '#aboutOverlay'
-  );
 
 document
   .querySelector('#aboutButton')
-  .onclick =
-    () =>
-      aboutOverlay.classList.remove(
-        'hidden'
-      );
+  .onclick=()=>{
+    aboutOverlay.classList.remove('hidden');
+  };
+
 
 document
   .querySelector('#aboutClose')
-  .onclick =
-    () =>
-      aboutOverlay.classList.add(
-        'hidden'
-      );
+  .onclick=()=>{
+    aboutOverlay.classList.add('hidden');
+  };
+
 
 aboutOverlay.addEventListener(
   'click',
-  e => {
-
-    if(e.target === aboutOverlay){
-
-      aboutOverlay.classList.add(
-        'hidden'
-      );
-
+  e=>{
+    if(e.target===aboutOverlay){
+      aboutOverlay.classList.add('hidden');
     }
-
   }
 );
+
 
 document.addEventListener(
   'keydown',
-  e => {
-
-    if(e.key === 'Escape'){
-
-      aboutOverlay.classList.add(
-        'hidden'
-      );
-
+  e=>{
+    if(e.key==='Escape'){
+      aboutOverlay.classList.add('hidden');
     }
-
   }
 );
 
 
-/* =========================================================
-   INITIAL LOAD
-   ========================================================= */
+/*
+ * INITIAL URL
+ */
 
-loadBangs();
-
-
-const params =
+const params=
   new URLSearchParams(
     location.search
   );
 
-const initialQuery =
+const initialQuery=
   params.get('q');
 
 
 if(initialQuery){
 
-  const initialType =
-    [
-      'web',
-      'images',
-      'news'
-    ].includes(
-      params.get('type')
-    )
-      ? params.get('type')
-      : 'web';
-
-
   search(
     initialQuery,
     Number(
-      params.get('page') || 0
+      params.get('page')||0
     ),
-    initialType
+    ['web','images','news']
+      .includes(
+        params.get('type')
+      )
+      ? params.get('type')
+      : 'web'
   );
 
 }
