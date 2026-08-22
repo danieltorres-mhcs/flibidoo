@@ -7,6 +7,7 @@
 
   <title>FlibidooSearch</title>
 
+  <!-- Favicon -->
   <link
     rel="icon"
     type="image/png"
@@ -24,42 +25,41 @@
       --result:#e7dce9;
       --url:#b8a2bc;
       --focus:#cdb8d1;
-      --translate:#a9c7e8;
+      --translate:#b8c8e8;
     }
 
     *{
-      box-sizing:border-box;
+      box-sizing:border-box
     }
 
-    html,
-    body{
+    html,body{
       margin:0;
       min-height:100%;
       background:var(--bg);
       color:var(--text);
-      font-family:Arial,Helvetica,sans-serif;
+      font-family:Arial,Helvetica,sans-serif
     }
 
     body{
       min-height:100vh;
       display:flex;
-      flex-direction:column;
+      flex-direction:column
     }
 
     a{
-      color:inherit;
+      color:inherit
     }
 
     .shell{
-      width:min(calc(100% - 40px),1120px);
-      margin:0 auto;
+      width:min(100% - 40px,1120px);
+      margin:0 auto
     }
 
     header{
       height:64px;
       border-bottom:1px solid var(--line2);
       display:flex;
-      align-items:center;
+      align-items:center
     }
 
     .brand{
@@ -68,7 +68,7 @@
       gap:10px;
       text-decoration:none;
       font-weight:600;
-      letter-spacing:-.01em;
+      letter-spacing:-.01em
     }
 
     .brand img{
@@ -76,25 +76,23 @@
       height:34px;
       object-fit:contain;
       display:block;
-      border-radius:0;
-      -webkit-mask-image:
-        linear-gradient(to right,transparent 0%,black 7%,black 93%,transparent 100%),
-        linear-gradient(to bottom,transparent 0%,black 7%,black 93%,transparent 100%);
-      mask-image:
-        linear-gradient(to right,transparent 0%,black 7%,black 93%,transparent 100%),
-        linear-gradient(to bottom,transparent 0%,black 7%,black 93%,transparent 100%);
-      -webkit-mask-composite:source-in;
-      mask-composite:intersect;
-    }
-
-    .brand-flibidoo,
-    .results-brand-flibidoo{
-      font-weight:700;
-      font-style:italic;
+      mask-image:linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 74%,
+        transparent 100%
+      );
+      -webkit-mask-image:linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 74%,
+        transparent 100%
+      );
+      border-radius:0 0 11px 11px
     }
 
     main{
-      flex:1;
+      flex:1
     }
 
     .home{
@@ -103,7 +101,7 @@
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      padding:54px 20px 100px;
+      padding:54px 0 100px
     }
 
     .hero-logo{
@@ -111,15 +109,19 @@
       height:auto;
       display:block;
       margin-bottom:12px;
-      border-radius:0;
-      -webkit-mask-image:
-        linear-gradient(to right,transparent 0%,black 7%,black 93%,transparent 100%),
-        linear-gradient(to bottom,transparent 0%,black 7%,black 93%,transparent 100%);
-      mask-image:
-        linear-gradient(to right,transparent 0%,black 7%,black 93%,transparent 100%),
-        linear-gradient(to bottom,transparent 0%,black 7%,black 93%,transparent 100%);
-      -webkit-mask-composite:source-in;
-      mask-composite:intersect;
+      mask-image:linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 78%,
+        transparent 100%
+      );
+      -webkit-mask-image:linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 78%,
+        transparent 100%
+      );
+      border-radius:0 0 34px 34px
     }
 
     h1{
@@ -127,11 +129,11 @@
       line-height:1;
       margin:0 0 30px;
       letter-spacing:-.055em;
-      font-weight:500;
+      font-weight:500
     }
 
     .search-wrap{
-      width:min(100%,680px);
+      width:min(100%,680px)
     }
 
     form{
@@ -141,14 +143,12 @@
       border:1px solid var(--line);
       border-radius:28px;
       background:transparent;
-      transition:
-        border-color .15s ease,
-        box-shadow .15s ease;
+      transition:border-color .15s ease,box-shadow .15s ease
     }
 
     form:focus-within{
       border-color:var(--focus);
-      box-shadow:0 0 0 2px rgba(205,184,209,.08);
+      box-shadow:0 0 0 2px rgba(205,184,209,.08)
     }
 
     .search-icon{
@@ -156,12 +156,12 @@
       height:20px;
       margin-left:18px;
       flex:0 0 auto;
-      opacity:.75;
+      opacity:.75
     }
 
     .search-icon circle,
     .search-icon path{
-      stroke:currentColor;
+      stroke:currentColor
     }
 
     input{
@@ -172,11 +172,11 @@
       background:transparent;
       color:var(--text);
       font-size:16px;
-      padding:0 14px;
+      padding:0 14px
     }
 
     input::placeholder{
-      color:#9e8da1;
+      color:#9e8da1
     }
 
     .submit{
@@ -190,72 +190,86 @@
       padding:0;
       display:grid;
       place-items:center;
+      font-size:20px;
+      line-height:1;
       cursor:pointer;
-      transition:
-        color .15s ease,
-        border-color .15s ease,
-        transform .12s ease;
-    }
-
-    .submit:hover{
-      border-color:var(--focus);
-    }
-
-    .submit:active{
-      transform:scale(.96);
+      transition:color .15s ease,border-color .15s ease
     }
 
     .submit.has-input{
       color:var(--text);
-      border-color:var(--focus);
+      border-color:var(--focus)
+    }
+
+    .submit:hover{
+      border-color:var(--focus)
     }
 
     .submit:focus-visible{
       outline:2px solid var(--focus);
-      outline-offset:2px;
+      outline-offset:2px
     }
 
     .submit-icon{
       width:18px;
       height:18px;
-      display:block;
+      display:block
     }
 
     .links{
       display:flex;
+      align-items:center;
+      justify-content:center;
       gap:18px;
       margin-top:20px;
       color:var(--muted);
       font-size:13px;
-      justify-content:center;
+      flex-wrap:wrap
     }
 
-    .links button{
+    .links button,
+    .links a{
       border:0;
       background:none;
       color:inherit;
       cursor:pointer;
       padding:0;
+      text-decoration:none
     }
 
-    .links button:hover{
-      color:var(--text);
+    .links button:hover,
+    .links a:hover{
+      color:var(--text)
     }
 
-    /* RESULTS */
+    .love-message{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      white-space:nowrap;
+      color:var(--muted)
+    }
+
+    .love-message img{
+      width:22px;
+      height:22px;
+      object-fit:contain;
+      display:inline-block;
+      vertical-align:middle
+    }
 
     .results{
-      padding:30px 20px 70px;
+      padding:30px 0 70px
     }
 
     .results-head{
       display:flex;
       align-items:center;
-      gap:18px;
-      min-height:44px;
+      justify-content:space-between;
       border-bottom:1px solid var(--line2);
       padding-bottom:14px;
       margin-bottom:14px;
+      gap:18px
     }
 
     .results-brand{
@@ -264,21 +278,20 @@
       gap:8px;
       text-decoration:none;
       color:inherit;
-      white-space:nowrap;
-      flex:0 0 auto;
+      white-space:nowrap
     }
 
     .results-brand img{
       width:28px;
       height:28px;
       object-fit:contain;
-      display:block;
+      display:block
     }
 
     .results-brand span{
       font-size:15px;
       font-weight:600;
-      letter-spacing:-.01em;
+      letter-spacing:-.01em
     }
 
     .results-query{
@@ -287,36 +300,62 @@
       overflow:hidden;
       text-overflow:ellipsis;
       white-space:nowrap;
-      flex:1;
-      min-width:0;
+      flex:1
     }
 
     .count{
       font-size:13px;
       color:var(--muted);
-      flex:0 0 auto;
+      white-space:nowrap
     }
 
     .results-search{
       width:min(100%,680px);
-      margin:0 0 10px;
+      margin:0 0 28px
     }
 
     .results-search form{
-      height:48px;
+      height:48px
     }
 
     .results-search .search-icon{
-      margin-left:16px;
+      margin-left:16px
     }
 
     .results-search .submit{
       width:34px;
       height:34px;
-      margin-right:6px;
+      margin-right:6px
     }
 
-    /* SEARCH TYPE TABS */
+    /* Translation suggestion */
+
+    .translate-message{
+      display:none;
+      margin:0 0 18px;
+      padding:11px 14px;
+      border-left:2px solid rgba(184,200,232,.35);
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5
+    }
+
+    .translate-message.visible{
+      display:block
+    }
+
+    .translate-message a{
+      color:var(--translate);
+      text-decoration:underline;
+      text-decoration-thickness:1px;
+      text-underline-offset:2px
+    }
+
+    .translate-message a:hover{
+      color:#d0dcf2
+    }
+
+    /* Search navigation */
 
     .search-types{
       display:flex;
@@ -324,13 +363,7 @@
       gap:0;
       margin:8px 0 18px;
       border-bottom:1px solid rgba(255,255,255,.12);
-      height:36px;
-      overflow-x:auto;
-      scrollbar-width:none;
-    }
-
-    .search-types::-webkit-scrollbar{
-      display:none;
+      height:36px
     }
 
     .search-type{
@@ -346,20 +379,17 @@
       margin:0;
       border-radius:0;
       cursor:pointer;
-      transition:
-        color .12s ease,
-        opacity .12s ease;
-      white-space:nowrap;
+      transition:color .12s ease
     }
 
     .search-type:hover{
       color:rgba(255,255,255,.9);
-      background:transparent;
+      background:transparent
     }
 
     .search-type.active{
       color:#fff;
-      background:transparent;
+      background:transparent
     }
 
     .search-type.active::after{
@@ -370,120 +400,83 @@
       bottom:-1px;
       height:2px;
       border-radius:2px 2px 0 0;
-      background:currentColor;
+      background:currentColor
     }
 
     .search-type:focus-visible{
       outline:1px solid rgba(255,255,255,.55);
-      outline-offset:-2px;
+      outline-offset:-2px
     }
 
-    /* TRANSLATE MESSAGE */
-
-    .translate-message{
-      display:none;
-      width:min(100%,680px);
-      margin:0 0 22px;
-      padding:11px 14px;
-      border:1px solid var(--line2);
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.5;
-      border-radius:8px;
-      background:rgba(255,255,255,.015);
-    }
-
-    .translate-message.show{
-      display:block;
-    }
-
-    .translate-message a{
-      color:var(--translate);
-      text-decoration:underline;
-      text-decoration-thickness:1px;
-      text-underline-offset:2px;
-    }
-
-    .translate-message a:hover{
-      color:#c4dcf3;
-    }
-
-    /* RESULTS LAYOUT */
+    /* Main responsive layout */
 
     .results-layout{
       display:grid;
       grid-template-columns:minmax(0,1fr) 330px;
       gap:42px;
-      align-items:start;
+      align-items:start
     }
 
     .results-main{
-      min-width:0;
+      min-width:0
     }
 
     .dictionary{
       border-left:1px solid var(--line2);
       padding-left:28px;
-      max-height:calc(100vh - 60px);
-      overflow-y:auto;
-      overscroll-behavior:contain;
-      scrollbar-width:thin;
-
-      /* Sticky on desktop/tablet */
       position:sticky;
       top:24px;
-
-      transition:
-        top .25s ease,
-        max-height .25s ease,
-        opacity .2s ease;
+      max-height:calc(100vh - 48px);
+      overflow-y:auto;
+      overscroll-behavior:contain;
+      scrollbar-width:thin
     }
 
     .dictionary::-webkit-scrollbar{
-      width:6px;
+      width:6px
     }
 
     .dictionary::-webkit-scrollbar-thumb{
       background:rgba(255,255,255,.2);
-      border-radius:6px;
+      border-radius:6px
     }
 
     .dictionary.hidden{
-      display:none;
+      display:none
     }
 
     .dictionary-title{
       font-size:22px;
       font-weight:500;
       letter-spacing:-.02em;
-      margin:0 0 5px;
+      margin:0 0 5px
     }
 
     .dictionary-word{
       font-size:13px;
       color:var(--muted);
-      margin-bottom:22px;
+      margin-bottom:22px
     }
 
     .dictionary-entry{
       padding:0 0 24px;
       margin-bottom:24px;
-      border-bottom:1px solid var(--line2);
+      border-bottom:1px solid var(--line2)
     }
 
     .dictionary-entry:last-child{
-      border-bottom:0;
+      border-bottom:0
     }
 
     .dictionary-language{
       font-size:13px;
       color:var(--muted);
-      margin-bottom:8px;
+      margin-bottom:8px
     }
 
     .dictionary-pos{
       font-size:15px;
-      margin-bottom:12px;
+      margin-bottom:12px
     }
 
     .dictionary-pronunciations,
@@ -491,7 +484,7 @@
     .dictionary-senses,
     .dictionary-relations,
     .dictionary-translations{
-      margin-top:14px;
+      margin-top:14px
     }
 
     .dictionary-label{
@@ -499,71 +492,71 @@
       color:var(--muted);
       text-transform:uppercase;
       letter-spacing:.05em;
-      margin-bottom:7px;
+      margin-bottom:7px
     }
 
     .dictionary-list{
       margin:0;
-      padding-left:18px;
+      padding-left:18px
     }
 
     .dictionary-list li{
-      margin:0 0 7px;
+      margin:0 0 7px
     }
 
     .dictionary-sense{
-      margin:0 0 15px;
+      margin:0 0 15px
     }
 
     .dictionary-definition{
       font-size:14px;
-      line-height:1.55;
+      line-height:1.55
     }
 
     .dictionary-tags{
       font-size:12px;
       color:var(--muted);
-      margin-left:5px;
+      margin-left:5px
     }
 
     .dictionary-example{
       font-size:13px;
       line-height:1.5;
       color:var(--result);
-      margin:7px 0 0 14px;
+      margin:7px 0 0 14px
     }
 
     .dictionary-quote{
       font-size:13px;
       line-height:1.5;
       color:var(--muted);
-      margin:7px 0 0 14px;
+      margin:7px 0 0 14px
     }
 
     .dictionary-source{
       font-size:12px;
       line-height:1.5;
       color:var(--muted);
-      padding-top:4px;
+      padding-top:4px
     }
 
     .dictionary-source a{
-      color:inherit;
+      color:inherit
     }
 
     .dictionary-loading,
     .dictionary-empty{
       font-size:13px;
       color:var(--muted);
-      line-height:1.5;
+      line-height:1.5
     }
 
-    /* NORMAL RESULTS */
+    /* Results */
 
     .result{
       padding:0 0 26px;
       margin-bottom:26px;
-      border-bottom:1px solid var(--line2);
+      border-bottom:1px solid var(--line2)
     }
 
     .result-url{
@@ -572,7 +565,7 @@
       margin-bottom:6px;
       overflow:hidden;
       text-overflow:ellipsis;
-      white-space:nowrap;
+      white-space:nowrap
     }
 
     .result h2{
@@ -580,15 +573,15 @@
       line-height:1.25;
       margin:0 0 7px;
       font-weight:500;
-      letter-spacing:-.02em;
+      letter-spacing:-.02em
     }
 
     .result h2 a{
-      text-decoration:none;
+      text-decoration:none
     }
 
     .result h2 a:hover{
-      text-decoration:underline;
+      text-decoration:underline
     }
 
     .snippet{
@@ -596,7 +589,25 @@
       line-height:1.6;
       color:var(--result);
       margin:0;
-      max-width:760px;
+      max-width:760px
+    }
+
+    .result-meta{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:7px
+    }
+
+    .result-inline-thumb{
+      margin-top:10px;
+      max-width:260px
+    }
+
+    .result-inline-thumb img{
+      display:block;
+      width:100%;
+      max-height:150px;
+      object-fit:cover
     }
 
     .result-favicon{
@@ -604,42 +615,24 @@
       height:18px;
       object-fit:contain;
       vertical-align:-4px;
-      margin-right:7px;
+      margin-right:7px
     }
 
-    .result-meta{
-      font-size:12px;
-      color:var(--muted);
-      margin-top:7px;
-    }
-
-    .result-inline-thumb{
-      margin-top:10px;
-      max-width:260px;
-    }
-
-    .result-inline-thumb img{
-      display:block;
-      width:100%;
-      max-height:150px;
-      object-fit:cover;
-    }
-
-    /* IMAGE RESULTS */
+    /* Images */
 
     .image-grid{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:28px 22px;
+      gap:28px 22px
     }
 
     .image-result{
-      min-width:0;
+      min-width:0
     }
 
     .image-result a{
       display:block;
-      text-decoration:none;
+      text-decoration:none
     }
 
     .image-result img{
@@ -648,7 +641,7 @@
       aspect-ratio:4/3;
       object-fit:cover;
       border:1px solid var(--line2);
-      background:rgba(255,255,255,.02);
+      background:rgba(255,255,255,.02)
     }
 
     .image-result-title{
@@ -657,7 +650,7 @@
       margin-top:9px;
       white-space:nowrap;
       overflow:hidden;
-      text-overflow:ellipsis;
+      text-overflow:ellipsis
     }
 
     .image-result-source{
@@ -666,50 +659,49 @@
       margin-top:4px;
       white-space:nowrap;
       overflow:hidden;
-      text-overflow:ellipsis;
+      text-overflow:ellipsis
     }
 
-    /* MAP RESULTS */
+    /* Maps */
 
     .map-result{
       padding:0 0 22px;
       margin-bottom:22px;
-      border-bottom:1px solid var(--line2);
+      border-bottom:1px solid var(--line2)
     }
 
     .map-result-title{
       font-size:18px;
       line-height:1.35;
       margin:0 0 6px;
-      font-weight:500;
+      font-weight:500
     }
 
     .map-result-title a{
-      text-decoration:none;
+      text-decoration:none
     }
 
     .map-result-title a:hover{
-      text-decoration:underline;
+      text-decoration:underline
     }
 
     .map-result-address{
       font-size:14px;
       line-height:1.55;
-      color:var(--result);
+      color:var(--result)
     }
 
     .map-result-coords{
       font-size:12px;
       color:var(--muted);
-      margin-top:6px;
+      margin-top:6px
     }
 
-    /* EMPTY / ERROR */
-
-    .empty{
+    .empty,
+    .error{
       padding:70px 0;
       color:var(--muted);
-      text-align:center;
+      text-align:center
     }
 
     .error{
@@ -724,15 +716,13 @@
       border:1px solid var(--line2);
       color:var(--muted);
       font-size:14px;
-      line-height:1.5;
+      line-height:1.5
     }
-
-    /* PAGER */
 
     .pager{
       display:flex;
       gap:8px;
-      padding-top:10px;
+      padding-top:10px
     }
 
     .pager button{
@@ -741,17 +731,31 @@
       color:var(--text);
       border-radius:4px;
       padding:8px 12px;
-      cursor:pointer;
+      cursor:pointer
     }
 
     .pager button:hover{
-      border-color:var(--focus);
+      border-color:var(--focus)
     }
 
-    /* AUTOCOMPLETE */
+    footer{
+      height:56px;
+      border-top:1px solid var(--line2);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      color:var(--muted);
+      font-size:12px
+    }
+
+    .hidden{
+      display:none!important
+    }
+
+    /* Autocomplete */
 
     .flibidoo-suggest-wrap{
-      position:relative;
+      position:relative
     }
 
     .flibidoo-suggestions{
@@ -764,11 +768,7 @@
       border:1px solid rgba(255,255,255,.14);
       border-radius:8px;
       overflow:hidden;
-      box-shadow:0 8px 20px rgba(0,0,0,.25);
-    }
-
-    .flibidoo-suggestions[hidden]{
-      display:none;
+      box-shadow:0 8px 20px rgba(0,0,0,.25)
     }
 
     .flibidoo-suggestion{
@@ -783,284 +783,229 @@
       padding:10px 13px;
       font:inherit;
       font-size:13px;
-      cursor:pointer;
+      cursor:pointer
     }
 
     .flibidoo-suggestion:hover,
     .flibidoo-suggestion.active{
-      background:rgba(255,255,255,.07);
+      background:rgba(255,255,255,.07)
     }
 
     .flibidoo-suggestion img{
       width:24px;
       height:24px;
       object-fit:cover;
-      border-radius:50%;
+      border-radius:50%
     }
 
     .flibidoo-suggestion small{
       display:block;
       color:rgba(255,255,255,.55);
-      margin-top:2px;
+      margin-top:2px
     }
 
-    /* FOOTER */
+    /* Tablet */
 
-    footer{
-      height:56px;
-      border-top:1px solid var(--line2);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      color:var(--muted);
-      font-size:12px;
-      padding:0 20px;
-    }
-
-    .footer-links{
-      display:flex;
-      gap:16px;
-    }
-
-    .footer-links a{
-      text-decoration:none;
-    }
-
-    .footer-links a:hover{
-      text-decoration:underline;
-      color:var(--text);
-    }
-
-    .hidden{
-      display:none!important;
-    }
-
-    /*
-      TABLET
-      Dictionary remains on the right and sticky.
-    */
-
-    @media(max-width:900px) and (min-width:701px){
+    @media(max-width:1000px){
 
       .shell{
-        width:min(calc(100% - 48px),1120px);
-      }
-
-      .results{
-        padding-left:24px;
-        padding-right:24px;
+        width:min(100% - 32px,900px)
       }
 
       .results-layout{
-        grid-template-columns:minmax(0,1fr) 290px;
-        gap:28px;
+        grid-template-columns:minmax(0,1fr) 300px;
+        gap:30px
       }
 
       .dictionary{
-        top:20px;
-        max-height:calc(100vh - 40px);
+        top:18px;
+        max-height:calc(100vh - 36px);
+        padding-left:22px
+      }
+    }
+
+    /* Phones: dictionary above results and NOT sticky */
+
+    @media(max-width:760px){
+
+      .shell{
+        width:min(100% - 28px,680px)
+      }
+
+      .results{
+        padding:24px 0 60px
+      }
+
+      .results-layout{
+        display:flex;
+        flex-direction:column;
+        gap:28px
+      }
+
+      /*
+        Dictionary appears first on phones.
+        order:-1 ensures it is above resultList.
+      */
+      .dictionary{
+        order:-1;
+        width:100%;
+        border-left:0;
+        border-top:0;
+        border-bottom:1px solid var(--line2);
+        padding:0 0 26px;
+        position:static;
+        top:auto;
+        max-height:none;
+        overflow:visible;
+        overscroll-behavior:auto
+      }
+
+      .results-main{
+        order:2;
+        width:100%
+      }
+
+      .translate-message{
+        margin-bottom:16px
       }
 
       .image-grid{
         grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:22px 14px
+      }
+
+      .results-head{
+        gap:12px
+      }
+
+      .results-query{
+        font-size:13px
+      }
+
+      .count{
+        display:none
       }
     }
 
-    /*
-      PHONE / VERTICAL DEVICES
-      Dictionary becomes the first item above results.
-      Sticky is explicitly disabled.
-    */
-
-    @media(max-width:700px){
+    @media(max-width:640px){
 
       .shell{
-        width:calc(100% - 28px);
+        width:calc(100% - 24px)
+      }
+
+      header{
+        height:58px
       }
 
       .home{
-        min-height:calc(100vh - 58px);
-        padding:
-          30px 14px
-          80px;
+        min-height:100vh;
+        padding:25px 0 60px
       }
 
       .hero-logo{
-        width:150px;
+        width:150px
       }
 
       h1{
         font-size:36px;
-        margin-bottom:24px;
+        margin-bottom:24px
       }
 
       form{
-        height:50px;
+        height:50px
+      }
+
+      .submit{
+        width:38px;
+        padding:0
       }
 
       .results{
-        padding:
-          22px 14px
-          60px;
-      }
-
-      .results-head{
-        gap:12px;
-        flex-wrap:wrap;
-      }
-
-      .results-brand img{
-        width:24px;
-        height:24px;
-      }
-
-      .results-brand span{
-        font-size:14px;
-      }
-
-      .results-query{
-        order:3;
-        flex-basis:100%;
-        font-size:13px;
-      }
-
-      .count{
-        margin-left:auto;
+        padding-top:20px
       }
 
       .results-search{
-        width:100%;
+        margin-bottom:22px
       }
 
       .search-types{
-        margin-top:8px;
+        overflow-x:auto;
+        scrollbar-width:none
+      }
+
+      .search-types::-webkit-scrollbar{
+        display:none
       }
 
       .search-type{
         padding-left:10px;
         padding-right:10px;
-        font-size:12px;
+        font-size:12px
       }
 
-      /*
-        Important:
-        Grid order puts dictionary ABOVE results.
-      */
-
-      .results-layout{
-        display:flex;
-        flex-direction:column;
-        gap:26px;
+      .results-brand img{
+        width:24px;
+        height:24px
       }
 
-      .dictionary{
-        order:1;
-        width:100%;
-        border-left:0;
-        border-top:1px solid var(--line2);
-        padding:
-          24px 0 0;
-
-        /*
-          No sticky behavior on phones.
-        */
-        position:static;
-        top:auto;
-
-        max-height:none;
-        overflow:visible;
-
-        transition:
-          padding .25s ease,
-          opacity .2s ease;
+      .results-brand span{
+        font-size:14px
       }
 
-      .results-main{
-        order:2;
-        width:100%;
+      .results-query{
+        display:none
+      }
+
+      .result h2{
+        font-size:18px
+      }
+
+      .snippet{
+        font-size:14px
       }
 
       .dictionary-title{
-        font-size:21px;
+        font-size:20px
       }
 
-      .translate-message{
-        width:100%;
-        margin-bottom:18px;
-      }
-
-      .image-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:22px 14px;
-      }
-
-      .footer-links{
-        gap:10px;
+      .love-message{
+        white-space:normal;
+        text-align:center;
+        justify-content:center
       }
     }
 
     @media(max-width:460px){
 
       .shell{
-        width:calc(100% - 24px);
+        width:calc(100% - 20px)
       }
 
       .home{
-        padding-left:12px;
-        padding-right:12px;
+        padding-left:4px;
+        padding-right:4px
       }
 
-      .results{
-        padding-left:12px;
-        padding-right:12px;
+      .search-wrap{
+        width:100%
       }
 
       .image-grid{
-        grid-template-columns:1fr;
+        grid-template-columns:1fr
       }
 
       .links{
-        gap:15px;
-      }
-
-      .results-brand span{
-        font-size:13px;
-      }
-
-      .count{
-        font-size:12px;
-      }
-    }
-
-    /*
-      EXTRA SMALL DEVICES
-      Gives search controls breathing room.
-    */
-
-    @media(max-width:360px){
-
-      .home{
-        padding-left:8px;
-        padding-right:8px;
+        gap:14px;
+        line-height:1.4
       }
 
       .results{
-        padding-left:8px;
-        padding-right:8px;
+        padding-left:2px;
+        padding-right:2px
       }
 
-      input{
-        font-size:15px;
-        padding-left:10px;
-        padding-right:8px;
-      }
-
-      .search-icon{
-        margin-left:13px;
-      }
-
-      .submit{
-        margin-right:6px;
+      .results-head{
+        margin-bottom:12px
       }
     }
   </style>
@@ -1081,7 +1026,7 @@
     />
 
     <h1>
-      <span class="brand-flibidoo">Flibidoo</span>Search
+      <strong><em>Flibidoo</em></strong>Search
     </h1>
 
     <div class="search-wrap">
@@ -1148,17 +1093,25 @@
       </form>
 
       <div class="links">
-        <button type="button" id="lucky">
-          I'm Feeling Lucky
-        </button>
 
-        <button type="button" id="clear">
-          Clear
-        </button>
+        <a
+          href="https://flibidoo-translate.devs.surf"
+          id="translateLink"
+        >
+          FlibidooTranslate
+        </a>
+
+        <span class="love-message">
+          woth love from The Great Confederacy of E
+          <img
+            src="https://raw.githubusercontent.com/danieltorres-mhcs/assets/refs/heads/main/Untitled13_20260821194209.png"
+            alt=""
+          />
+        </span>
+
       </div>
 
     </div>
-
   </section>
 
 
@@ -1173,16 +1126,14 @@
         href="/"
         aria-label="FlibidooSearch home"
       >
-
         <img
           src="https://github.com/danieltorres-mhcs/assets/blob/main/flibidoo.PNG?raw=true"
           alt="FlibidooSearch"
         />
 
         <span>
-          <span class="results-brand-flibidoo">Flibidoo</span>Search
+          <strong><em>Flibidoo</em></strong>Search
         </span>
-
       </a>
 
       <div
@@ -1241,12 +1192,14 @@
           aria-label="Search"
           title="Search"
         >
+
           <svg
             class="submit-icon"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"
           >
+
             <path
               d="M5 12h14"
               stroke="currentColor"
@@ -1261,7 +1214,9 @@
               stroke-linecap="round"
               stroke-linejoin="round"
             />
+
           </svg>
+
         </button>
 
       </form>
@@ -1269,7 +1224,16 @@
     </div>
 
 
-    <!-- SEARCH TYPE NAV -->
+    <!-- Translation suggestion -->
+
+    <div
+      id="translateMessage"
+      class="translate-message"
+      role="status"
+    ></div>
+
+
+    <!-- Search categories -->
 
     <nav
       class="search-types"
@@ -1311,31 +1275,9 @@
     </nav>
 
 
-    <!-- TRANSLATE DETECTION MESSAGE -->
-
-    <div
-      id="translateMessage"
-      class="translate-message"
-      role="status"
-      aria-live="polite"
-    >
-      I think you need
-      <a
-        href="https://flibidoo-translate.devs.surf"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        FlibidooTranslate
-      </a>
-      for that.
-    </div>
-
-
-    <!-- MAIN RESULTS + DICTIONARY -->
-
     <div class="results-layout">
 
-      <!-- MAIN SEARCH RESULTS -->
+      <!-- MAIN RESULTS -->
 
       <div class="results-main">
 
@@ -1365,21 +1307,13 @@
 
 
 <script>
-/*
-==========================================================
-FLIBIDOOSEARCH CONFIGURATION
-==========================================================
-*/
+/* ============================================================
+   FLIBIDOOSEARCH CONFIGURATION
+   ============================================================ */
 
-const WORKER_URL =
+const WORKER_BASE =
   'https://ancient-unit-5007.daniel-torres-a95.workers.dev';
 
-
-/*
-==========================================================
-DOM
-==========================================================
-*/
 
 const form =
   document.querySelector('#searchForm');
@@ -1429,37 +1363,9 @@ let currentPage = 0;
 let currentType = 'web';
 
 
-/*
-==========================================================
-UTILITY
-==========================================================
-*/
-
-function api(path, params = {}) {
-
-  const url =
-    new URL(
-      path,
-      WORKER_URL
-    );
-
-  Object.entries(params).forEach(
-    ([key,value]) => {
-      if(
-        value !== undefined &&
-        value !== null
-      ){
-        url.searchParams.set(
-          key,
-          value
-        );
-      }
-    }
-  );
-
-  return url.toString();
-}
-
+/* ============================================================
+   HELPERS
+   ============================================================ */
 
 function esc(s = '') {
 
@@ -1473,237 +1379,38 @@ function esc(s = '') {
       '"':'&quot;'
     }[c])
   );
+
 }
 
 
-function updateButtonState(
-  button,
-  value
-){
+function updateButtonState(button,value){
 
   button.classList.toggle(
     'has-input',
     value.trim().length > 0
   );
+
 }
 
 
 function normalize(s = ''){
 
-  return s
+  return String(s)
     .toLowerCase()
     .trim()
-    .replace(
-      /[“”"'.,!?;:()[\]{}]/g,
-      ''
-    )
-    .replace(
-      /\s+/g,
-      ' '
-    );
+    .replace(/[“”"'.,!?;:()[\]{}]/g,'')
+    .replace(/\s+/g,' ');
+
 }
 
 
-/*
-==========================================================
-DICTIONARY WORD DETECTION
-==========================================================
-*/
+/* ============================================================
+   TRANSLATION INTENT DETECTION
+   ============================================================ */
 
-function levenshtein(a,b){
+function translationIntent(query){
 
-  const prev =
-    Array.from(
-      {length:b.length + 1},
-      (_,i) => i
-    );
-
-  for(
-    let i = 1;
-    i <= a.length;
-    i++
-  ){
-
-    const cur = [i];
-
-    for(
-      let j = 1;
-      j <= b.length;
-      j++
-    ){
-
-      cur[j] =
-        Math.min(
-          cur[j - 1] + 1,
-          prev[j] + 1,
-          prev[j - 1] +
-          (
-            a[i - 1] === b[j - 1]
-              ? 0
-              : 1
-          )
-        );
-    }
-
-    for(
-      let j = 0;
-      j <= b.length;
-      j++
-    ){
-      prev[j] = cur[j];
-    }
-  }
-
-  return prev[b.length];
-}
-
-
-function dictionaryWord(query){
-
-  const q =
-    normalize(query);
-
-  if(!q){
-    return null;
-  }
-
-  const words =
-    q.split(' ');
-
-  if(words.length === 1){
-    return q;
-  }
-
-  const candidates =
-    new Set();
-
-  for(const word of words){
-
-    if(
-      /^[a-z][a-z'-]*$/i.test(word)
-    ){
-
-      candidates.add(
-        word.replace(
-          /^['-]+|['-]+$/g,
-          ''
-        )
-      );
-    }
-  }
-
-  for(const word of candidates){
-
-    const templates = [
-
-      `meaning of ${word}`,
-
-      `${word} meaning`,
-
-      `${word} means`,
-
-      `${word} definition`,
-
-      `definition of ${word}`
-
-    ];
-
-    for(
-      const template of templates
-    ){
-
-      if(
-        levenshtein(
-          q,
-          template
-        ) <= 3
-      ){
-
-        return word;
-      }
-    }
-  }
-
-  return null;
-}
-
-
-/*
-==========================================================
-ENGLISH-FIRST DICTIONARY
-==========================================================
-*/
-
-function prioritizeEnglish(entries){
-
-  if(
-    !Array.isArray(entries) ||
-    !entries.length
-  ){
-    return [];
-  }
-
-  return [...entries].sort(
-    (a,b) => {
-
-      const aCode =
-        String(
-          a?.language?.code || ''
-        ).toLowerCase();
-
-      const aName =
-        String(
-          a?.language?.name || ''
-        ).toLowerCase();
-
-      const bCode =
-        String(
-          b?.language?.code || ''
-        ).toLowerCase();
-
-      const bName =
-        String(
-          b?.language?.name || ''
-        ).toLowerCase();
-
-      const aEnglish =
-        aCode === 'en' ||
-        aName === 'english';
-
-      const bEnglish =
-        bCode === 'en' ||
-        bName === 'english';
-
-      if(
-        aEnglish &&
-        !bEnglish
-      ){
-        return -1;
-      }
-
-      if(
-        bEnglish &&
-        !aEnglish
-      ){
-        return 1;
-      }
-
-      return 0;
-    }
-  );
-}
-
-
-/*
-==========================================================
-TRANSLATE QUERY DETECTION
-==========================================================
-*/
-
-function isTranslationQuery(query){
-
-  const q =
-    normalize(query);
+  const q = normalize(query);
 
   if(!q){
     return false;
@@ -1711,70 +1418,730 @@ function isTranslationQuery(query){
 
 
   /*
-    Examples:
+    Examples detected:
 
     translate hello
     translator
-    translated word
+    translated text
     translate this to english
-    hello to english
-    english to spanish
-  */
-
-  if(
-    /\bto english\b/i.test(q) ||
-    /\benglish to\b/i.test(q) ||
-    /\btranslate\b/i.test(q) ||
-    /\btranslator\b/i.test(q) ||
-    /\btranslated\b/i.test(q)
-  ){
-    return true;
-  }
-
-
-  /*
-    Examples:
-
+    translate english to spanish
+    english to french
     say hello in spanish
-    say good morning in japanese
-    say hello in french
+    say hello in japanese
+    how do you say hello in spanish
   */
 
-  if(
-    /^say\s+.+\s+in\s+.+$/i.test(q)
-  ){
+  if(/\btranslate\b/.test(q)){
     return true;
   }
 
+  if(/\btranslator\b/.test(q)){
+    return true;
+  }
+
+  if(/\btranslated\b/.test(q)){
+    return true;
+  }
+
+  if(/\bto english\b/.test(q)){
+    return true;
+  }
+
+  if(/\benglish to\b/.test(q)){
+    return true;
+  }
+
+  if(/\bsay\b.+\bin\b/.test(q)){
+    return true;
+  }
 
   return false;
+
 }
 
 
-function updateTranslateMessage(query){
+function showTranslateMessage(query){
+
+  if(!translationIntent(query)){
+
+    translateMessage.classList.remove('visible');
+    translateMessage.innerHTML='';
+
+    return;
+  }
+
+
+  translateMessage.innerHTML =
+    `I think you need ` +
+    `<a href="https://flibidoo-translate.devs.surf">` +
+    `<strong><em>Flibidoo</em></strong>Translate` +
+    `</a> for that.`;
+
+
+  translateMessage.classList.add('visible');
+
+}
+
+
+/* ============================================================
+   LEVENSHTEIN
+   ============================================================ */
+
+function levenshtein(a,b){
+
+  const prev =
+    Array.from(
+      {length:b.length + 1},
+      (_,i)=>i
+    );
+
+
+  for(let i=1;i<=a.length;i++){
+
+    let cur=[i];
+
+    for(let j=1;j<=b.length;j++){
+
+      cur[j]=Math.min(
+        cur[j-1]+1,
+        prev[j]+1,
+        prev[j-1]+(
+          a[i-1]===b[j-1] ? 0 : 1
+        )
+      );
+
+    }
+
+    for(
+      let j=0;
+      j<=b.length;
+      j++
+    ){
+
+      prev[j]=cur[j];
+
+    }
+
+  }
+
+  return prev[b.length];
+
+}
+
+
+/* ============================================================
+   DICTIONARY DETECTION
+   ============================================================ */
+
+function dictionaryWord(query){
+
+  const q=normalize(query);
+
+  if(!q){
+    return null;
+  }
+
+
+  if(q.split(' ').length===1){
+    return q;
+  }
+
+
+  const tokens =
+    q
+      .split(' ')
+      .filter(Boolean);
+
+
+  const candidates =
+    new Set();
+
+
+  for(const t of tokens){
+
+    if(
+      /^[a-z][a-z'-]*$/i.test(t)
+    ){
+
+      candidates.add(
+        t.replace(
+          /^['-]+|['-]+$/g,
+          ''
+        )
+      );
+
+    }
+
+  }
+
+
+  for(const word of candidates){
+
+    const templates=[
+
+      `meaning of ${word}`,
+      `${word} meaning`,
+      `${word} means`,
+      `${word} definition`,
+      `definition of ${word}`
+
+    ];
+
+
+    for(const template of templates){
+
+      if(
+        levenshtein(q,template)<=3
+      ){
+
+        return word;
+
+      }
+
+    }
+
+  }
+
+
+  return null;
+
+}
+
+
+/* ============================================================
+   DICTIONARY LANGUAGE PRIORITIZATION
+   ============================================================ */
+
+function prioritizeEnglish(entries){
+
+  if(!Array.isArray(entries)){
+    return entries;
+  }
+
+
+  return [...entries].sort(
+    (a,b)=>{
+
+      const aLang =
+        String(
+          a?.language?.code ||
+          a?.language?.name ||
+          ''
+        ).toLowerCase();
+
+      const bLang =
+        String(
+          b?.language?.code ||
+          b?.language?.name ||
+          ''
+        ).toLowerCase();
+
+
+      const aEnglish =
+        aLang === 'en' ||
+        aLang === 'eng' ||
+        aLang.includes('english');
+
+
+      const bEnglish =
+        bLang === 'en' ||
+        bLang === 'eng' ||
+        bLang.includes('english');
+
+
+      if(aEnglish && !bEnglish){
+        return -1;
+      }
+
+      if(!aEnglish && bEnglish){
+        return 1;
+      }
+
+      return 0;
+
+    }
+  );
+
+}
+
+
+/* ============================================================
+   DICTIONARY RENDERING
+   ============================================================ */
+
+function dictionaryTags(tags){
+
+  return Array.isArray(tags) && tags.length
+
+    ? ` <span class="dictionary-tags">(${tags.map(esc).join(', ')})</span>`
+
+    : '';
+
+}
+
+
+function renderSense(sense,depth=0){
+
+  if(!sense){
+    return '';
+  }
+
+
+  let html =
+    `<div class="dictionary-sense" style="margin-left:${Math.min(depth,3)*12}px">`;
+
+
+  if(sense.definition){
+
+    html +=
+      `<div class="dictionary-definition">` +
+      `${esc(sense.definition)}` +
+      `${dictionaryTags(sense.tags)}` +
+      `</div>`;
+
+  }
+
+
+  if(Array.isArray(sense.examples)){
+
+    sense.examples.forEach(x=>{
+
+      if(x){
+
+        html +=
+          `<div class="dictionary-example">` +
+          `“${esc(x)}”` +
+          `</div>`;
+
+      }
+
+    });
+
+  }
+
+
+  if(Array.isArray(sense.quotes)){
+
+    sense.quotes.forEach(q=>{
+
+      if(q?.text){
+
+        html +=
+          `<div class="dictionary-quote">` +
+          `“${esc(q.text)}”` +
+          `${q.reference ? ` — ${esc(q.reference)}` : ''}` +
+          `</div>`;
+
+      }
+
+    });
+
+  }
+
 
   if(
-    isTranslationQuery(query)
+    Array.isArray(sense.synonyms) &&
+    sense.synonyms.length
   ){
 
-    translateMessage.classList.add(
-      'show'
-    );
+    html +=
+      `<div class="dictionary-relations">` +
+      `<div class="dictionary-label">Synonyms</div>` +
+      `<div>${sense.synonyms.map(esc).join(', ')}</div>` +
+      `</div>`;
 
-  }else{
-
-    translateMessage.classList.remove(
-      'show'
-    );
   }
+
+
+  if(
+    Array.isArray(sense.antonyms) &&
+    sense.antonyms.length
+  ){
+
+    html +=
+      `<div class="dictionary-relations">` +
+      `<div class="dictionary-label">Antonyms</div>` +
+      `<div>${sense.antonyms.map(esc).join(', ')}</div>` +
+      `</div>`;
+
+  }
+
+
+  if(
+    Array.isArray(sense.translations) &&
+    sense.translations.length
+  ){
+
+    html +=
+      `<div class="dictionary-translations">` +
+      `<div class="dictionary-label">Translations</div>` +
+      `<ul class="dictionary-list">`;
+
+
+    sense.translations.forEach(t=>{
+
+      if(t?.word){
+
+        html +=
+          `<li>` +
+          `${esc(
+            t.language?.name ||
+            t.language?.code ||
+            ''
+          )}` +
+          ` — ${esc(t.word)}` +
+          `</li>`;
+
+      }
+
+    });
+
+
+    html +=
+      `</ul></div>`;
+
+  }
+
+
+  if(Array.isArray(sense.subsenses)){
+
+    sense.subsenses.forEach(sub=>{
+
+      html +=
+        renderSense(
+          sub,
+          depth+1
+        );
+
+    });
+
+  }
+
+
+  return html + '</div>';
+
 }
 
 
-/*
-==========================================================
-RICH TEXT
-==========================================================
-*/
+function renderDictionary(data){
+
+  if(
+    !data?.entries?.length
+  ){
+
+    dictionary.classList.add('hidden');
+    dictionary.innerHTML='';
+
+    return;
+
+  }
+
+
+  const entries =
+    prioritizeEnglish(
+      data.entries
+    );
+
+
+  let html =
+    `<h2 class="dictionary-title">` +
+    `${esc(data.word || '')}` +
+    `</h2>`;
+
+
+  html +=
+    `<div class="dictionary-word">Dictionary</div>`;
+
+
+  entries.forEach(entry=>{
+
+    html +=
+      `<section class="dictionary-entry">`;
+
+
+    const language =
+      entry.language?.name ||
+      entry.language?.code;
+
+
+    if(language){
+
+      html +=
+        `<div class="dictionary-language">` +
+        `${esc(language)}` +
+        `${
+          entry.language?.code
+            ? ` (${esc(entry.language.code)})`
+            : ''
+        }` +
+        `</div>`;
+
+    }
+
+
+    if(entry.partOfSpeech){
+
+      html +=
+        `<div class="dictionary-pos">` +
+        `${esc(entry.partOfSpeech)}` +
+        `</div>`;
+
+    }
+
+
+    if(
+      Array.isArray(entry.pronunciations) &&
+      entry.pronunciations.length
+    ){
+
+      html +=
+        `<div class="dictionary-pronunciations">` +
+        `<div class="dictionary-label">Pronunciations</div>` +
+        `<ul class="dictionary-list">`;
+
+
+      entry.pronunciations.forEach(p=>{
+
+        if(p?.text){
+
+          html +=
+            `<li>` +
+            `${esc(p.text)}` +
+            `${
+              p.type
+                ? ` — ${esc(p.type)}`
+                : ''
+            }` +
+            `${dictionaryTags(p.tags)}` +
+            `</li>`;
+
+        }
+
+      });
+
+
+      html +=
+        `</ul></div>`;
+
+    }
+
+
+    if(
+      Array.isArray(entry.forms) &&
+      entry.forms.length
+    ){
+
+      html +=
+        `<div class="dictionary-forms">` +
+        `<div class="dictionary-label">Forms</div>` +
+        `<ul class="dictionary-list">`;
+
+
+      entry.forms.forEach(f=>{
+
+        if(f?.word){
+
+          html +=
+            `<li>` +
+            `${esc(f.word)}` +
+            `${dictionaryTags(f.tags)}` +
+            `</li>`;
+
+        }
+
+      });
+
+
+      html +=
+        `</ul></div>`;
+
+    }
+
+
+    if(
+      Array.isArray(entry.senses) &&
+      entry.senses.length
+    ){
+
+      html +=
+        `<div class="dictionary-senses">` +
+        `<div class="dictionary-label">Definitions</div>`;
+
+
+      entry.senses.forEach(
+        s=>{
+          html += renderSense(s);
+        }
+      );
+
+
+      html +=
+        `</div>`;
+
+    }
+
+
+    if(
+      Array.isArray(entry.synonyms) &&
+      entry.synonyms.length
+    ){
+
+      html +=
+        `<div class="dictionary-relations">` +
+        `<div class="dictionary-label">Synonyms</div>` +
+        `<div>${entry.synonyms.map(esc).join(', ')}</div>` +
+        `</div>`;
+
+    }
+
+
+    if(
+      Array.isArray(entry.antonyms) &&
+      entry.antonyms.length
+    ){
+
+      html +=
+        `<div class="dictionary-relations">` +
+        `<div class="dictionary-label">Antonyms</div>` +
+        `<div>${entry.antonyms.map(esc).join(', ')}</div>` +
+        `</div>`;
+
+    }
+
+
+    html +=
+      `</section>`;
+
+  });
+
+
+  if(data.source){
+
+    html +=
+      `<div class="dictionary-source">` +
+      `Source: `;
+
+
+    if(data.source.url){
+
+      html +=
+        `<a href="${esc(data.source.url)}" rel="noopener noreferrer">` +
+        `${esc(data.source.url)}` +
+        `</a>`;
+
+    }
+
+
+    if(data.source.license){
+
+      html +=
+        `<br>License: `;
+
+
+      if(data.source.license.url){
+
+        html +=
+          `<a href="${esc(data.source.license.url)}" rel="noopener noreferrer">` +
+          `${esc(data.source.license.name || 'License')}` +
+          `</a>`;
+
+      }else{
+
+        html +=
+          esc(
+            data.source.license.name || ''
+          );
+
+      }
+
+    }
+
+
+    html +=
+      `</div>`;
+
+  }
+
+
+  dictionary.innerHTML=html;
+  dictionary.classList.remove('hidden');
+
+}
+
+
+/* ============================================================
+   DICTIONARY API
+   ============================================================ */
+
+async function loadDictionary(q){
+
+  const word =
+    dictionaryWord(q);
+
+
+  if(!word){
+
+    dictionary.classList.add('hidden');
+    dictionary.innerHTML='';
+
+    return;
+
+  }
+
+
+  dictionary.classList.remove('hidden');
+
+  dictionary.innerHTML =
+    '<div class="dictionary-loading">' +
+    'Looking up the definition…' +
+    '</div>';
+
+
+  try{
+
+    const r =
+      await fetch(
+        `${WORKER_BASE}/api/dictionary?word=${encodeURIComponent(word)}`
+      );
+
+
+    if(!r.ok){
+
+      dictionary.classList.add('hidden');
+
+      return;
+
+    }
+
+
+    const data =
+      await r.json();
+
+
+    if(data?.entries?.length){
+
+      renderDictionary(data);
+
+    }else{
+
+      dictionary.classList.add('hidden');
+      dictionary.innerHTML='';
+
+    }
+
+  }catch(_){
+
+    dictionary.classList.add('hidden');
+    dictionary.innerHTML='';
+
+  }
+
+}
+
+
+/* ============================================================
+   RICH TEXT
+   ============================================================ */
 
 window.flibidooRichText =
 function(value){
@@ -1782,66 +2149,61 @@ function(value){
   let src =
     String(value ?? '');
 
+
   if(!src){
     return '';
   }
 
 
   const ta =
-    document.createElement(
-      'textarea'
-    );
+    document.createElement('textarea');
 
-  ta.innerHTML = src;
+  ta.innerHTML=src;
 
-  src = ta.value;
+  src=ta.value;
 
 
-  src = src
-    .replace(
-      /<\s*(script|iframe|object|embed|form|input|button|textarea|select|style|link|meta|svg|math)[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi,
-      ''
-    )
-    .replace(
-      /<\s*(script|iframe|object|embed|form|input|button|textarea|select|style|link|meta|svg|math)[^>]*\/?>/gi,
-      ''
-    )
-    .replace(
-      /\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi,
-      ''
-    )
-    .replace(
-      /\s+(href|src)\s*=\s*(['"])\s*javascript:[\s\S]*?\2/gi,
-      ''
-    );
+  src =
+    src
+      .replace(
+        /<\s*(script|iframe|object|embed|form|input|button|textarea|select|style|link|meta|svg|math)[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi,
+        ''
+      )
+      .replace(
+        /<\s*(script|iframe|object|embed|form|input|button|textarea|select|style|link|meta|svg|math)[^>]*\/?>/gi,
+        ''
+      )
+      .replace(
+        /\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi,
+        ''
+      )
+      .replace(
+        /\s+(href|src)\s*=\s*(['"])\s*javascript:[\s\S]*?\2/gi,
+        ''
+      );
 
 
-  const allowed = [];
+  const allowed=[];
 
 
   src =
     src.replace(
       /<\/?(strong|b|em|i|u|s|del|mark|small|br|code|kbd|sub|sup|a)(?:\s+[^>]*)?>/gi,
-      m => {
+      m=>{
 
         const idx =
-          allowed.push(m) - 1;
+          allowed.push(m)-1;
 
         return `@@FLIBIDOO_TAG_${idx}@@`;
+
       }
     );
 
 
   src =
     src
-      .replace(
-        /</g,
-        '&lt;'
-      )
-      .replace(
-        />/g,
-        '&gt;'
-      );
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;');
 
 
   src =
@@ -1917,8 +2279,7 @@ function(value){
   src =
     src.replace(
       /@@FLIBIDOO_TAG_(\d+)@@/g,
-      (_,i) =>
-        allowed[Number(i)] || ''
+      (_,i)=>allowed[Number(i)] || ''
     );
 
 
@@ -1926,629 +2287,33 @@ function(value){
     /\r?\n/g,
     '<br>'
   );
+
 };
 
 
-/*
-==========================================================
-DICTIONARY RENDERING
-==========================================================
-*/
-
-function dictionaryTags(tags){
-
-  if(
-    !Array.isArray(tags) ||
-    !tags.length
-  ){
-    return '';
-  }
-
-  return `
-    <span class="dictionary-tags">
-      (${tags.map(esc).join(', ')})
-    </span>
-  `;
-}
-
-
-function renderSense(
-  sense,
-  depth = 0
-){
-
-  if(!sense){
-    return '';
-  }
-
-  let html = `
-    <div
-      class="dictionary-sense"
-      style="margin-left:${Math.min(depth,3)*12}px"
-    >
-  `;
-
-
-  if(sense.definition){
-
-    html += `
-      <div class="dictionary-definition">
-        ${esc(sense.definition)}
-        ${dictionaryTags(sense.tags)}
-      </div>
-    `;
-  }
-
-
-  if(
-    Array.isArray(sense.examples)
-  ){
-
-    sense.examples.forEach(
-      example => {
-
-        if(example){
-
-          html += `
-            <div class="dictionary-example">
-              “${esc(example)}”
-            </div>
-          `;
-        }
-      }
-    );
-  }
-
-
-  if(
-    Array.isArray(sense.quotes)
-  ){
-
-    sense.quotes.forEach(
-      quote => {
-
-        if(quote?.text){
-
-          html += `
-            <div class="dictionary-quote">
-              “${esc(quote.text)}”
-              ${
-                quote.reference
-                  ? ` — ${esc(quote.reference)}`
-                  : ''
-              }
-            </div>
-          `;
-        }
-      }
-    );
-  }
-
-
-  if(
-    Array.isArray(sense.synonyms) &&
-    sense.synonyms.length
-  ){
-
-    html += `
-      <div class="dictionary-relations">
-        <div class="dictionary-label">
-          Synonyms
-        </div>
-
-        <div>
-          ${sense.synonyms.map(esc).join(', ')}
-        </div>
-      </div>
-    `;
-  }
-
-
-  if(
-    Array.isArray(sense.antonyms) &&
-    sense.antonyms.length
-  ){
-
-    html += `
-      <div class="dictionary-relations">
-        <div class="dictionary-label">
-          Antonyms
-        </div>
-
-        <div>
-          ${sense.antonyms.map(esc).join(', ')}
-        </div>
-      </div>
-    `;
-  }
-
-
-  if(
-    Array.isArray(sense.translations) &&
-    sense.translations.length
-  ){
-
-    html += `
-      <div class="dictionary-translations">
-
-        <div class="dictionary-label">
-          Translations
-        </div>
-
-        <ul class="dictionary-list">
-    `;
-
-
-    sense.translations.forEach(
-      translation => {
-
-        if(translation?.word){
-
-          html += `
-            <li>
-              ${
-                esc(
-                  translation.language?.name ||
-                  translation.language?.code ||
-                  ''
-                )
-              }
-
-              —
-
-              ${esc(translation.word)}
-            </li>
-          `;
-        }
-      }
-    );
-
-
-    html += `
-        </ul>
-      </div>
-    `;
-  }
-
-
-  if(
-    Array.isArray(sense.subsenses)
-  ){
-
-    sense.subsenses.forEach(
-      sub =>
-        html += renderSense(
-          sub,
-          depth + 1
-        )
-    );
-  }
-
-
-  return html + '</div>';
-}
-
-
-function renderDictionary(data){
-
-  if(
-    !data?.entries?.length
-  ){
-
-    dictionary.classList.add(
-      'hidden'
-    );
-
-    dictionary.innerHTML = '';
-
-    return;
-  }
-
-
-  /*
-    English entries are intentionally
-    moved to the top.
-  */
-
-  const entries =
-    prioritizeEnglish(
-      data.entries
-    );
-
-
-  let html = `
-
-    <h2 class="dictionary-title">
-      ${esc(data.word || '')}
-    </h2>
-
-    <div class="dictionary-word">
-      Dictionary
-    </div>
-
-  `;
-
-
-  entries.forEach(
-    entry => {
-
-      html += `
-        <section class="dictionary-entry">
-      `;
-
-
-      const language =
-        entry.language?.name ||
-        entry.language?.code;
-
-
-      if(language){
-
-        html += `
-          <div class="dictionary-language">
-            ${esc(language)}
-            ${
-              entry.language?.code
-                ? ` (${esc(entry.language.code)})`
-                : ''
-            }
-          </div>
-        `;
-      }
-
-
-      if(entry.partOfSpeech){
-
-        html += `
-          <div class="dictionary-pos">
-            ${esc(entry.partOfSpeech)}
-          </div>
-        `;
-      }
-
-
-      if(
-        Array.isArray(
-          entry.pronunciations
-        ) &&
-        entry.pronunciations.length
-      ){
-
-        html += `
-          <div class="dictionary-pronunciations">
-
-            <div class="dictionary-label">
-              Pronunciations
-            </div>
-
-            <ul class="dictionary-list">
-        `;
-
-
-        entry.pronunciations.forEach(
-          pronunciation => {
-
-            if(
-              pronunciation?.text
-            ){
-
-              html += `
-                <li>
-                  ${esc(pronunciation.text)}
-                  ${
-                    pronunciation.type
-                      ? ` — ${esc(pronunciation.type)}`
-                      : ''
-                  }
-                  ${dictionaryTags(
-                    pronunciation.tags
-                  )}
-                </li>
-              `;
-            }
-          }
-        );
-
-
-        html += `
-            </ul>
-          </div>
-        `;
-      }
-
-
-      if(
-        Array.isArray(entry.forms) &&
-        entry.forms.length
-      ){
-
-        html += `
-          <div class="dictionary-forms">
-
-            <div class="dictionary-label">
-              Forms
-            </div>
-
-            <ul class="dictionary-list">
-        `;
-
-
-        entry.forms.forEach(
-          form => {
-
-            if(form?.word){
-
-              html += `
-                <li>
-                  ${esc(form.word)}
-                  ${dictionaryTags(form.tags)}
-                </li>
-              `;
-            }
-          }
-        );
-
-
-        html += `
-            </ul>
-          </div>
-        `;
-      }
-
-
-      if(
-        Array.isArray(entry.senses) &&
-        entry.senses.length
-      ){
-
-        html += `
-          <div class="dictionary-senses">
-
-            <div class="dictionary-label">
-              Definitions
-            </div>
-        `;
-
-
-        entry.senses.forEach(
-          sense => {
-            html += renderSense(
-              sense
-            );
-          }
-        );
-
-
-        html += `
-          </div>
-        `;
-      }
-
-
-      if(
-        Array.isArray(entry.synonyms) &&
-        entry.synonyms.length
-      ){
-
-        html += `
-          <div class="dictionary-relations">
-
-            <div class="dictionary-label">
-              Synonyms
-            </div>
-
-            <div>
-              ${entry.synonyms.map(esc).join(', ')}
-            </div>
-
-          </div>
-        `;
-      }
-
-
-      if(
-        Array.isArray(entry.antonyms) &&
-        entry.antonyms.length
-      ){
-
-        html += `
-          <div class="dictionary-relations">
-
-            <div class="dictionary-label">
-              Antonyms
-            </div>
-
-            <div>
-              ${entry.antonyms.map(esc).join(', ')}
-            </div>
-
-          </div>
-        `;
-      }
-
-
-      html += `
-        </section>
-      `;
-    }
-  );
-
-
-  if(data.source){
-
-    html += `
-      <div class="dictionary-source">
-
-        Source:
-
-        ${
-          data.source.url
-            ? `
-              <a
-                href="${esc(data.source.url)}"
-                rel="noopener noreferrer"
-              >
-                ${esc(data.source.url)}
-              </a>
-            `
-            : ''
-        }
-
-        ${
-          data.source.license
-            ? `
-              <br>
-              License:
-              ${
-                data.source.license.url
-                  ? `
-                    <a
-                      href="${esc(data.source.license.url)}"
-                      rel="noopener noreferrer"
-                    >
-                      ${esc(
-                        data.source.license.name ||
-                        'License'
-                      )}
-                    </a>
-                  `
-                  : esc(
-                      data.source.license.name ||
-                      ''
-                    )
-              }
-            `
-            : ''
-        }
-
-      </div>
-    `;
-  }
-
-
-  dictionary.innerHTML =
-    html;
-
-  dictionary.classList.remove(
-    'hidden'
-  );
-}
-
-
-/*
-==========================================================
-LOAD DICTIONARY
-==========================================================
-*/
-
-async function loadDictionary(q){
-
-  const word =
-    dictionaryWord(q);
-
-
-  if(!word){
-
-    dictionary.classList.add(
-      'hidden'
-    );
-
-    dictionary.innerHTML = '';
-
-    return;
-  }
-
-
-  dictionary.classList.remove(
-    'hidden'
-  );
-
-
-  dictionary.innerHTML = `
-    <div class="dictionary-loading">
-      Looking up the definition…
-    </div>
-  `;
-
-
-  try{
-
-    const response =
-      await fetch(
-        api('/api/dictionary',{
-          word
-        })
-      );
-
-
-    if(!response.ok){
-
-      dictionary.classList.add(
-        'hidden'
-      );
-
-      return;
-    }
-
-
-    const data =
-      await response.json();
-
-
-    if(
-      data?.entries?.length
-    ){
-
-      renderDictionary(
-        data
-      );
-
-    }else{
-
-      dictionary.classList.add(
-        'hidden'
-      );
-
-      dictionary.innerHTML = '';
-    }
-
-  }catch(error){
-
-    dictionary.classList.add(
-      'hidden'
-    );
-
-    dictionary.innerHTML = '';
-  }
-}
-
-
-/*
-==========================================================
-RENDER SEARCH RESULTS
-==========================================================
-*/
+/* ============================================================
+   RENDER SEARCH RESULTS
+   ============================================================ */
 
 function render(data){
 
-  home.classList.add(
-    'hidden'
-  );
-
-  results.classList.remove(
-    'hidden'
-  );
+  home.classList.add('hidden');
+  results.classList.remove('hidden');
 
 
   currentType =
-    data.type ||
-    currentType;
+    data.type || currentType;
 
 
   label.textContent =
     data.query
       ? `Results for “${data.query}”`
       : '';
+
+
+  showTranslateMessage(
+    data.query || currentQ
+  );
 
 
   const resultsArray =
@@ -2573,28 +2338,19 @@ function render(data){
   );
 
 
-  updateTranslateMessage(
-    data.query || currentQ
-  );
-
-
   document
-    .querySelectorAll(
-      '.search-type'
-    )
+    .querySelectorAll('.search-type')
     .forEach(
-      button =>
-        button.classList.toggle(
+      b =>
+        b.classList.toggle(
           'active',
-          button.dataset.type ===
-          currentType
+          b.dataset.type === currentType
         )
     );
 
 
-  list.innerHTML = '';
-
-  pager.innerHTML = '';
+  list.innerHTML='';
+  pager.innerHTML='';
 
 
   if(!resultsArray.length){
@@ -2603,320 +2359,279 @@ function render(data){
       '<div class="empty">No results found.</div>';
 
     return;
+
   }
 
 
-  /*
-  IMAGES
-  */
+  /* IMAGES */
 
   if(currentType === 'images'){
 
     const grid =
-      document.createElement(
-        'div'
-      );
+      document.createElement('div');
 
-    grid.className =
-      'image-grid';
+    grid.className='image-grid';
 
 
-    resultsArray.forEach(
-      result => {
+    resultsArray.forEach(r=>{
 
-        const url =
-          result.url ||
-          result.properties?.url ||
-          '';
-
-        const image =
-          result.thumbnail ||
-          result.properties?.url ||
-          '';
+      const u =
+        r.url ||
+        r.properties?.url ||
+        '';
 
 
-        if(!image){
-          return;
-        }
+      const img =
+        r.thumbnail ||
+        r.properties?.url ||
+        '';
 
 
-        const element =
-          document.createElement(
-            'article'
-          );
-
-        element.className =
-          'image-result';
+      if(!img){
+        return;
+      }
 
 
-        element.innerHTML = `
+      const el =
+        document.createElement('article');
 
-          <a
-            href="${esc(url)}"
-            rel="noopener noreferrer"
+
+      el.className='image-result';
+
+
+      el.innerHTML =
+        `
+        <a
+          href="${esc(u)}"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="${esc(img)}"
+            alt="${esc(r.title || '')}"
+            loading="lazy"
+            referrerpolicy="no-referrer"
           >
+        </a>
 
-            <img
-              src="${esc(image)}"
-              alt="${esc(result.title || '')}"
-              loading="lazy"
-              referrerpolicy="no-referrer"
-            />
+        <div class="image-result-title">
+          ${esc(r.title || u)}
+        </div>
 
-          </a>
-
-          <div class="image-result-title">
-            ${esc(result.title || url)}
-          </div>
-
-          <div class="image-result-source">
-            ${esc(
-              result.source ||
-              result.meta_url?.hostname ||
-              ''
-            )}
-          </div>
-
+        <div class="image-result-source">
+          ${esc(
+            r.source ||
+            r.meta_url?.hostname ||
+            ''
+          )}
+        </div>
         `;
 
 
-        grid.appendChild(
-          element
-        );
-      }
-    );
+      grid.appendChild(el);
+
+    });
 
 
     if(grid.children.length){
 
-      list.appendChild(
-        grid
-      );
+      list.appendChild(grid);
 
     }else{
 
       list.innerHTML =
         '<div class="empty">No images found.</div>';
+
     }
 
-
-  /*
-  MAPS
-  */
-
-  }else if(currentType === 'map'){
-
-    resultsArray.forEach(
-      result => {
-
-        const element =
-          document.createElement(
-            'article'
-          );
-
-        element.className =
-          'map-result';
-
-
-        const url =
-          result.url || '';
-
-        const title =
-          result.title ||
-          'Map result';
-
-
-        const address =
-          result.address
-            ? Object.values(
-                result.address
-              )
-              .filter(Boolean)
-              .join(', ')
-            : (
-                result.description ||
-                ''
-              );
-
-
-        element.innerHTML = `
-
-          <h2 class="map-result-title">
-
-            <a
-              href="${esc(url)}"
-              rel="noopener noreferrer"
-            >
-              ${esc(title)}
-            </a>
-
-          </h2>
-
-          <div class="map-result-address">
-            ${esc(address)}
-          </div>
-
-          ${
-            result.lat &&
-            result.lon
-              ? `
-                <div class="map-result-coords">
-                  ${esc(result.lat)},
-                  ${esc(result.lon)}
-                </div>
-              `
-              : ''
-          }
-
-        `;
-
-
-        list.appendChild(
-          element
-        );
-      }
-    );
-
-
-  /*
-  WEB + NEWS
-  */
-
-  }else{
-
-    resultsArray.forEach(
-      result => {
-
-        const element =
-          document.createElement(
-            'article'
-          );
-
-        element.className =
-          'result';
-
-
-        const url =
-          result.url || '';
-
-        const favicon =
-          result.meta_url?.favicon ||
-          '';
-
-        const host =
-          result.meta_url?.hostname ||
-          '';
-
-        const title =
-          result.title ||
-          url;
-
-        const description =
-          result.description ||
-          result.content ||
-          '';
-
-        const age =
-          result.age ||
-          result.publishedDate ||
-          '';
-
-        const thumb =
-          result.thumbnail?.src ||
-          result.thumbnail ||
-          '';
-
-
-        element.innerHTML = `
-
-          <div class="result-url">
-
-            ${
-              favicon
-                ? `
-                  <img
-                    class="result-favicon"
-                    src="${esc(favicon)}"
-                    alt=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer"
-                  />
-                `
-                : ''
-            }
-
-            <span>
-              ${esc(host || url)}
-            </span>
-
-          </div>
-
-
-          <h2>
-
-            <a
-              href="${esc(url)}"
-              rel="noopener noreferrer"
-            >
-              ${esc(title)}
-            </a>
-
-          </h2>
-
-
-          ${
-            description
-              ? `
-                <p class="snippet">
-                  ${window.flibidooRichText(description)}
-                </p>
-              `
-              : ''
-          }
-
-
-          ${
-            age
-              ? `
-                <div class="result-meta">
-                  ${esc(age)}
-                </div>
-              `
-              : ''
-          }
-
-
-          ${
-            thumb
-              ? `
-                <div class="result-inline-thumb">
-
-                  <img
-                    src="${esc(thumb)}"
-                    alt=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer"
-                  />
-
-                </div>
-              `
-              : ''
-          }
-
-        `;
-
-
-        list.appendChild(
-          element
-        );
-      }
-    );
   }
 
 
-  /*
-  PAGINATION
-  */
+  /* MAPS */
+
+  else if(currentType === 'map'){
+
+    resultsArray.forEach(r=>{
+
+      const el =
+        document.createElement('article');
+
+
+      el.className='map-result';
+
+
+      const u =
+        r.url || '';
+
+
+      const title =
+        r.title || 'Map result';
+
+
+      const address =
+        r.address
+          ? Object.values(r.address)
+              .filter(Boolean)
+              .join(', ')
+          : (
+            r.description || ''
+          );
+
+
+      el.innerHTML =
+        `
+        <h2 class="map-result-title">
+          <a
+            href="${esc(u)}"
+            rel="noopener noreferrer"
+          >
+            ${esc(title)}
+          </a>
+        </h2>
+
+        <div class="map-result-address">
+          ${esc(address)}
+        </div>
+
+        ${
+          r.lat && r.lon
+            ? `<div class="map-result-coords">
+                ${esc(r.lat)}, ${esc(r.lon)}
+              </div>`
+            : ''
+        }
+        `;
+
+
+      list.appendChild(el);
+
+    });
+
+  }
+
+
+  /* WEB / NEWS */
+
+  else{
+
+    resultsArray.forEach(r=>{
+
+      const el =
+        document.createElement('article');
+
+
+      el.className='result';
+
+
+      const u =
+        r.url || '';
+
+
+      const favicon =
+        r.meta_url?.favicon || '';
+
+
+      const host =
+        r.meta_url?.hostname || '';
+
+
+      const title =
+        r.title || u;
+
+
+      const description =
+        r.description ||
+        r.content ||
+        '';
+
+
+      const age =
+        r.age ||
+        r.publishedDate ||
+        '';
+
+
+      const thumb =
+        r.thumbnail?.src ||
+        r.thumbnail ||
+        '';
+
+
+      el.innerHTML =
+        `
+        <div class="result-url">
+
+          ${
+            favicon
+              ? `
+                <img
+                  class="result-favicon"
+                  src="${esc(favicon)}"
+                  alt=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer"
+                >
+              `
+              : ''
+          }
+
+          <span>
+            ${esc(host || u)}
+          </span>
+
+        </div>
+
+        <h2>
+          <a
+            href="${esc(u)}"
+            rel="noopener noreferrer"
+          >
+            ${esc(title)}
+          </a>
+        </h2>
+
+        ${
+          description
+            ? `
+              <p class="snippet">
+                ${window.flibidooRichText(description)}
+              </p>
+            `
+            : ''
+        }
+
+        ${
+          age
+            ? `
+              <div class="result-meta">
+                ${esc(age)}
+              </div>
+            `
+            : ''
+        }
+
+        ${
+          thumb
+            ? `
+              <div class="result-inline-thumb">
+                <img
+                  src="${esc(thumb)}"
+                  alt=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer"
+                >
+              </div>
+            `
+            : ''
+        }
+        `;
+
+
+      list.appendChild(el);
+
+    });
+
+  }
+
 
   const hasMore =
     Boolean(
@@ -2927,89 +2642,74 @@ function render(data){
 
   if(currentPage > 0){
 
-    const button =
-      document.createElement(
-        'button'
+    const b =
+      document.createElement('button');
+
+
+    b.textContent='Previous';
+
+
+    b.onclick=() =>
+      search(
+        currentQ,
+        currentPage - 1,
+        currentType
       );
 
-    button.textContent =
-      'Previous';
 
+    pager.appendChild(b);
 
-    button.onclick =
-      () =>
-        search(
-          currentQ,
-          currentPage - 1,
-          currentType
-        );
-
-
-    pager.appendChild(
-      button
-    );
   }
 
 
   if(hasMore){
 
-    const button =
-      document.createElement(
-        'button'
+    const b =
+      document.createElement('button');
+
+
+    b.textContent='Next';
+
+
+    b.onclick=() =>
+      search(
+        currentQ,
+        currentPage + 1,
+        currentType
       );
 
-    button.textContent =
-      'Next';
 
+    pager.appendChild(b);
 
-    button.onclick =
-      () =>
-        search(
-          currentQ,
-          currentPage + 1,
-          currentType
-        );
-
-
-    pager.appendChild(
-      button
-    );
   }
 
-
-  /*
-  UPDATE URL
-
-  This uses the normal site URL,
-  not the Worker URL.
-  */
 
   history.replaceState(
     {},
     '',
     `/?q=${encodeURIComponent(
       data.query || currentQ
-    )}&type=${encodeURIComponent(
+    )}` +
+    `&type=${encodeURIComponent(
       currentType
-    )}&page=${currentPage}`
+    )}` +
+    `&page=${currentPage}`
   );
+
 }
 
 
-/*
-==========================================================
-SEARCH
-==========================================================
-*/
+/* ============================================================
+   SEARCH
+   ============================================================ */
 
 async function search(
   q,
-  page = 0,
-  type = currentType
+  page=0,
+  type=currentType
 ){
 
-  q =
-    q.trim();
+  q=q.trim();
 
 
   if(!q){
@@ -3017,21 +2717,13 @@ async function search(
   }
 
 
-  currentQ =
-    q;
-
-  currentPage =
-    page;
-
-  currentType =
-    type;
+  currentQ=q;
+  currentPage=page;
+  currentType=type;
 
 
-  input.value =
-    q;
-
-  resultsInput.value =
-    q;
+  input.value=q;
+  resultsInput.value=q;
 
 
   updateButtonState(
@@ -3039,59 +2731,49 @@ async function search(
     q
   );
 
+
   updateButtonState(
     resultsSubmitButton,
     q
   );
 
 
-  home.classList.add(
-    'hidden'
-  );
-
-  results.classList.remove(
-    'hidden'
-  );
-
-
-  updateTranslateMessage(
-    q
-  );
+  home.classList.add('hidden');
+  results.classList.remove('hidden');
 
 
   list.innerHTML =
     '<div class="empty">Searching…</div>';
 
 
-  count.textContent =
-    '';
+  count.textContent='';
 
 
   label.textContent =
     `Results for “${q}”`;
 
 
-  pager.innerHTML =
-    '';
+  showTranslateMessage(q);
+
+
+  pager.innerHTML='';
 
 
   document
-    .querySelectorAll(
-      '.search-type'
-    )
+    .querySelectorAll('.search-type')
     .forEach(
-      button =>
-        button.classList.toggle(
+      b =>
+        b.classList.toggle(
           'active',
-          button.dataset.type ===
-          currentType
+          b.dataset.type === currentType
         )
     );
 
 
   /*
-    Dictionary starts independently.
-    It doesn't prevent web search.
+    Dictionary runs independently.
+    This means a dictionary failure cannot break
+    the search request.
   */
 
   const dictionaryPromise =
@@ -3102,67 +2784,64 @@ async function search(
 
   try{
 
-    const response =
+    const r =
       await fetch(
-        api('/api/search',{
-          q,
-          page,
-          type:currentType
-        })
+        `${WORKER_BASE}/api/search` +
+        `?q=${encodeURIComponent(q)}` +
+        `&page=${page}` +
+        `&type=${encodeURIComponent(currentType)}`
       );
 
 
-    let data;
+    let d;
+
 
     try{
 
-      data =
-        await response.json();
+      d=await r.json();
 
-    }catch(error){
+    }catch(_){
 
       throw new Error(
-        'Search server returned invalid data.'
+        'Search worker returned invalid JSON.'
       );
+
     }
 
 
-    if(!response.ok){
+    if(!r.ok){
 
       throw new Error(
-        data.error ||
+        d.error ||
         'Search failed.'
       );
+
     }
 
 
-    render(
-      data
-    );
+    render(d);
 
+  }catch(e){
 
-  }catch(error){
-
-    list.innerHTML = `
-      <div class="error">
+    list.innerHTML =
+      `<div class="error">
         ${esc(
-          error.message ||
+          e.message ||
           'Search failed. Please try again.'
         )}
-      </div>
-    `;
+      </div>`;
+
   }
 
 
   await dictionaryPromise;
+
 }
 
 
-/*
-==========================================================
-INPUT EVENTS
-==========================================================
-*/
+/* ============================================================
+   FORM EVENTS
+   ============================================================ */
 
 input.addEventListener(
   'input',
@@ -3196,17 +2875,10 @@ updateButtonState(
 );
 
 
-/*
-==========================================================
-FORMS
-==========================================================
-*/
-
 form.addEventListener(
   'submit',
-  event => {
-
-    event.preventDefault();
+  e=>{
+    e.preventDefault();
 
     search(
       input.value,
@@ -3219,9 +2891,8 @@ form.addEventListener(
 
 resultsForm.addEventListener(
   'submit',
-  event => {
-
-    event.preventDefault();
+  e=>{
+    e.preventDefault();
 
     search(
       resultsInput.value,
@@ -3232,144 +2903,38 @@ resultsForm.addEventListener(
 );
 
 
-/*
-==========================================================
-CLEAR
-==========================================================
-*/
+/* ============================================================
+   SEARCH TYPE BUTTONS
+   ============================================================ */
 
 document
-  .querySelector('#clear')
-  .onclick = () => {
+  .querySelectorAll('.search-type')
+  .forEach(btn=>{
 
-    input.value = '';
+    btn.addEventListener(
+      'click',
+      ()=>{
 
-    input.focus();
+        const q =
+          resultsInput.value ||
+          currentQ;
 
-    updateButtonState(
-      submitButton,
-      input.value
-    );
-  };
-
-
-/*
-==========================================================
-I'M FEELING LUCKY
-==========================================================
-*/
-
-document
-  .querySelector('#lucky')
-  .onclick = async () => {
-
-    const q =
-      input.value.trim();
-
-
-    if(!q){
-      return;
-    }
-
-
-    /*
-      Translation queries should go
-      to FlibidooTranslate instead.
-    */
-
-    if(
-      isTranslationQuery(q)
-    ){
-
-      window.location.href =
-        'https://flibidoo-translate.devs.surf';
-
-      return;
-    }
-
-
-    try{
-
-      const response =
-        await fetch(
-          api('/api/search',{
-            q,
-            page:0,
-            type:currentType
-          })
-        );
-
-
-      const data =
-        await response.json();
-
-
-      if(
-        data.results?.[0]?.url
-      ){
-
-        location.href =
-          data.results[0].url;
-
-      }else{
 
         search(
           q,
           0,
-          currentType
+          btn.dataset.type
         );
+
       }
+    );
+
+  });
 
 
-    }catch(error){
-
-      search(
-        q,
-        0,
-        currentType
-      );
-    }
-  };
-
-
-/*
-==========================================================
-SEARCH TYPE BUTTONS
-==========================================================
-*/
-
-document
-  .querySelectorAll(
-    '.search-type'
-  )
-  .forEach(
-    button => {
-
-      button.addEventListener(
-        'click',
-        () => {
-
-          const q =
-            resultsInput.value ||
-            currentQ;
-
-
-          search(
-            q,
-            0,
-            button.dataset.type
-          );
-        }
-      );
-    }
-  );
-
-
-/*
-==========================================================
-INITIAL URL SEARCH
-==========================================================
-*/
+/* ============================================================
+   INITIAL URL SEARCH
+   ============================================================ */
 
 const params =
   new URLSearchParams(
@@ -3385,8 +2950,7 @@ const initialPage =
   Math.max(
     0,
     Number(
-      params.get('page') ||
-      0
+      params.get('page') || 0
     )
   );
 
@@ -3411,22 +2975,22 @@ if(initialQuery){
     initialPage,
     initialType
   );
+
 }
 
 
-/*
-==========================================================
-AUTOCOMPLETE
-==========================================================
-*/
+/* ============================================================
+   AUTOCOMPLETE
+   ============================================================ */
 
 (() => {
 
-  const inputs = [
-    ...document.querySelectorAll(
-      '#q,#resultsQ'
-    )
-  ];
+  const inputs =
+    [
+      ...document.querySelectorAll(
+        '#q, #resultsQ'
+      )
+    ];
 
 
   if(!inputs.length){
@@ -3434,13 +2998,24 @@ AUTOCOMPLETE
   }
 
 
-  let timer = null;
+  let timer=null;
+  let controller=null;
+  let selected=-1;
+  let items=[];
 
-  let controller = null;
 
-  let selected = -1;
-
-  let items = [];
+  const escape =
+    v =>
+      String(v ?? '').replace(
+        /[&<>"']/g,
+        c=>({
+          '&':'&amp;',
+          '<':'&lt;',
+          '>':'&gt;',
+          '"':'&quot;',
+          "'":'&#39;'
+        }[c])
+      );
 
 
   function setup(input){
@@ -3456,51 +3031,43 @@ AUTOCOMPLETE
 
 
     const box =
-      document.createElement(
-        'div'
-      );
+      document.createElement('div');
 
 
     box.className =
       'flibidoo-suggestions';
 
-    box.hidden =
-      true;
+
+    box.hidden=true;
 
 
-    wrap.appendChild(
-      box
-    );
+    wrap.appendChild(box);
 
 
     function close(){
 
-      box.hidden =
-        true;
+      box.hidden=true;
+      box.innerHTML='';
+      selected=-1;
 
-      box.innerHTML =
-        '';
-
-      selected =
-        -1;
     }
 
 
     function choose(q){
 
-      input.value =
-        q;
+      input.value=q;
 
       close();
 
 
-      const form =
+      const f =
         input.closest('form');
 
 
-      if(form){
-        form.requestSubmit();
+      if(f){
+        f.requestSubmit();
       }
+
     }
 
 
@@ -3515,11 +3082,11 @@ AUTOCOMPLETE
         close();
 
         return;
+
       }
 
 
       if(controller){
-
         controller.abort();
       }
 
@@ -3530,11 +3097,10 @@ AUTOCOMPLETE
 
       try{
 
-        const response =
+        const r =
           await fetch(
-            api('/api/suggest',{
-              q
-            }),
+            `${WORKER_BASE}/api/suggest?q=` +
+            encodeURIComponent(q),
             {
               signal:
                 controller.signal
@@ -3542,24 +3108,20 @@ AUTOCOMPLETE
           );
 
 
-        if(!response.ok){
-
+        if(!r.ok){
           throw new Error();
         }
 
 
-        const data =
-          await response.json();
+        const d =
+          await r.json();
 
 
         items =
           Array.isArray(
-            data.suggestions
+            d.suggestions
           )
-            ? data.suggestions.slice(
-                0,
-                8
-              )
+            ? d.suggestions.slice(0,8)
             : [];
 
 
@@ -3568,134 +3130,112 @@ AUTOCOMPLETE
           close();
 
           return;
+
         }
 
 
         box.innerHTML =
           items.map(
-            (item,index) => `
-
+            (x,i)=>
+              `
               <button
                 class="flibidoo-suggestion"
                 type="button"
-                data-i="${index}"
+                data-i="${i}"
               >
 
                 ${
-                  item.img
+                  x.img
                     ? `
                       <img
-                        src="${esc(item.img)}"
+                        src="${escape(x.img)}"
                         alt=""
                         loading="lazy"
                         referrerpolicy="no-referrer"
-                      />
+                      >
                     `
                     : ''
                 }
 
                 <span>
-
-                  ${esc(
-                    item.query
-                  )}
+                  ${escape(x.query)}
 
                   ${
-                    item.entity &&
-                    item.desc
-                      ? `
-                        <small>
-                          ${esc(item.desc)}
-                        </small>
-                      `
+                    x.entity && x.desc
+                      ? `<small>${escape(x.desc)}</small>`
                       : ''
                   }
-
                 </span>
 
               </button>
-            `
-          ).join('');
+              `
+          )
+          .join('');
 
 
-        box.hidden =
-          false;
+        box.hidden=false;
 
 
         box
-          .querySelectorAll(
-            'button'
-          )
-          .forEach(
-            button => {
+          .querySelectorAll('button')
+          .forEach(btn=>{
 
-              button.addEventListener(
-                'mousedown',
-                event => {
+            btn.addEventListener(
+              'mousedown',
+              e=>{
 
-                  event.preventDefault();
+                e.preventDefault();
 
+                choose(
+                  items[
+                    Number(
+                      btn.dataset.i
+                    )
+                  ].query
+                );
 
-                  const item =
-                    items[
-                      Number(
-                        button.dataset.i
-                      )
-                    ];
+              }
+            );
 
+          });
 
-                  if(item){
-
-                    choose(
-                      item.query
-                    );
-                  }
-                }
-              );
-            }
-          );
-
-
-      }catch(error){
+      }catch(_){
 
         close();
+
       }
+
     }
 
 
     input.addEventListener(
       'input',
-      () => {
+      ()=>{
 
-        clearTimeout(
-          timer
-        );
-
+        clearTimeout(timer);
 
         timer =
           setTimeout(
             load,
             180
           );
+
       }
     );
 
 
     input.addEventListener(
       'keydown',
-      event => {
+      e=>{
 
         if(box.hidden){
           return;
         }
 
 
-        if(
-          event.key ===
-          'ArrowDown'
-        ){
+        if(e.key === 'ArrowDown'){
 
-          event.preventDefault();
+          e.preventDefault();
 
           selected =
             Math.min(
@@ -3703,12 +3243,11 @@ AUTOCOMPLETE
               items.length - 1
             );
 
-        }else if(
-          event.key ===
-          'ArrowUp'
-        ){
+        }
 
-          event.preventDefault();
+        else if(e.key === 'ArrowUp'){
+
+          e.preventDefault();
 
           selected =
             Math.max(
@@ -3716,68 +3255,71 @@ AUTOCOMPLETE
               -1
             );
 
-        }else if(
-          event.key ===
-          'Enter' &&
+        }
+
+        else if(
+          e.key === 'Enter' &&
           selected >= 0
         ){
 
-          event.preventDefault();
+          e.preventDefault();
 
           choose(
             items[selected].query
           );
 
-        }else if(
-          event.key ===
-          'Escape'
+        }
+
+        else if(
+          e.key === 'Escape'
         ){
 
           close();
 
           return;
+
         }
 
 
         box
-          .querySelectorAll(
-            'button'
-          )
+          .querySelectorAll('button')
           .forEach(
-            (button,index) => {
-
-              button.classList.toggle(
+            (btn,i)=>
+              btn.classList.toggle(
                 'active',
-                index === selected
-              );
-            }
+                i===selected
+              )
           );
+
       }
     );
 
 
     document.addEventListener(
       'click',
-      event => {
+      e=>{
 
-        if(
-          !wrap.contains(
-            event.target
-          )
-        ){
-
+        if(!wrap.contains(e.target)){
           close();
         }
+
       }
     );
+
   }
 
 
-  inputs.forEach(
-    setup
-  );
+  inputs.forEach(setup);
 
 })();
+
+
+/* ============================================================
+   EXPOSE DICTIONARY FUNCTION
+   ============================================================ */
+
+window.flibidooLoadDictionary =
+  loadDictionary;
 
 </script>
 
