@@ -4,10 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#1d0c22">
+
 <title>FlibidooSearch</title>
 
-<link rel="icon"
-  href="https://raw.githubusercontent.com/danieltorres-mhcs/assets/refs/heads/main/flibidoo.PNG">
+<link
+  rel="icon"
+  type="image/png"
+  href="https://raw.githubusercontent.com/danieltorres-mhcs/assets/refs/heads/main/flibidoo.PNG"
+>
 
 <style>
 :root{
@@ -21,9 +25,12 @@
   --focus:#cdb8d1;
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
-html,body{
+html,
+body{
   margin:0;
   width:100%;
   min-height:100%;
@@ -43,13 +50,22 @@ a{
   color:inherit;
 }
 
-.hidden{
-  display:none!important;
+button,
+input{
+  font-family:inherit;
 }
 
-/* =========================
+.shell{
+  width:min(100% - 40px,1120px);
+  margin:0 auto;
+  padding-left:12px;
+  padding-right:12px;
+}
+
+
+/* =========================================================
    HOME
-========================= */
+   ========================================================= */
 
 #home.home{
   width:100%;
@@ -64,31 +80,37 @@ a{
   overflow:hidden;
 }
 
-.search-wrap{
-  width:min(100%,680px);
+.home-inner{
+  width:min(100%,760px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
 .hero-logo{
-  display:block;
-  width:min(180px,42vw);
+  width:min(360px,72vw);
+  max-width:360px;
   height:auto;
-  max-height:100px;
+  display:block;
+  margin:0 auto 22px;
   object-fit:contain;
-  margin:0 auto 16px;
 
-  /* subtle fade around the image edges */
+  /*
+   * Very subtle fading around the image edges.
+   * This doesn't alter the actual PNG.
+   */
   -webkit-mask-image:
     radial-gradient(
       ellipse at center,
-      #000 62%,
-      rgba(0,0,0,.96) 72%,
+      #000 68%,
+      rgba(0,0,0,.92) 82%,
       transparent 100%
     );
   mask-image:
     radial-gradient(
       ellipse at center,
-      #000 62%,
-      rgba(0,0,0,.96) 72%,
+      #000 68%,
+      rgba(0,0,0,.92) 82%,
       transparent 100%
     );
 }
@@ -97,23 +119,26 @@ h1{
   font-size:clamp(34px,5vw,54px);
   line-height:1;
   margin:0 0 30px;
-  text-align:center;
   letter-spacing:-.055em;
   font-weight:500;
 }
 
-h1 strong{
-  font-weight:700;
+h1 em{
+  font-style:normal;
 }
 
-.search-wrap form{
+.search-wrap{
+  width:min(100%,680px);
+}
+
+form{
   display:flex;
   align-items:center;
-  width:100%;
   height:54px;
   border:1px solid var(--line);
   border-radius:28px;
   background:transparent;
+
   transition:
     border-color .15s ease,
     box-shadow .15s ease;
@@ -121,7 +146,8 @@ h1 strong{
 
 form:focus-within{
   border-color:var(--focus);
-  box-shadow:0 0 0 2px rgba(205,184,209,.08);
+  box-shadow:
+    0 0 0 2px rgba(205,184,209,.08);
 }
 
 input{
@@ -132,28 +158,35 @@ input{
   background:transparent;
   color:var(--text);
   font-size:16px;
-  padding:0 16px;
+  padding:0 14px;
 }
 
 input::placeholder{
   color:#9e8da1;
 }
 
-/* Arrow button */
+
+/* =========================================================
+   SEARCH BUTTON / ARROW
+   ========================================================= */
 
 .submit{
   height:38px;
   width:38px;
   margin-right:8px;
+
   border:1px solid var(--line);
   background:transparent;
   color:#766679;
+
   border-radius:50%;
-  padding:9px;
+  padding:0;
+
   display:grid;
   place-items:center;
+
   cursor:pointer;
-  flex:0 0 38px;
+
   transition:
     color .15s ease,
     border-color .15s ease,
@@ -168,15 +201,24 @@ input::placeholder{
 .submit:hover{
   border-color:var(--focus);
   color:var(--text);
-  background:rgba(255,255,255,.035);
+  background:rgba(255,255,255,.03);
 }
 
-.submit-icon{
-  width:100%;
-  height:100%;
+.submit:active{
+  transform:scale(.96);
+}
+
+.submit svg{
+  width:19px;
+  height:19px;
   display:block;
   fill:currentColor;
 }
+
+
+/* =========================================================
+   HOME LINKS
+   ========================================================= */
 
 .links{
   display:flex;
@@ -184,7 +226,9 @@ input::placeholder{
   justify-content:center;
   flex-wrap:wrap;
   gap:18px;
+
   margin-top:20px;
+
   color:var(--muted);
   font-size:13px;
 }
@@ -206,7 +250,9 @@ input::placeholder{
   align-items:center;
   justify-content:center;
   gap:7px;
+
   color:var(--muted);
+
   font-size:12px;
   line-height:1.4;
   text-align:center;
@@ -215,26 +261,28 @@ input::placeholder{
 .confederacy-credit img{
   width:18px;
   height:18px;
+
   display:block;
   object-fit:contain;
+
   flex:0 0 18px;
+
   border-radius:4px;
 }
 
-/* =========================
-   RESULTS
-========================= */
+
+/* =========================================================
+   MAIN
+   ========================================================= */
 
 main{
   flex:1;
 }
 
-.shell{
-  width:min(100% - 40px,1120px);
-  margin:0 auto;
-  padding-left:12px;
-  padding-right:12px;
-}
+
+/* =========================================================
+   RESULTS
+   ========================================================= */
 
 .results{
   padding:30px 12px 70px;
@@ -244,8 +292,11 @@ main{
   display:flex;
   align-items:center;
   gap:18px;
+
   min-height:44px;
+
   border-bottom:1px solid var(--line2);
+
   padding-bottom:14px;
   margin-bottom:14px;
 }
@@ -254,31 +305,21 @@ main{
   display:inline-flex;
   align-items:center;
   gap:8px;
+
   text-decoration:none;
   color:inherit;
+
   white-space:nowrap;
 }
 
 .results-brand img{
-  width:30px;
-  height:30px;
+  width:32px;
+  height:32px;
+
   object-fit:contain;
   display:block;
 
-  -webkit-mask-image:
-    radial-gradient(
-      ellipse at center,
-      #000 60%,
-      rgba(0,0,0,.9) 75%,
-      transparent 100%
-    );
-  mask-image:
-    radial-gradient(
-      ellipse at center,
-      #000 60%,
-      rgba(0,0,0,.9) 75%,
-      transparent 100%
-    );
+  flex:0 0 32px;
 }
 
 .results-brand span{
@@ -290,9 +331,11 @@ main{
 .results-query{
   font-size:14px;
   color:var(--muted);
+
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
+
   flex:1;
 }
 
@@ -302,58 +345,78 @@ main{
   white-space:nowrap;
 }
 
+
+/* =========================================================
+   RESULTS SEARCH
+   ========================================================= */
+
 .results-search{
   width:min(100%,680px);
-  margin:0 0 28px;
+  margin:0 0 20px;
 }
 
 .results-search form{
-  display:flex;
-  align-items:center;
   height:48px;
-  border:1px solid var(--line);
-  border-radius:24px;
-  background:transparent;
-  transition:border-color .15s ease,box-shadow .15s ease;
 }
 
 .results-search .submit{
   width:34px;
   height:34px;
-  flex:0 0 34px;
-  padding:8px;
   margin-right:6px;
 }
 
-/* =========================
+.results-search .submit svg{
+  width:17px;
+  height:17px;
+}
+
+
+/* =========================================================
    SEARCH TYPES
-========================= */
+   ========================================================= */
 
 .search-types{
   display:flex;
   align-items:flex-end;
+
   gap:0;
+
   margin:8px 0 18px;
+
   border-bottom:1px solid rgba(255,255,255,.12);
+
   height:36px;
 }
 
 .search-type{
   position:relative;
+
   appearance:none;
+
   border:0;
   background:transparent;
+
   color:rgba(255,255,255,.62);
+
   font:inherit;
   font-size:13px;
+
   line-height:20px;
+
   padding:0 12px 10px;
+
   margin:0;
+
   border-radius:0;
+
   cursor:pointer;
 }
 
-.search-type:hover,
+.search-type:hover{
+  color:#fff;
+  background:transparent;
+}
+
 .search-type.active{
   color:#fff;
   background:transparent;
@@ -361,65 +424,93 @@ main{
 
 .search-type.active::after{
   content:"";
+
   position:absolute;
+
   left:10px;
   right:10px;
+
   bottom:-1px;
+
   height:2px;
+
   border-radius:2px 2px 0 0;
+
   background:currentColor;
 }
 
-/* =========================
+
+/* =========================================================
    RESULTS LAYOUT
-========================= */
+   ========================================================= */
 
 .results-layout{
   display:grid;
-  grid-template-columns:minmax(0,1fr) 330px;
+
+  grid-template-columns:
+    minmax(0,1fr)
+    330px;
+
   gap:42px;
+
   align-items:start;
 }
+
+
+/* =========================================================
+   WEB RESULTS
+   ========================================================= */
 
 .result{
   padding:0 0 26px;
   margin-bottom:26px;
+
   border-bottom:1px solid var(--line2);
 }
 
-/* Web result favicon + URL */
-
-.result-url-row{
+.result-top{
   display:flex;
   align-items:center;
-  gap:8px;
+
+  gap:9px;
+
   min-width:0;
+
   margin-bottom:7px;
 }
 
 .result-favicon{
   width:18px;
   height:18px;
+
   flex:0 0 18px;
+
   object-fit:contain;
-  border-radius:4px;
+
+  border-radius:3px;
+
   background:rgba(255,255,255,.04);
 }
 
 .result-url{
   font-size:13px;
   color:var(--url);
+
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
+
   min-width:0;
 }
 
 .result h2{
   font-size:20px;
   line-height:1.25;
+
   margin:0 0 7px;
+
   font-weight:500;
+
   letter-spacing:-.02em;
 }
 
@@ -433,8 +524,11 @@ main{
 
 .result-content{
   display:flex;
-  gap:16px;
   align-items:flex-start;
+
+  gap:18px;
+
+  min-width:0;
 }
 
 .result-text{
@@ -445,36 +539,47 @@ main{
 .snippet{
   font-size:14px;
   line-height:1.6;
+
   color:var(--result);
+
   margin:0;
+
   max-width:760px;
 }
 
 .result-meta{
   font-size:12px;
   color:var(--muted);
+
   margin-top:7px;
 }
-
-/* Tiago thumbnail / fallback favicon */
 
 .result-thumbnail{
   width:120px;
   height:80px;
-  object-fit:cover;
+
   flex:0 0 120px;
-  border:1px solid var(--line2);
+
+  object-fit:cover;
+
   border-radius:6px;
-  background:rgba(255,255,255,.025);
+
+  border:1px solid var(--line2);
+
+  background:rgba(255,255,255,.02);
 }
 
-/* =========================
-   IMAGES
-========================= */
+
+/* =========================================================
+   IMAGE RESULTS
+   ========================================================= */
 
 .image-grid{
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
+
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+
   gap:28px 22px;
 }
 
@@ -490,17 +595,26 @@ main{
 
 .image-result img{
   display:block;
+
   width:100%;
+
   aspect-ratio:4/3;
+
   object-fit:cover;
+
   border:1px solid var(--line2);
+
   background:rgba(255,255,255,.02);
+
+  border-radius:6px;
 }
 
 .image-result-title{
   font-size:14px;
   line-height:1.4;
+
   margin-top:9px;
+
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
@@ -509,91 +623,72 @@ main{
 .image-result-source{
   font-size:12px;
   color:var(--muted);
+
   margin-top:4px;
+
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
 
-/* =========================
-   MAP
-========================= */
 
-.map-result{
-  padding:0 0 22px;
-  margin-bottom:22px;
-  border-bottom:1px solid var(--line2);
-}
-
-.map-result-title{
-  font-size:18px;
-  line-height:1.35;
-  margin:0 0 6px;
-  font-weight:500;
-}
-
-.map-result-title a{
-  text-decoration:none;
-}
-
-.map-result-title a:hover{
-  text-decoration:underline;
-}
-
-.map-result-address{
-  font-size:14px;
-  line-height:1.55;
-  color:var(--result);
-}
-
-.map-result-coords{
-  font-size:12px;
-  color:var(--muted);
-  margin-top:6px;
-}
-
-/* =========================
+/* =========================================================
    DICTIONARY
-========================= */
+   ========================================================= */
 
 .dictionary{
   border-left:1px solid var(--line2);
+
   padding-left:28px;
-  max-height:72vh;
+
+  max-height:70vh;
+
   overflow-y:auto;
+
   overscroll-behavior:contain;
+
   scrollbar-width:thin;
 }
 
 .dictionary-title{
   font-size:22px;
+
   font-weight:500;
+
   letter-spacing:-.02em;
+
   margin:0 0 5px;
 }
 
 .dictionary-word{
   font-size:13px;
+
   color:var(--muted);
+
   margin-bottom:22px;
 }
 
 .dictionary-entry{
   padding:0 0 24px;
+
   margin-bottom:24px;
+
   border-bottom:1px solid var(--line2);
 }
 
-.dictionary-language{
+.dictionary-language,
+.dictionary-label{
   font-size:12px;
   color:var(--muted);
+}
+
+.dictionary-language{
   margin-bottom:8px;
 }
 
 .dictionary-pos{
   font-size:15px;
   margin-bottom:12px;
-  font-weight:600;
 }
 
 .dictionary-senses,
@@ -603,10 +698,10 @@ main{
 }
 
 .dictionary-label{
-  font-size:11px;
-  color:var(--muted);
   text-transform:uppercase;
-  letter-spacing:.06em;
+
+  letter-spacing:.05em;
+
   margin-bottom:7px;
 }
 
@@ -631,6 +726,7 @@ main{
 .dictionary-tags{
   font-size:12px;
   color:var(--muted);
+
   margin-left:5px;
 }
 
@@ -638,9 +734,10 @@ main{
 .dictionary-quote{
   font-size:13px;
   line-height:1.5;
+
   color:var(--result);
+
   margin:7px 0 0 14px;
-  font-style:italic;
 }
 
 .dictionary-source,
@@ -648,54 +745,67 @@ main{
 .dictionary-empty{
   font-size:12px;
   line-height:1.5;
+
   color:var(--muted);
 }
 
-.dictionary-source{
-  margin-top:18px;
-}
 
-/* =========================
-   EMPTY / ERROR
-========================= */
+/* =========================================================
+   EMPTY / ERROR / PAGER
+   ========================================================= */
 
 .empty{
   padding:70px 0;
+
   color:var(--muted);
+
   text-align:center;
 }
 
 .error{
   min-height:120px;
+
   max-width:680px;
+
   margin:0;
+
   padding:28px 18px;
+
   display:flex;
+
   align-items:center;
   justify-content:center;
+
   text-align:center;
+
   border:1px solid var(--line2);
+
   color:var(--muted);
+
   font-size:14px;
+
   line-height:1.5;
 }
 
-/* =========================
-   PAGER
-========================= */
-
 .pager{
   display:flex;
+
   gap:8px;
+
   padding-top:10px;
 }
 
 .pager button{
   border:1px solid var(--line);
+
   background:transparent;
+
   color:var(--text);
+
   border-radius:4px;
+
   padding:8px 12px;
+
   cursor:pointer;
 }
 
@@ -703,17 +813,28 @@ main{
   border-color:var(--focus);
 }
 
-/* =========================
+.hidden{
+  display:none!important;
+}
+
+
+/* =========================================================
    ABOUT
-========================= */
+   ========================================================= */
 
 .about-overlay{
   position:fixed;
+
   inset:0;
+
   background:rgba(0,0,0,.62);
+
   display:grid;
+
   place-items:center;
+
   padding:24px;
+
   z-index:10000;
 }
 
@@ -723,51 +844,78 @@ main{
 
 .about-card{
   position:relative;
+
   width:min(100%,560px);
+
   max-height:min(80vh,700px);
+
   overflow:auto;
+
   background:#24132a;
+
   border:1px solid var(--line);
+
   border-radius:14px;
+
   box-shadow:0 20px 60px rgba(0,0,0,.45);
+
   padding:30px;
 }
 
 .about-close{
   position:absolute;
+
   top:10px;
   right:10px;
+
   width:34px;
   height:34px;
+
   border:0;
+
   border-radius:50%;
+
   background:transparent;
+
   color:var(--muted);
+
   font-size:24px;
+
   line-height:1;
+
   cursor:pointer;
 }
 
 .about-close:hover{
   background:rgba(255,255,255,.08);
+
   color:var(--text);
 }
 
 .about-card h2{
   margin:0 38px 16px 0;
+
   font-size:25px;
+
   font-weight:500;
 }
 
 .about-card p{
   color:var(--result);
+
   line-height:1.7;
+
   font-size:14px;
 }
 
-/* =========================
+.about-card a{
+  color:var(--text);
+}
+
+
+/* =========================================================
    RESPONSIVE
-========================= */
+   ========================================================= */
 
 @media(max-width:860px){
 
@@ -777,33 +925,49 @@ main{
 
   .dictionary{
     order:-1;
+
     border-left:0;
+
     border-bottom:1px solid var(--line2);
+
     border-top:0;
+
     padding:0 0 26px;
+
     margin-bottom:26px;
+
     max-height:none;
   }
 }
 
+
 @media(max-width:760px){
 
   .image-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+
     gap:22px 14px;
+  }
+
+  .result-content{
+    gap:12px;
   }
 
   .result-thumbnail{
     width:100px;
     height:70px;
+
     flex-basis:100px;
   }
 }
+
 
 @media(max-width:640px){
 
   .shell{
     width:100%;
+
     padding-left:16px;
     padding-right:16px;
   }
@@ -813,16 +977,19 @@ main{
   }
 
   .hero-logo{
-    width:140px;
-    max-height:80px;
+    width:min(280px,75vw);
+    max-width:280px;
+
+    margin-bottom:18px;
   }
 
   h1{
     font-size:36px;
+
     margin-bottom:24px;
   }
 
-  .search-wrap form{
+  form{
     height:50px;
   }
 
@@ -835,8 +1002,10 @@ main{
   }
 
   .results-brand img{
-    width:24px;
-    height:24px;
+    width:28px;
+    height:28px;
+
+    flex-basis:28px;
   }
 
   .results-brand span{
@@ -849,23 +1018,19 @@ main{
 
   .search-types{
     overflow-x:auto;
+
     scrollbar-width:none;
+  }
+
+  .search-types::-webkit-scrollbar{
+    display:none;
   }
 
   .search-type{
     padding-left:10px;
     padding-right:10px;
+
     font-size:12px;
-  }
-
-  .result-content{
-    display:block;
-  }
-
-  .result-thumbnail{
-    width:100%;
-    height:160px;
-    margin-top:12px;
   }
 
   .about-overlay{
@@ -877,30 +1042,39 @@ main{
   }
 }
 
+
 @media(max-width:460px){
 
   .image-grid{
     grid-template-columns:1fr;
   }
 
-  .hero-logo{
-    width:125px;
+  .result-thumbnail{
+    width:84px;
+    height:64px;
+
+    flex-basis:84px;
+  }
+
+  .result h2{
+    font-size:18px;
   }
 }
 </style>
 </head>
 
+
 <body>
 
 <main>
 
-<!-- =========================
+<!-- =======================================================
      HOME
-========================= -->
+======================================================= -->
 
 <section id="home" class="home shell">
 
-  <div class="search-wrap">
+  <div class="home-inner">
 
     <img
       class="hero-logo"
@@ -908,57 +1082,71 @@ main{
       alt="Flibidoo"
     >
 
-    <h1><em><strong>Flibidoo</strong></em>Search</h1>
+    <div class="search-wrap">
 
-    <form id="searchForm" role="search">
+      <h1>
+        <em><strong>Flibidoo</strong></em>Search
+      </h1>
 
-      <input
-        id="q"
-        name="q"
+      <form
+        id="searchForm"
+        role="search"
         autocomplete="off"
-        spellcheck="false"
-        placeholder="Search the web"
-        aria-label="Search the web"
       >
 
-      <button
-        class="submit"
-        id="submitButton"
-        type="submit"
-        aria-label="Search"
-      >
-
-        <!-- YOUR EXACT ARROW SVG -->
-        <svg
-          class="submit-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 640 640"
-          aria-hidden="true"
-        >
-          <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
-        </svg>
-
-      </button>
-
-    </form>
-
-    <div class="links">
-
-      <button type="button" id="aboutButton">
-        About
-      </button>
-
-      <span class="confederacy-credit">
-
-        with love from The Great Confederacy of E
-
-        <img
-          src="https://raw.githubusercontent.com/danieltorres-mhcs/assets/refs/heads/main/Untitled13_20260821194209.png"
-          alt=""
-          aria-hidden="true"
+        <input
+          id="q"
+          name="q"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="Search the web"
+          aria-label="Search the web"
         >
 
-      </span>
+        <button
+          class="submit"
+          id="submitButton"
+          type="submit"
+          aria-label="Search"
+        >
+
+          <!-- Font Awesome arrow supplied by user -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 640 640"
+            aria-hidden="true"
+          >
+            <path
+              d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"
+            />
+          </svg>
+
+        </button>
+
+      </form>
+
+      <div class="links">
+
+        <button
+          type="button"
+          id="aboutButton"
+        >
+          About
+        </button>
+
+        <span class="confederacy-credit">
+
+          with love from The Great Confederacy of E
+
+          <img
+            src="https://raw.githubusercontent.com/danieltorres-mhcs/assets/refs/heads/main/Untitled13_20260821194209.png"
+            alt=""
+            aria-hidden="true"
+          >
+
+        </span>
+
+      </div>
 
     </div>
 
@@ -967,11 +1155,14 @@ main{
 </section>
 
 
-<!-- =========================
+<!-- =======================================================
      RESULTS
-========================= -->
+======================================================= -->
 
-<section id="results" class="results shell hidden">
+<section
+  id="results"
+  class="results shell hidden"
+>
 
   <div class="results-head">
 
@@ -1005,11 +1196,14 @@ main{
   </div>
 
 
+  <!-- Results search box -->
+
   <div class="results-search">
 
     <form
       id="resultsSearchForm"
       role="search"
+      autocomplete="off"
     >
 
       <input
@@ -1029,12 +1223,13 @@ main{
       >
 
         <svg
-          class="submit-icon"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 640 640"
           aria-hidden="true"
         >
-          <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+          <path
+            d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"
+          />
         </svg>
 
       </button>
@@ -1043,6 +1238,8 @@ main{
 
   </div>
 
+
+  <!-- Search categories -->
 
   <nav
     class="search-types"
@@ -1073,16 +1270,10 @@ main{
       News
     </button>
 
-    <button
-      class="search-type"
-      data-type="map"
-      type="button"
-    >
-      Maps
-    </button>
-
   </nav>
 
+
+  <!-- Results + dictionary -->
 
   <div class="results-layout">
 
@@ -1111,9 +1302,9 @@ main{
 </main>
 
 
-<!-- =========================
+<!-- =======================================================
      ABOUT
-========================= -->
+======================================================= -->
 
 <div
   id="aboutOverlay"
@@ -1134,15 +1325,17 @@ main{
       ×
     </button>
 
-    <h2 id="aboutTitle">About</h2>
+    <h2 id="aboutTitle">
+      About
+    </h2>
 
     <p>
       Welcome to FlibidooSearch.
     </p>
 
     <p>
-      You can edit this text directly in the HTML inside the
-      <strong>about-card</strong>.
+      You can edit this text directly in the HTML
+      inside the <strong>about-card</strong>.
     </p>
 
   </div>
@@ -1151,27 +1344,26 @@ main{
 
 
 <script>
-/* ============================================================
+
+/* =========================================================
    CONFIGURATION
+========================================================= */
 
-   IMPORTANT:
-   The browser talks to YOUR CLOUDFLARE WORKER.
-
-   Worker endpoints:
-     /api/search
-     /api/dictionary
-     /api/suggest
-============================================================ */
-
-const API_BASE = '';
-
-const FAVICON_FALLBACK =
-  'https://www.google.com/s2/favicons?domain=';
+const API_BASE =
+  'https://working-filibidooo.daniel-torres-a95.workers.dev';
 
 
-/* ============================================================
-   ELEMENTS
-============================================================ */
+const FLIBIDOO_LOGO =
+  'https://raw.githubusercontent.com/danieltorres-mhcs/assets/refs/heads/main/flibidoo.PNG';
+
+
+const CONFEDERACY_IMAGE =
+  'https://raw.githubusercontent.com/danieltorres-mhcs/assets/refs/heads/main/Untitled13_20260821194209.png';
+
+
+/* =========================================================
+   DOM
+========================================================= */
 
 const form =
   document.querySelector('#searchForm');
@@ -1213,30 +1405,36 @@ const resultsSubmitButton =
   document.querySelector('#resultsSubmitButton');
 
 
+/* =========================================================
+   STATE
+========================================================= */
+
 let currentQ = '';
 let currentPage = 0;
 let currentType = 'web';
 
 
-/* ============================================================
+/* =========================================================
    HELPERS
-============================================================ */
+========================================================= */
 
-function esc(value=''){
+function esc(value = ''){
+
   return String(value).replace(
     /[&<>'"]/g,
-    char => ({
+    character => ({
       '&':'&amp;',
       '<':'&lt;',
       '>':'&gt;',
       "'":'&#39;',
       '"':'&quot;'
-    }[char])
+    }[character])
   );
 }
 
 
 function updateButtonState(button,value){
+
   button.classList.toggle(
     'has-input',
     value.trim().length > 0
@@ -1246,132 +1444,153 @@ function updateButtonState(button,value){
 
 function getHostname(url){
 
+  if(!url) return '';
+
   try{
     return new URL(url).hostname;
   }catch{
     return '';
   }
-
 }
 
 
-function faviconFor(url){
+/* =========================================================
+   FAVICON
+========================================================= */
 
-  const host = getHostname(url);
+function faviconForResult(result){
+
+  /*
+   * Tiago commonly exposes:
+   *
+   * meta_url.favicon
+   *
+   * Some result shapes may expose:
+   *
+   * favicon
+   * favicon_url
+   */
+
+  const favicon =
+    result?.meta_url?.favicon ||
+    result?.favicon ||
+    result?.favicon_url ||
+    '';
+
+  if(favicon){
+    return favicon;
+  }
+
+  const url =
+    result?.url ||
+    result?.link ||
+    '';
+
+  const host =
+    getHostname(url);
 
   if(!host){
     return '';
   }
 
-  return FAVICON_FALLBACK +
-    encodeURIComponent(host) +
-    '&sz=64';
-
-}
-
-
-function getFavicon(result){
+  /*
+   * Google's favicon endpoint is used only
+   * as a fallback.
+   */
 
   return (
-    result?.meta_url?.favicon ||
-    result?.favicon ||
-    faviconFor(result?.url || '')
+    'https://www.google.com/s2/favicons' +
+    `?domain=${encodeURIComponent(host)}` +
+    '&sz=64'
   );
-
 }
 
 
-function getThumbnail(result){
+/* =========================================================
+   THUMBNAIL
+========================================================= */
+
+function thumbnailForResult(result){
 
   /*
-    Tiago commonly exposes:
-      thumbnail.src
-
-    Keep the other shapes as fallbacks because
-    response structures can differ between result types.
-  */
+   * Tiago image/OG-style thumbnail possibilities.
+   */
 
   return (
     result?.thumbnail?.src ||
     result?.thumbnail?.url ||
     result?.thumbnail ||
-    result?.properties?.thumbnail ||
+    result?.image?.url ||
     result?.image ||
+    result?.properties?.thumbnail ||
     ''
   );
-
 }
 
 
-/* ============================================================
-   DICTIONARY
-============================================================ */
+/* =========================================================
+   DICTIONARY HELPERS
+========================================================= */
 
-async function loadDictionary(word){
+function normalizeEntries(data){
 
-  dictionary.classList.remove('hidden');
-
-  dictionary.innerHTML =
-    '<div class="dictionary-loading">Looking up definition…</div>';
-
-  try{
-
-    const response = await fetch(
-      `${API_BASE}/api/dictionary?word=${encodeURIComponent(word)}`,
-      {
-        headers:{
-          'Accept':'application/json'
-        }
-      }
-    );
-
-    const text = await response.text();
-
-    let data;
-
-    try{
-      data = JSON.parse(text);
-    }catch{
-      throw new Error(
-        'Dictionary returned an invalid response.'
-      );
-    }
-
-    if(!response.ok){
-      throw new Error(
-        data?.error ||
-        'Dictionary lookup failed.'
-      );
-    }
-
-    renderDictionary(data,word);
-
-  }catch(error){
-
-    dictionary.innerHTML = `
-      <div class="dictionary-title">Dictionary</div>
-      <div class="dictionary-word">${esc(word)}</div>
-      <div class="dictionary-empty">
-        ${esc(
-          error.message ||
-          'No dictionary result available.'
-        )}
-      </div>
-    `;
-
+  if(Array.isArray(data)){
+    return data;
   }
 
+  if(
+    data &&
+    Array.isArray(data.entries)
+  ){
+    return data.entries;
+  }
+
+  if(
+    data &&
+    Array.isArray(data.data)
+  ){
+    return data.data;
+  }
+
+  return [];
 }
 
+
+function extractText(value){
+
+  if(value == null){
+    return '';
+  }
+
+  if(typeof value === 'string'){
+    return value;
+  }
+
+  if(typeof value === 'number'){
+    return String(value);
+  }
+
+  return '';
+}
+
+
+/* =========================================================
+   DICTIONARY RENDER
+========================================================= */
 
 function renderDictionary(data,word){
 
   const entries =
-    Array.isArray(data?.entries)
-      ? data.entries
-      : [];
+    normalizeEntries(data);
 
   dictionary.innerHTML = '';
+
+  if(!entries.length){
+    dictionary.classList.add('hidden');
+    return;
+  }
+
+  dictionary.classList.remove('hidden');
 
   const title =
     document.createElement('h2');
@@ -1385,33 +1604,16 @@ function renderDictionary(data,word){
   dictionary.appendChild(title);
 
 
-  const wordElement =
+  const wordLabel =
     document.createElement('div');
 
-  wordElement.className =
+  wordLabel.className =
     'dictionary-word';
 
-  wordElement.textContent =
+  wordLabel.textContent =
     word;
 
-  dictionary.appendChild(wordElement);
-
-
-  if(!entries.length){
-
-    const empty =
-      document.createElement('div');
-
-    empty.className =
-      'dictionary-empty';
-
-    empty.textContent =
-      'No definition found.';
-
-    dictionary.appendChild(empty);
-
-    return;
-  }
+  dictionary.appendChild(wordLabel);
 
 
   entries.forEach(entry => {
@@ -1423,54 +1625,71 @@ function renderDictionary(data,word){
       'dictionary-entry';
 
 
-    if(entry.language){
+    /*
+     * Language
+     */
 
-      const language =
+    const language =
+      entry.language ||
+      entry.lang ||
+      '';
+
+    if(language){
+
+      const el =
         document.createElement('div');
 
-      language.className =
+      el.className =
         'dictionary-language';
 
-      language.textContent =
-        entry.language;
+      el.textContent =
+        language;
 
-      article.appendChild(language);
-
-    }
-
-
-    if(entry.partOfSpeech){
-
-      const pos =
-        document.createElement('div');
-
-      pos.className =
-        'dictionary-pos';
-
-      pos.textContent =
-        entry.partOfSpeech;
-
-      article.appendChild(pos);
-
+      article.appendChild(el);
     }
 
 
     /*
-      Senses
-    */
+     * Part of speech
+     */
 
-    const senses =
-      Array.isArray(entry.senses)
-        ? entry.senses
-        : [];
+    const pos =
+      entry.partOfSpeech ||
+      entry.part_of_speech ||
+      entry.pos ||
+      '';
 
+    if(pos){
 
-    if(senses.length){
-
-      const sensesSection =
+      const el =
         document.createElement('div');
 
-      sensesSection.className =
+      el.className =
+        'dictionary-pos';
+
+      el.textContent =
+        pos;
+
+      article.appendChild(el);
+    }
+
+
+    /*
+     * Definitions
+     */
+
+    const definitions =
+      entry.definitions ||
+      entry.senses ||
+      [];
+
+
+    if(Array.isArray(definitions)){
+
+      const senses =
+        document.createElement('div');
+
+      senses.className =
         'dictionary-senses';
 
 
@@ -1483,131 +1702,141 @@ function renderDictionary(data,word){
       heading.textContent =
         'Definitions';
 
-      sensesSection.appendChild(heading);
+      senses.appendChild(heading);
 
 
-      senses.forEach((sense,index) => {
+      definitions
+        .slice(0,12)
+        .forEach((definition,index) => {
 
-        const senseElement =
-          document.createElement('div');
+          let definitionText = '';
 
-        senseElement.className =
-          'dictionary-sense';
+          let example = '';
 
-
-        const definition =
-          sense.definition ||
-          sense.def ||
-          sense.gloss ||
-          '';
+          let tags = '';
 
 
-        if(definition){
+          if(typeof definition === 'string'){
 
-          const def =
+            definitionText =
+              definition;
+
+          }else if(definition){
+
+            definitionText =
+              extractText(
+                definition.definition ||
+                definition.meaning ||
+                definition.text
+              );
+
+            example =
+              extractText(
+                definition.example ||
+                definition.examples?.[0]
+              );
+
+            tags =
+              Array.isArray(definition.tags)
+                ? definition.tags.join(', ')
+                : extractText(definition.tags);
+          }
+
+
+          if(!definitionText){
+            return;
+          }
+
+
+          const sense =
             document.createElement('div');
 
-          def.className =
+          sense.className =
+            'dictionary-sense';
+
+
+          const definitionEl =
+            document.createElement('div');
+
+          definitionEl.className =
             'dictionary-definition';
 
-          def.innerHTML =
-            `<strong>${index + 1}.</strong> ${esc(definition)}`;
+          definitionEl.textContent =
+            `${index + 1}. ${definitionText}`;
 
-          senseElement.appendChild(def);
-
-        }
-
-
-        const example =
-          sense.example ||
-          sense.examples?.[0] ||
-          '';
+          sense.appendChild(
+            definitionEl
+          );
 
 
-        if(example){
+          if(tags){
 
-          const ex =
-            document.createElement('div');
+            const tagEl =
+              document.createElement('span');
 
-          ex.className =
-            'dictionary-example';
+            tagEl.className =
+              'dictionary-tags';
 
-          ex.textContent =
-            `“${example}”`;
+            tagEl.textContent =
+              `(${tags})`;
 
-          senseElement.appendChild(ex);
+            definitionEl.appendChild(
+              tagEl
+            );
+          }
 
-        }
+
+          if(example){
+
+            const exampleEl =
+              document.createElement('div');
+
+            exampleEl.className =
+              'dictionary-example';
+
+            exampleEl.textContent =
+              `“${example}”`;
+
+            sense.appendChild(
+              exampleEl
+            );
+          }
 
 
-        sensesSection.appendChild(
-          senseElement
-        );
+          senses.appendChild(
+            sense
+          );
 
-      });
+        });
 
 
       article.appendChild(
-        sensesSection
+        senses
       );
-
     }
 
 
     /*
-      Synonyms
-    */
-
-    const synonyms =
-      entry.synonyms ||
-      [];
-
-    if(Array.isArray(synonyms) &&
-       synonyms.length){
-
-      appendDictionaryList(
-        article,
-        'Synonyms',
-        synonyms
-      );
-
-    }
-
-
-    /*
-      Antonyms
-    */
-
-    const antonyms =
-      entry.antonyms ||
-      [];
-
-    if(Array.isArray(antonyms) &&
-       antonyms.length){
-
-      appendDictionaryList(
-        article,
-        'Antonyms',
-        antonyms
-      );
-
-    }
-
-
-    /*
-      Translations
-    */
+     * Translations
+     */
 
     const translations =
-      entry.translations;
+      entry.translations ||
+      entry.translation ||
+      [];
 
-    if(translations){
 
-      const section =
+    if(
+      Array.isArray(translations) &&
+      translations.length
+    ){
+
+      const block =
         document.createElement('div');
 
-      section.className =
+      block.className =
         'dictionary-translations';
+
 
       const heading =
         document.createElement('div');
@@ -1618,69 +1847,62 @@ function renderDictionary(data,word){
       heading.textContent =
         'Translations';
 
-      section.appendChild(heading);
+      block.appendChild(
+        heading
+      );
 
 
-      if(Array.isArray(translations)){
+      const ul =
+        document.createElement('ul');
 
-        translations.forEach(item => {
+      ul.className =
+        'dictionary-list';
 
-          const value =
-            typeof item === 'string'
-              ? item
-              : item?.translation ||
-                item?.text ||
-                '';
 
-          if(!value) return;
+      translations
+        .slice(0,20)
+        .forEach(translation => {
 
-          const div =
-            document.createElement('div');
+          const li =
+            document.createElement('li');
 
-          div.className =
-            'dictionary-definition';
+          if(typeof translation === 'string'){
 
-          div.textContent =
-            value;
+            li.textContent =
+              translation;
 
-          section.appendChild(div);
+          }else{
 
-        });
+            li.textContent =
+              translation?.translation ||
+              translation?.word ||
+              translation?.text ||
+              '';
 
-      }else if(
-        typeof translations === 'object'
-      ){
+          }
 
-        Object.entries(
-          translations
-        ).forEach(([language,value]) => {
-
-          const div =
-            document.createElement('div');
-
-          div.className =
-            'dictionary-definition';
-
-          div.textContent =
-            `${language}: ${
-              Array.isArray(value)
-                ? value.join(', ')
-                : value
-            }`;
-
-          section.appendChild(div);
+          if(li.textContent){
+            ul.appendChild(li);
+          }
 
         });
 
+
+      if(ul.children.length){
+        block.appendChild(ul);
+        article.appendChild(block);
       }
-
-
-      article.appendChild(section);
-
     }
 
 
-    dictionary.appendChild(article);
+    article.appendChild(
+      document.createElement('br')
+    );
+
+
+    dictionary.appendChild(
+      article
+    );
 
   });
 
@@ -1691,153 +1913,233 @@ function renderDictionary(data,word){
   source.className =
     'dictionary-source';
 
-  source.innerHTML =
-    'Dictionary data from ' +
-    '<a href="https://freedictionaryapi.com/" target="_blank" rel="noopener noreferrer">FreeDictionaryAPI</a>.';
+  source.textContent =
+    'Source: FreeDictionaryAPI';
 
-  dictionary.appendChild(source);
-
+  dictionary.appendChild(
+    source
+  );
 }
 
 
-function appendDictionaryList(
-  parent,
-  title,
-  values
-){
+/* =========================================================
+   LOAD DICTIONARY
+========================================================= */
 
-  const section =
-    document.createElement('div');
+async function loadDictionary(word){
 
-  section.className =
-    'dictionary-relations';
+  /*
+   * Dictionary is primarily useful for Web searches.
+   */
 
-
-  const heading =
-    document.createElement('div');
-
-  heading.className =
-    'dictionary-label';
-
-  heading.textContent =
-    title;
-
-  section.appendChild(heading);
-
-
-  const ul =
-    document.createElement('ul');
-
-  ul.className =
-    'dictionary-list';
-
-
-  values.forEach(value => {
-
-    const text =
-      typeof value === 'string'
-        ? value
-        : value?.word ||
-          value?.text ||
-          '';
-
-    if(!text) return;
-
-    const li =
-      document.createElement('li');
-
-    li.textContent =
-      text;
-
-    ul.appendChild(li);
-
-  });
-
-
-  if(ul.children.length){
-
-    section.appendChild(ul);
-    parent.appendChild(section);
-
+  if(!word || currentType !== 'web'){
+    dictionary.classList.add('hidden');
+    dictionary.innerHTML = '';
+    return;
   }
 
+
+  dictionary.classList.remove('hidden');
+
+  dictionary.innerHTML = `
+    <h2 class="dictionary-title">
+      Dictionary
+    </h2>
+
+    <div class="dictionary-word">
+      ${esc(word)}
+    </div>
+
+    <div class="dictionary-loading">
+      Looking up “${esc(word)}”…
+    </div>
+  `;
+
+
+  try{
+
+    const response =
+      await fetch(
+        `${API_BASE}/api/dictionary?word=${encodeURIComponent(word)}`,
+        {
+          method:'GET',
+
+          headers:{
+            'Accept':'application/json'
+          }
+        }
+      );
+
+
+    const text =
+      await response.text();
+
+
+    let data;
+
+    try{
+
+      data =
+        JSON.parse(text);
+
+    }catch{
+
+      dictionary.innerHTML = `
+        <h2 class="dictionary-title">
+          Dictionary
+        </h2>
+
+        <div class="dictionary-word">
+          ${esc(word)}
+        </div>
+
+        <div class="dictionary-empty">
+          Dictionary unavailable.
+        </div>
+      `;
+
+      return;
+    }
+
+
+    if(
+      !response.ok &&
+      response.status !== 404
+    ){
+
+      dictionary.innerHTML = `
+        <h2 class="dictionary-title">
+          Dictionary
+        </h2>
+
+        <div class="dictionary-word">
+          ${esc(word)}
+        </div>
+
+        <div class="dictionary-empty">
+          Dictionary unavailable.
+        </div>
+      `;
+
+      return;
+    }
+
+
+    renderDictionary(
+      data,
+      word
+    );
+
+  }catch(error){
+
+    console.error(
+      'Dictionary error:',
+      error
+    );
+
+    dictionary.classList.add(
+      'hidden'
+    );
+  }
 }
 
 
-/* ============================================================
+/* =========================================================
    RENDER SEARCH RESULTS
-============================================================ */
+========================================================= */
 
 function render(data){
 
   home.classList.add('hidden');
+
   results.classList.remove('hidden');
 
+
   currentType =
-    data.type || currentType;
+    data.type ||
+    currentType;
+
 
   label.textContent =
     data.query
       ? `Results for “${data.query}”`
       : '';
 
-  let array = [];
 
+  let a = [];
+
+
+  /*
+   * WEB
+   */
 
   if(currentType === 'web'){
 
-    array =
+    a =
+      Array.isArray(
+        data.results?.web?.results
+      )
+        ? data.results.web.results
+        : [];
+
+  }
+
+
+  /*
+   * IMAGES
+   */
+
+  else if(
+    currentType === 'images'
+  ){
+
+    a =
       Array.isArray(
         data.results
       )
         ? data.results
-        : Array.isArray(
-            data.results?.web?.results
-          )
-          ? data.results.web.results
-          : [];
+        : [];
 
-  }else if(
-    currentType === 'images' ||
+  }
+
+
+  /*
+   * NEWS
+   */
+
+  else if(
     currentType === 'news'
   ){
 
-    array =
-      Array.isArray(data.results)
+    a =
+      Array.isArray(
+        data.results
+      )
         ? data.results
-        : [];
-
-  }else if(
-    currentType === 'map'
-  ){
-
-    const locations =
-      data.results?.locations ??
-      data.results?.map ??
-      data.locations ??
-      data.results;
-
-    array =
-      Array.isArray(locations)
-        ? locations
         : [];
 
   }
 
 
   count.textContent =
-    array.length
-      ? `${array.length} results`
+    a.length
+      ? `${a.length} results`
       : '';
 
 
   resultsInput.value =
-    data.query || '';
+    data.query ||
+    '';
 
 
   list.innerHTML = '';
+
   pager.innerHTML = '';
 
+
+  /*
+   * Active category
+   */
 
   document
     .querySelectorAll('.search-type')
@@ -1845,41 +2147,29 @@ function render(data){
 
       button.classList.toggle(
         'active',
-        button.dataset.type === currentType
+        button.dataset.type ===
+        currentType
       );
 
     });
 
 
-  /*
-    Dictionary only makes sense on normal web searches.
-  */
-
-  if(currentType === 'web' && data.query){
-
-    loadDictionary(data.query);
-
-  }else{
-
-    dictionary.classList.add('hidden');
-    dictionary.innerHTML = '';
-
-  }
-
-
-  if(!array.length){
+  if(!a.length){
 
     list.innerHTML =
       '<div class="empty">No results found.</div>';
 
-    return;
+    dictionary.classList.add(
+      'hidden'
+    );
 
+    return;
   }
 
 
-  /* =========================
+  /* =======================================================
      IMAGES
-  ========================= */
+  ======================================================= */
 
   if(currentType === 'images'){
 
@@ -1890,42 +2180,52 @@ function render(data){
       'image-grid';
 
 
-    array.forEach(result => {
+    a.forEach(result => {
 
       const url =
         result.url ||
+        result.link ||
         result.properties?.url ||
         '';
+
 
       const image =
-        getThumbnail(result) ||
-        result.url ||
+        result.thumbnail?.src ||
+        result.thumbnail?.url ||
+        result.thumbnail ||
+        result.image?.url ||
+        result.image ||
         result.properties?.url ||
         '';
 
 
-      if(!image) return;
+      if(!image){
+        return;
+      }
 
 
-      const element =
+      const article =
         document.createElement('article');
 
-      element.className =
+      article.className =
         'image-result';
 
 
-      element.innerHTML = `
+      article.innerHTML = `
+
         <a
           href="${esc(url)}"
           target="_blank"
           rel="noopener noreferrer"
         >
+
           <img
             src="${esc(image)}"
             alt="${esc(result.title || '')}"
             loading="lazy"
             referrerpolicy="no-referrer"
           >
+
         </a>
 
         <div class="image-result-title">
@@ -1942,14 +2242,18 @@ function render(data){
       `;
 
 
-      grid.appendChild(element);
+      grid.appendChild(
+        article
+      );
 
     });
 
 
     if(grid.children.length){
 
-      list.appendChild(grid);
+      list.appendChild(
+        grid
+      );
 
     }else{
 
@@ -1958,153 +2262,32 @@ function render(data){
 
     }
 
+
+    dictionary.classList.add(
+      'hidden'
+    );
   }
 
 
-  /* =========================
-     MAPS
-  ========================= */
+  /* =======================================================
+     NEWS
+  ======================================================= */
 
-  else if(currentType === 'map'){
+  else if(currentType === 'news'){
 
-    array.forEach(result => {
+    a.forEach(result => {
 
-      const element =
+      const article =
         document.createElement('article');
 
-      element.className =
-        'map-result';
-
-
-      const title =
-        result.title ||
-        result.name ||
-        result.address?.name ||
-        result.properties?.name ||
-        'Map result';
-
-
-      const url =
-        result.url ||
-        result.website ||
-        result.properties?.url ||
-        '';
-
-
-      let address = '';
-
-
-      if(typeof result.address === 'string'){
-
-        address =
-          result.address;
-
-      }else if(result.address){
-
-        address =
-          Object.values(result.address)
-            .filter(
-              value =>
-                typeof value === 'string' &&
-                value
-            )
-            .join(', ');
-
-      }else{
-
-        address =
-          result.description ||
-          result.properties?.address ||
-          '';
-
-      }
-
-
-      const lat =
-        result.lat ??
-        result.latitude ??
-        result.coordinates?.lat ??
-        result.geometry?.coordinates?.[1];
-
-
-      const lon =
-        result.lon ??
-        result.lng ??
-        result.longitude ??
-        result.coordinates?.lon ??
-        result.geometry?.coordinates?.[0];
-
-
-      const href =
-        lat != null &&
-        lon != null
-
-          ? `https://www.google.com/maps?q=${
-              encodeURIComponent(lat)
-            },${
-              encodeURIComponent(lon)
-            }`
-
-          : url;
-
-
-      element.innerHTML = `
-
-        <h2 class="map-result-title">
-
-          <a
-            href="${esc(href)}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            ${esc(title)}
-          </a>
-
-        </h2>
-
-        ${
-          address
-            ? `<div class="map-result-address">
-                ${esc(address)}
-              </div>`
-            : ''
-        }
-
-        ${
-          lat != null && lon != null
-            ? `<div class="map-result-coords">
-                ${esc(lat)}, ${esc(lon)}
-              </div>`
-            : ''
-        }
-
-      `;
-
-
-      list.appendChild(element);
-
-    });
-
-  }
-
-
-  /* =========================
-     WEB / NEWS
-  ========================= */
-
-  else{
-
-    array.forEach(result => {
-
-      const element =
-        document.createElement('article');
-
-      element.className =
+      article.className =
         'result';
 
 
       const url =
-        result.url || '';
+        result.url ||
+        result.link ||
+        '';
 
 
       const host =
@@ -2113,17 +2296,15 @@ function render(data){
 
 
       const favicon =
-        getFavicon(result) ||
-        faviconFor(url);
-
-
-      const thumbnail =
-        getThumbnail(result);
+        faviconForResult(
+          result
+        );
 
 
       const title =
         result.title ||
-        url;
+        url ||
+        'News result';
 
 
       const description =
@@ -2135,13 +2316,19 @@ function render(data){
       const age =
         result.age ||
         result.publishedDate ||
-        result.published ||
+        result.published_date ||
         '';
 
 
-      element.innerHTML = `
+      const thumbnail =
+        thumbnailForResult(
+          result
+        );
 
-        <div class="result-url-row">
+
+      article.innerHTML = `
+
+        <div class="result-top">
 
           ${
             favicon
@@ -2152,9 +2339,6 @@ function render(data){
                   alt=""
                   loading="lazy"
                   referrerpolicy="no-referrer"
-                  onerror="this.onerror=null;this.src='${esc(
-                    faviconFor(url)
-                  )}'"
                 >
               `
               : ''
@@ -2167,21 +2351,22 @@ function render(data){
         </div>
 
 
+        <h2>
+
+          <a
+            href="${esc(url)}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ${esc(title)}
+          </a>
+
+        </h2>
+
+
         <div class="result-content">
 
           <div class="result-text">
-
-            <h2>
-
-              <a
-                href="${esc(url)}"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                ${esc(title)}
-              </a>
-
-            </h2>
 
             ${
               description
@@ -2215,28 +2400,200 @@ function render(data){
                   alt=""
                   loading="lazy"
                   referrerpolicy="no-referrer"
-                  onerror="this.onerror=null;this.src='${esc(
-                    favicon
-                  )}'"
                 >
               `
               : ''
           }
 
         </div>
+
       `;
 
 
-      list.appendChild(element);
+      list.appendChild(
+        article
+      );
 
     });
+
+
+    dictionary.classList.add(
+      'hidden'
+    );
+  }
+
+
+  /* =======================================================
+     WEB
+  ======================================================= */
+
+  else{
+
+    a.forEach(result => {
+
+      const article =
+        document.createElement('article');
+
+      article.className =
+        'result';
+
+
+      const url =
+        result.url ||
+        result.link ||
+        '';
+
+
+      const host =
+        result.meta_url?.hostname ||
+        getHostname(url);
+
+
+      const favicon =
+        faviconForResult(
+          result
+        );
+
+
+      const title =
+        result.title ||
+        url ||
+        'Search result';
+
+
+      const description =
+        result.description ||
+        result.content ||
+        '';
+
+
+      const age =
+        result.age ||
+        result.publishedDate ||
+        result.published_date ||
+        '';
+
+
+      /*
+       * Thumbnail / OG image.
+       *
+       * If no thumbnail exists,
+       * favicon is used as the visual fallback.
+       */
+
+      const thumbnail =
+        thumbnailForResult(
+          result
+        ) ||
+        favicon;
+
+
+      article.innerHTML = `
+
+        <div class="result-top">
+
+          ${
+            favicon
+              ? `
+                <img
+                  class="result-favicon"
+                  src="${esc(favicon)}"
+                  alt=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer"
+                >
+              `
+              : ''
+          }
+
+          <div class="result-url">
+            ${esc(host || url)}
+          </div>
+
+        </div>
+
+
+        <h2>
+
+          <a
+            href="${esc(url)}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ${esc(title)}
+          </a>
+
+        </h2>
+
+
+        <div class="result-content">
+
+          <div class="result-text">
+
+            ${
+              description
+                ? `
+                  <p class="snippet">
+                    ${esc(description)}
+                  </p>
+                `
+                : ''
+            }
+
+            ${
+              age
+                ? `
+                  <div class="result-meta">
+                    ${esc(age)}
+                  </div>
+                `
+                : ''
+            }
+
+          </div>
+
+
+          ${
+            thumbnail
+              ? `
+                <img
+                  class="result-thumbnail"
+                  src="${esc(thumbnail)}"
+                  alt=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer"
+                >
+              `
+              : ''
+          }
+
+        </div>
+
+      `;
+
+
+      list.appendChild(
+        article
+      );
+
+    });
+
+
+    /*
+     * Dictionary only for Web.
+     */
+
+    loadDictionary(
+      data.query ||
+      currentQ
+    );
 
   }
 
 
-  /* =========================
+  /* =======================================================
      PAGINATION
-  ========================= */
+  ======================================================= */
 
   const more =
     Boolean(
@@ -2247,81 +2604,88 @@ function render(data){
 
   if(currentPage > 0){
 
-    const previous =
+    const button =
       document.createElement('button');
 
-    previous.textContent =
+    button.textContent =
       'Previous';
 
-    previous.onclick =
-      () =>
-        search(
-          currentQ,
-          currentPage - 1,
-          currentType
-        );
+    button.onclick = () =>
+      search(
+        currentQ,
+        currentPage - 1,
+        currentType
+      );
 
-    pager.appendChild(previous);
-
+    pager.appendChild(
+      button
+    );
   }
 
 
   if(more){
 
-    const next =
+    const button =
       document.createElement('button');
 
-    next.textContent =
+    button.textContent =
       'Next';
 
-    next.onclick =
-      () =>
-        search(
-          currentQ,
-          currentPage + 1,
-          currentType
-        );
+    button.onclick = () =>
+      search(
+        currentQ,
+        currentPage + 1,
+        currentType
+      );
 
-    pager.appendChild(next);
-
+    pager.appendChild(
+      button
+    );
   }
+
+
+  /*
+   * Update browser URL.
+   */
+
+  const query =
+    data.query ||
+    currentQ;
 
 
   history.replaceState(
     {},
     '',
-    `/?q=${encodeURIComponent(
-      data.query || currentQ
-    )}&type=${encodeURIComponent(
-      currentType
-    )}${
+    `/?q=${encodeURIComponent(query)}` +
+    `&type=${encodeURIComponent(currentType)}` +
+    `${
       currentPage
         ? `&page=${currentPage}`
         : ''
     }`
   );
-
 }
 
 
-/* ============================================================
+/* =========================================================
    SEARCH
-============================================================ */
+========================================================= */
 
 async function search(
-  query,
-  page=0,
-  type=currentType
+  q,
+  page = 0,
+  type = currentType
 ){
 
-  query =
-    query.trim();
+  q = q.trim();
 
-  if(!query) return;
+  if(!q){
+    return;
+  }
 
 
   currentQ =
-    query;
+    q;
 
   currentPage =
     Math.max(
@@ -2330,96 +2694,112 @@ async function search(
     );
 
   currentType =
-    type;
+    ['web','images','news']
+      .includes(type)
+      ? type
+      : 'web';
 
 
   document.title =
-    `${query} - FlibidooSearch`;
+    `${q} - FlibidooSearch`;
 
 
   input.value =
-    query;
+    q;
 
   resultsInput.value =
-    query;
+    q;
 
 
-  home.classList.add('hidden');
-  results.classList.remove('hidden');
+  home.classList.add(
+    'hidden'
+  );
+
+  results.classList.remove(
+    'hidden'
+  );
 
 
   list.innerHTML =
     '<div class="empty">Searching…</div>';
 
+
   count.textContent =
     '';
 
   label.textContent =
-    `Results for “${query}”`;
+    `Results for “${q}”`;
 
   pager.innerHTML =
     '';
 
 
-  if(currentType === 'web'){
+  /*
+   * Hide dictionary while searching
+   * unless this is a web search.
+   */
 
-    dictionary.classList.remove('hidden');
+  if(currentType !== 'web'){
+
+    dictionary.classList.add(
+      'hidden'
+    );
 
     dictionary.innerHTML =
-      '<div class="dictionary-loading">Looking up definition…</div>';
-
-  }else{
-
-    dictionary.classList.add('hidden');
+      '';
 
   }
 
 
+  /*
+   * Update active category immediately.
+   */
+
+  document
+    .querySelectorAll('.search-type')
+    .forEach(button => {
+
+      button.classList.toggle(
+        'active',
+        button.dataset.type ===
+        currentType
+      );
+
+    });
+
+
   try{
-
-    /*
-      IMPORTANT:
-      This calls YOUR WORKER.
-
-      It does NOT call:
-        search.tiago.zip/api
-      directly from the browser.
-    */
 
     const response =
       await fetch(
-        `${API_BASE}/api/search?q=${
-          encodeURIComponent(query)
-        }&type=${
-          encodeURIComponent(currentType)
-        }&page=${
-          currentPage
-        }`,
+        `${API_BASE}/api/search` +
+        `?q=${encodeURIComponent(q)}` +
+        `&type=${encodeURIComponent(currentType)}` +
+        `&page=${currentPage}`,
         {
           method:'GET',
+
           headers:{
-            'Accept':'application/json'
+            'Accept':
+              'application/json'
           }
         }
       );
 
 
     /*
-      Read text first.
-
-      This prevents:
-        Unexpected token 'N',
-        "Not Found " is not valid JSON
-
-      when Cloudflare returns an HTML/text error.
-    */
+     * Read text first.
+     *
+     * This avoids:
+     *
+     * Unexpected token 'N'
+     */
 
     const text =
       await response.text();
 
 
     let data;
-
 
     try{
 
@@ -2429,9 +2809,7 @@ async function search(
     }catch{
 
       throw new Error(
-        response.ok
-          ? 'Search server returned invalid JSON.'
-          : `Search endpoint returned ${response.status}: ${text.slice(0,120)}`
+        `Search server returned invalid JSON (HTTP ${response.status}).`
       );
 
     }
@@ -2441,63 +2819,58 @@ async function search(
 
       throw new Error(
         data?.error ||
-        `Search failed (${response.status}).`
+        `Search failed (HTTP ${response.status}).`
       );
 
     }
 
 
+    /*
+     * Make sure the renderer knows
+     * which category was requested.
+     */
+
     data.type =
       currentType;
 
+    data.query =
+      data.query ||
+      q;
 
-    render(data);
 
+    render(
+      data
+    );
 
   }catch(error){
 
-    dictionary.classList.add('hidden');
+    console.error(
+      'Search error:',
+      error
+    );
 
-    list.innerHTML = `
-      <div class="error">
-        ${esc(
-          error.message ||
-          'Search failed. Please try again.'
-        )}
-      </div>
-    `;
 
+    dictionary.classList.add(
+      'hidden'
+    );
+
+
+    list.innerHTML =
+      `
+        <div class="error">
+          ${esc(
+            error.message ||
+            'Search failed. Please try again.'
+          )}
+        </div>
+      `;
   }
-
 }
 
 
-/* ============================================================
-   INPUT BUTTON STATE
-============================================================ */
-
-input.addEventListener(
-  'input',
-  () =>
-    updateButtonState(
-      submitButton,
-      input.value
-    )
-);
-
-resultsInput.addEventListener(
-  'input',
-  () =>
-    updateButtonState(
-      resultsSubmitButton,
-      resultsInput.value
-    )
-);
-
-
-/* ============================================================
+/* =========================================================
    HOME SEARCH
-============================================================ */
+========================================================= */
 
 form.addEventListener(
   'submit',
@@ -2505,21 +2878,31 @@ form.addEventListener(
 
     event.preventDefault();
 
-    const query =
+    const q =
       input.value.trim();
 
-    if(!query) return;
+    if(!q){
+      return;
+    }
+
+
+    /*
+     * Navigate to the results URL.
+     *
+     * The initial URL loader below
+     * will perform the actual search.
+     */
 
     location.href =
-      `/?q=${encodeURIComponent(query)}&type=web&page=0`;
-
+      `/?q=${encodeURIComponent(q)}` +
+      `&type=web&page=0`;
   }
 );
 
 
-/* ============================================================
+/* =========================================================
    RESULTS SEARCH
-============================================================ */
+========================================================= */
 
 resultsForm.addEventListener(
   'submit',
@@ -2527,24 +2910,26 @@ resultsForm.addEventListener(
 
     event.preventDefault();
 
-    const query =
+    const q =
       resultsInput.value.trim();
 
-    if(!query) return;
+    if(!q){
+      return;
+    }
+
 
     search(
-      query,
+      q,
       0,
       currentType
     );
-
   }
 );
 
 
-/* ============================================================
-   SEARCH TYPE BUTTONS
-============================================================ */
+/* =========================================================
+   CATEGORY BUTTONS
+========================================================= */
 
 document
   .querySelectorAll('.search-type')
@@ -2554,14 +2939,30 @@ document
       'click',
       () => {
 
-        const query =
-          resultsInput.value ||
+        const q =
+          resultsInput.value.trim() ||
           currentQ;
 
+        const type =
+          button.dataset.type;
+
+
+        if(!q){
+          return;
+        }
+
+
+        /*
+         * This is the important part:
+         *
+         * Clicking Images or News creates
+         * a completely new Worker request.
+         */
+
         search(
-          query,
+          q,
           0,
-          button.dataset.type
+          type
         );
 
       }
@@ -2570,38 +2971,78 @@ document
   });
 
 
-/* ============================================================
+/* =========================================================
+   INPUT BUTTON STATE
+========================================================= */
+
+input.addEventListener(
+  'input',
+  () => {
+
+    updateButtonState(
+      submitButton,
+      input.value
+    );
+
+  }
+);
+
+
+resultsInput.addEventListener(
+  'input',
+  () => {
+
+    updateButtonState(
+      resultsSubmitButton,
+      resultsInput.value
+    );
+
+  }
+);
+
+
+/* =========================================================
    ABOUT
-============================================================ */
+========================================================= */
 
 const aboutOverlay =
   document.querySelector(
     '#aboutOverlay'
   );
 
-document
-  .querySelector('#aboutButton')
-  .onclick =
-    () =>
-      aboutOverlay.classList.remove(
-        'hidden'
-      );
+const aboutButton =
+  document.querySelector(
+    '#aboutButton'
+  );
+
+const aboutClose =
+  document.querySelector(
+    '#aboutClose'
+  );
 
 
-document
-  .querySelector('#aboutClose')
-  .onclick =
-    () =>
-      aboutOverlay.classList.add(
-        'hidden'
-      );
+aboutButton.onclick =
+  () =>
+    aboutOverlay.classList.remove(
+      'hidden'
+    );
+
+
+aboutClose.onclick =
+  () =>
+    aboutOverlay.classList.add(
+      'hidden'
+    );
 
 
 aboutOverlay.addEventListener(
   'click',
   event => {
 
-    if(event.target === aboutOverlay){
+    if(
+      event.target ===
+      aboutOverlay
+    ){
 
       aboutOverlay.classList.add(
         'hidden'
@@ -2617,7 +3058,9 @@ document.addEventListener(
   'keydown',
   event => {
 
-    if(event.key === 'Escape'){
+    if(
+      event.key === 'Escape'
+    ){
 
       aboutOverlay.classList.add(
         'hidden'
@@ -2629,43 +3072,66 @@ document.addEventListener(
 );
 
 
-/* ============================================================
+/* =========================================================
    INITIAL URL
-============================================================ */
+========================================================= */
 
 const params =
   new URLSearchParams(
     location.search
   );
 
+
 const initialQuery =
   params.get('q');
 
+
 const initialType =
-  ['web','images','news','map']
-    .includes(
-      params.get('type')
-    )
-      ? params.get('type')
-      : 'web';
+  params.get('type');
+
+
+const initialPage =
+  Number(
+    params.get('page') ||
+    '0'
+  );
 
 
 if(initialQuery){
 
   search(
     initialQuery,
-    Number(
-      params.get('page') || 0
-    ),
-    initialType
+
+    Number.isFinite(initialPage)
+      ? initialPage
+      : 0,
+
+    ['web','images','news']
+      .includes(initialType)
+      ? initialType
+      : 'web'
+  );
+
+}else{
+
+  /*
+   * Keep the home page visible.
+   */
+
+  home.classList.remove(
+    'hidden'
+  );
+
+  results.classList.add(
+    'hidden'
   );
 
 }
 
 
-/* ============================================================
-   INITIAL BUTTON STATES
-============================================================ */
+/* =========================================================
+   INITIAL BUTTON STATE
+========================================================= */
 
 updateButtonState(
   submitButton,
@@ -2676,6 +3142,7 @@ updateButtonState(
   resultsSubmitButton,
   resultsInput.value
 );
+
 </script>
 
 </body>
