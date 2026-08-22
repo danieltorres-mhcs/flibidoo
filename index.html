@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#1d0c22">
 <meta name="color-scheme" content="dark">
+<link rel="icon" href="https://github.com/danieltorres-mhcs/assets/blob/main/flibidoo.PNG?raw=true">
 <title>FlibidooSearch</title>
 
 <style>
@@ -17,8 +18,8 @@
   --result:#e7dce9;
   --url:#b8a2bc;
   --focus:#cdb8d1;
-  --panel:#24132a;
-  --error:#ffb5b5;
+  --translator-text:#f5eef7;
+  --translator-muted:#a995ad;
 }
 
 *{
@@ -49,8 +50,7 @@ select{
   font:inherit;
 }
 
-button,
-select{
+button{
   -webkit-tap-highlight-color:transparent;
 }
 
@@ -58,21 +58,13 @@ a{
   color:inherit;
 }
 
-.hidden{
-  display:none!important;
-}
-
 /* =========================================================
-   GLOBAL LAYOUT
+   GLOBAL
    ========================================================= */
 
 .shell{
   width:min(100% - 32px,1120px);
   margin:0 auto;
-}
-
-main{
-  flex:1;
 }
 
 /* =========================================================
@@ -81,19 +73,17 @@ main{
 
 #home.home{
   width:100%;
-  min-height:100vh;
+  min-height:100svh;
   margin:0;
   padding:
     max(24px,env(safe-area-inset-top))
-    max(20px,env(safe-area-inset-right))
+    max(16px,env(safe-area-inset-right))
     max(24px,env(safe-area-inset-bottom))
-    max(20px,env(safe-area-inset-left));
-
+    max(16px,env(safe-area-inset-left));
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-
   overflow:hidden;
 }
 
@@ -101,36 +91,38 @@ main{
   width:min(100%,680px);
 }
 
+.hero-logo{
+  width:min(210px,55vw);
+  max-width:210px;
+  height:auto;
+  display:block;
+  margin:0 auto 14px;
+  object-fit:contain;
+}
+
 h1{
   font-size:clamp(34px,5vw,54px);
   line-height:1;
   margin:0 0 30px;
+  text-align:center;
   letter-spacing:-.055em;
   font-weight:500;
-  text-align:center;
 }
 
-/* =========================================================
-   SEARCH BAR
-   ========================================================= */
-
-form{
+.search-wrap form{
   display:flex;
   align-items:center;
   width:100%;
-  min-width:0;
   height:54px;
-
   border:1px solid var(--line);
   border-radius:28px;
   background:transparent;
-
   transition:
     border-color .15s ease,
     box-shadow .15s ease;
 }
 
-form:focus-within{
+.search-wrap form:focus-within{
   border-color:var(--focus);
   box-shadow:0 0 0 2px rgba(205,184,209,.08);
 }
@@ -138,15 +130,12 @@ form:focus-within{
 input{
   min-width:0;
   flex:1;
-
   border:0;
   outline:0;
-
   background:transparent;
   color:var(--text);
-
   font-size:16px;
-  padding:0 14px;
+  padding:0 16px;
 }
 
 input::placeholder{
@@ -156,19 +145,14 @@ input::placeholder{
 .submit{
   height:38px;
   width:38px;
-
   margin-right:8px;
-
   border:1px solid var(--line);
   background:transparent;
   color:#766679;
-
   border-radius:50%;
   padding:0;
-
   display:grid;
   place-items:center;
-
   cursor:pointer;
   flex:0 0 auto;
 }
@@ -182,20 +166,17 @@ input::placeholder{
   border-color:var(--focus);
 }
 
-/* =========================================================
-   HOME LINKS
-   ========================================================= */
+.submit:active{
+  transform:scale(.96);
+}
 
 .links{
   display:flex;
   align-items:center;
   justify-content:center;
   flex-wrap:wrap;
-
   gap:18px;
-
   margin-top:20px;
-
   color:var(--muted);
   font-size:13px;
 }
@@ -216,24 +197,26 @@ input::placeholder{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-
   gap:7px;
-
   color:var(--muted);
-
   font-size:12px;
   line-height:1.4;
-
   text-align:center;
 }
 
 /* =========================================================
-   RESULTS
+   MAIN / RESULTS
    ========================================================= */
 
+main{
+  flex:1;
+}
+
 .results{
+  width:min(100% - 32px,1120px);
+  margin:0 auto;
   padding:
-    30px
+    max(24px,env(safe-area-inset-top))
     0
     max(70px,env(safe-area-inset-bottom));
 }
@@ -242,11 +225,8 @@ input::placeholder{
   display:flex;
   align-items:center;
   gap:18px;
-
   min-height:44px;
-
   border-bottom:1px solid var(--line2);
-
   padding-bottom:14px;
   margin-bottom:14px;
 }
@@ -254,13 +234,17 @@ input::placeholder{
 .results-brand{
   display:inline-flex;
   align-items:center;
-
   gap:8px;
-
   text-decoration:none;
   color:inherit;
-
   white-space:nowrap;
+}
+
+.results-brand img{
+  width:28px;
+  height:28px;
+  object-fit:contain;
+  display:block;
 }
 
 .results-brand span{
@@ -270,15 +254,12 @@ input::placeholder{
 }
 
 .results-query{
-  min-width:0;
-  flex:1;
-
   font-size:14px;
   color:var(--muted);
-
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
+  flex:1;
 }
 
 .count{
@@ -289,11 +270,20 @@ input::placeholder{
 
 .results-search{
   width:min(100%,680px);
-  margin:0 0 18px;
+  margin:0 0 28px;
 }
 
 .results-search form{
+  display:flex;
+  align-items:center;
   height:48px;
+  border:1px solid var(--line);
+  border-radius:24px;
+}
+
+.results-search form:focus-within{
+  border-color:var(--focus);
+  box-shadow:0 0 0 2px rgba(205,184,209,.08);
 }
 
 .results-search .submit{
@@ -302,25 +292,14 @@ input::placeholder{
   margin-right:6px;
 }
 
-/* =========================================================
-   SEARCH TYPES
-   ========================================================= */
-
 .search-types{
   display:flex;
   align-items:flex-end;
-
   gap:0;
-
   margin:8px 0 18px;
-
   border-bottom:1px solid rgba(255,255,255,.12);
-
   height:36px;
-
   overflow-x:auto;
-  overflow-y:hidden;
-
   scrollbar-width:none;
 }
 
@@ -330,26 +309,18 @@ input::placeholder{
 
 .search-type{
   position:relative;
-
   appearance:none;
-
   border:0;
   background:transparent;
-
   color:rgba(255,255,255,.62);
-
   font:inherit;
   font-size:13px;
   line-height:20px;
-
   padding:0 12px 10px;
   margin:0;
-
   border-radius:0;
-
   cursor:pointer;
-
-  flex:0 0 auto;
+  white-space:nowrap;
 }
 
 .search-type:hover,
@@ -360,17 +331,12 @@ input::placeholder{
 
 .search-type.active::after{
   content:"";
-
   position:absolute;
-
   left:10px;
   right:10px;
   bottom:-1px;
-
   height:2px;
-
   border-radius:2px 2px 0 0;
-
   background:currentColor;
 }
 
@@ -380,31 +346,21 @@ input::placeholder{
 
 .results-layout{
   display:grid;
-
   grid-template-columns:minmax(0,1fr) 330px;
-
   gap:42px;
-
   align-items:start;
 }
-
-/* =========================================================
-   WEB RESULTS
-   ========================================================= */
 
 .result{
   padding:0 0 26px;
   margin-bottom:26px;
-
   border-bottom:1px solid var(--line2);
 }
 
 .result-url{
   font-size:13px;
   color:var(--url);
-
   margin-bottom:6px;
-
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
@@ -413,9 +369,7 @@ input::placeholder{
 .result h2{
   font-size:20px;
   line-height:1.25;
-
   margin:0 0 7px;
-
   font-weight:500;
   letter-spacing:-.02em;
 }
@@ -431,18 +385,14 @@ input::placeholder{
 .snippet{
   font-size:14px;
   line-height:1.6;
-
   color:var(--result);
-
   margin:0;
-
   max-width:760px;
 }
 
 .result-meta{
   font-size:12px;
   color:var(--muted);
-
   margin-top:7px;
 }
 
@@ -452,10 +402,7 @@ input::placeholder{
 
 .image-grid{
   display:grid;
-
-  grid-template-columns:
-    repeat(3,minmax(0,1fr));
-
+  grid-template-columns:repeat(3,minmax(0,1fr));
   gap:28px 22px;
 }
 
@@ -471,23 +418,17 @@ input::placeholder{
 
 .image-result img{
   display:block;
-
   width:100%;
   aspect-ratio:4/3;
-
   object-fit:cover;
-
   border:1px solid var(--line2);
-
   background:rgba(255,255,255,.02);
 }
 
 .image-result-title{
   font-size:14px;
   line-height:1.4;
-
   margin-top:9px;
-
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
@@ -496,71 +437,10 @@ input::placeholder{
 .image-result-source{
   font-size:12px;
   color:var(--muted);
-
   margin-top:4px;
-
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-}
-
-/* =========================================================
-   MAP RESULTS
-   ========================================================= */
-
-.map-result{
-  padding:0 0 22px;
-  margin-bottom:22px;
-
-  border-bottom:1px solid var(--line2);
-}
-
-.map-result-title{
-  font-size:18px;
-  line-height:1.35;
-
-  margin:0 0 6px;
-
-  font-weight:500;
-}
-
-.map-result-title a{
-  text-decoration:none;
-}
-
-.map-result-title a:hover{
-  text-decoration:underline;
-}
-
-.map-result-address{
-  font-size:14px;
-  line-height:1.55;
-
-  color:var(--result);
-}
-
-.map-result-coords{
-  font-size:12px;
-  color:var(--muted);
-
-  margin-top:6px;
-}
-
-.map-result-link{
-  display:inline-block;
-
-  margin-top:10px;
-
-  font-size:12px;
-
-  color:var(--muted);
-
-  text-decoration:none;
-}
-
-.map-result-link:hover{
-  color:var(--text);
-  text-decoration:underline;
 }
 
 /* =========================================================
@@ -569,38 +449,29 @@ input::placeholder{
 
 .dictionary{
   border-left:1px solid var(--line2);
-
   padding-left:28px;
-
   max-height:70vh;
-
   overflow-y:auto;
-
   overscroll-behavior:contain;
-
   scrollbar-width:thin;
 }
 
 .dictionary-title{
   font-size:22px;
   font-weight:500;
-
   letter-spacing:-.02em;
-
   margin:0 0 5px;
 }
 
 .dictionary-word{
   font-size:13px;
   color:var(--muted);
-
   margin-bottom:22px;
 }
 
 .dictionary-entry{
   padding:0 0 24px;
   margin-bottom:24px;
-
   border-bottom:1px solid var(--line2);
 }
 
@@ -628,7 +499,6 @@ input::placeholder{
 .dictionary-label{
   text-transform:uppercase;
   letter-spacing:.05em;
-
   margin-bottom:7px;
 }
 
@@ -653,17 +523,13 @@ input::placeholder{
 .dictionary-tags{
   font-size:12px;
   color:var(--muted);
-
   margin-left:5px;
 }
 
-.dictionary-example,
-.dictionary-quote{
+.dictionary-example{
   font-size:13px;
   line-height:1.5;
-
   color:var(--result);
-
   margin:7px 0 0 14px;
 }
 
@@ -672,333 +538,177 @@ input::placeholder{
 .dictionary-empty{
   font-size:12px;
   line-height:1.5;
-
   color:var(--muted);
-}
-
-/* =========================================================
-   WORD OF THE DAY
-   ========================================================= */
-
-.wotd-panel{
-  padding:0 0 22px;
-  margin:0 0 22px;
-
-  border-bottom:1px solid var(--line2);
-}
-
-.wotd-heading{
-  display:flex;
-  align-items:center;
-  gap:8px;
-
-  margin:0 0 8px;
-
-  color:#ffb52e;
-
-  font-size:13px;
-  font-weight:600;
-}
-
-.wotd-word{
-  color:#ffe18a;
-
-  font-size:20px;
-  font-weight:600;
-  line-height:1.25;
-
-  margin:0 0 5px;
-}
-
-.wotd-definition{
-  color:#ffe9a8;
-
-  font-size:13px;
-  line-height:1.55;
-
-  margin:0;
-}
-
-.wotd-status{
-  color:var(--muted);
-
-  font-size:13px;
-  line-height:1.5;
 }
 
 /* =========================================================
    TRANSLATOR
+   NO CARD / NO ROUNDED CONTAINER
    ========================================================= */
 
-.translation-panel{
-  width:min(100%,760px);
-
-  margin:0 0 22px;
-
-  padding:18px;
-
-  border:1px solid var(--line2);
-
-  background:rgba(255,255,255,.015);
-
-  border-radius:14px;
+.translator{
+  display:none;
+  margin:0 0 32px;
+  padding:0 0 26px;
+  border-bottom:1px solid var(--line2);
 }
 
-.translation-top{
+.translator.visible{
+  display:block;
+}
+
+.translator-top{
   display:flex;
   align-items:center;
   justify-content:space-between;
-
   gap:12px;
-
   margin-bottom:14px;
 }
 
-.translation-title{
+.translator-title{
   font-size:14px;
   font-weight:600;
+  margin:0;
 }
 
-.translation-close{
-  width:32px;
-  height:32px;
-
-  border:0;
-  border-radius:50%;
-
-  background:transparent;
-
-  color:var(--muted);
-
-  cursor:pointer;
-
-  font-size:20px;
-
+.translator-languages{
   display:grid;
-  place-items:center;
-}
-
-.translation-close:hover{
-  background:rgba(255,255,255,.08);
-  color:var(--text);
-}
-
-.translation-languages{
-  display:grid;
-
-  grid-template-columns:
-    minmax(0,1fr)
-    40px
-    minmax(0,1fr);
-
+  grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr);
   align-items:center;
-
   gap:10px;
-
   margin-bottom:12px;
 }
 
-.translation-language{
-  width:100%;
-  height:38px;
-
-  border:1px solid var(--line);
-  border-radius:8px;
-
-  background:#201025;
-  color:var(--text);
-
-  padding:0 10px;
-
-  outline:none;
+.translator-language{
+  min-width:0;
 }
 
-.translation-language:focus{
+.translator-language select{
+  width:100%;
+  height:40px;
+  border:0;
+  border-bottom:1px solid var(--line);
+  border-radius:0;
+  outline:0;
+  background:transparent;
+  color:var(--text);
+  padding:0 4px;
+  cursor:pointer;
+}
+
+.translator-language select:focus{
   border-color:var(--focus);
 }
 
-.translation-language option{
+.translator-language select option{
   background:#24132a;
   color:var(--text);
 }
 
-.translation-swap{
-  width:38px;
-  height:38px;
-
-  border:1px solid var(--line);
-  border-radius:50%;
-
+.translate-swap{
+  width:36px;
+  height:36px;
+  border:0;
+  border-radius:0;
   background:transparent;
-
   color:var(--muted);
-
   cursor:pointer;
-
   display:grid;
   place-items:center;
-
-  font-size:17px;
+  font-size:18px;
 }
 
-.translation-swap:hover{
+.translate-swap:hover{
   color:var(--text);
-  border-color:var(--focus);
 }
 
-.translation-editors{
+.translator-fields{
   display:grid;
-
-  grid-template-columns:
-    minmax(0,1fr)
-    minmax(0,1fr);
-
-  gap:12px;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:20px;
 }
 
-.translation-box{
-  position:relative;
+.translator-field{
+  min-width:0;
 }
 
-.translation-textarea{
+.translator-field textarea{
   width:100%;
-
-  min-height:150px;
-
+  min-height:130px;
+  max-height:260px;
   resize:vertical;
-
   border:1px solid var(--line);
-  border-radius:10px;
-
+  border-radius:0;
+  outline:0;
   background:transparent;
-  color:var(--text);
-
-  padding:13px 13px 34px;
-
-  outline:none;
-
-  font:inherit;
+  color:var(--translator-text);
+  padding:12px;
   font-size:14px;
   line-height:1.55;
 }
 
-.translation-textarea:focus{
+.translator-field textarea:focus{
   border-color:var(--focus);
 }
 
-.translation-textarea::placeholder{
-  color:#9e8da1;
+.translator-field textarea::placeholder{
+  color:var(--translator-muted);
 }
 
-.translation-output{
-  min-height:150px;
-
-  border:1px solid var(--line);
-  border-radius:10px;
-
-  padding:13px;
-
-  color:var(--result);
-
-  font-size:14px;
-  line-height:1.55;
-
-  white-space:pre-wrap;
-  overflow-wrap:anywhere;
+.translator-field textarea[readonly]{
+  color:#ddd1df;
 }
 
-.translation-counter{
-  position:absolute;
-
-  bottom:9px;
-  right:11px;
-
-  font-size:11px;
-
-  color:var(--muted);
-
-  pointer-events:none;
-}
-
-.translation-footer{
+.translator-field-head{
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:8px;
+  margin-bottom:7px;
+}
 
+.translator-field-label{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.translator-count{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.translator-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
   gap:12px;
-
   margin-top:12px;
 }
 
-.translation-status{
-  min-width:0;
-
-  font-size:12px;
-
+.translator-status{
+  flex:1;
   color:var(--muted);
-
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+  font-size:12px;
+  line-height:1.4;
 }
 
-.translation-button{
-  flex:0 0 auto;
-
+.translate-button{
   height:38px;
-
-  padding:0 15px;
-
+  padding:0 16px;
   border:1px solid var(--line);
-  border-radius:19px;
-
+  border-radius:0;
   background:transparent;
-
   color:var(--text);
-
   cursor:pointer;
 }
 
-.translation-button:hover{
+.translate-button:hover{
   border-color:var(--focus);
 }
 
-.translation-button:disabled{
+.translate-button:disabled{
   opacity:.45;
-  cursor:default;
-}
-
-/* =========================================================
-   BANG NOTICE
-   ========================================================= */
-
-.bang-notice{
-  display:inline-flex;
-  align-items:center;
-
-  max-width:100%;
-
-  margin:0 0 16px;
-
-  padding:7px 10px;
-
-  border:1px solid var(--line2);
-  border-radius:8px;
-
-  color:var(--muted);
-
-  font-size:12px;
-
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.bang-notice strong{
-  color:var(--text);
-  font-weight:500;
-
-  margin-right:5px;
+  cursor:not-allowed;
 }
 
 /* =========================================================
@@ -1007,59 +717,42 @@ input::placeholder{
 
 .empty{
   padding:70px 0;
-
   color:var(--muted);
-
   text-align:center;
 }
 
 .error{
   min-height:120px;
-
   max-width:680px;
-
   margin:0;
-
   padding:28px 18px;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   text-align:center;
-
   border:1px solid var(--line2);
-
   color:var(--muted);
-
   font-size:14px;
   line-height:1.5;
 }
 
 .pager{
   display:flex;
-
   gap:8px;
-
   padding-top:10px;
 }
 
 .pager button{
   border:1px solid var(--line);
-
   background:transparent;
-
   color:var(--text);
-
-  border-radius:4px;
-
+  border-radius:0;
   padding:8px 12px;
-
   cursor:pointer;
 }
 
-.pager button:hover{
-  border-color:var(--focus);
+.hidden{
+  display:none!important;
 }
 
 /* =========================================================
@@ -1069,57 +762,41 @@ input::placeholder{
 .about-overlay{
   position:fixed;
   inset:0;
-
   background:rgba(0,0,0,.62);
-
   display:grid;
   place-items:center;
-
   padding:24px;
-
   z-index:10000;
+}
+
+.about-overlay.hidden{
+  display:none;
 }
 
 .about-card{
   position:relative;
-
   width:min(100%,560px);
-
   max-height:min(80vh,700px);
-
   overflow:auto;
-
   background:#24132a;
-
   border:1px solid var(--line);
-
   border-radius:14px;
-
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.45);
-
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
   padding:30px;
 }
 
 .about-close{
   position:absolute;
-
   top:10px;
   right:10px;
-
   width:34px;
   height:34px;
-
   border:0;
   border-radius:50%;
-
   background:transparent;
-
   color:var(--muted);
-
   font-size:24px;
   line-height:1;
-
   cursor:pointer;
 }
 
@@ -1130,17 +807,13 @@ input::placeholder{
 
 .about-card h2{
   margin:0 38px 16px 0;
-
   font-size:25px;
-
   font-weight:500;
 }
 
 .about-card p{
   color:var(--result);
-
   line-height:1.7;
-
   font-size:14px;
 }
 
@@ -1152,55 +825,48 @@ input::placeholder{
    TABLET
    ========================================================= */
 
-@media(max-width:900px){
-
-  .shell{
-    width:min(100% - 28px,1120px);
-  }
+@media(max-width:860px){
 
   .results-layout{
     grid-template-columns:1fr;
-
     gap:0;
   }
 
   /*
-   * Dictionary first on tablet/mobile.
-   */
+    Dictionary is deliberately first on smaller screens.
+  */
   .dictionary{
     order:-1;
-
     border-left:0;
-
     border-bottom:1px solid var(--line2);
-
+    border-top:0;
     padding:0 0 26px;
-
-    margin-bottom:26px;
-
+    margin:0 0 26px;
     max-height:none;
   }
 
-  .translation-panel{
-    width:100%;
+  .translator-fields{
+    grid-template-columns:1fr;
+  }
+
+  .translator-languages{
+    grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr);
   }
 }
 
 /* =========================================================
-   SMALL TABLET / LARGE PHONE
+   SMALL TABLET
    ========================================================= */
 
 @media(max-width:760px){
 
   .image-grid{
-    grid-template-columns:
-      repeat(2,minmax(0,1fr));
-
+    grid-template-columns:repeat(2,minmax(0,1fr));
     gap:22px 14px;
   }
 
   .results{
-    padding-top:22px;
+    width:min(100% - 28px,1120px);
   }
 
   .results-head{
@@ -1208,133 +874,140 @@ input::placeholder{
   }
 
   .results-query{
-    font-size:13px;
-  }
-
-  .count{
-    font-size:12px;
-  }
-
-  .translation-editors{
-    grid-template-columns:1fr;
-  }
-
-  .translation-output{
-    min-height:120px;
+    min-width:0;
   }
 }
 
 /* =========================================================
-   PHONE
+   MOBILE
    ========================================================= */
 
 @media(max-width:640px){
 
   .shell{
     width:100%;
-
-    padding-left:
-      max(16px,env(safe-area-inset-left));
-
-    padding-right:
-      max(16px,env(safe-area-inset-right));
+    padding-left:16px;
+    padding-right:16px;
   }
 
   #home.home{
-    padding-top:
-      max(20px,env(safe-area-inset-top));
-
-    padding-bottom:
-      max(20px,env(safe-area-inset-bottom));
+    padding:
+      max(20px,env(safe-area-inset-top))
+      max(16px,env(safe-area-inset-right))
+      max(20px,env(safe-area-inset-bottom))
+      max(16px,env(safe-area-inset-left));
   }
 
-  .search-wrap{
-    width:100%;
+  .hero-logo{
+    width:150px;
+    max-width:45vw;
+    margin-bottom:12px;
   }
 
   h1{
     font-size:36px;
-
     margin-bottom:24px;
   }
 
-  form{
+  .search-wrap form{
     height:50px;
   }
 
-  input{
-    font-size:16px;
-  }
-
   .results{
-    padding-top:18px;
+    width:100%;
+    padding:
+      max(18px,env(safe-area-inset-top))
+      max(16px,env(safe-area-inset-right))
+      max(60px,env(safe-area-inset-bottom))
+      max(16px,env(safe-area-inset-left));
   }
 
   .results-head{
     min-width:0;
   }
 
-  .results-brand{
-    flex:0 0 auto;
+  .results-brand img{
+    width:24px;
+    height:24px;
+  }
+
+  .results-brand span{
+    font-size:14px;
   }
 
   .results-query{
-    min-width:0;
+    font-size:13px;
+  }
+
+  .count{
+    display:none;
   }
 
   .results-search{
-    width:100%;
+    margin-bottom:20px;
   }
 
   .search-types{
+    margin-top:8px;
     margin-bottom:16px;
   }
 
   .search-type{
     padding-left:10px;
     padding-right:10px;
-
     font-size:12px;
   }
 
+  .result{
+    padding-bottom:22px;
+    margin-bottom:22px;
+  }
+
   .result h2{
-    font-size:19px;
+    font-size:18px;
   }
 
   .snippet{
     font-size:14px;
   }
 
-  .translation-panel{
-    padding:15px;
-
-    border-radius:12px;
+  .image-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:20px 12px;
   }
 
-  .translation-languages{
-    grid-template-columns:
-      minmax(0,1fr)
-      36px
-      minmax(0,1fr);
-
-    gap:7px;
+  .translator{
+    margin-bottom:24px;
   }
 
-  .translation-language{
-    font-size:12px;
+  .translator-languages{
+    grid-template-columns:1fr;
+    gap:8px;
   }
 
-  .translation-swap{
-    width:34px;
-    height:34px;
+  .translate-swap{
+    justify-self:center;
+    transform:rotate(90deg);
   }
 
-  .translation-footer{
+  .translator-fields{
+    gap:14px;
+  }
+
+  .translator-field textarea{
+    min-height:120px;
+  }
+
+  .translator-actions{
     align-items:flex-start;
   }
 
-  .translation-status{
-    white-space:normal;
+  .translator-status{
+    font-size:11px;
+  }
+
+  .translate-button{
+    flex:0 0 auto;
   }
 
   .about-overlay{
@@ -1347,60 +1020,75 @@ input::placeholder{
 }
 
 /* =========================================================
-   VERY SMALL PHONE
+   VERY SMALL PHONES
    ========================================================= */
 
 @media(max-width:460px){
 
-  .shell{
-    padding-left:
-      max(13px,env(safe-area-inset-left));
-
-    padding-right:
-      max(13px,env(safe-area-inset-right));
+  #home.home{
+    padding-left:14px;
+    padding-right:14px;
   }
 
-  #home.home{
-    padding-left:
-      max(13px,env(safe-area-inset-left));
+  .results{
+    padding-left:14px;
+    padding-right:14px;
+  }
 
-    padding-right:
-      max(13px,env(safe-area-inset-right));
+  .hero-logo{
+    width:130px;
   }
 
   h1{
     font-size:32px;
-
-    letter-spacing:-.045em;
   }
 
   .image-grid{
     grid-template-columns:1fr;
   }
 
+  .translator-top{
+    align-items:flex-start;
+  }
+
+  .translator-actions{
+    flex-direction:column;
+  }
+
+  .translator-status{
+    width:100%;
+  }
+
+  .translate-button{
+    width:100%;
+  }
+}
+
+/* =========================================================
+   LANDSCAPE PHONE
+   ========================================================= */
+
+@media(max-height:520px) and (orientation:landscape){
+
+  #home.home{
+    justify-content:flex-start;
+    padding-top:28px;
+    padding-bottom:28px;
+    overflow:auto;
+  }
+
+  .hero-logo{
+    width:90px;
+    margin-bottom:8px;
+  }
+
+  h1{
+    font-size:30px;
+    margin-bottom:18px;
+  }
+
   .links{
-    gap:12px;
-  }
-
-  .results-head{
-    gap:8px;
-  }
-
-  .results-brand span{
-    font-size:13px;
-  }
-
-  .count{
-    display:none;
-  }
-
-  .translation-panel{
-    padding:13px;
-  }
-
-  .translation-textarea,
-  .translation-output{
-    font-size:13px;
+    margin-top:14px;
   }
 }
 
@@ -1415,6 +1103,7 @@ input::placeholder{
   *::after{
     scroll-behavior:auto!important;
     transition:none!important;
+    animation:none!important;
   }
 }
 </style>
@@ -1426,21 +1115,25 @@ input::placeholder{
 
 <!-- =======================================================
      HOME
-======================================================= -->
+     ======================================================= -->
 
 <section id="home" class="home shell">
 
   <div class="search-wrap">
 
+    <!-- RESTORED FLIBIDOO LOGO -->
+    <img
+      class="hero-logo"
+      src="https://github.com/danieltorres-mhcs/assets/blob/main/flibidoo.PNG?raw=true"
+      alt="Flibidoo"
+      decoding="async"
+    >
+
     <h1>
       <em><strong>Flibidoo</strong></em>Search
     </h1>
 
-    <form
-      id="searchForm"
-      role="search"
-      autocomplete="off"
-    >
+    <form id="searchForm" role="search">
 
       <input
         id="q"
@@ -1465,9 +1158,7 @@ input::placeholder{
       <button
         type="button"
         id="aboutButton"
-      >
-        About
-      </button>
+      >About</button>
 
       <span class="confederacy-credit">
         with love from The Great Confederacy of E
@@ -1482,12 +1173,9 @@ input::placeholder{
 
 <!-- =======================================================
      RESULTS
-======================================================= -->
+     ======================================================= -->
 
-<section
-  id="results"
-  class="results shell hidden"
->
+<section id="results" class="results shell hidden">
 
   <div class="results-head">
 
@@ -1496,9 +1184,18 @@ input::placeholder{
       href="/"
       aria-label="FlibidooSearch home"
     >
+
+      <!-- RESTORED LOGO HERE TOO -->
+      <img
+        src="https://github.com/danieltorres-mhcs/assets/blob/main/flibidoo.PNG?raw=true"
+        alt="Flibidoo"
+        decoding="async"
+      >
+
       <span>
         <em><strong>Flibidoo</strong></em>Search
       </span>
+
     </a>
 
     <div
@@ -1514,12 +1211,15 @@ input::placeholder{
   </div>
 
 
+  <!-- =====================================================
+       RESULTS SEARCH
+       ===================================================== -->
+
   <div class="results-search">
 
     <form
       id="resultsSearchForm"
       role="search"
-      autocomplete="off"
     >
 
       <input
@@ -1544,130 +1244,9 @@ input::placeholder{
 
 
   <!-- =====================================================
-       TRANSLATOR
-  ====================================================== -->
-
-  <div
-    id="translationPanel"
-    class="translation-panel hidden"
-  >
-
-    <div class="translation-top">
-
-      <div class="translation-title">
-        Translate
-      </div>
-
-      <button
-        id="translationClose"
-        class="translation-close"
-        type="button"
-        aria-label="Close translator"
-      >×</button>
-
-    </div>
-
-
-    <div class="translation-languages">
-
-      <select
-        id="translationSource"
-        class="translation-language"
-        aria-label="Input language"
-      >
-        <option value="auto">
-          Auto-detect
-        </option>
-      </select>
-
-
-      <button
-        id="translationSwap"
-        class="translation-swap"
-        type="button"
-        aria-label="Swap languages"
-        title="Swap languages"
-      >⇄</button>
-
-
-      <select
-        id="translationTarget"
-        class="translation-language"
-        aria-label="Output language"
-      >
-        <option value="en">
-          English
-        </option>
-      </select>
-
-    </div>
-
-
-    <div class="translation-editors">
-
-      <div class="translation-box">
-
-        <textarea
-          id="translationInput"
-          class="translation-textarea"
-          maxlength="2000"
-          placeholder="Enter text to translate…"
-          spellcheck="false"
-          aria-label="Text to translate"
-        ></textarea>
-
-        <div
-          id="translationCounter"
-          class="translation-counter"
-        >
-          0 / 2000
-        </div>
-
-      </div>
-
-
-      <div
-        id="translationOutput"
-        class="translation-output"
-        aria-live="polite"
-      ></div>
-
-    </div>
-
-
-    <div class="translation-footer">
-
-      <div
-        id="translationStatus"
-        class="translation-status"
-      ></div>
-
-      <button
-        id="translationButton"
-        class="translation-button"
-        type="button"
-      >
-        Translate
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- =====================================================
-       BANG NOTICE
-  ====================================================== -->
-
-  <div
-    id="bangNotice"
-    class="bang-notice hidden"
-  ></div>
-
-
-  <!-- =====================================================
        SEARCH TYPES
-  ====================================================== -->
+       MAP REMOVED
+       ===================================================== -->
 
   <nav
     class="search-types"
@@ -1678,40 +1257,146 @@ input::placeholder{
       class="search-type active"
       data-type="web"
       type="button"
-    >
-      Web
-    </button>
+    >Web</button>
 
     <button
       class="search-type"
       data-type="images"
       type="button"
-    >
-      Images
-    </button>
+    >Images</button>
 
     <button
       class="search-type"
       data-type="news"
       type="button"
-    >
-      News
-    </button>
-
-    <button
-      class="search-type"
-      data-type="map"
-      type="button"
-    >
-      Maps
-    </button>
+    >News</button>
 
   </nav>
 
 
   <!-- =====================================================
-       RESULTS + DICTIONARY
-  ====================================================== -->
+       TRANSLATOR
+       ===================================================== -->
+
+  <section
+    id="translator"
+    class="translator"
+    aria-label="Translator"
+  >
+
+    <div class="translator-top">
+
+      <h2 class="translator-title">
+        Translate
+      </h2>
+
+    </div>
+
+
+    <div class="translator-languages">
+
+      <div class="translator-language">
+
+        <select
+          id="translateFrom"
+          aria-label="Translate from"
+        ></select>
+
+      </div>
+
+
+      <button
+        id="translateSwap"
+        class="translate-swap"
+        type="button"
+        aria-label="Swap languages"
+        title="Swap languages"
+      >↕</button>
+
+
+      <div class="translator-language">
+
+        <select
+          id="translateTo"
+          aria-label="Translate to"
+        ></select>
+
+      </div>
+
+    </div>
+
+
+    <div class="translator-fields">
+
+      <div class="translator-field">
+
+        <div class="translator-field-head">
+
+          <span class="translator-field-label">
+            Input
+          </span>
+
+          <span
+            id="translateCount"
+            class="translator-count"
+          >0 / 2000</span>
+
+        </div>
+
+        <textarea
+          id="translateInput"
+          maxlength="2000"
+          placeholder="Enter text to translate…"
+          spellcheck="true"
+        ></textarea>
+
+      </div>
+
+
+      <div class="translator-field">
+
+        <div class="translator-field-head">
+
+          <span class="translator-field-label">
+            Translation
+          </span>
+
+        </div>
+
+        <textarea
+          id="translateOutput"
+          readonly
+          placeholder="Translation will appear here…"
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <div class="translator-actions">
+
+      <div
+        id="translateStatus"
+        class="translator-status"
+      ></div>
+
+      <button
+        id="translateButton"
+        class="translate-button"
+        type="button"
+      >
+        Translate
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       RESULTS LAYOUT
+       ===================================================== -->
 
   <div class="results-layout">
 
@@ -1727,9 +1412,10 @@ input::placeholder{
     </div>
 
 
+    <!-- DICTIONARY IS ALWAYS AVAILABLE -->
     <aside
       id="dictionary"
-      class="dictionary hidden"
+      class="dictionary"
       aria-label="Dictionary results"
     ></aside>
 
@@ -1742,7 +1428,7 @@ input::placeholder{
 
 <!-- =======================================================
      ABOUT
-======================================================= -->
+     ======================================================= -->
 
 <div
   id="aboutOverlay"
@@ -1770,8 +1456,8 @@ input::placeholder{
     </p>
 
     <p>
-      You can edit this text directly in the HTML
-      inside the <strong>about-card</strong>.
+      A simple, privacy-minded search interface with web,
+      image, news, dictionary, bangs, and translation tools.
     </p>
 
   </div>
@@ -1781,25 +1467,27 @@ input::placeholder{
 
 <script>
 /* =========================================================
-   CONFIGURATION
-========================================================= */
+   CONFIG
+   ========================================================= */
 
 const API_BASE =
   'https://search.tiago.zip';
 
-const TRANSLATE_WORKER =
-  'https://flibidtranslate.daniel-torres-a95.workers.dev';
+const TRANSLATOR_WORKER =
+  'https://flibidtranslate.daniel-torres-a95.workers.dev/';
 
 const BANGS_URL =
   'https://services.helium.imput.net/bangs.json';
 
-const TRANSLATE_MAX =
-  2000;
+const DICTIONARY_API =
+  'https://api.dictionaryapi.dev/api/v2/entries/en/';
+
+const MAX_TRANSLATE_CHARS = 2000;
 
 
 /* =========================================================
    DOM
-========================================================= */
+   ========================================================= */
 
 const form =
   document.querySelector('#searchForm');
@@ -1840,58 +1528,51 @@ const resultsSubmitButton =
 const dictionary =
   document.querySelector('#dictionary');
 
-const bangNotice =
-  document.querySelector('#bangNotice');
+const translator =
+  document.querySelector('#translator');
 
-const translationPanel =
-  document.querySelector('#translationPanel');
+const translateFrom =
+  document.querySelector('#translateFrom');
 
-const translationInput =
-  document.querySelector('#translationInput');
+const translateTo =
+  document.querySelector('#translateTo');
 
-const translationOutput =
-  document.querySelector('#translationOutput');
+const translateInput =
+  document.querySelector('#translateInput');
 
-const translationSource =
-  document.querySelector('#translationSource');
+const translateOutput =
+  document.querySelector('#translateOutput');
 
-const translationTarget =
-  document.querySelector('#translationTarget');
+const translateButton =
+  document.querySelector('#translateButton');
 
-const translationCounter =
-  document.querySelector('#translationCounter');
+const translateSwap =
+  document.querySelector('#translateSwap');
 
-const translationStatus =
-  document.querySelector('#translationStatus');
+const translateStatus =
+  document.querySelector('#translateStatus');
 
-const translationButton =
-  document.querySelector('#translationButton');
-
-const translationSwap =
-  document.querySelector('#translationSwap');
-
-const translationClose =
-  document.querySelector('#translationClose');
+const translateCount =
+  document.querySelector('#translateCount');
 
 
 /* =========================================================
    STATE
-========================================================= */
+   ========================================================= */
 
 let currentQ = '';
 let currentPage = 0;
 let currentType = 'web';
 
 let bangs = [];
-let bangMap = new Map();
 let bangsLoaded = false;
 
 
 /* =========================================================
    HELPERS
-========================================================= */
+   ========================================================= */
 
-function esc(s=''){
+function esc(s = ''){
   return String(s).replace(
     /[&<>'"]/g,
     c => ({
@@ -1918,200 +1599,26 @@ function updateButtonState(button,value){
 }
 
 
-function unicodeLength(value=''){
-  return Array.from(value).length;
-}
+function debounce(fn,wait=250){
 
+  let timer;
 
-function safeURL(value){
+  return (...args)=>{
 
-  if(!value){
-    return '';
-  }
+    clearTimeout(timer);
 
-  try{
-
-    const url =
-      new URL(value);
-
-    if(
-      url.protocol !== 'http:' &&
-      url.protocol !== 'https:'
-    ){
-      return '';
-    }
-
-    return url.href;
-
-  }catch{
-
-    return '';
-  }
-}
-
-
-/* =========================================================
-   SEARCH BUTTON STATE
-========================================================= */
-
-input.addEventListener(
-  'input',
-  () => updateButtonState(
-    submitButton,
-    input.value
-  )
-);
-
-resultsInput.addEventListener(
-  'input',
-  () => updateButtonState(
-    resultsSubmitButton,
-    resultsInput.value
-  )
-);
-
-
-/* =========================================================
-   HELIUM BANGS
-========================================================= */
-
-/*
- * Helium's manifest uses:
- *
- * s  = site name
- * t  = single trigger
- * ts = multiple triggers
- * u  = URL template
- *
- * Example:
- *
- * {
- *   "s":"Wikipedia",
- *   "ts":["w","wiki"],
- *   "u":"https://en.wikipedia.org/wiki/Special:Search?search={searchTerms}"
- * }
- */
-
-function normalizeBangRecord(record){
-
-  if(!record || typeof record !== 'object'){
-    return null;
-  }
-
-  const name =
-    String(
-      record.s ||
-      record.name ||
-      ''
-    ).trim();
-
-  const template =
-    String(
-      record.u ||
-      record.url ||
-      ''
-    ).trim();
-
-  if(!name || !template){
-    return null;
-  }
-
-  let triggers = [];
-
-  if(
-    Array.isArray(record.ts)
-  ){
-    triggers.push(
-      ...record.ts
+    timer=setTimeout(
+      ()=>fn(...args),
+      wait
     );
-  }
 
-  if(record.t){
-    triggers.push(
-      record.t
-    );
-  }
-
-  if(
-    Array.isArray(record.triggers)
-  ){
-    triggers.push(
-      ...record.triggers
-    );
-  }
-
-  triggers =
-    triggers
-      .map(
-        x => String(x)
-          .trim()
-          .toLowerCase()
-          .replace(/^!/,'')
-      )
-      .filter(Boolean);
-
-  triggers =
-    [...new Set(triggers)];
-
-  if(!triggers.length){
-    return null;
-  }
-
-  return {
-    name,
-    template,
-    triggers,
-    category:
-      record.sc ||
-      record.category ||
-      ''
   };
 }
 
 
-function buildBangMap(data){
-
-  bangMap =
-    new Map();
-
-  bangs =
-    Array.isArray(data)
-      ? data
-      : Array.isArray(data?.bang)
-        ? data.bang
-        : Array.isArray(data?.bangs)
-          ? data.bangs
-          : [];
-
-  for(const raw of bangs){
-
-    const bang =
-      normalizeBangRecord(raw);
-
-    if(!bang){
-      continue;
-    }
-
-    for(
-      const trigger of bang.triggers
-    ){
-
-      if(!bangMap.has(trigger)){
-
-        bangMap.set(
-          trigger,
-          bang
-        );
-
-      }
-
-    }
-
-  }
-
-  bangsLoaded = true;
-}
-
+/* =========================================================
+   BANGS
+   ========================================================= */
 
 async function loadBangs(){
 
@@ -2119,605 +1626,382 @@ async function loadBangs(){
     return;
   }
 
-  /*
-   * Try cached data first.
-   */
-  try{
-
-    const cached =
-      localStorage.getItem(
-        'flibidoo-helium-bangs'
-      );
-
-    if(cached){
-
-      const parsed =
-        JSON.parse(cached);
-
-      if(Array.isArray(parsed)){
-
-        buildBangMap(parsed);
-
-      }
-
-    }
-
-  }catch{}
-
-
-  /*
-   * Fetch fresh Helium data.
-   */
   try{
 
     const response =
-      await fetch(
-        BANGS_URL,
-        {
-          method:'GET',
-          credentials:'omit',
-          headers:{
-            'Accept':
-              'application/json'
-          },
-          cache:'no-store'
-        }
-      );
+      await fetch(BANGS_URL,{
+        method:'GET',
+        cache:'force-cache'
+      });
 
     if(!response.ok){
-      throw new Error(
-        `Bang request failed: ${response.status}`
-      );
+      throw new Error('Could not load bangs');
     }
 
     const data =
       await response.json();
 
-    const raw =
-      Array.isArray(data)
-        ? data
-        : Array.isArray(data?.bang)
-          ? data.bang
-          : Array.isArray(data?.bangs)
-            ? data.bangs
-            : [];
+    if(Array.isArray(data)){
+      bangs=data;
+    }
 
-    buildBangMap(raw);
-
-    try{
-
-      localStorage.setItem(
-        'flibidoo-helium-bangs',
-        JSON.stringify(raw)
-      );
-
-    }catch{}
+    bangsLoaded=true;
 
   }catch(error){
 
-    /*
-     * If cached data exists, continue using it.
-     */
-    if(!bangsLoaded){
-
-      buildBangMap([]);
-
-    }
-
     console.warn(
-      'FlibidooSearch: unable to load Helium bangs.',
+      'Bangs could not be loaded:',
       error
     );
 
   }
+
 }
 
 
-/*
- * Detect:
- *
- * !w cats
- * cats !w
- * cats !w more
- *
- * The bang can appear at the beginning or end.
- */
+function findBang(query){
 
-function parseBang(query){
-
-  const text =
+  const trimmed =
     query.trim();
 
-  if(!text){
+  if(!trimmed.startsWith('!')){
     return null;
   }
 
-  const tokens =
-    text.split(/\s+/);
+  const firstWord =
+    trimmed.split(/\s+/)[0];
 
-  let bangTokenIndex = -1;
-  let trigger = '';
+  const bangName =
+    firstWord.slice(1).toLowerCase();
 
-  /*
-   * First check beginning.
-   */
-  if(tokens.length){
-
-    const first =
-      tokens[0].match(
-        /^!([^\s!]+)$/
-      );
-
-    if(first){
-
-      const candidate =
-        first[1].toLowerCase();
-
-      if(bangMap.has(candidate)){
-
-        bangTokenIndex = 0;
-        trigger = candidate;
-
-      }
-
-    }
-
-  }
-
-  /*
-   * If not found, search the query for a
-   * standalone bang anywhere.
-   */
-  if(bangTokenIndex === -1){
-
-    for(
-      let i=1;
-      i<tokens.length;
-      i++
-    ){
-
-      const match =
-        tokens[i].match(
-          /^!([^\s!]+)$/
-        );
-
-      if(!match){
-        continue;
-      }
-
-      const candidate =
-        match[1].toLowerCase();
-
-      if(
-        bangMap.has(candidate)
-      ){
-
-        bangTokenIndex = i;
-        trigger = candidate;
-
-        break;
-      }
-
-    }
-
-  }
-
-  if(
-    bangTokenIndex === -1 ||
-    !trigger
-  ){
+  if(!bangName){
     return null;
   }
+
+  return bangs.find(
+    bang =>
+      Array.isArray(bang.ts) &&
+      bang.ts.some(
+        tag =>
+          String(tag).toLowerCase() === bangName
+      )
+  ) || null;
+
+}
+
+
+function handleBang(query){
 
   const bang =
-    bangMap.get(trigger);
-
-  const queryParts =
-    tokens.filter(
-      (_,i) =>
-        i !== bangTokenIndex
-    );
-
-  const cleanQuery =
-    queryParts.join(' ').trim();
-
-  return {
-    trigger,
-    bang,
-    cleanQuery
-  };
-}
-
-
-/*
- * Replace both common placeholder formats:
- *
- * {searchTerms}
- * %s
- */
-
-function buildBangURL(
-  bang,
-  query
-){
+    findBang(query);
 
   if(!bang){
-    return '';
-  }
-
-  const encoded =
-    encodeURIComponent(
-      query || ''
-    );
-
-  let template =
-    bang.template;
-
-  /*
-   * Helium uses {searchTerms}.
-   */
-  if(
-    template.includes(
-      '{searchTerms}'
-    )
-  ){
-
-    return template.replace(
-      /\{searchTerms\}/g,
-      encoded
-    );
-
-  }
-
-  /*
-   * Support %s as a compatibility fallback.
-   */
-  if(
-    template.includes('%s')
-  ){
-
-    return template.replace(
-      /%s/g,
-      encoded
-    );
-
-  }
-
-  /*
-   * If no placeholder exists,
-   * open the URL as-is.
-   */
-  return template;
-}
-
-
-function tryBangSearch(query){
-
-  const parsed =
-    parseBang(query);
-
-  if(!parsed){
     return false;
   }
 
-  const url =
-    buildBangURL(
-      parsed.bang,
-      parsed.cleanQuery
-    );
+  const first =
+    query.trim().split(/\s+/)[0];
 
-  if(!url){
+  const searchTerms =
+    query.trim().slice(first.length).trim();
+
+  if(!searchTerms){
     return false;
   }
 
-  bangNotice.classList.remove(
-    'hidden'
-  );
+  if(!bang.u){
+    return false;
+  }
 
-  bangNotice.innerHTML =
-    `<strong>!${esc(parsed.trigger)}</strong> ` +
-    `${esc(parsed.bang.name)}`;
+  const target =
+    bang.u.replace(
+      '{searchTerms}',
+      encodeURIComponent(searchTerms)
+    );
 
-  window.location.href =
-    url;
+  window.location.href=target;
 
   return true;
 }
 
 
 /* =========================================================
-   TRANSLATION LANGUAGES
-========================================================= */
+   TRANSLATOR DETECTION
+   ========================================================= */
 
-const TRANSLATION_LANGUAGES = [
+const LANGUAGE_ALIASES = {
 
-  ['auto','Auto-detect'],
+  english:'en',
+  eng:'en',
+  en:'en',
 
-  ['en','English'],
-  ['es','Spanish'],
-  ['fr','French'],
-  ['de','German'],
-  ['it','Italian'],
-  ['pt','Portuguese'],
-  ['nl','Dutch'],
+  spanish:'es',
+  espanol:'es',
+  español:'es',
+  spanish:'es',
+  es:'es',
 
-  ['ru','Russian'],
-  ['uk','Ukrainian'],
-  ['pl','Polish'],
-  ['cs','Czech'],
-  ['sk','Slovak'],
-  ['ro','Romanian'],
-  ['hu','Hungarian'],
+  french:'fr',
+  français:'fr',
+  francais:'fr',
+  fr:'fr',
 
-  ['el','Greek'],
-  ['tr','Turkish'],
+  german:'de',
+  deutsch:'de',
+  de:'de',
 
-  ['ar','Arabic'],
-  ['he','Hebrew'],
-  ['fa','Persian'],
+  italian:'it',
+  italiano:'it',
+  it:'it',
 
-  ['hi','Hindi'],
-  ['bn','Bengali'],
-  ['ur','Urdu'],
+  portuguese:'pt',
+  português:'pt',
+  portugues:'pt',
+  pt:'pt',
 
-  ['ta','Tamil'],
-  ['te','Telugu'],
-  ['ml','Malayalam'],
+  dutch:'nl',
+  nederlands:'nl',
+  nl:'nl',
 
-  ['id','Indonesian'],
-  ['ms','Malay'],
+  russian:'ru',
+  русский:'ru',
+  ru:'ru',
 
-  ['vi','Vietnamese'],
-  ['th','Thai'],
+  ukrainian:'uk',
+  українська:'uk',
+  uk:'uk',
 
-  ['zh-CN','Chinese (Simplified)'],
-  ['zh-TW','Chinese (Traditional)'],
+  polish:'pl',
+  polski:'pl',
+  pl:'pl',
 
-  ['ja','Japanese'],
-  ['ko','Korean'],
+  japanese:'ja',
+  日本語:'ja',
+  ja:'ja',
 
-  ['sw','Swahili'],
-  ['af','Afrikaans'],
+  korean:'ko',
+  한국어:'ko',
+  ko:'ko',
 
-  ['no','Norwegian'],
-  ['sv','Swedish'],
-  ['da','Danish'],
-  ['fi','Finnish'],
+  chinese:'zh',
+  中文:'zh',
+  mandarin:'zh',
+  zh:'zh',
 
-  ['et','Estonian'],
-  ['lv','Latvian'],
-  ['lt','Lithuanian'],
+  arabic:'ar',
+  العربية:'ar',
+  ar:'ar',
 
-  ['sl','Slovenian'],
-  ['bg','Bulgarian'],
-  ['sr','Serbian'],
-  ['hr','Croatian'],
+  hindi:'hi',
+  हिन्दी:'hi',
+  hi:'hi',
 
-  ['ca','Catalan'],
-  ['eu','Basque'],
-  ['gl','Galician']
+  filipino:'tl',
+  tagalog:'tl',
+  tl:'tl',
+
+  indonesian:'id',
+  bahasa:'id',
+  id:'id',
+
+  vietnamese:'vi',
+  tiếng:'vi',
+  vi:'vi',
+
+  thai:'th',
+  ไทย:'th',
+  th:'th',
+
+  turkish:'tr',
+  türkçe:'tr',
+  turkish:'tr',
+  tr:'tr',
+
+  greek:'el',
+  ελληνικά:'el',
+  el:'el',
+
+  hebrew:'he',
+  עברית:'he',
+  he:'he',
+
+  swedish:'sv',
+  svenska:'sv',
+  sv:'sv',
+
+  danish:'da',
+  dansk:'da',
+  da:'da',
+
+  norwegian:'no',
+  norsk:'no',
+  no:'no',
+
+  finnish:'fi',
+  suomi:'fi',
+  fi:'fi',
+
+  czech:'cs',
+  čeština:'cs',
+  cs:'cs',
+
+  romanian:'ro',
+  română:'ro',
+  ro:'ro',
+
+  hungarian:'hu',
+  magyar:'hu',
+  hu:'hu'
+};
+
+
+const LANGUAGE_NAMES = {
+
+  auto:'Auto-detect',
+
+  en:'English',
+  es:'Spanish',
+  fr:'French',
+  de:'German',
+  it:'Italian',
+  pt:'Portuguese',
+  nl:'Dutch',
+  ru:'Russian',
+  uk:'Ukrainian',
+  pl:'Polish',
+  ja:'Japanese',
+  ko:'Korean',
+  zh:'Chinese',
+  ar:'Arabic',
+  hi:'Hindi',
+  tl:'Filipino',
+  id:'Indonesian',
+  vi:'Vietnamese',
+  th:'Thai',
+  tr:'Turkish',
+  el:'Greek',
+  he:'Hebrew',
+  sv:'Swedish',
+  da:'Danish',
+  no:'Norwegian',
+  fi:'Finnish',
+  cs:'Czech',
+  ro:'Romanian',
+  hu:'Hungarian'
+};
+
+
+const LANGUAGE_ORDER = [
+
+  'en',
+  'es',
+  'fr',
+  'de',
+  'it',
+  'pt',
+  'nl',
+  'ru',
+  'uk',
+  'pl',
+  'ja',
+  'ko',
+  'zh',
+  'ar',
+  'hi',
+  'tl',
+  'id',
+  'vi',
+  'th',
+  'tr',
+  'el',
+  'he',
+  'sv',
+  'da',
+  'no',
+  'fi',
+  'cs',
+  'ro',
+  'hu'
+
 ];
 
 
-function populateTranslationLanguages(){
-
-  translationSource.innerHTML = '';
-  translationTarget.innerHTML = '';
-
-  for(
-    const [code,name]
-    of TRANSLATION_LANGUAGES
-  ){
-
-    const sourceOption =
-      document.createElement(
-        'option'
-      );
-
-    sourceOption.value =
-      code;
-
-    sourceOption.textContent =
-      name;
-
-    translationSource.appendChild(
-      sourceOption
-    );
-
-    if(code !== 'auto'){
-
-      const targetOption =
-        document.createElement(
-          'option'
-        );
-
-      targetOption.value =
-        code;
-
-      targetOption.textContent =
-        name;
-
-      translationTarget.appendChild(
-        targetOption
-      );
-
-    }
-
-  }
-
-  translationSource.value =
-    'auto';
-
-  translationTarget.value =
-    'en';
-}
-
-
-populateTranslationLanguages();
-
-
-function languageCodeFromName(
-  value
-){
+function languageCodeFromText(text){
 
   const normalized =
-    value
+    text
+      .toLowerCase()
       .trim()
-      .toLowerCase();
+      .replace(/\s+/g,' ');
 
-  const aliases = {
+  return LANGUAGE_ALIASES[normalized] || null;
 
-    english:'en',
-
-    spanish:'es',
-    español:'es',
-
-    french:'fr',
-    français:'fr',
-
-    german:'de',
-    deutsch:'de',
-
-    italian:'it',
-
-    portuguese:'pt',
-
-    dutch:'nl',
-
-    russian:'ru',
-
-    ukrainian:'uk',
-
-    polish:'pl',
-
-    czech:'cs',
-
-    slovak:'sk',
-
-    romanian:'ro',
-
-    hungarian:'hu',
-
-    greek:'el',
-
-    turkish:'tr',
-
-    arabic:'ar',
-
-    hebrew:'he',
-
-    persian:'fa',
-
-    hindi:'hi',
-
-    bengali:'bn',
-
-    urdu:'ur',
-
-    tamil:'ta',
-
-    telugu:'te',
-
-    malayalam:'ml',
-
-    indonesian:'id',
-
-    malay:'ms',
-
-    vietnamese:'vi',
-
-    thai:'th',
-
-    japanese:'ja',
-
-    korean:'ko',
-
-    chinese:'zh-CN',
-
-    'chinese simplified':'zh-CN',
-
-    'simplified chinese':'zh-CN',
-
-    'chinese traditional':'zh-TW',
-
-    'traditional chinese':'zh-TW',
-
-    swedish:'sv',
-
-    norwegian:'no',
-
-    danish:'da',
-
-    finnish:'fi',
-
-    swahili:'sw',
-
-    afrikaans:'af',
-
-    catalan:'ca',
-
-    basque:'eu',
-
-    galician:'gl'
-
-  };
-
-  return (
-    aliases[normalized] ||
-    null
-  );
 }
 
 
-function detectTranslationIntent(
-  query
-){
+function detectTranslatorIntent(query){
 
   const q =
     query
       .trim()
-      .toLowerCase();
+      .toLowerCase()
+      .replace(/[?!.]+$/,'');
+
+  let match;
 
   /*
-   * translate
-   * translator
-   *
-   * Auto-detect -> English
-   */
-  if(
-    q === 'translate' ||
-    q === 'translator'
-  ){
+    "spanish to english"
+    "spanish -> english"
+    "spanish → english"
+  */
 
-    return {
-      source:'auto',
-      target:'en'
-    };
+  match =
+    q.match(
+      /^(.+?)\s*(?:to|->|→)\s*(.+)$/
+    );
+
+  if(match){
+
+    const from =
+      languageCodeFromText(match[1]);
+
+    const to =
+      languageCodeFromText(match[2]);
+
+    if(from && to){
+
+      return {
+        from,
+        to,
+        mode:'explicit'
+      };
+
+    }
 
   }
 
 
   /*
-   * "spanish to english"
-   * "japanese to english"
-   */
-  const toEnglish =
+    "spanish to english"
+    handled above.
+  */
+
+  match =
     q.match(
       /^(.+?)\s+to\s+english$/
     );
 
-  if(toEnglish){
+  if(match){
 
-    const source =
-      languageCodeFromName(
-        toEnglish[1]
-      );
+    const from =
+      languageCodeFromText(match[1]);
 
-    if(source){
+    if(from){
 
       return {
-        source,
-        target:'en'
+        from,
+        to:'en',
+        mode:'explicit'
       };
 
     }
@@ -2726,25 +2010,25 @@ function detectTranslationIntent(
 
 
   /*
-   * "english to spanish"
-   */
-  const englishTo =
+    "english to spanish"
+  */
+
+  match =
     q.match(
-      /^english\s+to\s+(.+?)$/
+      /^english\s+to\s+(.+)$/
     );
 
-  if(englishTo){
+  if(match){
 
-    const target =
-      languageCodeFromName(
-        englishTo[1]
-      );
+    const to =
+      languageCodeFromText(match[1]);
 
-    if(target){
+    if(to){
 
       return {
-        source:'en',
-        target
+        from:'en',
+        to,
+        mode:'explicit'
       };
 
     }
@@ -2753,446 +2037,508 @@ function detectTranslationIntent(
 
 
   /*
-   * Also support:
-   *
-   * "translate spanish"
-   * "translate to spanish"
-   */
-  const translateTo =
-    q.match(
-      /^translate\s+(?:to\s+)?(.+?)$/
-    );
+    "translate"
+    "translator"
+    */
 
-  if(translateTo){
+  if(
+    q === 'translate' ||
+    q === 'translator' ||
+    q === 'translation'
+  ){
 
-    const target =
-      languageCodeFromName(
-        translateTo[1]
-      );
-
-    if(target){
-
-      return {
-        source:'auto',
-        target
-      };
-
-    }
+    return {
+      from:'auto',
+      to:'en',
+      mode:'generic'
+    };
 
   }
 
   return null;
-}
 
-
-function openTranslation(
-  query
-){
-
-  const intent =
-    detectTranslationIntent(
-      query
-    );
-
-  if(!intent){
-
-    translationPanel.classList.add(
-      'hidden'
-    );
-
-    return false;
-  }
-
-  translationPanel.classList.remove(
-    'hidden'
-  );
-
-  const source =
-    intent.source ||
-    'auto';
-
-  const target =
-    intent.target ||
-    'en';
-
-  const sourceExists =
-    [...translationSource.options]
-      .some(
-        option =>
-          option.value === source
-      );
-
-  const targetExists =
-    [...translationTarget.options]
-      .some(
-        option =>
-          option.value === target
-      );
-
-  translationSource.value =
-    sourceExists
-      ? source
-      : 'auto';
-
-  translationTarget.value =
-    targetExists
-      ? target
-      : 'en';
-
-  translationStatus.textContent =
-    '';
-
-  return true;
 }
 
 
 /* =========================================================
-   TRANSLATOR
-========================================================= */
+   TRANSLATOR LANGUAGE UI
+   ========================================================= */
 
-function updateTranslationCounter(){
+function populateLanguageSelects(
+  fromCode='auto',
+  toCode='en'
+){
 
-  const length =
-    unicodeLength(
-      translationInput.value
-    );
+  translateFrom.innerHTML='';
+  translateTo.innerHTML='';
 
-  translationCounter.textContent =
-    `${length} / ${TRANSLATE_MAX}`;
+  const fromOptions = [
+    'auto',
+    ...LANGUAGE_ORDER
+  ];
 
-  translationCounter.style.color =
-    length >= TRANSLATE_MAX
-      ? 'var(--error)'
-      : '';
+  fromOptions.forEach(code=>{
 
-  translationButton.disabled =
-    length === 0;
+    const option =
+      document.createElement('option');
+
+    option.value=code;
+    option.textContent=
+      LANGUAGE_NAMES[code] || code;
+
+    translateFrom.appendChild(option);
+
+  });
+
+
+  LANGUAGE_ORDER.forEach(code=>{
+
+    const option =
+      document.createElement('option');
+
+    option.value=code;
+    option.textContent=
+      LANGUAGE_NAMES[code] || code;
+
+    translateTo.appendChild(option);
+
+  });
+
+
+  translateFrom.value=
+    LANGUAGE_NAMES[fromCode]
+      ? fromCode
+      : 'auto';
+
+  translateTo.value=
+    LANGUAGE_NAMES[toCode]
+      ? toCode
+      : 'en';
+
 }
 
 
-/*
- * Hard client-side limit.
- *
- * maxlength alone can behave differently with
- * Unicode because JavaScript's string length uses
- * UTF-16 units. We explicitly trim to 2,000
- * Unicode code points.
- */
-translationInput.addEventListener(
-  'input',
-  () => {
+function showTranslator(
+  from='auto',
+  to='en'
+){
 
-    let value =
-      translationInput.value;
+  populateLanguageSelects(
+    from,
+    to
+  );
 
-    if(
-      unicodeLength(value) >
-      TRANSLATE_MAX
-    ){
+  translator.classList.add('visible');
 
-      value =
-        Array.from(value)
-          .slice(0,TRANSLATE_MAX)
-          .join('');
-
-      translationInput.value =
-        value;
-    }
-
-    updateTranslationCounter();
-
-  }
-);
+}
 
 
-translationClose.addEventListener(
-  'click',
-  () => {
+function hideTranslator(){
 
-    translationPanel.classList.add(
-      'hidden'
-    );
+  translator.classList.remove('visible');
 
-  }
-);
+}
 
 
-translationSwap.addEventListener(
-  'click',
-  () => {
+function updateTranslateCount(){
 
-    const oldSource =
-      translationSource.value;
+  const length =
+    translateInput.value.length;
 
-    const oldTarget =
-      translationTarget.value;
+  translateCount.textContent =
+    `${length} / ${MAX_TRANSLATE_CHARS}`;
 
-    /*
-     * Auto-detect can't be an output language.
-     */
-    if(oldSource === 'auto'){
+}
 
-      translationSource.value =
-        oldTarget;
 
-      translationTarget.value =
-        'en';
-
-    }else{
-
-      translationSource.value =
-        oldTarget;
-
-      translationTarget.value =
-        oldSource;
-
-    }
-
-    const oldInput =
-      translationInput.value;
-
-    const oldOutput =
-      translationOutput.textContent;
-
-    if(oldOutput){
-
-      translationInput.value =
-        oldOutput;
-
-      translationOutput.textContent =
-        oldInput;
-
-    }
-
-    updateTranslationCounter();
-
-  }
-);
-
+/* =========================================================
+   TRANSLATOR REQUEST
+   ========================================================= */
 
 async function translateText(){
 
-  let text =
-    translationInput.value;
-
-  /*
-   * Enforce the limit one more time before
-   * the network request.
-   */
-  if(
-    unicodeLength(text) >
-    TRANSLATE_MAX
-  ){
-
-    text =
-      Array.from(text)
-        .slice(0,TRANSLATE_MAX)
-        .join('');
-
-    translationInput.value =
-      text;
-  }
-
-  text =
-    text.trim();
+  const text =
+    translateInput.value.trim();
 
   if(!text){
 
-    translationStatus.textContent =
+    translateStatus.textContent =
       'Enter something to translate.';
 
+    translateOutput.value='';
+
     return;
+
   }
 
-  const length =
-    unicodeLength(text);
+  if(text.length > MAX_TRANSLATE_CHARS){
 
-  if(length > TRANSLATE_MAX){
-
-    translationStatus.textContent =
-      `Maximum ${TRANSLATE_MAX} characters.`;
+    translateStatus.textContent =
+      `Maximum is ${MAX_TRANSLATE_CHARS} characters.`;
 
     return;
+
   }
 
   const source =
-    translationSource.value ||
-    'auto';
+    translateFrom.value;
 
   const target =
-    translationTarget.value ||
-    'en';
+    translateTo.value;
 
-  translationButton.disabled =
-    true;
+  if(source === target && source !== 'auto'){
 
-  translationStatus.textContent =
+    translateOutput.value=text;
+
+    translateStatus.textContent =
+      'Source and target are the same language.';
+
+    return;
+
+  }
+
+  translateButton.disabled=true;
+
+  translateStatus.textContent =
     'Translating…';
 
-  translationOutput.textContent =
-    '';
+  translateOutput.value='';
+
+
+  try{
+
+    /*
+      The worker is the public translation endpoint.
+
+      The frontend does not need MyMemory credentials.
+      Your Cloudflare Worker handles the actual request.
+    */
+
+    const url =
+      new URL(
+        TRANSLATOR_WORKER
+      );
+
+    url.searchParams.set(
+      'q',
+      text
+    );
+
+    url.searchParams.set(
+      'source',
+      source
+    );
+
+    url.searchParams.set(
+      'target',
+      target
+    );
+
+
+    const response =
+      await fetch(
+        url.toString(),
+        {
+          method:'GET',
+          headers:{
+            'Accept':'application/json'
+          }
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        `Translation request failed (${response.status})`
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    /*
+      Support several common Worker response shapes.
+    */
+
+    const translated =
+      data.translatedText ??
+      data.translation ??
+      data.translated ??
+      data.result ??
+      data.text ??
+      data.response?.translatedText ??
+      '';
+
+
+    if(!translated){
+
+      throw new Error(
+        'The translator returned no translated text.'
+      );
+
+    }
+
+
+    translateOutput.value=
+      String(translated);
+
+    translateStatus.textContent =
+      `${LANGUAGE_NAMES[target] || target}`;
+
+
+  }catch(error){
+
+    console.error(
+      'Translation error:',
+      error
+    );
+
+    translateStatus.textContent =
+      error.message ||
+      'Translation failed.';
+
+  }finally{
+
+    translateButton.disabled=false;
+
+  }
+
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+async function search(
+  q,
+  page=0,
+  type='web'
+){
+
+  q=q.trim();
+
+  if(!q){
+    return;
+  }
+
+
+  /*
+    BANGS FIRST.
+    "!w cats" etc. goes directly to the bang URL.
+  */
+
+  await loadBangs();
+
+  if(handleBang(q)){
+    return;
+  }
+
+
+  currentQ=q;
+
+  currentPage=
+    Math.max(
+      0,
+      Number(page) || 0
+    );
+
+  currentType=
+    ['web','images','news'].includes(type)
+      ? type
+      : 'web';
+
+
+  /*
+    IMPORTANT:
+    Switch to results IMMEDIATELY.
+
+    The old version waited for fetch before making
+    the results page visible, which caused the home
+    screen to remain there while searching.
+  */
+
+  home.classList.add('hidden');
+
+  results.classList.remove('hidden');
+
+
+  document.title =
+    `${q} - FlibidooSearch`;
+
+  input.value=q;
+
+  resultsInput.value=q;
+
+  label.textContent =
+    `Results for “${q}”`;
+
+  count.textContent='';
+
+  pager.innerHTML='';
+
+  list.innerHTML =
+    '<div class="empty">Searching…</div>';
+
+
+  /*
+    Translator detection happens immediately.
+  */
+
+  const translatorIntent =
+    detectTranslatorIntent(q);
+
+  if(translatorIntent){
+
+    showTranslator(
+      translatorIntent.from,
+      translatorIntent.to
+    );
+
+    /*
+      The translator search itself should not depend
+      on web results.
+    */
+
+    dictionary.innerHTML =
+      '<div class="dictionary-title">Dictionary</div>' +
+      `<div class="dictionary-word">${esc(q)}</div>` +
+      '<div class="dictionary-empty">Enter a word to see dictionary results.</div>';
+
+  }else{
+
+    hideTranslator();
+
+  }
+
+
+  /*
+    Always load the dictionary independently.
+    This means "No results found" does NOT remove it.
+  */
+
+  const dictionaryPromise =
+    loadDictionary(q);
+
 
   try{
 
     const response =
       await fetch(
-        `${TRANSLATE_WORKER}/api/translate`,
+        `${API_BASE}/api`,
         {
           method:'POST',
-
           headers:{
-            'Content-Type':
-              'application/json'
+            'Content-Type':'application/json',
+            'Accept':'application/json'
           },
-
           body:JSON.stringify({
-            text,
-            source,
-            target
+            query:q,
+            type:currentType,
+            page:currentPage
           })
         }
       );
+
+
+    const raw =
+      await response.text();
+
 
     let data;
 
     try{
 
-      data =
-        await response.json();
+      data=JSON.parse(raw);
 
     }catch{
 
       throw new Error(
-        'The translation server returned an invalid response.'
+        'Search server returned invalid JSON.'
       );
 
     }
+
 
     if(!response.ok){
 
       throw new Error(
-        data?.error ||
-        `Translation failed (${response.status}).`
+        data.error ||
+        `Search failed (${response.status}).`
       );
 
     }
 
-    translationOutput.textContent =
-      data.translatedText ||
-      '';
 
-    /*
-     * If the Worker reports a detected source
-     * language, reflect it in the selector.
-     */
-    if(
-      data.source &&
-      data.source !== 'auto'
-    ){
+    data.type=currentType;
 
-      const exists =
-        [...translationSource.options]
-          .some(
-            option =>
-              option.value === data.source
-          );
+    render(data);
 
-      if(exists){
-
-        translationSource.value =
-          data.source;
-
-      }
-
-    }
-
-    translationStatus.textContent =
-      'Translation complete.';
 
   }catch(error){
 
-    translationOutput.textContent =
-      '';
+    console.error(
+      'Search error:',
+      error
+    );
 
-    translationStatus.textContent =
-      error?.message ||
-      'Translation failed. Please try again.';
 
-  }finally{
+    /*
+      Keep dictionary visible even if search fails.
+    */
 
-    translationButton.disabled =
-      unicodeLength(
-        translationInput.value
-      ) === 0;
+    list.innerHTML =
+      `<div class="error">${esc(
+        error.message ||
+        'Search failed. Please try again.'
+      )}</div>`;
+
+    count.textContent='';
 
   }
+
+
+  await dictionaryPromise;
 
 }
 
 
-translationButton.addEventListener(
-  'click',
-  translateText
-);
-
-
-translationInput.addEventListener(
-  'keydown',
-  event => {
-
-    /*
-     * Ctrl/Cmd + Enter translates.
-     */
-    if(
-      event.key === 'Enter' &&
-      (event.ctrlKey || event.metaKey)
-    ){
-
-      event.preventDefault();
-
-      translateText();
-
-    }
-
-  }
-);
-
-
-updateTranslationCounter();
-
-
 /* =========================================================
-   RENDER RESULTS
-========================================================= */
+   RENDER SEARCH RESULTS
+   ========================================================= */
 
 function render(data){
 
-  home.classList.add(
-    'hidden'
-  );
+  /*
+    Do NOT hide results here.
+    The search page was already shown immediately.
+  */
 
-  results.classList.remove(
-    'hidden'
-  );
+  home.classList.add('hidden');
+
+  results.classList.remove('hidden');
+
 
   currentType =
-    data.type ||
-    currentType;
+    ['web','images','news'].includes(data.type)
+      ? data.type
+      : currentType;
+
 
   label.textContent =
     data.query
       ? `Results for “${data.query}”`
       : '';
 
-  let a = [];
+
+  let a=[];
 
 
-  /*
-   * Web
-   */
-  if(
-    currentType === 'web'
-  ){
+  if(currentType==='web'){
 
     a =
       Array.isArray(
@@ -3203,50 +2549,16 @@ function render(data){
           ? data.results
           : [];
 
-  }
-
-
-  /*
-   * Images / News
-   */
-  else if(
-    currentType === 'images' ||
-    currentType === 'news'
+  }else if(
+    currentType==='images' ||
+    currentType==='news'
   ){
 
     a =
       Array.isArray(data.results)
         ? data.results
-        : Array.isArray(
-            data.results?.results
-          )
+        : Array.isArray(data.results?.results)
           ? data.results.results
-          : [];
-
-  }
-
-
-  /*
-   * Maps
-   */
-  else if(
-    currentType === 'map'
-  ){
-
-    const loc =
-      data.results?.locations ??
-      data.results?.map ??
-      data.results?.places ??
-      data.locations ??
-      data.map ??
-      data.places ??
-      data.results;
-
-    a =
-      Array.isArray(loc)
-        ? loc
-        : Array.isArray(loc?.results)
-          ? loc.results
           : [];
 
   }
@@ -3257,33 +2569,32 @@ function render(data){
       ? `${a.length} results`
       : '';
 
+
   resultsInput.value =
-    data.query ||
-    '';
+    data.query || '';
 
-  list.innerHTML =
-    '';
 
-  pager.innerHTML =
-    '';
+  list.innerHTML='';
+
+  pager.innerHTML='';
 
 
   document
-    .querySelectorAll(
-      '.search-type'
-    )
-    .forEach(
-      button => {
+    .querySelectorAll('.search-type')
+    .forEach(button=>{
 
-        button.classList.toggle(
-          'active',
-          button.dataset.type ===
-            currentType
-        );
+      button.classList.toggle(
+        'active',
+        button.dataset.type===currentType
+      );
 
-      }
-    );
+    });
 
+
+  /*
+    NO RESULTS:
+    Keep dictionary visible.
+  */
 
   if(!a.length){
 
@@ -3294,114 +2605,101 @@ function render(data){
       {},
       '',
       `/?q=${encodeURIComponent(
-        data.query ||
-        currentQ
+        data.query || currentQ
       )}&type=${encodeURIComponent(
         currentType
-      )}${
-        currentPage
-          ? `&page=${currentPage}`
-          : ''
+      )}${currentPage
+        ? `&page=${currentPage}`
+        : ''
       }`
     );
 
     return;
+
   }
 
 
   /* =======================================================
      IMAGES
-  ======================================================= */
+     ======================================================= */
 
-  if(
-    currentType === 'images'
-  ){
+  if(currentType==='images'){
 
     const grid =
-      document.createElement(
-        'div'
-      );
+      document.createElement('div');
 
-    grid.className =
-      'image-grid';
+    grid.className='image-grid';
 
 
-    a.forEach(
-      r => {
+    a.forEach(r=>{
 
-        const u =
-          safeURL(
-            r.url ||
-            r.properties?.url ||
-            ''
-          );
+      const u =
+        r.url ||
+        r.properties?.url ||
+        r.image?.url ||
+        '';
 
-        const img =
-          safeURL(
-            r.thumbnail ||
-            r.image ||
-            r.properties?.url ||
-            ''
-          );
+      const img =
+        r.thumbnail ||
+        r.thumbnail_url ||
+        r.image?.thumbnail ||
+        r.properties?.thumbnail ||
+        r.properties?.url ||
+        '';
 
-        if(!img){
-          return;
-        }
 
-        const el =
-          document.createElement(
-            'article'
-          );
-
-        el.className =
-          'image-result';
-
-        el.innerHTML = `
-          <a
-            href="${esc(u || img)}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="${esc(img)}"
-              alt="${esc(
-                r.title || ''
-              )}"
-              loading="lazy"
-              referrerpolicy="no-referrer"
-            >
-          </a>
-
-          <div class="image-result-title">
-            ${esc(
-              r.title ||
-              u ||
-              'Image'
-            )}
-          </div>
-
-          <div class="image-result-source">
-            ${esc(
-              r.source ||
-              r.meta_url?.hostname ||
-              ''
-            )}
-          </div>
-        `;
-
-        grid.appendChild(
-          el
-        );
-
+      if(!img){
+        return;
       }
-    );
+
+
+      const el =
+        document.createElement('article');
+
+      el.className='image-result';
+
+
+      el.innerHTML=`
+
+        <a
+          href="${esc(u)}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+
+          <img
+            src="${esc(img)}"
+            alt="${esc(r.title || '')}"
+            loading="lazy"
+            decoding="async"
+            referrerpolicy="no-referrer"
+          >
+
+        </a>
+
+        <div class="image-result-title">
+          ${esc(r.title || u)}
+        </div>
+
+        <div class="image-result-source">
+          ${esc(
+            r.source ||
+            r.meta_url?.hostname ||
+            r.domain ||
+            ''
+          )}
+        </div>
+      `;
+
+
+      grid.appendChild(el);
+
+    });
 
 
     if(grid.children.length){
 
-      list.appendChild(
-        grid
-      );
+      list.appendChild(grid);
 
     }else{
 
@@ -3414,392 +2712,118 @@ function render(data){
 
 
   /* =======================================================
-     MAPS
-  ======================================================= */
-
-  else if(
-    currentType === 'map'
-  ){
-
-    a.forEach(
-      r => {
-
-        const el =
-          document.createElement(
-            'article'
-          );
-
-        el.className =
-          'map-result';
-
-
-        const properties =
-          r.properties ||
-          {};
-
-
-        const title =
-          r.title ||
-          r.name ||
-          r.address?.name ||
-          properties.name ||
-          properties.title ||
-          'Map result';
-
-
-        const website =
-          safeURL(
-            r.url ||
-            r.website ||
-            properties.url ||
-            properties.website ||
-            ''
-          );
-
-
-        let address = '';
-
-
-        if(
-          typeof r.address ===
-          'string'
-        ){
-
-          address =
-            r.address;
-
-        }else if(
-          r.address &&
-          typeof r.address ===
-          'object'
-        ){
-
-          const parts = [
-            r.address.house_number,
-            r.address.road,
-            r.address.neighbourhood,
-            r.address.suburb,
-            r.address.city,
-            r.address.town,
-            r.address.village,
-            r.address.state,
-            r.address.postcode,
-            r.address.country
-          ]
-          .filter(
-            value =>
-              typeof value ===
-              'string' &&
-              value.trim()
-          );
-
-          address =
-            [...new Set(parts)]
-              .join(', ');
-
-          /*
-           * Fallback for unknown object formats.
-           */
-          if(!address){
-
-            address =
-              Object.values(
-                r.address
-              )
-              .filter(
-                value =>
-                  typeof value ===
-                  'string' &&
-                  value.trim()
-              )
-              .join(', ');
-
-          }
-
-        }
-
-
-        if(!address){
-
-          address =
-            r.description ||
-            properties.address ||
-            '';
-
-        }
-
-
-        const lat =
-          r.lat ??
-          r.latitude ??
-          r.coordinates?.lat ??
-          r.geometry?.coordinates?.[1] ??
-          properties.lat ??
-          properties.latitude;
-
-
-        const lon =
-          r.lon ??
-          r.lng ??
-          r.longitude ??
-          r.coordinates?.lon ??
-          r.geometry?.coordinates?.[0] ??
-          properties.lon ??
-          properties.lng ??
-          properties.longitude;
-
-
-        let mapHref =
-          '';
-
-
-        if(
-          lat !== undefined &&
-          lat !== null &&
-          lon !== undefined &&
-          lon !== null
-        ){
-
-          mapHref =
-            `https://www.google.com/maps?q=${
-              encodeURIComponent(lat)
-            },${
-              encodeURIComponent(lon)
-            }`;
-
-        }else if(website){
-
-          mapHref =
-            website;
-
-        }
-
-
-        el.innerHTML = `
-
-          <h2 class="map-result-title">
-
-            ${
-              mapHref
-
-                ? `
-                  <a
-                    href="${esc(mapHref)}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    ${esc(title)}
-                  </a>
-                `
-
-                : esc(title)
-            }
-
-          </h2>
-
-
-          ${
-            address
-              ? `
-                <div class="map-result-address">
-                  ${esc(address)}
-                </div>
-              `
-              : ''
-          }
-
-
-          ${
-            lat !== undefined &&
-            lat !== null &&
-            lon !== undefined &&
-            lon !== null
-
-              ? `
-                <div class="map-result-coords">
-                  ${esc(lat)}, ${esc(lon)}
-                </div>
-              `
-
-              : ''
-          }
-
-
-          ${
-            website
-
-              ? `
-                <a
-                  class="map-result-link"
-                  href="${esc(website)}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Website
-                </a>
-              `
-
-              : ''
-          }
-
-        `;
-
-        list.appendChild(
-          el
-        );
-
-      }
-    );
-
-  }
-
-
-  /* =======================================================
      WEB / NEWS
-  ======================================================= */
+     ======================================================= */
 
   else{
 
-    a.forEach(
-      r => {
+    a.forEach(r=>{
 
-        const el =
-          document.createElement(
-            'article'
-          );
+      const el =
+        document.createElement('article');
 
-        el.className =
-          'result';
+      el.className='result';
 
 
-        const u =
-          safeURL(
-            r.url ||
-            ''
-          );
+      const u =
+        r.url ||
+        r.link ||
+        '';
+
+      const host =
+        r.meta_url?.hostname ||
+        r.source ||
+        r.domain ||
+        '';
+
+      const title =
+        r.title ||
+        r.name ||
+        u;
+
+      const desc =
+        r.description ||
+        r.content ||
+        r.snippet ||
+        '';
+
+      const age =
+        r.age ||
+        r.publishedDate ||
+        r.published ||
+        '';
 
 
-        const host =
-          r.meta_url?.hostname ||
-          '';
+      el.innerHTML=`
+
+        <div class="result-url">
+          ${esc(host || u)}
+        </div>
+
+        <h2>
+
+          <a
+            href="${esc(u)}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ${esc(title)}
+          </a>
+
+        </h2>
+
+        ${
+          desc
+            ? `<p class="snippet">${esc(desc)}</p>`
+            : ''
+        }
+
+        ${
+          age
+            ? `<div class="result-meta">${esc(age)}</div>`
+            : ''
+        }
+
+      `;
 
 
-        const title =
-          r.title ||
-          u ||
-          '';
+      list.appendChild(el);
 
-
-        const desc =
-          r.description ||
-          r.content ||
-          '';
-
-
-        const age =
-          r.age ||
-          r.publishedDate ||
-          '';
-
-
-        el.innerHTML = `
-
-          <div class="result-url">
-            ${esc(host || u)}
-          </div>
-
-          <h2>
-
-            ${
-              u
-
-                ? `
-                  <a
-                    href="${esc(u)}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    ${esc(title)}
-                  </a>
-                `
-
-                : esc(title)
-            }
-
-          </h2>
-
-
-          ${
-            desc
-
-              ? `
-                <p class="snippet">
-                  ${esc(desc)}
-                </p>
-              `
-
-              : ''
-          }
-
-
-          ${
-            age
-
-              ? `
-                <div class="result-meta">
-                  ${esc(age)}
-                </div>
-              `
-
-              : ''
-          }
-
-        `;
-
-        list.appendChild(
-          el
-        );
-
-      }
-    );
+    });
 
   }
 
 
-  /* =======================================================
-     PAGER
-  ======================================================= */
+  /*
+    Pagination.
+  */
 
   const more =
     Boolean(
       data.more_results_available ||
-      data.hasMore
+      data.hasMore ||
+      data.has_more
     );
 
 
-  if(
-    currentPage > 0
-  ){
+  if(currentPage > 0){
 
     const button =
-      document.createElement(
-        'button'
+      document.createElement('button');
+
+    button.textContent='Previous';
+
+    button.onclick=()=>{
+
+      search(
+        currentQ,
+        currentPage - 1,
+        currentType
       );
 
-    button.textContent =
-      'Previous';
+    };
 
-    button.onclick =
-      () =>
-        search(
-          currentQ,
-          currentPage - 1,
-          currentType
-        );
-
-    pager.appendChild(
-      button
-    );
+    pager.appendChild(button);
 
   }
 
@@ -3807,24 +2831,21 @@ function render(data){
   if(more){
 
     const button =
-      document.createElement(
-        'button'
+      document.createElement('button');
+
+    button.textContent='Next';
+
+    button.onclick=()=>{
+
+      search(
+        currentQ,
+        currentPage + 1,
+        currentType
       );
 
-    button.textContent =
-      'Next';
+    };
 
-    button.onclick =
-      () =>
-        search(
-          currentQ,
-          currentPage + 1,
-          currentType
-        );
-
-    pager.appendChild(
-      button
-    );
+    pager.appendChild(button);
 
   }
 
@@ -3833,14 +2854,12 @@ function render(data){
     {},
     '',
     `/?q=${encodeURIComponent(
-      data.query ||
-      currentQ
+      data.query || currentQ
     )}&type=${encodeURIComponent(
       currentType
-    )}${
-      currentPage
-        ? `&page=${currentPage}`
-        : ''
+    )}${currentPage
+      ? `&page=${currentPage}`
+      : ''
     }`
   );
 
@@ -3848,179 +2867,279 @@ function render(data){
 
 
 /* =========================================================
-   SEARCH
-========================================================= */
+   DICTIONARY
+   ========================================================= */
 
-async function search(
-  q,
-  page=0,
-  type=currentType
-){
+async function loadDictionary(query){
 
-  q =
-    q.trim();
+  const clean =
+    query
+      .trim()
+      .split(/\s+/)[0]
+      .replace(
+        /^[^\p{L}\p{N}'-]+|[^\p{L}\p{N}'-]+$/gu,
+        ''
+      );
 
-  if(!q){
-    return;
-  }
+
+  dictionary.innerHTML=`
+
+    <div class="dictionary-title">
+      Dictionary
+    </div>
+
+    <div class="dictionary-word">
+      ${esc(clean || query)}
+    </div>
+
+    <div class="dictionary-loading">
+      Looking up definition…
+    </div>
+
+  `;
 
 
   /*
-   * Make sure the latest bang list is available.
-   */
-  await loadBangs();
+    Don't try to dictionary-lookup translator commands.
+  */
 
-
-  /*
-   * A bang takes priority over normal search.
-   */
   if(
-    tryBangSearch(q)
+    !clean ||
+    detectTranslatorIntent(query)
   ){
 
+    dictionary.innerHTML=`
+
+      <div class="dictionary-title">
+        Dictionary
+      </div>
+
+      <div class="dictionary-word">
+        ${esc(query)}
+      </div>
+
+      <div class="dictionary-empty">
+        Dictionary lookup is available for individual words.
+      </div>
+
+    `;
+
     return;
+
   }
-
-
-  currentQ =
-    q;
-
-  currentPage =
-    Math.max(
-      0,
-      Number(page) || 0
-    );
-
-  currentType =
-    type;
-
-
-  /*
-   * Open translator when the query is
-   * a translation command.
-   */
-  openTranslation(
-    q
-  );
-
-
-  document.title =
-    `${q} - FlibidooSearch`;
-
-
-  input.value =
-    q;
-
-  resultsInput.value =
-    q;
-
-
-  updateButtonState(
-    submitButton,
-    q
-  );
-
-  updateButtonState(
-    resultsSubmitButton,
-    q
-  );
-
-
-  home.classList.add(
-    'hidden'
-  );
-
-  results.classList.remove(
-    'hidden'
-  );
-
-
-  list.innerHTML =
-    '<div class="empty">Searching…</div>';
-
-  count.textContent =
-    '';
-
-  label.textContent =
-    `Results for “${q}”`;
-
-  pager.innerHTML =
-    '';
-
-
-  /*
-   * MAP FIX:
-   *
-   * Previously the code converted map searches
-   * into "web".
-   *
-   * We now send the actual selected type.
-   */
-  const requestType =
-    type;
 
 
   try{
 
     const response =
       await fetch(
-        `${API_BASE}/api`,
+        `${DICTIONARY_API}${encodeURIComponent(clean)}`,
         {
-          method:'POST',
-
           headers:{
-            'Content-Type':
-              'application/json'
-          },
-
-          body:JSON.stringify({
-
-            query:q,
-
-            type:requestType,
-
-            page:currentPage
-
-          })
-
+            'Accept':'application/json'
+          }
         }
       );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        'No dictionary entry found.'
+      );
+
+    }
 
 
     const data =
       await response.json();
 
 
-    if(!response.ok){
+    if(
+      !Array.isArray(data) ||
+      !data.length
+    ){
 
       throw new Error(
-        data.error ||
-        'Search failed'
+        'No dictionary entry found.'
       );
 
     }
 
 
-    data.type =
-      type;
+    const entry =
+      data[0];
 
 
-    render(
-      data
-    );
+    const meanings =
+      Array.isArray(entry.meanings)
+        ? entry.meanings
+        : [];
+
+
+    let html=`
+
+      <div class="dictionary-title">
+        Dictionary
+      </div>
+
+      <div class="dictionary-word">
+        ${esc(entry.word || clean)}
+      </div>
+
+    `;
+
+
+    meanings.forEach(meaning=>{
+
+      html += `
+
+        <article class="dictionary-entry">
+
+          <div class="dictionary-language">
+            ${esc(entry.phonetic || '')}
+          </div>
+
+          <div class="dictionary-pos">
+            ${esc(meaning.partOfSpeech || '')}
+          </div>
+
+      `;
+
+
+      const definitions =
+        Array.isArray(meaning.definitions)
+          ? meaning.definitions
+          : [];
+
+
+      definitions
+        .slice(0,8)
+        .forEach((definition,index)=>{
+
+          html += `
+
+            <div class="dictionary-sense">
+
+              <div class="dictionary-definition">
+
+                ${index + 1}.
+                ${esc(
+                  definition.definition || ''
+                )}
+
+              </div>
+
+              ${
+                definition.example
+                  ? `
+                    <div class="dictionary-example">
+                      “${esc(definition.example)}”
+                    </div>
+                  `
+                  : ''
+              }
+
+            </div>
+
+          `;
+
+        });
+
+
+      const synonyms =
+        definitions
+          .flatMap(
+            d =>
+              Array.isArray(d.synonyms)
+                ? d.synonyms
+                : []
+          )
+          .slice(0,12);
+
+
+      if(synonyms.length){
+
+        html += `
+
+          <div class="dictionary-relations">
+
+            <div class="dictionary-label">
+              Synonyms
+            </div>
+
+            <div class="dictionary-definition">
+              ${esc(
+                [...new Set(synonyms)].join(', ')
+              )}
+            </div>
+
+          </div>
+
+        `;
+
+      }
+
+
+      html += `
+        </article>
+      `;
+
+    });
+
+
+    const source =
+      entry.sourceUrls?.[0];
+
+
+    if(source){
+
+      html += `
+
+        <div class="dictionary-source">
+
+          Source:
+          <a
+            href="${esc(source)}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ${esc(source)}
+          </a>
+
+        </div>
+
+      `;
+
+    }
+
+
+    dictionary.innerHTML=html;
 
 
   }catch(error){
 
-    list.innerHTML =
-      `
-        <div class="error">
-          ${esc(
-            error.message ||
-            'Search failed. Please try again.'
-          )}
-        </div>
-      `;
+    /*
+      IMPORTANT:
+      Dictionary remains visible even when
+      no dictionary entry exists.
+    */
+
+    dictionary.innerHTML=`
+
+      <div class="dictionary-title">
+        Dictionary
+      </div>
+
+      <div class="dictionary-word">
+        ${esc(clean || query)}
+      </div>
+
+      <div class="dictionary-empty">
+        No dictionary entry found.
+      </div>
+
+    `;
 
   }
 
@@ -4028,14 +3147,42 @@ async function search(
 
 
 /* =========================================================
-   HOME SEARCH
-========================================================= */
+   INPUT EVENTS
+   ========================================================= */
+
+input.addEventListener(
+  'input',
+  ()=>updateButtonState(
+    submitButton,
+    input.value
+  )
+);
+
+
+resultsInput.addEventListener(
+  'input',
+  ()=>updateButtonState(
+    resultsSubmitButton,
+    resultsInput.value
+  )
+);
+
+
+translateInput.addEventListener(
+  'input',
+  updateTranslateCount
+);
+
+
+/* =========================================================
+   SEARCH FORM
+   ========================================================= */
 
 form.addEventListener(
   'submit',
-  async event => {
+  async e=>{
 
-    event.preventDefault();
+    e.preventDefault();
 
     const q =
       input.value.trim();
@@ -4046,50 +3193,64 @@ form.addEventListener(
 
 
     /*
-     * Check bangs before changing URL.
-     */
-    await loadBangs();
+      Change screen immediately.
 
-    if(
-      tryBangSearch(q)
-    ){
+      This also prevents the "stays on home screen
+      for a while" problem.
+    */
 
-      return;
-    }
+    home.classList.add('hidden');
 
+    results.classList.remove('hidden');
 
-    location.href =
-      `/?q=${
-        encodeURIComponent(q)
-      }&type=web&page=0`;
+    list.innerHTML =
+      '<div class="empty">Searching…</div>';
 
-  }
-);
+    label.textContent =
+      `Results for “${q}”`;
+
+    resultsInput.value=q;
 
 
-/* =========================================================
-   RESULTS SEARCH
-========================================================= */
+    /*
+      Put the URL into history immediately.
+    */
 
-resultsForm.addEventListener(
-  'submit',
-  async event => {
-
-    event.preventDefault();
-
-    const q =
-      resultsInput.value.trim();
-
-    if(!q){
-      return;
-    }
+    history.pushState(
+      {},
+      '',
+      `/?q=${encodeURIComponent(q)}&type=web&page=0`
+    );
 
 
     await search(
       q,
       0,
-      currentType
+      'web'
     );
+
+  }
+);
+
+
+resultsForm.addEventListener(
+  'submit',
+  e=>{
+
+    e.preventDefault();
+
+    const q =
+      resultsInput.value.trim();
+
+    if(q){
+
+      search(
+        q,
+        0,
+        currentType
+      );
+
+    }
 
   }
 );
@@ -4097,39 +3258,93 @@ resultsForm.addEventListener(
 
 /* =========================================================
    SEARCH TYPE BUTTONS
-========================================================= */
+   ========================================================= */
 
 document
-  .querySelectorAll(
-    '.search-type'
-  )
-  .forEach(
-    button => {
+  .querySelectorAll('.search-type')
+  .forEach(button=>{
 
-      button.addEventListener(
-        'click',
-        () => {
+    button.addEventListener(
+      'click',
+      ()=>{
 
-          const q =
-            resultsInput.value ||
-            currentQ;
+        const q =
+          resultsInput.value.trim() ||
+          currentQ;
 
-          search(
-            q,
-            0,
-            button.dataset.type
-          );
-
+        if(!q){
+          return;
         }
-      );
 
+        search(
+          q,
+          0,
+          button.dataset.type
+        );
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   TRANSLATOR
+   ========================================================= */
+
+translateButton.addEventListener(
+  'click',
+  translateText
+);
+
+
+translateSwap.addEventListener(
+  'click',
+  ()=>{
+
+    const from =
+      translateFrom.value;
+
+    const to =
+      translateTo.value;
+
+
+    /*
+      Don't make auto-detect the output.
+    */
+
+    if(to==='auto'){
+      return;
     }
-  );
+
+
+    translateFrom.value=
+      to;
+
+    translateTo.value=
+      from === 'auto'
+        ? 'en'
+        : from;
+
+
+    const oldInput =
+      translateInput.value;
+
+    translateInput.value=
+      translateOutput.value;
+
+    translateOutput.value=
+      oldInput;
+
+    updateTranslateCount();
+
+  }
+);
 
 
 /* =========================================================
    ABOUT
-========================================================= */
+   ========================================================= */
 
 const aboutOverlay =
   document.querySelector(
@@ -4138,35 +3353,32 @@ const aboutOverlay =
 
 
 document
-  .querySelector(
-    '#aboutButton'
-  )
-  .onclick =
-    () =>
-      aboutOverlay.classList.remove(
-        'hidden'
-      );
+  .querySelector('#aboutButton')
+  .onclick=()=>{
+
+    aboutOverlay.classList.remove(
+      'hidden'
+    );
+
+  };
 
 
 document
-  .querySelector(
-    '#aboutClose'
-  )
-  .onclick =
-    () =>
-      aboutOverlay.classList.add(
-        'hidden'
-      );
+  .querySelector('#aboutClose')
+  .onclick=()=>{
+
+    aboutOverlay.classList.add(
+      'hidden'
+    );
+
+  };
 
 
 aboutOverlay.addEventListener(
   'click',
-  event => {
+  e=>{
 
-    if(
-      event.target ===
-      aboutOverlay
-    ){
+    if(e.target===aboutOverlay){
 
       aboutOverlay.classList.add(
         'hidden'
@@ -4180,11 +3392,9 @@ aboutOverlay.addEventListener(
 
 document.addEventListener(
   'keydown',
-  event => {
+  e=>{
 
-    if(
-      event.key === 'Escape'
-    ){
+    if(e.key==='Escape'){
 
       aboutOverlay.classList.add(
         'hidden'
@@ -4197,8 +3407,8 @@ document.addEventListener(
 
 
 /* =========================================================
-   URL INITIALIZATION
-========================================================= */
+   URL / INITIAL LOAD
+   ========================================================= */
 
 const params =
   new URLSearchParams(
@@ -4209,12 +3419,7 @@ const initialQuery =
   params.get('q');
 
 const initialType =
-  [
-    'web',
-    'images',
-    'news',
-    'map'
-  ].includes(
+  ['web','images','news'].includes(
     params.get('type')
   )
     ? params.get('type')
@@ -4222,23 +3427,60 @@ const initialType =
 
 
 /*
- * Start loading bangs immediately,
- * without blocking the initial page.
- */
+  Load bangs in the background so the first bang
+  doesn't have to wait as long.
+*/
+
 loadBangs();
 
 
+/*
+  Important:
+  If there is a query in the URL, immediately switch
+  to results before waiting for the API.
+*/
+
 if(initialQuery){
+
+  home.classList.add('hidden');
+
+  results.classList.remove('hidden');
+
+  resultsInput.value=
+    initialQuery;
+
+  label.textContent=
+    `Results for “${initialQuery}”`;
+
+  list.innerHTML=
+    '<div class="empty">Searching…</div>';
+
 
   search(
     initialQuery,
-    Number(
-      params.get('page') || 0
-    ),
+    Number(params.get('page') || 0),
     initialType
   );
 
 }
+
+
+/* =========================================================
+   INITIAL BUTTON STATES
+   ========================================================= */
+
+updateButtonState(
+  submitButton,
+  input.value
+);
+
+updateButtonState(
+  resultsSubmitButton,
+  resultsInput.value
+);
+
+updateTranslateCount();
+
 </script>
 
 </body>
