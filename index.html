@@ -4,274 +4,1946 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#1d0c22">
+<img
+class="hero-logo"
+src="https://raw.githubusercontent.com/danieltorres-mhcs/assets/refs/heads/main/flibidoo.PNG"
+alt="Flibidoo">
 <title>FlibidooSearch</title>
+
 <style>
 :root{
-  --bg:#1d0c22;--text:#f5eef7;--muted:#b9aabb;--line:#5a4560;
-  --line2:#39283d;--result:#e7dce9;--url:#b8a2bc;--focus:#cdb8d1;
+  --bg:#1d0c22;
+  --text:#f5eef7;
+  --muted:#b9aabb;
+  --line:#5a4560;
+  --line2:#39283d;
+  --result:#e7dce9;
+  --url:#b8a2bc;
+  --focus:#cdb8d1;
 }
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;min-height:100%;background:var(--bg);color:var(--text);
-font-family:Arial,Helvetica,sans-serif}
-body{min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
-a{color:inherit}
-.shell{width:min(100% - 40px,1120px);margin:0 auto;padding-left:12px;padding-right:12px}
-#home.home{width:100%;height:100vh;min-height:100vh;margin:0;padding:24px;
-display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
-.hero-logo{width:min(210px,55vw);height:auto;display:block;margin:0 0 12px;object-fit:contain}
-h1{font-size:clamp(34px,5vw,54px);line-height:1;margin:0 0 30px;letter-spacing:-.055em;font-weight:500}
-.search-wrap{width:min(100%,680px)}
-form{display:flex;align-items:center;height:54px;border:1px solid var(--line);border-radius:28px;background:transparent;
-transition:border-color .15s ease,box-shadow .15s ease}
-form:focus-within{border-color:var(--focus);box-shadow:0 0 0 2px rgba(205,184,209,.08)}
-.search-icon{width:20px;height:20px;margin-left:18px;flex:0 0 auto;opacity:.75}
-.search-icon circle,.search-icon path{stroke:currentColor}
-input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:var(--text);font-size:16px;padding:0 14px}
-input::placeholder{color:#9e8da1}
-.submit{height:38px;width:38px;margin-right:8px;border:1px solid var(--line);background:transparent;color:#766679;
-border-radius:50%;padding:0;display:grid;place-items:center;cursor:pointer}
-.submit.has-input{color:var(--text);border-color:var(--focus)}
-.submit:hover{border-color:var(--focus)}
-.submit-icon{width:18px;height:18px;display:block}
-.links{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:18px;margin-top:20px;color:var(--muted);font-size:13px}
-.links button{border:0;background:none;color:inherit;cursor:pointer;padding:0}
-.links button:hover{color:var(--text)}
-.confederacy-credit{display:inline-flex;align-items:center;justify-content:center;gap:7px;color:var(--muted);font-size:12px;line-height:1.4;text-align:center}
-.confederacy-credit img{width:18px;height:18px;display:block;object-fit:contain;flex:0 0 18px;border-radius:4px}
-main{flex:1}
-.results{padding:30px 12px 70px}
-.results-head{display:flex;align-items:center;gap:18px;min-height:44px;border-bottom:1px solid var(--line2);
-padding-bottom:14px;margin-bottom:14px}
-.results-brand{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:inherit;white-space:nowrap}
-.results-brand img{width:28px;height:28px;object-fit:contain;display:block}
-.results-brand span{font-size:15px;font-weight:600;letter-spacing:-.01em}
-.results-query{font-size:14px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
-.count{font-size:13px;color:var(--muted);white-space:nowrap}
-.results-search{width:min(100%,680px);margin:0 0 28px}
-.results-search form{height:48px}
-.results-search .search-icon{margin-left:16px}
-.results-search .submit{width:34px;height:34px;margin-right:6px}
-.search-types{display:flex;align-items:flex-end;gap:0;margin:8px 0 18px;border-bottom:1px solid rgba(255,255,255,.12);height:36px}
-.search-type{position:relative;appearance:none;border:0;background:transparent;color:rgba(255,255,255,.62);font:inherit;font-size:13px;
-line-height:20px;padding:0 12px 10px;margin:0;border-radius:0;cursor:pointer}
-.search-type:hover,.search-type.active{color:#fff;background:transparent}
-.search-type.active::after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:2px;border-radius:2px 2px 0 0;background:currentColor}
-.results-layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:42px;align-items:start}
-.result{padding:0 0 26px;margin-bottom:26px;border-bottom:1px solid var(--line2)}
-.result-url{font-size:13px;color:var(--url);margin-bottom:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.result h2{font-size:20px;line-height:1.25;margin:0 0 7px;font-weight:500;letter-spacing:-.02em}
-.result h2 a{text-decoration:none}.result h2 a:hover{text-decoration:underline}
-.snippet{font-size:14px;line-height:1.6;color:var(--result);margin:0;max-width:760px}
-.result-meta{font-size:12px;color:var(--muted);margin-top:7px}
-.image-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 22px}
-.image-result{min-width:0;position:relative}.image-result a{display:block;text-decoration:none}
-.image-result img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--line2);background:rgba(255,255,255,.02)}
-.image-result-title{font-size:14px;line-height:1.4;margin-top:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.image-result-source{font-size:12px;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.map-result{padding:0 0 22px;margin-bottom:22px;border-bottom:1px solid var(--line2)}
-.map-result-title{font-size:18px;line-height:1.35;margin:0 0 6px;font-weight:500}
-.map-result-title a{text-decoration:none}.map-result-title a:hover{text-decoration:underline}
-.map-result-address{font-size:14px;line-height:1.55;color:var(--result)}
-.map-result-coords{font-size:12px;color:var(--muted);margin-top:6px}
-.dictionary{border-left:1px solid var(--line2);padding-left:28px;max-height:70vh;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
-.dictionary-title{font-size:22px;font-weight:500;letter-spacing:-.02em;margin:0 0 5px}
-.dictionary-word{font-size:13px;color:var(--muted);margin-bottom:22px}
-.dictionary-entry{padding:0 0 24px;margin-bottom:24px;border-bottom:1px solid var(--line2)}
-.dictionary-language,.dictionary-label{font-size:12px;color:var(--muted)}
-.dictionary-language{margin-bottom:8px}.dictionary-pos{font-size:15px;margin-bottom:12px}
-.dictionary-senses,.dictionary-relations,.dictionary-translations{margin-top:14px}
-.dictionary-label{text-transform:uppercase;letter-spacing:.05em;margin-bottom:7px}
-.dictionary-list{margin:0;padding-left:18px}.dictionary-list li{margin:0 0 7px}
-.dictionary-sense{margin:0 0 15px}.dictionary-definition{font-size:14px;line-height:1.55}
-.dictionary-tags{font-size:12px;color:var(--muted);margin-left:5px}
-.dictionary-example,.dictionary-quote{font-size:13px;line-height:1.5;color:var(--result);margin:7px 0 0 14px}
-.dictionary-source,.dictionary-loading,.dictionary-empty{font-size:12px;line-height:1.5;color:var(--muted)}
-.wotd-panel{padding:0 0 22px;margin:0 0 22px;border-bottom:1px solid var(--line2)}
-.wotd-heading{display:flex;align-items:center;gap:8px;margin:0 0 8px;color:#ffb52e;font-size:13px;font-weight:600}
-.wotd-word{color:#ffe18a;font-size:20px;font-weight:600;line-height:1.25;margin:0 0 5px}
-.wotd-definition{color:#ffe9a8;font-size:13px;line-height:1.55;margin:0}
-.wotd-status{color:var(--muted);font-size:13px;line-height:1.5}
-.empty{padding:70px 0;color:var(--muted);text-align:center}
-.error{min-height:120px;max-width:680px;margin:0;padding:28px 18px;display:flex;align-items:center;justify-content:center;
-text-align:center;border:1px solid var(--line2);color:var(--muted);font-size:14px;line-height:1.5}
-.pager{display:flex;gap:8px;padding-top:10px}.pager button{border:1px solid var(--line);background:transparent;color:var(--text);
-border-radius:4px;padding:8px 12px;cursor:pointer}
-.hidden{display:none!important}
 
-/* About */
-.about-overlay{position:fixed;inset:0;background:rgba(0,0,0,.62);display:grid;place-items:center;padding:24px;z-index:10000}
-.about-overlay.hidden{display:none}
-.about-card{position:relative;width:min(100%,560px);max-height:min(80vh,700px);overflow:auto;background:#24132a;
-border:1px solid var(--line);border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.45);padding:30px}
-.about-close{position:absolute;top:10px;right:10px;width:34px;height:34px;border:0;border-radius:50%;
-background:transparent;color:var(--muted);font-size:24px;line-height:1;cursor:pointer}
-.about-close:hover{background:rgba(255,255,255,.08);color:var(--text)}
-.about-card h2{margin:0 38px 16px 0;font-size:25px;font-weight:500}.about-card p{color:var(--result);line-height:1.7;font-size:14px}
-.about-card a{color:var(--text)}
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  width:100%;
+  min-height:100%;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  overflow-x:hidden
+}
+
+a{color:inherit}
+
+.shell{
+  width:min(100% - 40px,1120px);
+  margin:0 auto;
+  padding-left:12px;
+  padding-right:12px
+}
+
+/* =========================
+   HOME
+========================= */
+
+#home.home{
+  width:100%;
+  height:100vh;
+  min-height:100vh;
+  margin:0;
+  padding:24px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden
+}
+
+/* Flibidoo logo */
+
+.hero-logo{
+  width:min(210px,55vw);
+  height:auto;
+  display:block;
+  margin:0 0 16px;
+  object-fit:contain;
+
+  /*
+    Soft transparent edges around the logo.
+    This fades the outside edges without changing
+    the actual image file.
+  */
+  -webkit-mask-image:
+    radial-gradient(
+      ellipse at center,
+      #000 58%,
+      rgba(0,0,0,.96) 68%,
+      rgba(0,0,0,.70) 80%,
+      rgba(0,0,0,0) 100%
+    );
+  mask-image:
+    radial-gradient(
+      ellipse at center,
+      #000 58%,
+      rgba(0,0,0,.96) 68%,
+      rgba(0,0,0,.70) 80%,
+      rgba(0,0,0,0) 100%
+    );
+}
+
+h1{
+  font-size:clamp(34px,5vw,54px);
+  line-height:1;
+  margin:0 0 30px;
+  letter-spacing:-.055em;
+  font-weight:500
+}
+
+.search-wrap{
+  width:min(100%,680px)
+}
+
+form{
+  display:flex;
+  align-items:center;
+  height:54px;
+  border:1px solid var(--line);
+  border-radius:28px;
+  background:transparent;
+  transition:border-color .15s ease,box-shadow .15s ease
+}
+
+form:focus-within{
+  border-color:var(--focus);
+  box-shadow:0 0 0 2px rgba(205,184,209,.08)
+}
+
+.search-icon{
+  width:20px;
+  height:20px;
+  margin-left:18px;
+  flex:0 0 auto;
+  opacity:.75
+}
+
+.search-icon circle,
+.search-icon path{
+  stroke:currentColor
+}
+
+input{
+  min-width:0;
+  flex:1;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:var(--text);
+  font-size:16px;
+  padding:0 14px
+}
+
+input::placeholder{
+  color:#9e8da1
+}
+
+.submit{
+  height:38px;
+  width:38px;
+  margin-right:8px;
+  border:1px solid var(--line);
+  background:transparent;
+  color:#766679;
+  border-radius:50%;
+  padding:0;
+  display:grid;
+  place-items:center;
+  cursor:pointer
+}
+
+.submit.has-input{
+  color:var(--text);
+  border-color:var(--focus)
+}
+
+.submit:hover{
+  border-color:var(--focus)
+}
+
+.submit-icon{
+  width:18px;
+  height:18px;
+  display:block
+}
+
+.links{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:18px;
+  margin-top:20px;
+  color:var(--muted);
+  font-size:13px
+}
+
+.links button{
+  border:0;
+  background:none;
+  color:inherit;
+  cursor:pointer;
+  padding:0
+}
+
+.links button:hover{
+  color:var(--text)
+}
+
+/* Confederacy credit */
+
+.confederacy-credit{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.4;
+  text-align:center
+}
+
+.confederacy-credit img{
+  width:18px;
+  height:18px;
+  display:block;
+  object-fit:contain;
+  flex:0 0 18px;
+  border-radius:4px
+}
+
+main{
+  flex:1
+}
+
+/* =========================
+   RESULTS
+========================= */
+
+.results{
+  padding:30px 12px 70px
+}
+
+.results-head{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  min-height:44px;
+  border-bottom:1px solid var(--line2);
+  padding-bottom:14px;
+  margin-bottom:14px
+}
+
+.results-brand{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  text-decoration:none;
+  color:inherit;
+  white-space:nowrap
+}
+
+.results-brand img{
+  width:28px;
+  height:28px;
+  object-fit:contain;
+  display:block
+}
+
+.results-brand span{
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:-.01em
+}
+
+.results-query{
+  font-size:14px;
+  color:var(--muted);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  flex:1
+}
+
+.count{
+  font-size:13px;
+  color:var(--muted);
+  white-space:nowrap
+}
+
+.results-search{
+  width:min(100%,680px);
+  margin:0 0 28px
+}
+
+.results-search form{
+  height:48px
+}
+
+.results-search .search-icon{
+  margin-left:16px
+}
+
+.results-search .submit{
+  width:34px;
+  height:34px;
+  margin-right:6px
+}
+
+.search-types{
+  display:flex;
+  align-items:flex-end;
+  gap:0;
+  margin:8px 0 18px;
+  border-bottom:1px solid rgba(255,255,255,.12);
+  height:36px
+}
+
+.search-type{
+  position:relative;
+  appearance:none;
+  border:0;
+  background:transparent;
+  color:rgba(255,255,255,.62);
+  font:inherit;
+  font-size:13px;
+  line-height:20px;
+  padding:0 12px 10px;
+  margin:0;
+  border-radius:0;
+  cursor:pointer
+}
+
+.search-type:hover,
+.search-type.active{
+  color:#fff;
+  background:transparent
+}
+
+.search-type.active::after{
+  content:"";
+  position:absolute;
+  left:10px;
+  right:10px;
+  bottom:-1px;
+  height:2px;
+  border-radius:2px 2px 0 0;
+  background:currentColor
+}
+
+.results-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 330px;
+  gap:42px;
+  align-items:start
+}
+
+/* =========================
+   WEB RESULTS
+========================= */
+
+.result{
+  position:relative;
+  padding:0 0 26px;
+  margin-bottom:26px;
+  border-bottom:1px solid var(--line2)
+}
+
+.result-main{
+  min-width:0;
+  padding-right:150px
+}
+
+.result-url{
+  font-size:13px;
+  color:var(--url);
+  margin-bottom:6px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap
+}
+
+/* Title + favicon */
+
+.result-title-row{
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  min-width:0
+}
+
+.result-favicon{
+  width:18px;
+  height:18px;
+  flex:0 0 18px;
+  margin-top:3px;
+  object-fit:contain;
+  border-radius:3px
+}
+
+.result h2{
+  min-width:0;
+  font-size:20px;
+  line-height:1.25;
+  margin:0 0 7px;
+  font-weight:500;
+  letter-spacing:-.02em
+}
+
+.result h2 a{
+  text-decoration:none
+}
+
+.result h2 a:hover{
+  text-decoration:underline
+}
+
+.snippet{
+  font-size:14px;
+  line-height:1.6;
+  color:var(--result);
+  margin:0;
+  max-width:760px
+}
+
+.result-meta{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:7px
+}
+
+/* Result thumbnail / OG image */
+
+.result-thumbnail{
+  position:absolute;
+  right:0;
+  top:0;
+  width:128px;
+  height:82px;
+  object-fit:cover;
+  border:1px solid var(--line2);
+  border-radius:8px;
+  background:rgba(255,255,255,.025)
+}
+
+.result-thumbnail.favicon-fallback{
+  object-fit:contain;
+  padding:24px;
+  background:rgba(255,255,255,.025)
+}
+
+/* =========================
+   IMAGES
+========================= */
+
+.image-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:28px 22px
+}
+
+.image-result{
+  min-width:0;
+  position:relative
+}
+
+.image-result a{
+  display:block;
+  text-decoration:none
+}
+
+.image-result img{
+  display:block;
+  width:100%;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  border:1px solid var(--line2);
+  background:rgba(255,255,255,.02)
+}
+
+.image-result-title{
+  font-size:14px;
+  line-height:1.4;
+  margin-top:9px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis
+}
+
+.image-result-source{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:4px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis
+}
+
+/* =========================
+   MAP
+========================= */
+
+.map-result{
+  padding:0 0 22px;
+  margin-bottom:22px;
+  border-bottom:1px solid var(--line2)
+}
+
+.map-result-title{
+  font-size:18px;
+  line-height:1.35;
+  margin:0 0 6px;
+  font-weight:500
+}
+
+.map-result-title a{
+  text-decoration:none
+}
+
+.map-result-title a:hover{
+  text-decoration:underline
+}
+
+.map-result-address{
+  font-size:14px;
+  line-height:1.55;
+  color:var(--result)
+}
+
+.map-result-coords{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:6px
+}
+
+/* =========================
+   DICTIONARY
+========================= */
+
+.dictionary{
+  border-left:1px solid var(--line2);
+  padding-left:28px;
+  max-height:70vh;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-width:thin
+}
+
+.dictionary-title{
+  font-size:22px;
+  font-weight:500;
+  letter-spacing:-.02em;
+  margin:0 0 5px
+}
+
+.dictionary-word{
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:22px
+}
+
+.dictionary-entry{
+  padding:0 0 24px;
+  margin-bottom:24px;
+  border-bottom:1px solid var(--line2)
+}
+
+.dictionary-language,
+.dictionary-label{
+  font-size:12px;
+  color:var(--muted)
+}
+
+.dictionary-language{
+  margin-bottom:8px
+}
+
+.dictionary-pos{
+  font-size:15px;
+  margin-bottom:12px
+}
+
+.dictionary-senses,
+.dictionary-relations,
+.dictionary-translations{
+  margin-top:14px
+}
+
+.dictionary-label{
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  margin-bottom:7px
+}
+
+.dictionary-list{
+  margin:0;
+  padding-left:18px
+}
+
+.dictionary-list li{
+  margin:0 0 7px
+}
+
+.dictionary-sense{
+  margin:0 0 15px
+}
+
+.dictionary-definition{
+  font-size:14px;
+  line-height:1.55
+}
+
+.dictionary-tags{
+  font-size:12px;
+  color:var(--muted);
+  margin-left:5px
+}
+
+.dictionary-example,
+.dictionary-quote{
+  font-size:13px;
+  line-height:1.5;
+  color:var(--result);
+  margin:7px 0 0 14px
+}
+
+.dictionary-source,
+.dictionary-loading,
+.dictionary-empty{
+  font-size:12px;
+  line-height:1.5;
+  color:var(--muted)
+}
+
+/* =========================
+   WORD OF THE DAY
+========================= */
+
+.wotd-panel{
+  padding:0 0 22px;
+  margin:0 0 22px;
+  border-bottom:1px solid var(--line2)
+}
+
+.wotd-heading{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:0 0 8px;
+  color:#ffb52e;
+  font-size:13px;
+  font-weight:600
+}
+
+.wotd-word{
+  color:#ffe18a;
+  font-size:20px;
+  font-weight:600;
+  line-height:1.25;
+  margin:0 0 5px
+}
+
+.wotd-definition{
+  color:#ffe9a8;
+  font-size:13px;
+  line-height:1.55;
+  margin:0
+}
+
+.wotd-status{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5
+}
+
+.empty{
+  padding:70px 0;
+  color:var(--muted);
+  text-align:center
+}
+
+.error{
+  min-height:120px;
+  max-width:680px;
+  margin:0;
+  padding:28px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  border:1px solid var(--line2);
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.5
+}
+
+.pager{
+  display:flex;
+  gap:8px;
+  padding-top:10px
+}
+
+.pager button{
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--text);
+  border-radius:4px;
+  padding:8px 12px;
+  cursor:pointer
+}
+
+.hidden{
+  display:none!important
+}
+
+/* =========================
+   ABOUT
+========================= */
+
+.about-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.62);
+  display:grid;
+  place-items:center;
+  padding:24px;
+  z-index:10000
+}
+
+.about-overlay.hidden{
+  display:none
+}
+
+.about-card{
+  position:relative;
+  width:min(100%,560px);
+  max-height:min(80vh,700px);
+  overflow:auto;
+  background:#24132a;
+  border:1px solid var(--line);
+  border-radius:14px;
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+  padding:30px
+}
+
+.about-close{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:34px;
+  height:34px;
+  border:0;
+  border-radius:50%;
+  background:transparent;
+  color:var(--muted);
+  font-size:24px;
+  line-height:1;
+  cursor:pointer
+}
+
+.about-close:hover{
+  background:rgba(255,255,255,.08);
+  color:var(--text)
+}
+
+.about-card h2{
+  margin:0 38px 16px 0;
+  font-size:25px;
+  font-weight:500
+}
+
+.about-card p{
+  color:var(--result);
+  line-height:1.7;
+  font-size:14px
+}
+
+.about-card a{
+  color:var(--text)
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(max-width:860px){
-  .results-layout{grid-template-columns:1fr}
-  /* Mobile/tablet: dictionary appears first */
-  .dictionary{order:-1;border-left:0;border-bottom:1px solid var(--line2);border-top:0;padding:0 0 26px;
-  margin-bottom:26px;max-height:none}
+
+  .results-layout{
+    grid-template-columns:1fr
+  }
+
+  .dictionary{
+    order:-1;
+    border-left:0;
+    border-bottom:1px solid var(--line2);
+    border-top:0;
+    padding:0 0 26px;
+    margin-bottom:26px;
+    max-height:none
+  }
 }
-@media(max-width:760px){.image-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px}}
+
+@media(max-width:760px){
+
+  .image-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:22px 14px
+  }
+
+  .result-main{
+    padding-right:115px
+  }
+
+  .result-thumbnail{
+    width:100px;
+    height:70px
+  }
+}
+
 @media(max-width:640px){
-  .shell{width:100%;padding-left:16px;padding-right:16px}
-  #home.home{padding:20px 16px}
-  .hero-logo{width:150px}h1{font-size:36px;margin-bottom:24px}
-  form{height:50px}.results{padding:22px 16px 60px}
-  .results-head{gap:12px}.results-brand img{width:24px;height:24px}.results-brand span{font-size:14px}
-  .results-query{font-size:13px}.search-types{overflow-x:auto;scrollbar-width:none}
-  .search-type{padding-left:10px;padding-right:10px;font-size:12px}
-  .about-overlay{padding:16px}.about-card{padding:26px 22px}
+
+  .shell{
+    width:100%;
+    padding-left:16px;
+    padding-right:16px
+  }
+
+  #home.home{
+    padding:20px 16px
+  }
+
+  .hero-logo{
+    width:150px
+  }
+
+  h1{
+    font-size:36px;
+    margin-bottom:24px
+  }
+
+  form{
+    height:50px
+  }
+
+  .results{
+    padding:22px 16px 60px
+  }
+
+  .results-head{
+    gap:12px
+  }
+
+  .results-brand img{
+    width:24px;
+    height:24px
+  }
+
+  .results-brand span{
+    font-size:14px
+  }
+
+  .results-query{
+    font-size:13px
+  }
+
+  .search-types{
+    overflow-x:auto;
+    scrollbar-width:none
+  }
+
+  .search-type{
+    padding-left:10px;
+    padding-right:10px;
+    font-size:12px
+  }
+
+  .about-overlay{
+    padding:16px
+  }
+
+  .about-card{
+    padding:26px 22px
+  }
 }
-@media(max-width:460px){.image-grid{grid-template-columns:1fr}}
+
+@media(max-width:460px){
+
+  .image-grid{
+    grid-template-columns:1fr
+  }
+
+  .result-main{
+    padding-right:0
+  }
+
+  .result-thumbnail{
+    position:relative;
+    top:auto;
+    right:auto;
+    width:100%;
+    height:150px;
+    margin-top:12px;
+    order:3
+  }
+}
 </style>
 </head>
+
 <body>
+
 <main>
+
 <section id="home" class="home shell">
+
   <div class="search-wrap">
+
     <h1><em><strong>Flibidoo</strong></em>Search</h1>
+
     <form id="searchForm" role="search">
-      <input id="q" name="q" autocomplete="off" spellcheck="false" placeholder="Search the web" aria-label="Search the web">
-      <button class="submit" id="submitButton" type="submit" aria-label="Search">→</button>
+
+      <input
+        id="q"
+        name="q"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Search the web"
+        aria-label="Search the web"
+      >
+
+      <button
+        class="submit"
+        id="submitButton"
+        type="submit"
+        aria-label="Search"
+      >→</button>
+
     </form>
+
     <div class="links">
-      <button type="button" id="aboutButton">About</button>
-      <span class="confederacy-credit">with love from The Great Confederacy of E</span>
+
+      <button type="button" id="aboutButton">
+        About
+      </button>
+
+      <span class="confederacy-credit">
+        <span>with love from The Great Confederacy of E</span>
+
+        <img
+          src="https://raw.githubusercontent.com/danieltorres-mhcs/assets/refs/heads/main/Untitled13_20260821194209.png"
+          alt=""
+          aria-hidden="true"
+        >
+      </span>
+
     </div>
+
   </div>
+
 </section>
+
 
 <section id="results" class="results shell hidden">
+
   <div class="results-head">
-    <a class="results-brand" href="/" aria-label="FlibidooSearch home"><span><em><strong>Flibidoo</strong></em>Search</span></a>
-    <div id="queryLabel" class="results-query"></div><div id="count" class="count"></div>
+
+    <a
+      class="results-brand"
+      href="/"
+      aria-label="FlibidooSearch home"
+    >
+      <span>
+        <em><strong>Flibidoo</strong></em>Search
+      </span>
+    </a>
+
+    <div id="queryLabel" class="results-query"></div>
+
+    <div id="count" class="count"></div>
+
   </div>
+
+
   <div class="results-search">
+
     <form id="resultsSearchForm" role="search">
-      <input id="resultsQ" name="q" autocomplete="off" spellcheck="false" placeholder="Search the web" aria-label="Search the web">
-      <button class="submit" id="resultsSubmitButton" type="submit" aria-label="Search">→</button>
+
+      <input
+        id="resultsQ"
+        name="q"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Search the web"
+        aria-label="Search the web"
+      >
+
+      <button
+        class="submit"
+        id="resultsSubmitButton"
+        type="submit"
+        aria-label="Search"
+      >→</button>
+
     </form>
+
   </div>
+
+
   <nav class="search-types" aria-label="Search type">
-    <button class="search-type active" data-type="web" type="button">Web</button>
-    <button class="search-type" data-type="images" type="button">Images</button>
-    <button class="search-type" data-type="news" type="button">News</button>
-    <button class="search-type" data-type="map" type="button">Maps</button>
+
+    <button
+      class="search-type active"
+      data-type="web"
+      type="button"
+    >Web</button>
+
+    <button
+      class="search-type"
+      data-type="images"
+      type="button"
+    >Images</button>
+
+    <button
+      class="search-type"
+      data-type="news"
+      type="button"
+    >News</button>
+
+    <button
+      class="search-type"
+      data-type="map"
+      type="button"
+    >Maps</button>
+
   </nav>
+
+
   <div class="results-layout">
-    <div><div id="resultList"></div><div id="pager" class="pager"></div></div>
-    <aside id="dictionary" class="dictionary hidden" aria-label="Dictionary results"></aside>
+
+    <div>
+      <div id="resultList"></div>
+      <div id="pager" class="pager"></div>
+    </div>
+
+    <aside
+      id="dictionary"
+      class="dictionary hidden"
+      aria-label="Dictionary results"
+    ></aside>
+
   </div>
+
 </section>
+
 </main>
 
-<div id="aboutOverlay" class="about-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+
+<div
+  id="aboutOverlay"
+  class="about-overlay hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="aboutTitle"
+>
+
   <div class="about-card">
-    <button id="aboutClose" class="about-close" type="button" aria-label="Close About">×</button>
-    <!-- EDIT THIS CARD CONTENT -->
+
+    <button
+      id="aboutClose"
+      class="about-close"
+      type="button"
+      aria-label="Close About"
+    >×</button>
+
     <h2 id="aboutTitle">About</h2>
+
     <p>Welcome to FlibidooSearch.</p>
-    <p>You can edit this text directly in the HTML inside the <strong>about-card</strong>.</p>
+
+    <p>
+      You can edit this text directly in the HTML inside the
+      <strong>about-card</strong>.
+    </p>
+
   </div>
+
 </div>
 
-<script>
-const API_BASE='https://search.tiago.zip';
-const form=document.querySelector('#searchForm'),input=document.querySelector('#q');
-const home=document.querySelector('#home'),results=document.querySelector('#results');
-const list=document.querySelector('#resultList'),label=document.querySelector('#queryLabel');
-const count=document.querySelector('#count'),pager=document.querySelector('#pager');
-const resultsForm=document.querySelector('#resultsSearchForm'),resultsInput=document.querySelector('#resultsQ');
-const dictionary=document.querySelector('#dictionary');
-let currentQ='',currentPage=0,currentType='web';
 
-function esc(s=''){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
-function updateButtonState(b,v){b.classList.toggle('has-input',v.trim().length>0)}
+<script>
+
+const API_BASE='https://search.tiago.zip';
+
+const form=document.querySelector('#searchForm');
+const input=document.querySelector('#q');
+
+const home=document.querySelector('#home');
+const results=document.querySelector('#results');
+
+const list=document.querySelector('#resultList');
+const label=document.querySelector('#queryLabel');
+const count=document.querySelector('#count');
+const pager=document.querySelector('#pager');
+
+const resultsForm=document.querySelector('#resultsSearchForm');
+const resultsInput=document.querySelector('#resultsQ');
+
+const dictionary=document.querySelector('#dictionary');
+
+let currentQ='';
+let currentPage=0;
+let currentType='web';
+
+
+function esc(s=''){
+  return String(s).replace(
+    /[&<>'"]/g,
+    c=>({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      "'":'&#39;',
+      '"':'&quot;'
+    }[c])
+  )
+}
+
+
+/*
+  Gets the hostname from a result URL.
+*/
+
+function getHostname(url=''){
+
+  try{
+    return new URL(url).hostname;
+  }catch{
+    return '';
+  }
+
+}
+
+
+/*
+  Google favicon service.
+
+  This is used as a reliable browser-side favicon
+  fallback without needing another backend request.
+*/
+
+function faviconFor(url=''){
+
+  const host=getHostname(url);
+
+  if(!host)return '';
+
+  return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=64`;
+
+}
+
+
+/*
+  Try the common thumbnail fields returned by
+  different search APIs.
+
+  If your API returns an OG image as one of these
+  fields, it will automatically be used.
+*/
+
+function getResultThumbnail(r,url){
+
+  return (
+    r.thumbnail ||
+    r.thumbnail_url ||
+    r.image ||
+    r.image_url ||
+    r.og_image ||
+    r.ogImage ||
+    r.meta?.image ||
+    r.meta?.og_image ||
+    r.properties?.thumbnail ||
+    r.properties?.image ||
+    faviconFor(url)
+  );
+
+}
+
+
+function isFallbackThumbnail(src,url){
+
+  if(!src)return true;
+
+  return src===faviconFor(url);
+
+}
+
+
+function updateButtonState(b,v){
+  b.classList.toggle(
+    'has-input',
+    v.trim().length>0
+  );
+}
+
+
+/* Update button appearance while typing */
+
+input.addEventListener(
+  'input',
+  ()=>updateButtonState(
+    document.querySelector('#submitButton'),
+    input.value
+  )
+);
+
+resultsInput.addEventListener(
+  'input',
+  ()=>updateButtonState(
+    document.querySelector('#resultsSubmitButton'),
+    resultsInput.value
+  )
+);
+
+
+/*
+  Render results.
+*/
 
 function render(data){
-  home.classList.add('hidden');results.classList.remove('hidden');
-  currentType=data.type||currentType;label.textContent=data.query?`Results for “${data.query}”`:'';
+
+  home.classList.add('hidden');
+  results.classList.remove('hidden');
+
+  currentType=data.type||currentType;
+
+  label.textContent=data.query
+    ? `Results for “${data.query}”`
+    : '';
+
   let a=[];
-  if(currentType==='web') a=Array.isArray(data.results?.web?.results)?data.results.web.results:[];
-  else if(currentType==='images'||currentType==='news') a=Array.isArray(data.results)?data.results:[];
-  else if(currentType==='map'){
-    const loc=data.results?.locations??data.results?.map??data.locations;
-    a=Array.isArray(loc)?loc:Array.isArray(loc?.results)?loc.results:[];
+
+  if(currentType==='web'){
+
+    a=Array.isArray(
+      data.results?.web?.results
+    )
+      ? data.results.web.results
+      : [];
+
   }
-  count.textContent=a.length?`${a.length} results`:'';
-  resultsInput.value=data.query||'';list.innerHTML='';pager.innerHTML='';
-  document.querySelectorAll('.search-type').forEach(b=>b.classList.toggle('active',b.dataset.type===currentType));
-  if(!a.length){list.innerHTML='<div class="empty">No results found.</div>';return}
+
+  else if(
+    currentType==='images' ||
+    currentType==='news'
+  ){
+
+    a=Array.isArray(data.results)
+      ? data.results
+      : [];
+
+  }
+
+  else if(currentType==='map'){
+
+    const loc=
+      data.results?.locations ??
+      data.results?.map ??
+      data.locations;
+
+    a=Array.isArray(loc)
+      ? loc
+      : Array.isArray(loc?.results)
+        ? loc.results
+        : [];
+
+  }
+
+
+  count.textContent=
+    a.length
+      ? `${a.length} results`
+      : '';
+
+  resultsInput.value=data.query||'';
+
+  list.innerHTML='';
+  pager.innerHTML='';
+
+
+  document
+    .querySelectorAll('.search-type')
+    .forEach(b=>{
+
+      b.classList.toggle(
+        'active',
+        b.dataset.type===currentType
+      );
+
+    });
+
+
+  if(!a.length){
+
+    list.innerHTML=
+      '<div class="empty">No results found.</div>';
+
+    return;
+
+  }
+
+
+  /* =========================
+     IMAGES
+  ========================= */
 
   if(currentType==='images'){
-    const grid=document.createElement('div');grid.className='image-grid';
+
+    const grid=document.createElement('div');
+
+    grid.className='image-grid';
+
     a.forEach(r=>{
-      const u=r.url||r.properties?.url||'',img=r.thumbnail||r.properties?.url||'';
+
+      const u=
+        r.url ||
+        r.properties?.url ||
+        '';
+
+      const img=
+        r.thumbnail ||
+        r.properties?.url ||
+        '';
+
       if(!img)return;
-      const el=document.createElement('article');el.className='image-result';
-      el.innerHTML=`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer"><img src="${esc(img)}" alt="${esc(r.title||'')}" loading="lazy" referrerpolicy="no-referrer"></a>
-      <div class="image-result-title">${esc(r.title||u)}</div><div class="image-result-source">${esc(r.source||r.meta_url?.hostname||'')}</div>`;
+
+      const el=
+        document.createElement('article');
+
+      el.className='image-result';
+
+      el.innerHTML=`
+
+        <a
+          href="${esc(u)}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+
+          <img
+            src="${esc(img)}"
+            alt="${esc(r.title||'')}"
+            loading="lazy"
+            referrerpolicy="no-referrer"
+          >
+
+        </a>
+
+        <div class="image-result-title">
+          ${esc(r.title||u)}
+        </div>
+
+        <div class="image-result-source">
+          ${esc(
+            r.source ||
+            r.meta_url?.hostname ||
+            getHostname(u)
+          )}
+        </div>
+
+      `;
+
       grid.appendChild(el);
+
     });
-    if(grid.children.length)list.appendChild(grid);else list.innerHTML='<div class="empty">No images found.</div>';
-  }else if(currentType==='map'){
-    a.forEach(r=>{
-      const el=document.createElement('article');el.className='map-result';
-      const title=r.title||r.name||r.address?.name||r.properties?.name||'Map result';
-      const u=r.url||r.website||r.properties?.url||'';
-      const addr=typeof r.address==='string'?r.address:(r.address?Object.values(r.address).filter(v=>typeof v==='string'&&v).join(', '):r.description||r.properties?.address||'');
-      const lat=r.lat??r.latitude??r.coordinates?.lat??r.geometry?.coordinates?.[1];
-      const lon=r.lon??r.lng??r.longitude??r.coordinates?.lon??r.geometry?.coordinates?.[0];
-      const href=lat!=null&&lon!=null?`https://www.google.com/maps?q=${encodeURIComponent(lat)},${encodeURIComponent(lon)}`:u;
-      el.innerHTML=`<h2 class="map-result-title"><a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(title)}</a></h2>
-      ${addr?`<div class="map-result-address">${esc(addr)}</div>`:''}
-      ${lat!=null&&lon!=null?`<div class="map-result-coords">${esc(lat)}, ${esc(lon)}</div>`:''}`;
-      list.appendChild(el);
-    });
-  }else{
-    a.forEach(r=>{
-      const el=document.createElement('article');el.className='result';
-      const u=r.url||'',host=r.meta_url?.hostname||'',title=r.title||u,desc=r.description||r.content||'',age=r.age||r.publishedDate||'';
-      el.innerHTML=`<div class="result-url">${esc(host||u)}</div><h2><a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(title)}</a></h2>
-      ${desc?`<p class="snippet">${esc(desc)}</p>`:''}${age?`<div class="result-meta">${esc(age)}</div>`:''}`;
-      list.appendChild(el);
-    });
+
+
+    if(grid.children.length){
+
+      list.appendChild(grid);
+
+    }else{
+
+      list.innerHTML=
+        '<div class="empty">No images found.</div>';
+
+    }
+
   }
-  const more=Boolean(data.more_results_available||data.hasMore);
-  if(currentPage>0){const b=document.createElement('button');b.textContent='Previous';b.onclick=()=>search(currentQ,currentPage-1,currentType);pager.appendChild(b)}
-  if(more){const b=document.createElement('button');b.textContent='Next';b.onclick=()=>search(currentQ,currentPage+1,currentType);pager.appendChild(b)}
-  history.replaceState({},'',`/?q=${encodeURIComponent(data.query||currentQ)}&type=${encodeURIComponent(currentType)}${currentPage?`&page=${currentPage}`:''}`);
+
+
+  /* =========================
+     MAP
+  ========================= */
+
+  else if(currentType==='map'){
+
+    a.forEach(r=>{
+
+      const el=
+        document.createElement('article');
+
+      el.className='map-result';
+
+      const title=
+        r.title ||
+        r.name ||
+        r.address?.name ||
+        r.properties?.name ||
+        'Map result';
+
+      const u=
+        r.url ||
+        r.website ||
+        r.properties?.url ||
+        '';
+
+      const addr=
+        typeof r.address==='string'
+          ? r.address
+          : (
+              r.address
+                ? Object.values(r.address)
+                    .filter(
+                      v=>typeof v==='string'&&v
+                    )
+                    .join(', ')
+                : r.description ||
+                  r.properties?.address ||
+                  ''
+            );
+
+      const lat=
+        r.lat ??
+        r.latitude ??
+        r.coordinates?.lat ??
+        r.geometry?.coordinates?.[1];
+
+      const lon=
+        r.lon ??
+        r.lng ??
+        r.longitude ??
+        r.coordinates?.lon ??
+        r.geometry?.coordinates?.[0];
+
+      const href=
+        lat!=null&&lon!=null
+          ? `https://www.google.com/maps?q=${encodeURIComponent(lat)},${encodeURIComponent(lon)}`
+          : u;
+
+
+      el.innerHTML=`
+
+        <h2 class="map-result-title">
+
+          <a
+            href="${esc(href)}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ${esc(title)}
+          </a>
+
+        </h2>
+
+        ${
+          addr
+            ? `<div class="map-result-address">
+                ${esc(addr)}
+              </div>`
+            : ''
+        }
+
+        ${
+          lat!=null&&lon!=null
+            ? `<div class="map-result-coords">
+                ${esc(lat)}, ${esc(lon)}
+              </div>`
+            : ''
+        }
+
+      `;
+
+      list.appendChild(el);
+
+    });
+
+  }
+
+
+  /* =========================
+     WEB / NEWS
+  ========================= */
+
+  else{
+
+    a.forEach(r=>{
+
+      const el=
+        document.createElement('article');
+
+      el.className='result';
+
+
+      const u=
+        r.url ||
+        r.link ||
+        '';
+
+      const host=
+        r.meta_url?.hostname ||
+        getHostname(u);
+
+      const title=
+        r.title ||
+        u ||
+        'Untitled result';
+
+      const desc=
+        r.description ||
+        r.content ||
+        '';
+
+      const age=
+        r.age ||
+        r.publishedDate ||
+        r.published_date ||
+        '';
+
+
+      /*
+        Favicon on the left.
+      */
+
+      const favicon=
+        r.favicon ||
+        r.favicon_url ||
+        r.meta?.favicon ||
+        faviconFor(u);
+
+
+      /*
+        Thumbnail / OG image on the right.
+
+        API-provided thumbnail is preferred.
+        Favicon is used as fallback.
+      */
+
+      const thumbnail=
+        getResultThumbnail(r,u);
+
+      const fallback=
+        isFallbackThumbnail(thumbnail,u);
+
+
+      el.innerHTML=`
+
+        <div class="result-main">
+
+          <div class="result-url">
+            ${esc(host||u)}
+          </div>
+
+          <div class="result-title-row">
+
+            <img
+              class="result-favicon"
+              src="${esc(favicon)}"
+              alt=""
+              loading="lazy"
+              referrerpolicy="no-referrer"
+              onerror="this.style.visibility='hidden'"
+            >
+
+            <h2>
+
+              <a
+                href="${esc(u)}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ${esc(title)}
+              </a>
+
+            </h2>
+
+          </div>
+
+          ${
+            desc
+              ? `<p class="snippet">
+                  ${esc(desc)}
+                </p>`
+              : ''
+          }
+
+          ${
+            age
+              ? `<div class="result-meta">
+                  ${esc(age)}
+                </div>`
+              : ''
+          }
+
+        </div>
+
+        ${
+          thumbnail
+            ? `<img
+                class="result-thumbnail ${
+                  fallback
+                    ? 'favicon-fallback'
+                    : ''
+                }"
+                src="${esc(thumbnail)}"
+                alt=""
+                loading="lazy"
+                referrerpolicy="no-referrer"
+                onerror="this.onerror=null;this.src='${esc(faviconFor(u))}';this.classList.add('favicon-fallback')"
+              >`
+            : ''
+        }
+
+      `;
+
+      list.appendChild(el);
+
+    });
+
+  }
+
+
+  const more=
+    Boolean(
+      data.more_results_available ||
+      data.hasMore
+    );
+
+
+  if(currentPage>0){
+
+    const b=
+      document.createElement('button');
+
+    b.textContent='Previous';
+
+    b.onclick=()=>
+      search(
+        currentQ,
+        currentPage-1,
+        currentType
+      );
+
+    pager.appendChild(b);
+
+  }
+
+
+  if(more){
+
+    const b=
+      document.createElement('button');
+
+    b.textContent='Next';
+
+    b.onclick=()=>
+      search(
+        currentQ,
+        currentPage+1,
+        currentType
+      );
+
+    pager.appendChild(b);
+
+  }
+
+
+  history.replaceState(
+    {},
+    '',
+    `/?q=${encodeURIComponent(data.query||currentQ)}&type=${encodeURIComponent(currentType)}${
+      currentPage
+        ? `&page=${currentPage}`
+        : ''
+    }`
+  );
+
 }
 
-async function search(q,page=0,type=currentType){
-  q=q.trim();if(!q)return;
-  currentQ=q;currentPage=Math.max(0,Number(page)||0);currentType=type;
-  document.title=`${q} - FlibidooSearch`;input.value=q;resultsInput.value=q;
-  home.classList.add('hidden');results.classList.remove('hidden');
-  list.innerHTML='<div class="empty">Searching…</div>';count.textContent='';label.textContent=`Results for “${q}”`;pager.innerHTML='';
+
+/*
+  Search.
+*/
+
+async function search(
+  q,
+  page=0,
+  type=currentType
+){
+
+  q=q.trim();
+
+  if(!q)return;
+
+  currentQ=q;
+  currentPage=
+    Math.max(0,Number(page)||0);
+
+  currentType=type;
+
+  document.title=
+    `${q} - FlibidooSearch`;
+
+  input.value=q;
+  resultsInput.value=q;
+
+  home.classList.add('hidden');
+  results.classList.remove('hidden');
+
+  list.innerHTML=
+    '<div class="empty">Searching…</div>';
+
+  count.textContent='';
+
+  label.textContent=
+    `Results for “${q}”`;
+
+  pager.innerHTML='';
+
+
   try{
-    const r=await fetch(`${API_BASE}/api`,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({query:q,type:type==='map'?'web':type,page:currentPage})});
-    const d=await r.json();if(!r.ok)throw new Error(d.error||'Search failed');d.type=type;render(d);
-  }catch(e){list.innerHTML=`<div class="error">${esc(e.message||'Search failed. Please try again.')}</div>`}
+
+    const r=
+      await fetch(
+        `${API_BASE}/api`,
+        {
+          method:'POST',
+          headers:{
+            'Content-Type':
+              'application/json'
+          },
+          body:JSON.stringify({
+            query:q,
+            type:
+              type==='map'
+                ? 'web'
+                : type,
+            page:currentPage
+          })
+        }
+      );
+
+
+    const d=
+      await r.json();
+
+    if(!r.ok){
+
+      throw new Error(
+        d.error ||
+        'Search failed'
+      );
+
+    }
+
+    d.type=type;
+
+    render(d);
+
+  }catch(e){
+
+    list.innerHTML=`
+
+      <div class="error">
+
+        ${esc(
+          e.message ||
+          'Search failed. Please try again.'
+        )}
+
+      </div>
+
+    `;
+
+  }
+
 }
 
-form.addEventListener('submit',e=>{e.preventDefault();const q=input.value.trim();if(q)location.href=`/?q=${encodeURIComponent(q)}&type=web&page=0`});
-resultsForm.addEventListener('submit',e=>{e.preventDefault();const q=resultsInput.value.trim();if(q)search(q,0,currentType)});
-document.querySelectorAll('.search-type').forEach(btn=>btn.addEventListener('click',()=>search(resultsInput.value||currentQ,0,btn.dataset.type)));
 
-const aboutOverlay=document.querySelector('#aboutOverlay');
-document.querySelector('#aboutButton').onclick=()=>aboutOverlay.classList.remove('hidden');
-document.querySelector('#aboutClose').onclick=()=>aboutOverlay.classList.add('hidden');
-aboutOverlay.addEventListener('click',e=>{if(e.target===aboutOverlay)aboutOverlay.classList.add('hidden')});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')aboutOverlay.classList.add('hidden')});
+/*
+  Home search.
+*/
 
-const params=new URLSearchParams(location.search),initialQuery=params.get('q');
-if(initialQuery)search(initialQuery,Number(params.get('page')||0),['web','images','news','map'].includes(params.get('type'))?params.get('type'):'web');
+form.addEventListener(
+  'submit',
+  e=>{
+
+    e.preventDefault();
+
+    const q=
+      input.value.trim();
+
+    if(q){
+
+      location.href=
+        `/?q=${encodeURIComponent(q)}&type=web&page=0`;
+
+    }
+
+  }
+);
+
+
+/*
+  Results search.
+*/
+
+resultsForm.addEventListener(
+  'submit',
+  e=>{
+
+    e.preventDefault();
+
+    const q=
+      resultsInput.value.trim();
+
+    if(q){
+
+      search(
+        q,
+        0,
+        currentType
+      );
+
+    }
+
+  }
+);
+
+
+/*
+  Search type buttons.
+*/
+
+document
+  .querySelectorAll('.search-type')
+  .forEach(btn=>{
+
+    btn.addEventListener(
+      'click',
+      ()=>{
+
+        search(
+          resultsInput.value ||
+          currentQ,
+          0,
+          btn.dataset.type
+        );
+
+      }
+    );
+
+  });
+
+
+/*
+  About modal.
+*/
+
+const aboutOverlay=
+  document.querySelector(
+    '#aboutOverlay'
+  );
+
+document
+  .querySelector('#aboutButton')
+  .onclick=()=>
+    aboutOverlay.classList.remove(
+      'hidden'
+    );
+
+document
+  .querySelector('#aboutClose')
+  .onclick=()=>
+    aboutOverlay.classList.add(
+      'hidden'
+    );
+
+aboutOverlay.addEventListener(
+  'click',
+  e=>{
+
+    if(e.target===aboutOverlay){
+
+      aboutOverlay.classList.add(
+        'hidden'
+      );
+
+    }
+
+  }
+);
+
+
+document.addEventListener(
+  'keydown',
+  e=>{
+
+    if(e.key==='Escape'){
+
+      aboutOverlay.classList.add(
+        'hidden'
+      );
+
+    }
+
+  }
+);
+
+
+/*
+  Initial URL search.
+*/
+
+const params=
+  new URLSearchParams(
+    location.search
+  );
+
+const initialQuery=
+  params.get('q');
+
+
+if(initialQuery){
+
+  search(
+    initialQuery,
+    Number(params.get('page')||0),
+    [
+      'web',
+      'images',
+      'news',
+      'map'
+    ].includes(params.get('type'))
+      ? params.get('type')
+      : 'web'
+  );
+
+}
+
 </script>
+
 </body>
 </html>
