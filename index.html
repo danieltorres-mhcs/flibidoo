@@ -2,130 +2,78 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#1d0c22">
-<meta name="color-scheme" content="dark">
 <link rel="icon" href="https://github.com/danieltorres-mhcs/assets/blob/main/flibidoo.PNG?raw=true">
 <title>FlibidooSearch</title>
 
 <style>
 :root{
-  --bg:#1d0c22;
-  --text:#f5eef7;
-  --muted:#b9aabb;
-  --line:#5a4560;
-  --line2:#39283d;
-  --result:#e7dce9;
-  --url:#b8a2bc;
-  --focus:#cdb8d1;
-  --translator-text:#f5eef7;
-  --translator-muted:#a995ad;
+  --bg:#1d0c22;--text:#f5eef7;--muted:#b9aabb;--line:#5a4560;
+  --line2:#39283d;--result:#e7dce9;--url:#b8a2bc;--focus:#cdb8d1;
 }
-
-*{
-  box-sizing:border-box;
-}
-
-html,
-body{
-  margin:0;
-  width:100%;
-  min-height:100%;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
-}
-
-body{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  overflow-x:hidden;
-}
-
-button,
-input,
-textarea,
-select{
-  font:inherit;
-}
-
-button{
-  -webkit-tap-highlight-color:transparent;
-}
-
-a{
-  color:inherit;
-}
-
-/* =========================================================
-   GLOBAL
-   ========================================================= */
-
-.shell{
-  width:min(100% - 32px,1120px);
-  margin:0 auto;
-}
-
-/* =========================================================
-   HOME
-   ========================================================= */
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;min-height:100%;background:var(--bg);color:var(--text);
+font-family:Arial,Helvetica,sans-serif}
+body{min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+a{color:inherit}
+.shell{width:min(100% - 40px,1120px);margin:0 auto;padding-left:12px;padding-right:12px}
 
 #home.home{
   width:100%;
-  min-height:100svh;
+  height:100vh;
+  min-height:100vh;
   margin:0;
-  padding:
-    max(24px,env(safe-area-inset-top))
-    max(16px,env(safe-area-inset-right))
-    max(24px,env(safe-area-inset-bottom))
-    max(16px,env(safe-area-inset-left));
+  padding:24px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  overflow:hidden;
-}
-
-.search-wrap{
-  width:min(100%,680px);
+  overflow:hidden
 }
 
 .hero-logo{
   width:min(210px,55vw);
-  max-width:210px;
   height:auto;
   display:block;
-  margin:0 auto 14px;
-  object-fit:contain;
+  margin:0 0 12px;
+  object-fit:contain
 }
 
 h1{
   font-size:clamp(34px,5vw,54px);
   line-height:1;
   margin:0 0 30px;
-  text-align:center;
   letter-spacing:-.055em;
-  font-weight:500;
+  font-weight:500
 }
 
-.search-wrap form{
+.search-wrap{width:min(100%,680px)}
+
+form{
   display:flex;
   align-items:center;
-  width:100%;
   height:54px;
   border:1px solid var(--line);
   border-radius:28px;
   background:transparent;
-  transition:
-    border-color .15s ease,
-    box-shadow .15s ease;
+  transition:border-color .15s ease,box-shadow .15s ease
 }
 
-.search-wrap form:focus-within{
+form:focus-within{
   border-color:var(--focus);
-  box-shadow:0 0 0 2px rgba(205,184,209,.08);
+  box-shadow:0 0 0 2px rgba(205,184,209,.08)
 }
+
+.search-icon{
+  width:20px;
+  height:20px;
+  margin-left:18px;
+  flex:0 0 auto;
+  opacity:.75
+}
+
+.search-icon circle,.search-icon path{stroke:currentColor}
 
 input{
   min-width:0;
@@ -135,12 +83,10 @@ input{
   background:transparent;
   color:var(--text);
   font-size:16px;
-  padding:0 16px;
+  padding:0 14px
 }
 
-input::placeholder{
-  color:#9e8da1;
-}
+input::placeholder{color:#9e8da1}
 
 .submit{
   height:38px;
@@ -153,21 +99,20 @@ input::placeholder{
   padding:0;
   display:grid;
   place-items:center;
-  cursor:pointer;
-  flex:0 0 auto;
+  cursor:pointer
 }
 
 .submit.has-input{
   color:var(--text);
-  border-color:var(--focus);
+  border-color:var(--focus)
 }
 
-.submit:hover{
-  border-color:var(--focus);
-}
+.submit:hover{border-color:var(--focus)}
 
-.submit:active{
-  transform:scale(.96);
+.submit-icon{
+  width:18px;
+  height:18px;
+  display:block
 }
 
 .links{
@@ -178,7 +123,7 @@ input::placeholder{
   gap:18px;
   margin-top:20px;
   color:var(--muted);
-  font-size:13px;
+  font-size:13px
 }
 
 .links button{
@@ -186,12 +131,10 @@ input::placeholder{
   background:none;
   color:inherit;
   cursor:pointer;
-  padding:0;
+  padding:0
 }
 
-.links button:hover{
-  color:var(--text);
-}
+.links button:hover{color:var(--text)}
 
 .confederacy-credit{
   display:inline-flex;
@@ -201,24 +144,22 @@ input::placeholder{
   color:var(--muted);
   font-size:12px;
   line-height:1.4;
-  text-align:center;
+  text-align:center
 }
 
-/* =========================================================
-   MAIN / RESULTS
-   ========================================================= */
-
-main{
-  flex:1;
+.confederacy-credit img{
+  width:18px;
+  height:18px;
+  display:block;
+  object-fit:contain;
+  flex:0 0 18px;
+  border-radius:4px
 }
+
+main{flex:1}
 
 .results{
-  width:min(100% - 32px,1120px);
-  margin:0 auto;
-  padding:
-    max(24px,env(safe-area-inset-top))
-    0
-    max(70px,env(safe-area-inset-bottom));
+  padding:30px 12px 70px
 }
 
 .results-head{
@@ -228,7 +169,7 @@ main{
   min-height:44px;
   border-bottom:1px solid var(--line2);
   padding-bottom:14px;
-  margin-bottom:14px;
+  margin-bottom:14px
 }
 
 .results-brand{
@@ -237,20 +178,20 @@ main{
   gap:8px;
   text-decoration:none;
   color:inherit;
-  white-space:nowrap;
+  white-space:nowrap
 }
 
 .results-brand img{
   width:28px;
   height:28px;
   object-fit:contain;
-  display:block;
+  display:block
 }
 
 .results-brand span{
   font-size:15px;
   font-weight:600;
-  letter-spacing:-.01em;
+  letter-spacing:-.01em
 }
 
 .results-query{
@@ -259,37 +200,27 @@ main{
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
-  flex:1;
+  flex:1
 }
 
 .count{
   font-size:13px;
   color:var(--muted);
-  white-space:nowrap;
+  white-space:nowrap
 }
 
 .results-search{
   width:min(100%,680px);
-  margin:0 0 28px;
+  margin:0 0 28px
 }
 
-.results-search form{
-  display:flex;
-  align-items:center;
-  height:48px;
-  border:1px solid var(--line);
-  border-radius:24px;
-}
-
-.results-search form:focus-within{
-  border-color:var(--focus);
-  box-shadow:0 0 0 2px rgba(205,184,209,.08);
-}
+.results-search form{height:48px}
+.results-search .search-icon{margin-left:16px}
 
 .results-search .submit{
   width:34px;
   height:34px;
-  margin-right:6px;
+  margin-right:6px
 }
 
 .search-types{
@@ -298,13 +229,7 @@ main{
   gap:0;
   margin:8px 0 18px;
   border-bottom:1px solid rgba(255,255,255,.12);
-  height:36px;
-  overflow-x:auto;
-  scrollbar-width:none;
-}
-
-.search-types::-webkit-scrollbar{
-  display:none;
+  height:36px
 }
 
 .search-type{
@@ -319,14 +244,12 @@ main{
   padding:0 12px 10px;
   margin:0;
   border-radius:0;
-  cursor:pointer;
-  white-space:nowrap;
+  cursor:pointer
 }
 
-.search-type:hover,
-.search-type.active{
+.search-type:hover,.search-type.active{
   color:#fff;
-  background:transparent;
+  background:transparent
 }
 
 .search-type.active::after{
@@ -337,24 +260,20 @@ main{
   bottom:-1px;
   height:2px;
   border-radius:2px 2px 0 0;
-  background:currentColor;
+  background:currentColor
 }
-
-/* =========================================================
-   RESULTS LAYOUT
-   ========================================================= */
 
 .results-layout{
   display:grid;
   grid-template-columns:minmax(0,1fr) 330px;
   gap:42px;
-  align-items:start;
+  align-items:start
 }
 
 .result{
   padding:0 0 26px;
   margin-bottom:26px;
-  border-bottom:1px solid var(--line2);
+  border-bottom:1px solid var(--line2)
 }
 
 .result-url{
@@ -363,7 +282,7 @@ main{
   margin-bottom:6px;
   overflow:hidden;
   text-overflow:ellipsis;
-  white-space:nowrap;
+  white-space:nowrap
 }
 
 .result h2{
@@ -371,49 +290,52 @@ main{
   line-height:1.25;
   margin:0 0 7px;
   font-weight:500;
-  letter-spacing:-.02em;
+  letter-spacing:-.02em
 }
 
-.result h2 a{
-  text-decoration:none;
-}
-
-.result h2 a:hover{
-  text-decoration:underline;
-}
+.result h2 a{text-decoration:none}
+.result h2 a:hover{text-decoration:underline}
 
 .snippet{
   font-size:14px;
   line-height:1.6;
   color:var(--result);
   margin:0;
-  max-width:760px;
+  max-width:760px
 }
 
 .result-meta{
   font-size:12px;
   color:var(--muted);
-  margin-top:7px;
+  margin-top:7px
 }
 
-/* =========================================================
-   IMAGE RESULTS
-   ========================================================= */
+.result-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:8px
+}
+
+.result-tag{
+  color:var(--muted);
+  font-size:11px
+}
 
 .image-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:28px 22px;
+  gap:28px 22px
 }
 
 .image-result{
   min-width:0;
-  position:relative;
+  position:relative
 }
 
 .image-result a{
   display:block;
-  text-decoration:none;
+  text-decoration:none
 }
 
 .image-result img{
@@ -422,7 +344,7 @@ main{
   aspect-ratio:4/3;
   object-fit:cover;
   border:1px solid var(--line2);
-  background:rgba(255,255,255,.02);
+  background:rgba(255,255,255,.02)
 }
 
 .image-result-title{
@@ -431,7 +353,7 @@ main{
   margin-top:9px;
   white-space:nowrap;
   overflow:hidden;
-  text-overflow:ellipsis;
+  text-overflow:ellipsis
 }
 
 .image-result-source{
@@ -440,12 +362,8 @@ main{
   margin-top:4px;
   white-space:nowrap;
   overflow:hidden;
-  text-overflow:ellipsis;
+  text-overflow:ellipsis
 }
-
-/* =========================================================
-   DICTIONARY
-   ========================================================= */
 
 .dictionary{
   border-left:1px solid var(--line2);
@@ -453,84 +371,79 @@ main{
   max-height:70vh;
   overflow-y:auto;
   overscroll-behavior:contain;
-  scrollbar-width:thin;
+  scrollbar-width:thin
 }
 
 .dictionary-title{
   font-size:22px;
   font-weight:500;
   letter-spacing:-.02em;
-  margin:0 0 5px;
+  margin:0 0 5px
 }
 
 .dictionary-word{
   font-size:13px;
   color:var(--muted);
-  margin-bottom:22px;
+  margin-bottom:22px
 }
 
 .dictionary-entry{
   padding:0 0 24px;
   margin-bottom:24px;
-  border-bottom:1px solid var(--line2);
+  border-bottom:1px solid var(--line2)
 }
 
 .dictionary-language,
 .dictionary-label{
   font-size:12px;
-  color:var(--muted);
+  color:var(--muted)
 }
 
-.dictionary-language{
-  margin-bottom:8px;
-}
+.dictionary-language{margin-bottom:8px}
 
 .dictionary-pos{
   font-size:15px;
-  margin-bottom:12px;
+  margin-bottom:12px
 }
 
 .dictionary-senses,
 .dictionary-relations,
 .dictionary-translations{
-  margin-top:14px;
+  margin-top:14px
 }
 
 .dictionary-label{
   text-transform:uppercase;
   letter-spacing:.05em;
-  margin-bottom:7px;
+  margin-bottom:7px
 }
 
 .dictionary-list{
   margin:0;
-  padding-left:18px;
+  padding-left:18px
 }
 
-.dictionary-list li{
-  margin:0 0 7px;
-}
+.dictionary-list li{margin:0 0 7px}
 
-.dictionary-sense{
-  margin:0 0 15px;
-}
+.dictionary-sense{margin:0 0 15px}
 
 .dictionary-definition{
   font-size:14px;
-  line-height:1.55;
+  line-height:1.55
 }
 
 .dictionary-tags{
   font-size:12px;
   color:var(--muted);
-  margin-left:5px;
+  margin-left:5px
 }
 
-.dictionary-example{
+.dictionary-example,
+.dictionary-quote{
   font-size:13px;
   line-height:1.5;
   color:var(--result);
-  margin:7px 0 0 14px;
+  margin:7px 0 0 14px
 }
 
 .dictionary-source,
@@ -538,187 +451,50 @@ main{
 .dictionary-empty{
   font-size:12px;
   line-height:1.5;
-  color:var(--muted);
+  color:var(--muted)
 }
 
-/* =========================================================
-   TRANSLATOR
-   NO CARD / NO ROUNDED CONTAINER
-   ========================================================= */
-
-.translator{
-  display:none;
-  margin:0 0 32px;
-  padding:0 0 26px;
-  border-bottom:1px solid var(--line2);
+.wotd-panel{
+  padding:0 0 22px;
+  margin:0 0 22px;
+  border-bottom:1px solid var(--line2)
 }
 
-.translator.visible{
-  display:block;
-}
-
-.translator-top{
+.wotd-heading{
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin-bottom:14px;
-}
-
-.translator-title{
-  font-size:14px;
-  font-weight:600;
-  margin:0;
-}
-
-.translator-languages{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr);
-  align-items:center;
-  gap:10px;
-  margin-bottom:12px;
-}
-
-.translator-language{
-  min-width:0;
-}
-
-.translator-language select{
-  width:100%;
-  height:40px;
-  border:0;
-  border-bottom:1px solid var(--line);
-  border-radius:0;
-  outline:0;
-  background:transparent;
-  color:var(--text);
-  padding:0 4px;
-  cursor:pointer;
-}
-
-.translator-language select:focus{
-  border-color:var(--focus);
-}
-
-.translator-language select option{
-  background:#24132a;
-  color:var(--text);
-}
-
-.translate-swap{
-  width:36px;
-  height:36px;
-  border:0;
-  border-radius:0;
-  background:transparent;
-  color:var(--muted);
-  cursor:pointer;
-  display:grid;
-  place-items:center;
-  font-size:18px;
-}
-
-.translate-swap:hover{
-  color:var(--text);
-}
-
-.translator-fields{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:20px;
-}
-
-.translator-field{
-  min-width:0;
-}
-
-.translator-field textarea{
-  width:100%;
-  min-height:130px;
-  max-height:260px;
-  resize:vertical;
-  border:1px solid var(--line);
-  border-radius:0;
-  outline:0;
-  background:transparent;
-  color:var(--translator-text);
-  padding:12px;
-  font-size:14px;
-  line-height:1.55;
-}
-
-.translator-field textarea:focus{
-  border-color:var(--focus);
-}
-
-.translator-field textarea::placeholder{
-  color:var(--translator-muted);
-}
-
-.translator-field textarea[readonly]{
-  color:#ddd1df;
-}
-
-.translator-field-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
   gap:8px;
-  margin-bottom:7px;
+  margin:0 0 8px;
+  color:#ffb52e;
+  font-size:13px;
+  font-weight:600
 }
 
-.translator-field-label{
+.wotd-word{
+  color:#ffe18a;
+  font-size:20px;
+  font-weight:600;
+  line-height:1.25;
+  margin:0 0 5px
+}
+
+.wotd-definition{
+  color:#ffe9a8;
+  font-size:13px;
+  line-height:1.55;
+  margin:0
+}
+
+.wotd-status{
   color:var(--muted);
-  font-size:12px;
+  font-size:13px;
+  line-height:1.5
 }
-
-.translator-count{
-  color:var(--muted);
-  font-size:11px;
-}
-
-.translator-actions{
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  gap:12px;
-  margin-top:12px;
-}
-
-.translator-status{
-  flex:1;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.4;
-}
-
-.translate-button{
-  height:38px;
-  padding:0 16px;
-  border:1px solid var(--line);
-  border-radius:0;
-  background:transparent;
-  color:var(--text);
-  cursor:pointer;
-}
-
-.translate-button:hover{
-  border-color:var(--focus);
-}
-
-.translate-button:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-}
-
-/* =========================================================
-   EMPTY / ERROR / PAGER
-   ========================================================= */
 
 .empty{
   padding:70px 0;
   color:var(--muted);
-  text-align:center;
+  text-align:center
 }
 
 .error{
@@ -733,31 +509,194 @@ main{
   border:1px solid var(--line2);
   color:var(--muted);
   font-size:14px;
-  line-height:1.5;
+  line-height:1.5
 }
 
 .pager{
   display:flex;
   gap:8px;
-  padding-top:10px;
+  padding-top:10px
 }
 
 .pager button{
   border:1px solid var(--line);
   background:transparent;
   color:var(--text);
-  border-radius:0;
+  border-radius:4px;
   padding:8px 12px;
+  cursor:pointer
+}
+
+.hidden{display:none!important}
+
+/* Translator */
+
+.translator-panel{
+  width:min(100%,680px);
+  margin:0 0 28px;
+  padding:0 0 24px;
+  border-bottom:1px solid var(--line2)
+}
+
+.translator-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:12px
+}
+
+.translator-title{
+  font-size:15px;
+  font-weight:500;
+  margin:0
+}
+
+.translator-languages{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 38px minmax(0,1fr);
+  align-items:center;
+  gap:8px;
+  margin-bottom:10px
+}
+
+.translator-language{
+  min-width:0;
+  height:38px;
+  border:1px solid var(--line);
+  border-radius:4px;
+  background:transparent;
+  color:var(--text);
+  padding:0 10px;
+  outline:0;
+  font:inherit;
+  font-size:13px
+}
+
+.translator-language:focus{
+  border-color:var(--focus)
+}
+
+.translator-swap{
+  width:34px;
+  height:34px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:transparent;
+  color:var(--muted);
+  display:grid;
+  place-items:center;
   cursor:pointer;
+  padding:0
 }
 
-.hidden{
-  display:none!important;
+.translator-swap:hover{
+  color:var(--text);
+  border-color:var(--focus)
 }
 
-/* =========================================================
-   ABOUT
-   ========================================================= */
+.translator-fields{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:12px
+}
+
+.translator-field{
+  min-width:0
+}
+
+.translator-field textarea{
+  width:100%;
+  min-height:150px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:4px;
+  background:transparent;
+  color:var(--text);
+  padding:12px;
+  outline:0;
+  font:inherit;
+  font-size:14px;
+  line-height:1.55
+}
+
+.translator-field textarea:focus{
+  border-color:var(--focus)
+}
+
+.translator-field textarea::placeholder{
+  color:#9e8da1
+}
+
+.translator-output{
+  white-space:pre-wrap;
+  overflow-wrap:anywhere
+}
+
+.translator-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:8px
+}
+
+.translator-counter{
+  font-size:11px;
+  color:var(--muted)
+}
+
+.translator-button{
+  height:36px;
+  border:1px solid var(--line);
+  border-radius:4px;
+  background:transparent;
+  color:var(--text);
+  padding:0 15px;
+  cursor:pointer
+}
+
+.translator-button:hover{
+  border-color:var(--focus)
+}
+
+.translator-status{
+  font-size:12px;
+  color:var(--muted);
+  min-height:18px;
+  margin-top:7px
+}
+
+.translator-language-list{
+  position:absolute;
+  z-index:20;
+  width:min(320px,90vw);
+  max-height:260px;
+  overflow-y:auto;
+  margin-top:4px;
+  border:1px solid var(--line);
+  background:var(--bg);
+  padding:6px 0
+}
+
+.translator-language-option{
+  display:block;
+  width:100%;
+  border:0;
+  background:transparent;
+  color:var(--text);
+  text-align:left;
+  padding:8px 10px;
+  cursor:pointer;
+  font:inherit;
+  font-size:13px
+}
+
+.translator-language-option:hover{
+  background:rgba(255,255,255,.06)
+}
+
+/* About */
 
 .about-overlay{
   position:fixed;
@@ -766,12 +705,10 @@ main{
   display:grid;
   place-items:center;
   padding:24px;
-  z-index:10000;
+  z-index:10000
 }
 
-.about-overlay.hidden{
-  display:none;
-}
+.about-overlay.hidden{display:none}
 
 .about-card{
   position:relative;
@@ -782,7 +719,7 @@ main{
   border:1px solid var(--line);
   border-radius:14px;
   box-shadow:0 20px 60px rgba(0,0,0,.45);
-  padding:30px;
+  padding:30px
 }
 
 .about-close{
@@ -797,341 +734,210 @@ main{
   color:var(--muted);
   font-size:24px;
   line-height:1;
-  cursor:pointer;
+  cursor:pointer
 }
 
 .about-close:hover{
   background:rgba(255,255,255,.08);
-  color:var(--text);
+  color:var(--text)
 }
 
 .about-card h2{
   margin:0 38px 16px 0;
   font-size:25px;
-  font-weight:500;
+  font-weight:500
 }
 
 .about-card p{
   color:var(--result);
   line-height:1.7;
-  font-size:14px;
+  font-size:14px
 }
 
-.about-card a{
-  color:var(--text);
-}
-
-/* =========================================================
-   TABLET
-   ========================================================= */
+.about-card a{color:var(--text)}
 
 @media(max-width:860px){
 
   .results-layout{
-    grid-template-columns:1fr;
-    gap:0;
+    grid-template-columns:1fr
   }
 
-  /*
-    Dictionary is deliberately first on smaller screens.
-  */
+  /* Mobile/tablet: dictionary appears first */
   .dictionary{
     order:-1;
     border-left:0;
     border-bottom:1px solid var(--line2);
     border-top:0;
     padding:0 0 26px;
-    margin:0 0 26px;
-    max-height:none;
+    margin-bottom:26px;
+    max-height:none
   }
 
-  .translator-fields{
-    grid-template-columns:1fr;
-  }
-
-  .translator-languages{
-    grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr);
+  .translator-panel{
+    width:100%
   }
 }
-
-/* =========================================================
-   SMALL TABLET
-   ========================================================= */
 
 @media(max-width:760px){
 
   .image-grid{
     grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:22px 14px;
-  }
-
-  .results{
-    width:min(100% - 28px,1120px);
-  }
-
-  .results-head{
-    gap:12px;
-  }
-
-  .results-query{
-    min-width:0;
+    gap:22px 14px
   }
 }
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
 
 @media(max-width:640px){
 
   .shell{
     width:100%;
     padding-left:16px;
-    padding-right:16px;
+    padding-right:16px
   }
 
   #home.home{
-    padding:
-      max(20px,env(safe-area-inset-top))
-      max(16px,env(safe-area-inset-right))
-      max(20px,env(safe-area-inset-bottom))
-      max(16px,env(safe-area-inset-left));
+    padding:20px 16px
   }
 
-  .hero-logo{
-    width:150px;
-    max-width:45vw;
-    margin-bottom:12px;
-  }
+  .hero-logo{width:150px}
 
   h1{
     font-size:36px;
-    margin-bottom:24px;
+    margin-bottom:24px
   }
 
-  .search-wrap form{
-    height:50px;
-  }
+  form{height:50px}
 
   .results{
-    width:100%;
-    padding:
-      max(18px,env(safe-area-inset-top))
-      max(16px,env(safe-area-inset-right))
-      max(60px,env(safe-area-inset-bottom))
-      max(16px,env(safe-area-inset-left));
+    padding:22px 16px 60px
   }
 
   .results-head{
-    min-width:0;
+    gap:12px
   }
 
   .results-brand img{
     width:24px;
-    height:24px;
+    height:24px
   }
 
   .results-brand span{
-    font-size:14px;
+    font-size:14px
   }
 
   .results-query{
-    font-size:13px;
-  }
-
-  .count{
-    display:none;
-  }
-
-  .results-search{
-    margin-bottom:20px;
+    font-size:13px
   }
 
   .search-types{
-    margin-top:8px;
-    margin-bottom:16px;
+    overflow-x:auto;
+    scrollbar-width:none
   }
 
   .search-type{
     padding-left:10px;
     padding-right:10px;
-    font-size:12px;
+    font-size:12px
   }
 
-  .result{
-    padding-bottom:22px;
-    margin-bottom:22px;
+  .translator-languages{
+    grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr);
+    gap:5px
   }
 
-  .result h2{
-    font-size:18px;
+  .translator-fields{
+    grid-template-columns:1fr
   }
 
-  .snippet{
-    font-size:14px;
+  .translator-field textarea{
+    min-height:120px
   }
 
-  .image-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:20px 12px;
+  .about-overlay{
+    padding:16px
   }
 
-  .translator{
-    margin-bottom:24px;
+  .about-card{
+    padding:26px 22px
+  }
+}
+
+@media(max-width:520px){
+
+  .shell{
+    padding-left:18px;
+    padding-right:18px
+  }
+
+  #home.home{
+    padding-left:18px;
+    padding-right:18px
+  }
+
+  .results{
+    padding-left:18px;
+    padding-right:18px
+  }
+
+  .translator-panel{
+    width:100%
   }
 
   .translator-languages{
     grid-template-columns:1fr;
-    gap:8px;
+    gap:7px
   }
 
-  .translate-swap{
+  .translator-swap{
     justify-self:center;
-    transform:rotate(90deg);
-  }
-
-  .translator-fields{
-    gap:14px;
-  }
-
-  .translator-field textarea{
-    min-height:120px;
-  }
-
-  .translator-actions{
-    align-items:flex-start;
-  }
-
-  .translator-status{
-    font-size:11px;
-  }
-
-  .translate-button{
-    flex:0 0 auto;
-  }
-
-  .about-overlay{
-    padding:16px;
-  }
-
-  .about-card{
-    padding:26px 22px;
+    transform:rotate(90deg)
   }
 }
 
-/* =========================================================
-   VERY SMALL PHONES
-   ========================================================= */
-
 @media(max-width:460px){
+
+  .image-grid{
+    grid-template-columns:1fr
+  }
+}
+
+@media(max-width:380px){
+
+  .shell{
+    padding-left:14px;
+    padding-right:14px
+  }
 
   #home.home{
     padding-left:14px;
-    padding-right:14px;
+    padding-right:14px
   }
 
   .results{
     padding-left:14px;
-    padding-right:14px;
-  }
-
-  .hero-logo{
-    width:130px;
-  }
-
-  h1{
-    font-size:32px;
-  }
-
-  .image-grid{
-    grid-template-columns:1fr;
-  }
-
-  .translator-top{
-    align-items:flex-start;
-  }
-
-  .translator-actions{
-    flex-direction:column;
-  }
-
-  .translator-status{
-    width:100%;
-  }
-
-  .translate-button{
-    width:100%;
-  }
-}
-
-/* =========================================================
-   LANDSCAPE PHONE
-   ========================================================= */
-
-@media(max-height:520px) and (orientation:landscape){
-
-  #home.home{
-    justify-content:flex-start;
-    padding-top:28px;
-    padding-bottom:28px;
-    overflow:auto;
-  }
-
-  .hero-logo{
-    width:90px;
-    margin-bottom:8px;
-  }
-
-  h1{
-    font-size:30px;
-    margin-bottom:18px;
+    padding-right:14px
   }
 
   .links{
-    margin-top:14px;
-  }
-}
-
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
-
-@media(prefers-reduced-motion:reduce){
-
-  *,
-  *::before,
-  *::after{
-    scroll-behavior:auto!important;
-    transition:none!important;
-    animation:none!important;
+    gap:14px
   }
 }
 </style>
 </head>
 
 <body>
-
 <main>
-
-<!-- =======================================================
-     HOME
-     ======================================================= -->
 
 <section id="home" class="home shell">
 
   <div class="search-wrap">
 
-    <!-- RESTORED FLIBIDOO LOGO -->
     <img
       class="hero-logo"
       src="https://github.com/danieltorres-mhcs/assets/blob/main/flibidoo.PNG?raw=true"
       alt="Flibidoo"
-      decoding="async"
     >
 
-    <h1>
-      <em><strong>Flibidoo</strong></em>Search
-    </h1>
+    <h1><em><strong>Flibidoo</strong></em>Search</h1>
 
     <form id="searchForm" role="search">
 
@@ -1161,7 +967,16 @@ main{
       >About</button>
 
       <span class="confederacy-credit">
-        with love from The Great Confederacy of E
+
+        <img
+          src="https://github.com/danieltorres-mhcs/assets/blob/main/confederacy.png?raw=true"
+          alt=""
+        >
+
+        <span>
+          with love from The Great Confederacy of E
+        </span>
+
       </span>
 
     </div>
@@ -1170,10 +985,6 @@ main{
 
 </section>
 
-
-<!-- =======================================================
-     RESULTS
-     ======================================================= -->
 
 <section id="results" class="results shell hidden">
 
@@ -1185,11 +996,9 @@ main{
       aria-label="FlibidooSearch home"
     >
 
-      <!-- RESTORED LOGO HERE TOO -->
       <img
         src="https://github.com/danieltorres-mhcs/assets/blob/main/flibidoo.PNG?raw=true"
         alt="Flibidoo"
-        decoding="async"
       >
 
       <span>
@@ -1210,10 +1019,6 @@ main{
 
   </div>
 
-
-  <!-- =====================================================
-       RESULTS SEARCH
-       ===================================================== -->
 
   <div class="results-search">
 
@@ -1243,11 +1048,6 @@ main{
   </div>
 
 
-  <!-- =====================================================
-       SEARCH TYPES
-       MAP REMOVED
-       ===================================================== -->
-
   <nav
     class="search-types"
     aria-label="Search type"
@@ -1274,20 +1074,15 @@ main{
   </nav>
 
 
-  <!-- =====================================================
-       TRANSLATOR
-       ===================================================== -->
-
-  <section
+  <div
     id="translator"
-    class="translator"
-    aria-label="Translator"
+    class="translator-panel hidden"
   >
 
-    <div class="translator-top">
+    <div class="translator-heading">
 
       <h2 class="translator-title">
-        Translate
+        Translator
       </h2>
 
     </div>
@@ -1295,31 +1090,47 @@ main{
 
     <div class="translator-languages">
 
-      <div class="translator-language">
+      <div style="position:relative">
 
-        <select
+        <input
           id="translateFrom"
-          aria-label="Translate from"
-        ></select>
+          class="translator-language"
+          value="Auto Detect"
+          autocomplete="off"
+          aria-label="Input language"
+        >
+
+        <div
+          id="translateFromList"
+          class="translator-language-list hidden"
+        ></div>
 
       </div>
 
 
       <button
         id="translateSwap"
-        class="translate-swap"
+        class="translator-swap"
         type="button"
-        aria-label="Swap languages"
-        title="Swap languages"
-      >↕</button>
+        aria-label="Switch languages"
+        title="Switch languages"
+      >↔</button>
 
 
-      <div class="translator-language">
+      <div style="position:relative">
 
-        <select
+        <input
           id="translateTo"
-          aria-label="Translate to"
-        ></select>
+          class="translator-language"
+          value="English"
+          autocomplete="off"
+          aria-label="Output language"
+        >
+
+        <div
+          id="translateToList"
+          class="translator-language-list hidden"
+        ></div>
 
       </div>
 
@@ -1330,73 +1141,51 @@ main{
 
       <div class="translator-field">
 
-        <div class="translator-field-head">
-
-          <span class="translator-field-label">
-            Input
-          </span>
-
-          <span
-            id="translateCount"
-            class="translator-count"
-          >0 / 2000</span>
-
-        </div>
-
         <textarea
           id="translateInput"
           maxlength="2000"
+          rows="7"
           placeholder="Enter text to translate…"
-          spellcheck="true"
         ></textarea>
+
+        <div class="translator-bottom">
+
+          <div class="translator-counter">
+            <span id="translateCount">0</span>/2000
+          </div>
+
+          <button
+            id="translateButton"
+            class="translator-button"
+            type="button"
+          >Translate</button>
+
+        </div>
 
       </div>
 
 
       <div class="translator-field">
 
-        <div class="translator-field-head">
-
-          <span class="translator-field-label">
-            Translation
-          </span>
-
-        </div>
-
         <textarea
           id="translateOutput"
+          class="translator-output"
+          rows="7"
           readonly
-          placeholder="Translation will appear here…"
+          placeholder="Translation"
         ></textarea>
+
+        <div
+          id="translatorStatus"
+          class="translator-status"
+        ></div>
 
       </div>
 
     </div>
 
+  </div>
 
-    <div class="translator-actions">
-
-      <div
-        id="translateStatus"
-        class="translator-status"
-      ></div>
-
-      <button
-        id="translateButton"
-        class="translate-button"
-        type="button"
-      >
-        Translate
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- =====================================================
-       RESULTS LAYOUT
-       ===================================================== -->
 
   <div class="results-layout">
 
@@ -1411,11 +1200,9 @@ main{
 
     </div>
 
-
-    <!-- DICTIONARY IS ALWAYS AVAILABLE -->
     <aside
       id="dictionary"
-      class="dictionary"
+      class="dictionary hidden"
       aria-label="Dictionary results"
     ></aside>
 
@@ -1425,10 +1212,6 @@ main{
 
 </main>
 
-
-<!-- =======================================================
-     ABOUT
-     ======================================================= -->
 
 <div
   id="aboutOverlay"
@@ -1447,17 +1230,15 @@ main{
       aria-label="Close About"
     >×</button>
 
-    <h2 id="aboutTitle">
-      About
-    </h2>
+    <!-- EDIT THIS CARD CONTENT -->
+
+    <h2 id="aboutTitle">About</h2>
+
+    <p>Welcome to FlibidooSearch.</p>
 
     <p>
-      Welcome to FlibidooSearch.
-    </p>
-
-    <p>
-      A simple, privacy-minded search interface with web,
-      image, news, dictionary, bangs, and translation tools.
+      You can edit this text directly in the HTML inside the
+      <strong>about-card</strong>.
     </p>
 
   </div>
@@ -1466,27 +1247,17 @@ main{
 
 
 <script>
+
 /* =========================================================
    CONFIG
    ========================================================= */
 
 const API_BASE =
-  'https://search.tiago.zip';
-
-const TRANSLATOR_WORKER =
-  'https://flibidtranslate.daniel-torres-a95.workers.dev/';
-
-const BANGS_URL =
-  'https://services.helium.imput.net/bangs.json';
-
-const DICTIONARY_API =
-  'https://api.dictionaryapi.dev/api/v2/entries/en/';
-
-const MAX_TRANSLATE_CHARS = 2000;
+  'https://flibidtranslate.daniel-torres-a95.workers.dev';
 
 
 /* =========================================================
-   DOM
+   ELEMENTS
    ========================================================= */
 
 const form =
@@ -1494,9 +1265,6 @@ const form =
 
 const input =
   document.querySelector('#q');
-
-const submitButton =
-  document.querySelector('#submitButton');
 
 const home =
   document.querySelector('#home');
@@ -1522,9 +1290,6 @@ const resultsForm =
 const resultsInput =
   document.querySelector('#resultsQ');
 
-const resultsSubmitButton =
-  document.querySelector('#resultsSubmitButton');
-
 const dictionary =
   document.querySelector('#dictionary');
 
@@ -1549,30 +1314,25 @@ const translateButton =
 const translateSwap =
   document.querySelector('#translateSwap');
 
-const translateStatus =
-  document.querySelector('#translateStatus');
-
 const translateCount =
   document.querySelector('#translateCount');
 
+const translatorStatus =
+  document.querySelector('#translatorStatus');
 
-/* =========================================================
-   STATE
-   ========================================================= */
 
 let currentQ = '';
 let currentPage = 0;
 let currentType = 'web';
-
 let bangs = [];
-let bangsLoaded = false;
 
 
 /* =========================================================
-   HELPERS
+   ESCAPE
    ========================================================= */
 
-function esc(s = ''){
+function esc(s=''){
+
   return String(s).replace(
     /[&<>'"]/g,
     c => ({
@@ -1583,36 +1343,21 @@ function esc(s = ''){
       '"':'&quot;'
     }[c])
   );
+
 }
 
 
-function updateButtonState(button,value){
+/* =========================================================
+   BUTTON STATE
+   ========================================================= */
 
-  if(!button){
-    return;
-  }
+function updateButtonState(b,v){
 
-  button.classList.toggle(
+  b.classList.toggle(
     'has-input',
-    value.trim().length > 0
+    v.trim().length>0
   );
-}
 
-
-function debounce(fn,wait=250){
-
-  let timer;
-
-  return (...args)=>{
-
-    clearTimeout(timer);
-
-    timer=setTimeout(
-      ()=>fn(...args),
-      wait
-    );
-
-  };
 }
 
 
@@ -1622,792 +1367,552 @@ function debounce(fn,wait=250){
 
 async function loadBangs(){
 
-  if(bangsLoaded){
-    return;
-  }
-
   try{
 
-    const response =
-      await fetch(BANGS_URL,{
-        method:'GET',
-        cache:'force-cache'
-      });
+    const r =
+      await fetch(
+        'https://services.helium.imput.net/bangs.json'
+      );
 
-    if(!response.ok){
-      throw new Error('Could not load bangs');
+    if(!r.ok){
+      throw new Error();
     }
 
     const data =
-      await response.json();
+      await r.json();
 
-    if(Array.isArray(data)){
-      bangs=data;
-    }
+    bangs =
+      Array.isArray(data)
+        ? data
+        : [];
 
-    bangsLoaded=true;
+  }catch{
 
-  }catch(error){
+    bangs=[];
 
-    console.warn(
-      'Bangs could not be loaded:',
-      error
+  }
+
+}
+
+
+function resolveBang(query){
+
+  const match =
+    query.match(
+      /^!(\S+)(?:\s+(.*))?$/
     );
 
-  }
-
-}
-
-
-function findBang(query){
-
-  const trimmed =
-    query.trim();
-
-  if(!trimmed.startsWith('!')){
+  if(!match){
     return null;
   }
 
-  const firstWord =
-    trimmed.split(/\s+/)[0];
-
-  const bangName =
-    firstWord.slice(1).toLowerCase();
-
-  if(!bangName){
-    return null;
-  }
-
-  return bangs.find(
-    bang =>
-      Array.isArray(bang.ts) &&
-      bang.ts.some(
-        tag =>
-          String(tag).toLowerCase() === bangName
-      )
-  ) || null;
-
-}
-
-
-function handleBang(query){
-
-  const bang =
-    findBang(query);
-
-  if(!bang){
-    return false;
-  }
-
-  const first =
-    query.trim().split(/\s+/)[0];
+  const trigger =
+    match[1].toLowerCase();
 
   const searchTerms =
-    query.trim().slice(first.length).trim();
+    (match[2] || '').trim();
 
   if(!searchTerms){
-    return false;
+    return null;
   }
 
-  if(!bang.u){
-    return false;
-  }
-
-  const target =
-    bang.u.replace(
-      '{searchTerms}',
-      encodeURIComponent(searchTerms)
+  const bang =
+    bangs.find(item =>
+      Array.isArray(item.ts) &&
+      item.ts.some(
+        t =>
+          String(t).toLowerCase() ===
+          trigger
+      )
     );
 
-  window.location.href=target;
+  if(!bang || !bang.u){
+    return null;
+  }
 
-  return true;
+  return bang.u.replace(
+    /\{searchTerms\}/g,
+    encodeURIComponent(searchTerms)
+  );
+
 }
 
 
 /* =========================================================
-   TRANSLATOR DETECTION
+   TRANSLATOR LANGUAGES
    ========================================================= */
 
-const LANGUAGE_ALIASES = {
+const TRANSLATION_LANGUAGES = [
+
+  ['Auto Detect','auto'],
+
+  ['English','en'],
+  ['Spanish','es'],
+  ['French','fr'],
+  ['German','de'],
+  ['Italian','it'],
+  ['Portuguese','pt'],
+  ['Dutch','nl'],
+  ['Russian','ru'],
+  ['Ukrainian','uk'],
+  ['Polish','pl'],
+  ['Czech','cs'],
+  ['Slovak','sk'],
+  ['Romanian','ro'],
+  ['Hungarian','hu'],
+  ['Greek','el'],
+  ['Turkish','tr'],
+  ['Arabic','ar'],
+  ['Hebrew','he'],
+  ['Persian','fa'],
+
+  ['Chinese','zh'],
+  ['Japanese','ja'],
+  ['Korean','ko'],
+
+  ['Hindi','hi'],
+  ['Bengali','bn'],
+  ['Urdu','ur'],
+
+  ['Indonesian','id'],
+  ['Malay','ms'],
+  ['Filipino','tl'],
+  ['Vietnamese','vi'],
+  ['Thai','th'],
+
+  ['Swedish','sv'],
+  ['Norwegian','no'],
+  ['Danish','da'],
+  ['Finnish','fi'],
+
+  ['Bulgarian','bg'],
+  ['Croatian','hr'],
+  ['Serbian','sr'],
+  ['Slovenian','sl'],
+
+  ['Estonian','et'],
+  ['Latvian','lv'],
+  ['Lithuanian','lt'],
+
+  ['Catalan','ca'],
+  ['Slovenian','sl'],
+
+  ['Swahili','sw'],
+  ['Afrikaans','af'],
+
+  ['Latin','la']
+];
+
+
+const languageAliases = {
+
+  auto:'auto',
+  autodetect:'auto',
+  'auto detect':'auto',
 
   english:'en',
   eng:'en',
-  en:'en',
 
   spanish:'es',
   espanol:'es',
   español:'es',
-  spanish:'es',
-  es:'es',
 
   french:'fr',
-  français:'fr',
-  francais:'fr',
-  fr:'fr',
 
   german:'de',
   deutsch:'de',
-  de:'de',
 
   italian:'it',
-  italiano:'it',
-  it:'it',
 
   portuguese:'pt',
-  português:'pt',
-  portugues:'pt',
-  pt:'pt',
 
   dutch:'nl',
-  nederlands:'nl',
-  nl:'nl',
 
   russian:'ru',
-  русский:'ru',
-  ru:'ru',
 
   ukrainian:'uk',
-  українська:'uk',
-  uk:'uk',
 
   polish:'pl',
-  polski:'pl',
-  pl:'pl',
 
-  japanese:'ja',
-  日本語:'ja',
-  ja:'ja',
+  czech:'cs',
 
-  korean:'ko',
-  한국어:'ko',
-  ko:'ko',
+  slovak:'sk',
 
-  chinese:'zh',
-  中文:'zh',
-  mandarin:'zh',
-  zh:'zh',
+  romanian:'ro',
+
+  hungarian:'hu',
+
+  greek:'el',
+
+  turkish:'tr',
 
   arabic:'ar',
-  العربية:'ar',
-  ar:'ar',
+
+  hebrew:'he',
+
+  persian:'fa',
+
+  chinese:'zh',
+  mandarin:'zh',
+
+  japanese:'ja',
+
+  korean:'ko',
 
   hindi:'hi',
-  हिन्दी:'hi',
-  hi:'hi',
+
+  bengali:'bn',
+
+  urdu:'ur',
+
+  indonesian:'id',
+
+  malay:'ms',
 
   filipino:'tl',
   tagalog:'tl',
-  tl:'tl',
-
-  indonesian:'id',
-  bahasa:'id',
-  id:'id',
 
   vietnamese:'vi',
-  tiếng:'vi',
-  vi:'vi',
 
   thai:'th',
-  ไทย:'th',
-  th:'th',
-
-  turkish:'tr',
-  türkçe:'tr',
-  turkish:'tr',
-  tr:'tr',
-
-  greek:'el',
-  ελληνικά:'el',
-  el:'el',
-
-  hebrew:'he',
-  עברית:'he',
-  he:'he',
 
   swedish:'sv',
-  svenska:'sv',
-  sv:'sv',
-
-  danish:'da',
-  dansk:'da',
-  da:'da',
 
   norwegian:'no',
-  norsk:'no',
-  no:'no',
+
+  danish:'da',
 
   finnish:'fi',
-  suomi:'fi',
-  fi:'fi',
 
-  czech:'cs',
-  čeština:'cs',
-  cs:'cs',
+  bulgarian:'bg',
 
-  romanian:'ro',
-  română:'ro',
-  ro:'ro',
+  croatian:'hr',
 
-  hungarian:'hu',
-  magyar:'hu',
-  hu:'hu'
+  serbian:'sr',
+
+  slovenian:'sl',
+
+  estonian:'et',
+
+  latvian:'lv',
+
+  lithuanian:'lt',
+
+  catalan:'ca',
+
+  swahili:'sw',
+
+  afrikaans:'af',
+
+  latin:'la'
 };
 
 
-const LANGUAGE_NAMES = {
+function languageCode(value){
 
-  auto:'Auto-detect',
-
-  en:'English',
-  es:'Spanish',
-  fr:'French',
-  de:'German',
-  it:'Italian',
-  pt:'Portuguese',
-  nl:'Dutch',
-  ru:'Russian',
-  uk:'Ukrainian',
-  pl:'Polish',
-  ja:'Japanese',
-  ko:'Korean',
-  zh:'Chinese',
-  ar:'Arabic',
-  hi:'Hindi',
-  tl:'Filipino',
-  id:'Indonesian',
-  vi:'Vietnamese',
-  th:'Thai',
-  tr:'Turkish',
-  el:'Greek',
-  he:'Hebrew',
-  sv:'Swedish',
-  da:'Danish',
-  no:'Norwegian',
-  fi:'Finnish',
-  cs:'Czech',
-  ro:'Romanian',
-  hu:'Hungarian'
-};
-
-
-const LANGUAGE_ORDER = [
-
-  'en',
-  'es',
-  'fr',
-  'de',
-  'it',
-  'pt',
-  'nl',
-  'ru',
-  'uk',
-  'pl',
-  'ja',
-  'ko',
-  'zh',
-  'ar',
-  'hi',
-  'tl',
-  'id',
-  'vi',
-  'th',
-  'tr',
-  'el',
-  'he',
-  'sv',
-  'da',
-  'no',
-  'fi',
-  'cs',
-  'ro',
-  'hu'
-
-];
-
-
-function languageCodeFromText(text){
-
-  const normalized =
-    text
-      .toLowerCase()
+  const clean =
+    String(value || '')
       .trim()
-      .replace(/\s+/g,' ');
+      .toLowerCase();
 
-  return LANGUAGE_ALIASES[normalized] || null;
+  return (
+    languageAliases[clean] ||
+    TRANSLATION_LANGUAGES.find(
+      x =>
+        x[0].toLowerCase() === clean
+    )?.[1] ||
+    clean
+  );
 
 }
 
 
-function detectTranslatorIntent(query){
+function languageName(code){
 
-  const q =
-    query
-      .trim()
-      .toLowerCase()
-      .replace(/[?!.]+$/,'');
-
-  let match;
-
-  /*
-    "spanish to english"
-    "spanish -> english"
-    "spanish → english"
-  */
-
-  match =
-    q.match(
-      /^(.+?)\s*(?:to|->|→)\s*(.+)$/
+  const found =
+    TRANSLATION_LANGUAGES.find(
+      x => x[1] === code
     );
 
-  if(match){
+  return found
+    ? found[0]
+    : code;
+}
 
-    const from =
-      languageCodeFromText(match[1]);
 
-    const to =
-      languageCodeFromText(match[2]);
+/* =========================================================
+   TRANSLATOR LANGUAGE PICKERS
+   ========================================================= */
 
-    if(from && to){
+function setupLanguagePicker(
+  inputElement,
+  listElement
+){
 
-      return {
-        from,
-        to,
-        mode:'explicit'
-      };
+  function renderOptions(filter=''){
 
-    }
+    const clean =
+      filter
+        .trim()
+        .toLowerCase();
+
+    listElement.innerHTML='';
+
+    TRANSLATION_LANGUAGES
+      .filter(item =>
+        !clean ||
+        item[0]
+          .toLowerCase()
+          .includes(clean)
+      )
+      .forEach(item => {
+
+        const button =
+          document.createElement('button');
+
+        button.type='button';
+        button.className=
+          'translator-language-option';
+
+        button.textContent=item[0];
+
+        button.addEventListener(
+          'click',
+          () => {
+
+            inputElement.value =
+              item[0];
+
+            listElement.classList.add(
+              'hidden'
+            );
+
+          }
+        );
+
+        listElement.appendChild(button);
+
+      });
 
   }
 
 
-  /*
-    "spanish to english"
-    handled above.
-  */
+  inputElement.addEventListener(
+    'focus',
+    () => {
 
-  match =
-    q.match(
-      /^(.+?)\s+to\s+english$/
-    );
+      renderOptions(
+        inputElement.value === 'Auto Detect'
+          ? ''
+          : inputElement.value
+      );
 
-  if(match){
-
-    const from =
-      languageCodeFromText(match[1]);
-
-    if(from){
-
-      return {
-        from,
-        to:'en',
-        mode:'explicit'
-      };
+      listElement.classList.remove(
+        'hidden'
+      );
 
     }
+  );
 
-  }
 
+  inputElement.addEventListener(
+    'input',
+    () => {
 
-  /*
-    "english to spanish"
-  */
+      renderOptions(
+        inputElement.value
+      );
 
-  match =
-    q.match(
-      /^english\s+to\s+(.+)$/
-    );
-
-  if(match){
-
-    const to =
-      languageCodeFromText(match[1]);
-
-    if(to){
-
-      return {
-        from:'en',
-        to,
-        mode:'explicit'
-      };
+      listElement.classList.remove(
+        'hidden'
+      );
 
     }
+  );
 
-  }
+
+  document.addEventListener(
+    'click',
+    e => {
+
+      if(
+        e.target !== inputElement &&
+        !listElement.contains(e.target)
+      ){
+
+        listElement.classList.add(
+          'hidden'
+        );
+
+      }
+
+    }
+  );
+
+}
 
 
-  /*
-    "translate"
-    "translator"
-    */
+setupLanguagePicker(
+  translateFrom,
+  document.querySelector(
+    '#translateFromList'
+  )
+);
+
+setupLanguagePicker(
+  translateTo,
+  document.querySelector(
+    '#translateToList'
+  )
+);
+
+
+/* =========================================================
+   TRANSLATOR QUERY DETECTION
+   ========================================================= */
+
+function translatorQueryInfo(q){
+
+  const clean =
+    q.trim().toLowerCase();
 
   if(
-    q === 'translate' ||
-    q === 'translator' ||
-    q === 'translation'
+    clean === 'translate' ||
+    clean === 'translator'
   ){
 
     return {
       from:'auto',
-      to:'en',
-      mode:'generic'
+      to:'en'
     };
 
   }
+
+
+  const toEnglish =
+    clean.match(
+      /^(.+?)\s+to\s+english$/
+    );
+
+  if(toEnglish){
+
+    const from =
+      languageCode(
+        toEnglish[1]
+      );
+
+    if(
+      from &&
+      from !== toEnglish[1]
+    ){
+
+      return {
+        from,
+        to:'en'
+      };
+
+    }
+
+  }
+
+
+  const englishTo =
+    clean.match(
+      /^english\s+to\s+(.+?)$/
+    );
+
+  if(englishTo){
+
+    const to =
+      languageCode(
+        englishTo[1]
+      );
+
+    if(
+      to &&
+      to !== englishTo[1]
+    ){
+
+      return {
+        from:'en',
+        to
+      };
+
+    }
+
+  }
+
+
+  const translateLanguage =
+    clean.match(
+      /^(?:translate|translator)\s+(.+)$/
+    );
+
+  if(translateLanguage){
+
+    const from =
+      languageCode(
+        translateLanguage[1]
+      );
+
+    if(
+      from &&
+      from !== translateLanguage[1]
+    ){
+
+      return {
+        from,
+        to:'en'
+      };
+
+    }
+
+  }
+
 
   return null;
 
 }
 
 
-/* =========================================================
-   TRANSLATOR LANGUAGE UI
-   ========================================================= */
+function showTranslator(info){
 
-function populateLanguageSelects(
-  fromCode='auto',
-  toCode='en'
-){
-
-  translateFrom.innerHTML='';
-  translateTo.innerHTML='';
-
-  const fromOptions = [
-    'auto',
-    ...LANGUAGE_ORDER
-  ];
-
-  fromOptions.forEach(code=>{
-
-    const option =
-      document.createElement('option');
-
-    option.value=code;
-    option.textContent=
-      LANGUAGE_NAMES[code] || code;
-
-    translateFrom.appendChild(option);
-
-  });
-
-
-  LANGUAGE_ORDER.forEach(code=>{
-
-    const option =
-      document.createElement('option');
-
-    option.value=code;
-    option.textContent=
-      LANGUAGE_NAMES[code] || code;
-
-    translateTo.appendChild(option);
-
-  });
-
-
-  translateFrom.value=
-    LANGUAGE_NAMES[fromCode]
-      ? fromCode
-      : 'auto';
-
-  translateTo.value=
-    LANGUAGE_NAMES[toCode]
-      ? toCode
-      : 'en';
-
-}
-
-
-function showTranslator(
-  from='auto',
-  to='en'
-){
-
-  populateLanguageSelects(
-    from,
-    to
+  translator.classList.remove(
+    'hidden'
   );
 
-  translator.classList.add('visible');
+  const from =
+    info?.from || 'auto';
+
+  const to =
+    info?.to || 'en';
+
+  translateFrom.value =
+    languageName(from);
+
+  translateTo.value =
+    languageName(to);
 
 }
 
 
 function hideTranslator(){
 
-  translator.classList.remove('visible');
+  translator.classList.add(
+    'hidden'
+  );
 
 }
 
 
-function updateTranslateCount(){
+function applyTranslatorQuery(q){
 
-  const length =
-    translateInput.value.length;
+  const info =
+    translatorQueryInfo(q);
 
-  translateCount.textContent =
-    `${length} / ${MAX_TRANSLATE_CHARS}`;
+  if(info){
 
-}
-
-
-/* =========================================================
-   TRANSLATOR REQUEST
-   ========================================================= */
-
-async function translateText(){
-
-  const text =
-    translateInput.value.trim();
-
-  if(!text){
-
-    translateStatus.textContent =
-      'Enter something to translate.';
-
-    translateOutput.value='';
-
-    return;
-
-  }
-
-  if(text.length > MAX_TRANSLATE_CHARS){
-
-    translateStatus.textContent =
-      `Maximum is ${MAX_TRANSLATE_CHARS} characters.`;
-
-    return;
-
-  }
-
-  const source =
-    translateFrom.value;
-
-  const target =
-    translateTo.value;
-
-  if(source === target && source !== 'auto'){
-
-    translateOutput.value=text;
-
-    translateStatus.textContent =
-      'Source and target are the same language.';
-
-    return;
-
-  }
-
-  translateButton.disabled=true;
-
-  translateStatus.textContent =
-    'Translating…';
-
-  translateOutput.value='';
-
-
-  try{
-
-    /*
-      The worker is the public translation endpoint.
-
-      The frontend does not need MyMemory credentials.
-      Your Cloudflare Worker handles the actual request.
-    */
-
-    const url =
-      new URL(
-        TRANSLATOR_WORKER
-      );
-
-    url.searchParams.set(
-      'q',
-      text
-    );
-
-    url.searchParams.set(
-      'source',
-      source
-    );
-
-    url.searchParams.set(
-      'target',
-      target
-    );
-
-
-    const response =
-      await fetch(
-        url.toString(),
-        {
-          method:'GET',
-          headers:{
-            'Accept':'application/json'
-          }
-        }
-      );
-
-
-    if(!response.ok){
-
-      throw new Error(
-        `Translation request failed (${response.status})`
-      );
-
-    }
-
-
-    const data =
-      await response.json();
-
-
-    /*
-      Support several common Worker response shapes.
-    */
-
-    const translated =
-      data.translatedText ??
-      data.translation ??
-      data.translated ??
-      data.result ??
-      data.text ??
-      data.response?.translatedText ??
-      '';
-
-
-    if(!translated){
-
-      throw new Error(
-        'The translator returned no translated text.'
-      );
-
-    }
-
-
-    translateOutput.value=
-      String(translated);
-
-    translateStatus.textContent =
-      `${LANGUAGE_NAMES[target] || target}`;
-
-
-  }catch(error){
-
-    console.error(
-      'Translation error:',
-      error
-    );
-
-    translateStatus.textContent =
-      error.message ||
-      'Translation failed.';
-
-  }finally{
-
-    translateButton.disabled=false;
-
-  }
-
-}
-
-
-/* =========================================================
-   SEARCH
-   ========================================================= */
-
-async function search(
-  q,
-  page=0,
-  type='web'
-){
-
-  q=q.trim();
-
-  if(!q){
-    return;
-  }
-
-
-  /*
-    BANGS FIRST.
-    "!w cats" etc. goes directly to the bang URL.
-  */
-
-  await loadBangs();
-
-  if(handleBang(q)){
-    return;
-  }
-
-
-  currentQ=q;
-
-  currentPage=
-    Math.max(
-      0,
-      Number(page) || 0
-    );
-
-  currentType=
-    ['web','images','news'].includes(type)
-      ? type
-      : 'web';
-
-
-  /*
-    IMPORTANT:
-    Switch to results IMMEDIATELY.
-
-    The old version waited for fetch before making
-    the results page visible, which caused the home
-    screen to remain there while searching.
-  */
-
-  home.classList.add('hidden');
-
-  results.classList.remove('hidden');
-
-
-  document.title =
-    `${q} - FlibidooSearch`;
-
-  input.value=q;
-
-  resultsInput.value=q;
-
-  label.textContent =
-    `Results for “${q}”`;
-
-  count.textContent='';
-
-  pager.innerHTML='';
-
-  list.innerHTML =
-    '<div class="empty">Searching…</div>';
-
-
-  /*
-    Translator detection happens immediately.
-  */
-
-  const translatorIntent =
-    detectTranslatorIntent(q);
-
-  if(translatorIntent){
-
-    showTranslator(
-      translatorIntent.from,
-      translatorIntent.to
-    );
-
-    /*
-      The translator search itself should not depend
-      on web results.
-    */
-
-    dictionary.innerHTML =
-      '<div class="dictionary-title">Dictionary</div>' +
-      `<div class="dictionary-word">${esc(q)}</div>` +
-      '<div class="dictionary-empty">Enter a word to see dictionary results.</div>';
+    showTranslator(info);
 
   }else{
 
@@ -2415,94 +1920,401 @@ async function search(
 
   }
 
+  return info;
 
-  /*
-    Always load the dictionary independently.
-    This means "No results found" does NOT remove it.
-  */
-
-  const dictionaryPromise =
-    loadDictionary(q);
+}
 
 
-  try{
+/* =========================================================
+   TRANSLATOR
+   ========================================================= */
 
-    const response =
-      await fetch(
-        `${API_BASE}/api`,
-        {
-          method:'POST',
-          headers:{
-            'Content-Type':'application/json',
-            'Accept':'application/json'
-          },
-          body:JSON.stringify({
-            query:q,
-            type:currentType,
-            page:currentPage
-          })
+translateInput.addEventListener(
+  'input',
+  () => {
+
+    if(
+      translateInput.value.length >
+      2000
+    ){
+
+      translateInput.value =
+        translateInput.value.slice(
+          0,
+          2000
+        );
+
+    }
+
+    translateCount.textContent =
+      translateInput.value.length;
+
+  }
+);
+
+
+translateSwap.addEventListener(
+  'click',
+  () => {
+
+    const from =
+      languageCode(
+        translateFrom.value
+      );
+
+    const to =
+      languageCode(
+        translateTo.value
+      );
+
+    if(from === 'auto'){
+
+      translateFrom.value =
+        languageName(to);
+
+      translateTo.value =
+        'Auto Detect';
+
+    }else{
+
+      translateFrom.value =
+        languageName(to);
+
+      translateTo.value =
+        languageName(from);
+
+    }
+
+    const oldInput =
+      translateInput.value;
+
+    translateInput.value =
+      translateOutput.value;
+
+    translateOutput.value =
+      oldInput;
+
+    translateCount.textContent =
+      translateInput.value.length;
+
+  }
+);
+
+
+async function translateText(
+  text,
+  from,
+  to
+){
+
+  text =
+    String(text || '')
+      .slice(0,2000);
+
+  const endpoint =
+    `${API_BASE}/api/translate?` +
+    `text=${encodeURIComponent(text)}` +
+    `&from=${encodeURIComponent(from)}` +
+    `&to=${encodeURIComponent(to)}`;
+
+  const response =
+    await fetch(
+      endpoint,
+      {
+        method:'GET',
+        headers:{
+          'Accept':'application/json'
         }
-      );
-
-
-    const raw =
-      await response.text();
-
-
-    let data;
-
-    try{
-
-      data=JSON.parse(raw);
-
-    }catch{
-
-      throw new Error(
-        'Search server returned invalid JSON.'
-      );
-
-    }
-
-
-    if(!response.ok){
-
-      throw new Error(
-        data.error ||
-        `Search failed (${response.status}).`
-      );
-
-    }
-
-
-    data.type=currentType;
-
-    render(data);
-
-
-  }catch(error){
-
-    console.error(
-      'Search error:',
-      error
+      }
     );
 
+  const data =
+    await response.json();
 
-    /*
-      Keep dictionary visible even if search fails.
-    */
+  if(!response.ok){
 
-    list.innerHTML =
-      `<div class="error">${esc(
-        error.message ||
-        'Search failed. Please try again.'
-      )}</div>`;
-
-    count.textContent='';
+    throw new Error(
+      data.error ||
+      'Translation failed.'
+    );
 
   }
 
+  return (
+    data?.responseData?.translatedText ||
+    ''
+  );
 
-  await dictionaryPromise;
+}
+
+
+translateButton.addEventListener(
+  'click',
+  async () => {
+
+    const text =
+      translateInput.value
+        .slice(0,2000)
+        .trim();
+
+    if(!text){
+
+      translateOutput.value='';
+      translatorStatus.textContent=
+        'Enter something to translate.';
+
+      return;
+
+    }
+
+    const from =
+      languageCode(
+        translateFrom.value
+      );
+
+    const to =
+      languageCode(
+        translateTo.value
+      );
+
+    if(from === to && from !== 'auto'){
+
+      translateOutput.value=text;
+
+      translatorStatus.textContent=
+        'The input and output languages are the same.';
+
+      return;
+
+    }
+
+    translateButton.disabled=true;
+
+    translatorStatus.textContent=
+      'Translating…';
+
+    translateOutput.value='';
+
+    try{
+
+      const translated =
+        await translateText(
+          text,
+          from,
+          to
+        );
+
+      translateOutput.value =
+        translated;
+
+      translatorStatus.textContent='';
+
+    }catch(e){
+
+      translatorStatus.textContent =
+        e.message ||
+        'Translation failed.';
+
+    }finally{
+
+      translateButton.disabled=false;
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   DICTIONARY
+   ========================================================= */
+
+async function loadDictionary(word){
+
+  dictionary.classList.remove(
+    'hidden'
+  );
+
+  dictionary.innerHTML =
+    '<div class="dictionary-loading">' +
+    'Loading dictionary…' +
+    '</div>';
+
+  try{
+
+    const r =
+      await fetch(
+        `${API_BASE}/api/dictionary?word=${
+          encodeURIComponent(word)
+        }`,
+        {
+          headers:{
+            'Accept':'application/json'
+          }
+        }
+      );
+
+    if(!r.ok){
+      throw new Error();
+    }
+
+    const data =
+      await r.json();
+
+    renderDictionary(
+      data,
+      word
+    );
+
+  }catch{
+
+    dictionary.innerHTML =
+      `<h2 class="dictionary-title">${
+        esc(word)
+      }</h2>
+      <div class="dictionary-empty">
+        Dictionary unavailable.
+      </div>`;
+
+  }
+
+}
+
+
+function renderDictionary(
+  data,
+  word
+){
+
+  const entries =
+    Array.isArray(data?.entries)
+      ? data.entries
+      : [];
+
+  dictionary.innerHTML='';
+
+  const title =
+    document.createElement('h2');
+
+  title.className=
+    'dictionary-title';
+
+  title.textContent=word;
+
+  dictionary.appendChild(title);
+
+  if(!entries.length){
+
+    const empty =
+      document.createElement('div');
+
+    empty.className=
+      'dictionary-empty';
+
+    empty.textContent=
+      'No dictionary entry found.';
+
+    dictionary.appendChild(empty);
+
+    return;
+
+  }
+
+  entries.forEach(entry => {
+
+    const article =
+      document.createElement('article');
+
+    article.className=
+      'dictionary-entry';
+
+    const language =
+      entry.language ||
+      entry.lang ||
+      '';
+
+    const pos =
+      entry.partOfSpeech ||
+      entry.pos ||
+      '';
+
+    article.innerHTML=`
+
+      ${
+        language
+          ? `<div class="dictionary-language">
+              ${esc(language)}
+            </div>`
+          : ''
+      }
+
+      ${
+        pos
+          ? `<div class="dictionary-pos">
+              ${esc(pos)}
+            </div>`
+          : ''
+      }
+
+    `;
+
+    const meanings =
+      entry.meanings ||
+      entry.senses ||
+      [];
+
+    if(Array.isArray(meanings)){
+
+      const list =
+        document.createElement('ol');
+
+      list.className=
+        'dictionary-list';
+
+      meanings
+        .slice(0,10)
+        .forEach(meaning => {
+
+          const li =
+            document.createElement('li');
+
+          const definition =
+            typeof meaning === 'string'
+              ? meaning
+              : meaning.definition ||
+                meaning.gloss ||
+                '';
+
+          li.innerHTML =
+            `<div class="dictionary-definition">
+              ${esc(definition)}
+            </div>`;
+
+          if(
+            meaning?.tags &&
+            Array.isArray(meaning.tags)
+          ){
+
+            li.innerHTML +=
+              `<div class="dictionary-tags">
+                ${meaning.tags
+                  .map(tag => esc(tag))
+                  .join(' · ')}
+              </div>`;
+
+          }
+
+          list.appendChild(li);
+
+        });
+
+      article.appendChild(list);
+
+    }
+
+    dictionary.appendChild(article);
+
+  });
 
 }
 
@@ -2513,32 +2325,30 @@ async function search(
 
 function render(data){
 
-  /*
-    Do NOT hide results here.
-    The search page was already shown immediately.
-  */
-
   home.classList.add('hidden');
 
   results.classList.remove('hidden');
 
-
   currentType =
-    ['web','images','news'].includes(data.type)
-      ? data.type
-      : currentType;
-
+    data.type ||
+    currentType;
 
   label.textContent =
     data.query
       ? `Results for “${data.query}”`
       : '';
 
+  applyTranslatorQuery(
+    data.query || currentQ
+  );
+
+  loadDictionary(
+    data.query || currentQ
+  );
 
   let a=[];
 
-
-  if(currentType==='web'){
+  if(currentType === 'web'){
 
     a =
       Array.isArray(
@@ -2550,67 +2360,59 @@ function render(data){
           : [];
 
   }else if(
-    currentType==='images' ||
-    currentType==='news'
+    currentType === 'images' ||
+    currentType === 'news'
   ){
 
     a =
       Array.isArray(data.results)
         ? data.results
-        : Array.isArray(data.results?.results)
-          ? data.results.results
-          : [];
+        : [];
 
   }
-
 
   count.textContent =
     a.length
       ? `${a.length} results`
       : '';
 
-
   resultsInput.value =
     data.query || '';
 
-
   list.innerHTML='';
-
   pager.innerHTML='';
-
 
   document
     .querySelectorAll('.search-type')
-    .forEach(button=>{
-
-      button.classList.toggle(
+    .forEach(b =>
+      b.classList.toggle(
         'active',
-        button.dataset.type===currentType
-      );
+        b.dataset.type ===
+        currentType
+      )
+    );
 
-    });
-
-
-  /*
-    NO RESULTS:
-    Keep dictionary visible.
-  */
 
   if(!a.length){
 
     list.innerHTML =
-      '<div class="empty">No results found.</div>';
+      '<div class="empty">' +
+      'No results found.' +
+      '</div>';
 
     history.replaceState(
       {},
       '',
-      `/?q=${encodeURIComponent(
-        data.query || currentQ
-      )}&type=${encodeURIComponent(
-        currentType
-      )}${currentPage
-        ? `&page=${currentPage}`
-        : ''
+      `/?q=${
+        encodeURIComponent(
+          data.query || currentQ
+        )
+      }&type=${
+        encodeURIComponent(currentType)
+      }${
+        currentPage
+          ? `&page=${currentPage}`
+          : ''
       }`
     );
 
@@ -2619,45 +2421,32 @@ function render(data){
   }
 
 
-  /* =======================================================
-     IMAGES
-     ======================================================= */
-
-  if(currentType==='images'){
+  if(currentType === 'images'){
 
     const grid =
       document.createElement('div');
 
     grid.className='image-grid';
 
-
-    a.forEach(r=>{
+    a.forEach(r => {
 
       const u =
         r.url ||
         r.properties?.url ||
-        r.image?.url ||
         '';
 
       const img =
         r.thumbnail ||
-        r.thumbnail_url ||
-        r.image?.thumbnail ||
-        r.properties?.thumbnail ||
         r.properties?.url ||
         '';
 
-
-      if(!img){
-        return;
-      }
-
+      if(!img)return;
 
       const el =
         document.createElement('article');
 
-      el.className='image-result';
-
+      el.className=
+        'image-result';
 
       el.innerHTML=`
 
@@ -2671,7 +2460,6 @@ function render(data){
             src="${esc(img)}"
             alt="${esc(r.title || '')}"
             loading="lazy"
-            decoding="async"
             referrerpolicy="no-referrer"
           >
 
@@ -2685,17 +2473,15 @@ function render(data){
           ${esc(
             r.source ||
             r.meta_url?.hostname ||
-            r.domain ||
             ''
           )}
         </div>
-      `;
 
+      `;
 
       grid.appendChild(el);
 
     });
-
 
     if(grid.children.length){
 
@@ -2704,41 +2490,31 @@ function render(data){
     }else{
 
       list.innerHTML =
-        '<div class="empty">No images found.</div>';
+        '<div class="empty">' +
+        'No images found.' +
+        '</div>';
 
     }
 
-  }
 
+  }else{
 
-  /* =======================================================
-     WEB / NEWS
-     ======================================================= */
-
-  else{
-
-    a.forEach(r=>{
+    a.forEach(r => {
 
       const el =
         document.createElement('article');
 
       el.className='result';
 
-
       const u =
-        r.url ||
-        r.link ||
-        '';
+        r.url || '';
 
       const host =
         r.meta_url?.hostname ||
-        r.source ||
-        r.domain ||
         '';
 
       const title =
         r.title ||
-        r.name ||
         u;
 
       const desc =
@@ -2750,9 +2526,25 @@ function render(data){
       const age =
         r.age ||
         r.publishedDate ||
-        r.published ||
         '';
 
+      const tags =
+        Array.isArray(r.tags)
+          ? r.tags
+          : [];
+
+      const tagHTML =
+        tags.length
+          ? `
+            <div class="result-tags">
+              ${tags.map(tag =>
+                `<span class="result-tag">
+                  ${esc(tag)}
+                </span>`
+              ).join(' · ')}
+            </div>
+          `
+          : '';
 
       el.innerHTML=`
 
@@ -2761,7 +2553,6 @@ function render(data){
         </div>
 
         <h2>
-
           <a
             href="${esc(u)}"
             target="_blank"
@@ -2769,23 +2560,27 @@ function render(data){
           >
             ${esc(title)}
           </a>
-
         </h2>
 
         ${
           desc
-            ? `<p class="snippet">${esc(desc)}</p>`
+            ? `<p class="snippet">
+                ${esc(desc)}
+              </p>`
             : ''
         }
 
+        ${tagHTML}
+
         ${
           age
-            ? `<div class="result-meta">${esc(age)}</div>`
+            ? `<div class="result-meta">
+                ${esc(age)}
+              </div>`
             : ''
         }
 
       `;
-
 
       list.appendChild(el);
 
@@ -2794,58 +2589,49 @@ function render(data){
   }
 
 
-  /*
-    Pagination.
-  */
-
   const more =
     Boolean(
       data.more_results_available ||
-      data.hasMore ||
-      data.has_more
+      data.hasMore
     );
 
 
   if(currentPage > 0){
 
-    const button =
+    const b =
       document.createElement('button');
 
-    button.textContent='Previous';
+    b.textContent='Previous';
 
-    button.onclick=()=>{
+    b.onclick =
+      () =>
+        search(
+          currentQ,
+          currentPage - 1,
+          currentType
+        );
 
-      search(
-        currentQ,
-        currentPage - 1,
-        currentType
-      );
-
-    };
-
-    pager.appendChild(button);
+    pager.appendChild(b);
 
   }
 
 
   if(more){
 
-    const button =
+    const b =
       document.createElement('button');
 
-    button.textContent='Next';
+    b.textContent='Next';
 
-    button.onclick=()=>{
+    b.onclick =
+      () =>
+        search(
+          currentQ,
+          currentPage + 1,
+          currentType
+        );
 
-      search(
-        currentQ,
-        currentPage + 1,
-        currentType
-      );
-
-    };
-
-    pager.appendChild(button);
+    pager.appendChild(b);
 
   }
 
@@ -2853,13 +2639,16 @@ function render(data){
   history.replaceState(
     {},
     '',
-    `/?q=${encodeURIComponent(
-      data.query || currentQ
-    )}&type=${encodeURIComponent(
-      currentType
-    )}${currentPage
-      ? `&page=${currentPage}`
-      : ''
+    `/?q=${
+      encodeURIComponent(
+        data.query || currentQ
+      )
+    }&type=${
+      encodeURIComponent(currentType)
+    }${
+      currentPage
+        ? `&page=${currentPage}`
+        : ''
     }`
   );
 
@@ -2867,74 +2656,88 @@ function render(data){
 
 
 /* =========================================================
-   DICTIONARY
+   SEARCH
    ========================================================= */
 
-async function loadDictionary(query){
+async function search(
+  q,
+  page=0,
+  type=currentType
+){
 
-  const clean =
-    query
-      .trim()
-      .split(/\s+/)[0]
-      .replace(
-        /^[^\p{L}\p{N}'-]+|[^\p{L}\p{N}'-]+$/gu,
-        ''
-      );
+  q=q.trim();
 
+  if(!q)return;
 
-  dictionary.innerHTML=`
+  currentQ=q;
 
-    <div class="dictionary-title">
-      Dictionary
-    </div>
+  currentPage =
+    Math.max(
+      0,
+      Number(page) || 0
+    );
 
-    <div class="dictionary-word">
-      ${esc(clean || query)}
-    </div>
+  currentType =
+    ['web','images','news']
+      .includes(type)
+      ? type
+      : 'web';
 
-    <div class="dictionary-loading">
-      Looking up definition…
-    </div>
+  document.title =
+    `${q} - FlibidooSearch`;
 
-  `;
+  input.value=q;
 
+  resultsInput.value=q;
 
   /*
-    Don't try to dictionary-lookup translator commands.
-  */
+   * Switch immediately so the user does not
+   * remain on the home screen while waiting.
+   */
 
-  if(
-    !clean ||
-    detectTranslatorIntent(query)
-  ){
+  home.classList.add('hidden');
 
-    dictionary.innerHTML=`
+  results.classList.remove('hidden');
 
-      <div class="dictionary-title">
-        Dictionary
-      </div>
+  label.textContent =
+    `Results for “${q}”`;
 
-      <div class="dictionary-word">
-        ${esc(query)}
-      </div>
+  applyTranslatorQuery(q);
 
-      <div class="dictionary-empty">
-        Dictionary lookup is available for individual words.
-      </div>
+  list.innerHTML =
+    '<div class="empty">Searching…</div>';
 
-    `;
+  count.textContent='';
 
-    return;
+  pager.innerHTML='';
 
-  }
+  /*
+   * Dictionary is independent from the search
+   * results, so it still appears when there
+   * are zero web results.
+   */
+
+  loadDictionary(q);
 
 
   try{
 
-    const response =
+    const endpoint =
+      `${API_BASE}/api/search?` +
+      `q=${encodeURIComponent(q)}` +
+      `&type=${encodeURIComponent(
+        currentType
+      )}` +
+      `&page=${encodeURIComponent(
+        currentPage
+      )}`;
+
+
+    const r =
       await fetch(
-        `${DICTIONARY_API}${encodeURIComponent(clean)}`,
+        endpoint,
         {
+          method:'GET',
           headers:{
             'Accept':'application/json'
           }
@@ -2942,204 +2745,35 @@ async function loadDictionary(query){
       );
 
 
-    if(!response.ok){
+    const d =
+      await r.json();
+
+
+    if(!r.ok){
 
       throw new Error(
-        'No dictionary entry found.'
+        d.error ||
+        'Search failed.'
       );
 
     }
 
 
-    const data =
-      await response.json();
+    d.type =
+      currentType;
 
+    render(d);
 
-    if(
-      !Array.isArray(data) ||
-      !data.length
-    ){
 
-      throw new Error(
-        'No dictionary entry found.'
-      );
+  }catch(e){
 
-    }
-
-
-    const entry =
-      data[0];
-
-
-    const meanings =
-      Array.isArray(entry.meanings)
-        ? entry.meanings
-        : [];
-
-
-    let html=`
-
-      <div class="dictionary-title">
-        Dictionary
-      </div>
-
-      <div class="dictionary-word">
-        ${esc(entry.word || clean)}
-      </div>
-
-    `;
-
-
-    meanings.forEach(meaning=>{
-
-      html += `
-
-        <article class="dictionary-entry">
-
-          <div class="dictionary-language">
-            ${esc(entry.phonetic || '')}
-          </div>
-
-          <div class="dictionary-pos">
-            ${esc(meaning.partOfSpeech || '')}
-          </div>
-
-      `;
-
-
-      const definitions =
-        Array.isArray(meaning.definitions)
-          ? meaning.definitions
-          : [];
-
-
-      definitions
-        .slice(0,8)
-        .forEach((definition,index)=>{
-
-          html += `
-
-            <div class="dictionary-sense">
-
-              <div class="dictionary-definition">
-
-                ${index + 1}.
-                ${esc(
-                  definition.definition || ''
-                )}
-
-              </div>
-
-              ${
-                definition.example
-                  ? `
-                    <div class="dictionary-example">
-                      “${esc(definition.example)}”
-                    </div>
-                  `
-                  : ''
-              }
-
-            </div>
-
-          `;
-
-        });
-
-
-      const synonyms =
-        definitions
-          .flatMap(
-            d =>
-              Array.isArray(d.synonyms)
-                ? d.synonyms
-                : []
-          )
-          .slice(0,12);
-
-
-      if(synonyms.length){
-
-        html += `
-
-          <div class="dictionary-relations">
-
-            <div class="dictionary-label">
-              Synonyms
-            </div>
-
-            <div class="dictionary-definition">
-              ${esc(
-                [...new Set(synonyms)].join(', ')
-              )}
-            </div>
-
-          </div>
-
-        `;
-
-      }
-
-
-      html += `
-        </article>
-      `;
-
-    });
-
-
-    const source =
-      entry.sourceUrls?.[0];
-
-
-    if(source){
-
-      html += `
-
-        <div class="dictionary-source">
-
-          Source:
-          <a
-            href="${esc(source)}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            ${esc(source)}
-          </a>
-
-        </div>
-
-      `;
-
-    }
-
-
-    dictionary.innerHTML=html;
-
-
-  }catch(error){
-
-    /*
-      IMPORTANT:
-      Dictionary remains visible even when
-      no dictionary entry exists.
-    */
-
-    dictionary.innerHTML=`
-
-      <div class="dictionary-title">
-        Dictionary
-      </div>
-
-      <div class="dictionary-word">
-        ${esc(clean || query)}
-      </div>
-
-      <div class="dictionary-empty">
-        No dictionary entry found.
-      </div>
-
-    `;
+    list.innerHTML =
+      `<div class="error">
+        ${esc(
+          e.message ||
+          'Search failed. Please try again.'
+        )}
+      </div>`;
 
   }
 
@@ -3147,110 +2781,79 @@ async function loadDictionary(query){
 
 
 /* =========================================================
-   INPUT EVENTS
-   ========================================================= */
-
-input.addEventListener(
-  'input',
-  ()=>updateButtonState(
-    submitButton,
-    input.value
-  )
-);
-
-
-resultsInput.addEventListener(
-  'input',
-  ()=>updateButtonState(
-    resultsSubmitButton,
-    resultsInput.value
-  )
-);
-
-
-translateInput.addEventListener(
-  'input',
-  updateTranslateCount
-);
-
-
-/* =========================================================
-   SEARCH FORM
+   HOME SEARCH
    ========================================================= */
 
 form.addEventListener(
   'submit',
-  async e=>{
+  e => {
 
     e.preventDefault();
 
     const q =
       input.value.trim();
 
-    if(!q){
+    if(!q)return;
+
+
+    const bangUrl =
+      resolveBang(q);
+
+
+    if(bangUrl){
+
+      window.location.href =
+        bangUrl;
+
       return;
+
     }
 
 
-    /*
-      Change screen immediately.
-
-      This also prevents the "stays on home screen
-      for a while" problem.
-    */
-
-    home.classList.add('hidden');
-
-    results.classList.remove('hidden');
-
-    list.innerHTML =
-      '<div class="empty">Searching…</div>';
-
-    label.textContent =
-      `Results for “${q}”`;
-
-    resultsInput.value=q;
-
-
-    /*
-      Put the URL into history immediately.
-    */
-
-    history.pushState(
-      {},
-      '',
-      `/?q=${encodeURIComponent(q)}&type=web&page=0`
-    );
-
-
-    await search(
-      q,
-      0,
-      'web'
-    );
+    location.href =
+      `/?q=${
+        encodeURIComponent(q)
+      }&type=web&page=0`;
 
   }
 );
 
 
+/* =========================================================
+   RESULTS SEARCH
+   ========================================================= */
+
 resultsForm.addEventListener(
   'submit',
-  e=>{
+  e => {
 
     e.preventDefault();
 
     const q =
       resultsInput.value.trim();
 
-    if(q){
+    if(!q)return;
 
-      search(
-        q,
-        0,
-        currentType
-      );
+
+    const bangUrl =
+      resolveBang(q);
+
+
+    if(bangUrl){
+
+      window.location.href =
+        bangUrl;
+
+      return;
 
     }
+
+
+    search(
+      q,
+      0,
+      currentType
+    );
 
   }
 );
@@ -3262,83 +2865,45 @@ resultsForm.addEventListener(
 
 document
   .querySelectorAll('.search-type')
-  .forEach(button=>{
-
-    button.addEventListener(
-      'click',
-      ()=>{
-
-        const q =
-          resultsInput.value.trim() ||
-          currentQ;
-
-        if(!q){
-          return;
-        }
-
-        search(
-          q,
-          0,
-          button.dataset.type
-        );
-
-      }
-    );
-
-  });
+  .forEach(
+    btn =>
+      btn.addEventListener(
+        'click',
+        () =>
+          search(
+            resultsInput.value ||
+            currentQ,
+            0,
+            btn.dataset.type
+          )
+      )
+  );
 
 
 /* =========================================================
-   TRANSLATOR
+   INPUT BUTTON STATES
    ========================================================= */
 
-translateButton.addEventListener(
-  'click',
-  translateText
+input.addEventListener(
+  'input',
+  () =>
+    updateButtonState(
+      document.querySelector(
+        '#submitButton'
+      ),
+      input.value
+    )
 );
 
-
-translateSwap.addEventListener(
-  'click',
-  ()=>{
-
-    const from =
-      translateFrom.value;
-
-    const to =
-      translateTo.value;
-
-
-    /*
-      Don't make auto-detect the output.
-    */
-
-    if(to==='auto'){
-      return;
-    }
-
-
-    translateFrom.value=
-      to;
-
-    translateTo.value=
-      from === 'auto'
-        ? 'en'
-        : from;
-
-
-    const oldInput =
-      translateInput.value;
-
-    translateInput.value=
-      translateOutput.value;
-
-    translateOutput.value=
-      oldInput;
-
-    updateTranslateCount();
-
-  }
+resultsInput.addEventListener(
+  'input',
+  () =>
+    updateButtonState(
+      document.querySelector(
+        '#resultsSubmitButton'
+      ),
+      resultsInput.value
+    )
 );
 
 
@@ -3351,34 +2916,27 @@ const aboutOverlay =
     '#aboutOverlay'
   );
 
-
 document
   .querySelector('#aboutButton')
-  .onclick=()=>{
-
-    aboutOverlay.classList.remove(
-      'hidden'
-    );
-
-  };
-
+  .onclick =
+    () =>
+      aboutOverlay.classList.remove(
+        'hidden'
+      );
 
 document
   .querySelector('#aboutClose')
-  .onclick=()=>{
-
-    aboutOverlay.classList.add(
-      'hidden'
-    );
-
-  };
-
+  .onclick =
+    () =>
+      aboutOverlay.classList.add(
+        'hidden'
+      );
 
 aboutOverlay.addEventListener(
   'click',
-  e=>{
+  e => {
 
-    if(e.target===aboutOverlay){
+    if(e.target === aboutOverlay){
 
       aboutOverlay.classList.add(
         'hidden'
@@ -3389,12 +2947,11 @@ aboutOverlay.addEventListener(
   }
 );
 
-
 document.addEventListener(
   'keydown',
-  e=>{
+  e => {
 
-    if(e.key==='Escape'){
+    if(e.key === 'Escape'){
 
       aboutOverlay.classList.add(
         'hidden'
@@ -3407,8 +2964,11 @@ document.addEventListener(
 
 
 /* =========================================================
-   URL / INITIAL LOAD
+   INITIAL LOAD
    ========================================================= */
+
+loadBangs();
+
 
 const params =
   new URLSearchParams(
@@ -3418,68 +2978,30 @@ const params =
 const initialQuery =
   params.get('q');
 
-const initialType =
-  ['web','images','news'].includes(
-    params.get('type')
-  )
-    ? params.get('type')
-    : 'web';
-
-
-/*
-  Load bangs in the background so the first bang
-  doesn't have to wait as long.
-*/
-
-loadBangs();
-
-
-/*
-  Important:
-  If there is a query in the URL, immediately switch
-  to results before waiting for the API.
-*/
 
 if(initialQuery){
 
-  home.classList.add('hidden');
-
-  results.classList.remove('hidden');
-
-  resultsInput.value=
-    initialQuery;
-
-  label.textContent=
-    `Results for “${initialQuery}”`;
-
-  list.innerHTML=
-    '<div class="empty">Searching…</div>';
+  const initialType =
+    [
+      'web',
+      'images',
+      'news'
+    ].includes(
+      params.get('type')
+    )
+      ? params.get('type')
+      : 'web';
 
 
   search(
     initialQuery,
-    Number(params.get('page') || 0),
+    Number(
+      params.get('page') || 0
+    ),
     initialType
   );
 
 }
-
-
-/* =========================================================
-   INITIAL BUTTON STATES
-   ========================================================= */
-
-updateButtonState(
-  submitButton,
-  input.value
-);
-
-updateButtonState(
-  resultsSubmitButton,
-  resultsInput.value
-);
-
-updateTranslateCount();
 
 </script>
 
