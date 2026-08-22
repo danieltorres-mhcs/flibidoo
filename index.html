@@ -505,36 +505,39 @@
   </style>
 
   <style id="flibidoo-minimal-update">
-    body {
-      background: #1d0c22;
+    body{
+      background:#1d0c22
     }
 
-    header, footer,
-    .removed-topbar, .removed-bottombar,
-    .removed-top-bar, .removed-bottom-bar {
-      display: none !important;
+    header,
+    footer,
+    .removed-topbar,
+    .removed-bottombar,
+    .removed-top-bar,
+    .removed-bottom-bar{
+      display:none!important
     }
 
-    main, .main, .search-page, .search-container {
-      min-height: 100vh;
+    main,
+    .main,
+    .search-page,
+    .search-container{
+      min-height:100vh
     }
 
-    .logo, .brand-logo,
+    .logo,
+    .brand-logo,
     img[alt*="Flibidoo" i],
-    img[src*="flibidoo" i] {
-      border-radius: 0 !important;
+    img[src*="flibidoo" i]{
+      border-radius:0!important;
       -webkit-mask-image:
-        linear-gradient(to right,
-          transparent 0%, black 7%, black 93%, transparent 100%),
-        linear-gradient(to bottom,
-          transparent 0%, black 7%, black 93%, transparent 100%);
+        linear-gradient(to right,transparent 0%,black 7%,black 93%,transparent 100%),
+        linear-gradient(to bottom,transparent 0%,black 7%,black 93%,transparent 100%);
       mask-image:
-        linear-gradient(to right,
-          transparent 0%, black 7%, black 93%, transparent 100%),
-        linear-gradient(to bottom,
-          transparent 0%, black 7%, black 93%, transparent 100%);
-      -webkit-mask-composite: source-in;
-      mask-composite: intersect;
+        linear-gradient(to right,transparent 0%,black 7%,black 93%,transparent 100%),
+        linear-gradient(to bottom,transparent 0%,black 7%,black 93%,transparent 100%);
+      -webkit-mask-composite:source-in;
+      mask-composite:intersect
     }
   </style>
 
@@ -966,6 +969,7 @@
       overflow:hidden
     }
   </style>
+
 </head>
 
 <body>
@@ -1094,6 +1098,7 @@
             r="6.8"
             stroke-width="1.7"
           />
+
           <path
             d="m16 16 5 5"
             stroke-width="1.7"
@@ -1129,6 +1134,7 @@
               stroke-width="2"
               stroke-linecap="round"
             />
+
             <path
               d="m12 5 7 7-7 7"
               stroke="currentColor"
@@ -1144,10 +1150,8 @@
     </div>
 
 
-    <nav
-      class="search-types"
-      aria-label="Search type"
-    >
+    <nav class="search-types" aria-label="Search type">
+
       <button
         class="search-type active"
         data-type="web"
@@ -1179,14 +1183,18 @@
       >
         Maps
       </button>
+
     </nav>
 
 
     <div class="results-layout">
 
       <div>
+
         <div id="resultList"></div>
+
         <div id="pager" class="pager"></div>
+
       </div>
 
       <aside
@@ -1203,36 +1211,58 @@
 
 
 <script>
-/*
- * ============================================================
- * FLIBIDOOSEARCH WORKER
- * ============================================================
- *
- * All API requests go through this Cloudflare Worker.
- */
 
-const WORKER_BASE =
+/*
+|--------------------------------------------------------------------------
+| FLIBIDOO WORKER
+|--------------------------------------------------------------------------
+|
+| Your HTML is hosted on:
+|
+| https://flibidoo-search.devs.surf
+|
+| Your API Worker is hosted on:
+|
+| https://ancient-unit-5007.daniel-torres-a95.workers.dev
+|
+*/
+
+const WORKER_URL =
   'https://ancient-unit-5007.daniel-torres-a95.workers.dev';
 
 
-function workerUrl(path, params = {}) {
-  const url = new URL(path, WORKER_BASE);
+/*
+|--------------------------------------------------------------------------
+| API helper
+|--------------------------------------------------------------------------
+*/
 
-  for (const [key, value] of Object.entries(params)) {
-    if (value !== undefined && value !== null) {
+function workerAPI(path, params = {}) {
+
+  const url = new URL(
+    WORKER_URL.replace(/\/+$/, '') + path
+  );
+
+  Object.entries(params).forEach(([key, value]) => {
+
+    if (
+      value !== undefined &&
+      value !== null
+    ) {
       url.searchParams.set(key, value);
     }
-  }
+
+  });
 
   return url.toString();
 }
 
 
 /*
- * ============================================================
- * DOM REFERENCES
- * ============================================================
- */
+|--------------------------------------------------------------------------
+| Elements
+|--------------------------------------------------------------------------
+*/
 
 const form =
   document.querySelector('#searchForm');
@@ -1280,12 +1310,13 @@ let currentType = 'web';
 
 
 /*
- * ============================================================
- * HELPERS
- * ============================================================
- */
+|--------------------------------------------------------------------------
+| Utility functions
+|--------------------------------------------------------------------------
+*/
 
 function esc(s = '') {
+
   return String(s).replace(
     /[&<>'"]/g,
     c => ({
@@ -1296,23 +1327,28 @@ function esc(s = '') {
       '"':'&quot;'
     }[c])
   );
+
 }
 
 
 function updateButtonState(button, value) {
+
   button.classList.toggle(
     'has-input',
     value.trim().length > 0
   );
+
 }
 
 
 function normalize(s = '') {
+
   return s
     .toLowerCase()
     .trim()
     .replace(/[“”"'.,!?;:()[\]{}]/g, '')
     .replace(/\s+/g, ' ');
+
 }
 
 
@@ -1320,8 +1356,8 @@ function levenshtein(a, b) {
 
   const prev =
     Array.from(
-      { length: b.length + 1 },
-      (_, i) => i
+      {length:b.length + 1},
+      (_,i) => i
     );
 
   for (let i = 1; i <= a.length; i++) {
@@ -1336,30 +1372,35 @@ function levenshtein(a, b) {
         prev[j - 1] +
           (a[i - 1] === b[j - 1] ? 0 : 1)
       );
+
     }
 
-    for (let j = 0; j <= b.length; j++) {
+    for (
+      let j = 0;
+      j <= b.length;
+      j++
+    ) {
       prev[j] = cur[j];
     }
+
   }
 
   return prev[b.length];
+
 }
 
 
 /*
- * ============================================================
- * DICTIONARY QUERY DETECTION
- * ============================================================
- */
+|--------------------------------------------------------------------------
+| Dictionary detection
+|--------------------------------------------------------------------------
+*/
 
 function dictionaryWord(query) {
 
   const q = normalize(query);
 
-  if (!q || q.split(' ').length === 0) {
-    return null;
-  }
+  if (!q) return null;
 
   if (q.split(' ').length === 1) {
     return q;
@@ -1372,13 +1413,17 @@ function dictionaryWord(query) {
 
   for (const t of tokens) {
 
-    if (/^[a-z][a-z'-]*$/i.test(t)) {
-
+    if (
+      /^[a-z][a-z'-]*$/i.test(t)
+    ) {
       candidates.add(
-        t.replace(/^['-]+|['-]+$/g, '')
+        t.replace(
+          /^['-]+|['-]+$/g,
+          ''
+        )
       );
-
     }
+
   }
 
   for (const word of candidates) {
@@ -1393,26 +1438,31 @@ function dictionaryWord(query) {
 
     for (const template of templates) {
 
-      if (levenshtein(q, template) <= 3) {
+      if (
+        levenshtein(q, template) <= 3
+      ) {
         return word;
       }
 
     }
+
   }
 
   return null;
+
 }
 
 
 /*
- * ============================================================
- * SEARCH RESULT RENDERING
- * ============================================================
- */
+|--------------------------------------------------------------------------
+| Render search results
+|--------------------------------------------------------------------------
+*/
 
 function render(data) {
 
   home.classList.add('hidden');
+
   results.classList.remove('hidden');
 
   currentType =
@@ -1451,6 +1501,7 @@ function render(data) {
     );
 
   list.innerHTML = '';
+
   pager.innerHTML = '';
 
 
@@ -1460,22 +1511,22 @@ function render(data) {
       '<div class="empty">No results found.</div>';
 
     return;
+
   }
 
 
   /*
-   * ==========================================================
-   * IMAGE RESULTS
-   * ==========================================================
-   */
+  |--------------------------------------------------------------------------
+  | Images
+  |--------------------------------------------------------------------------
+  */
 
   if (currentType === 'images') {
 
     const grid =
       document.createElement('div');
 
-    grid.className =
-      'image-grid';
+    grid.className = 'image-grid';
 
     resultsArray.forEach(r => {
 
@@ -1524,8 +1575,8 @@ function render(data) {
       `;
 
       grid.appendChild(el);
-    });
 
+    });
 
     if (grid.children.length) {
 
@@ -1533,26 +1584,28 @@ function render(data) {
 
     } else {
 
-      list.appendChild(
-        Object.assign(
-          document.createElement('div'),
-          {
-            className:'empty',
-            textContent:'No images found.'
-          }
-        )
-      );
+      const empty =
+        document.createElement('div');
+
+      empty.className = 'empty';
+
+      empty.textContent =
+        'No images found.';
+
+      list.appendChild(empty);
 
     }
 
+  }
+
 
   /*
-   * ==========================================================
-   * MAP RESULTS
-   * ==========================================================
-   */
+  |--------------------------------------------------------------------------
+  | Maps
+  |--------------------------------------------------------------------------
+  */
 
-  } else if (currentType === 'map') {
+  else if (currentType === 'map') {
 
     resultsArray.forEach(r => {
 
@@ -1591,34 +1644,34 @@ function render(data) {
 
         ${
           r.lat && r.lon
-            ? `
-              <div class="map-result-coords">
+            ? `<div class="map-result-coords">
                 ${esc(r.lat)}, ${esc(r.lon)}
-              </div>
-            `
+              </div>`
             : ''
         }
       `;
 
       list.appendChild(el);
+
     });
+
+  }
 
 
   /*
-   * ==========================================================
-   * WEB / NEWS RESULTS
-   * ==========================================================
-   */
+  |--------------------------------------------------------------------------
+  | Web / News
+  |--------------------------------------------------------------------------
+  */
 
-  } else {
+  else {
 
     resultsArray.forEach(r => {
 
       const el =
         document.createElement('article');
 
-      el.className =
-        'result';
+      el.className = 'result';
 
       const u =
         r.url || '';
@@ -1647,22 +1700,19 @@ function render(data) {
         r.thumbnail ||
         '';
 
-
       el.innerHTML = `
 
         <div class="result-url">
 
           ${
             favicon
-              ? `
-                <img
+              ? `<img
                   class="result-favicon"
                   src="${esc(favicon)}"
                   alt=""
                   loading="lazy"
                   referrerpolicy="no-referrer"
-                >
-              `
+                >`
               : ''
           }
 
@@ -1671,7 +1721,6 @@ function render(data) {
           </span>
 
         </div>
-
 
         <h2>
           <a
@@ -1682,41 +1731,32 @@ function render(data) {
           </a>
         </h2>
 
-
         ${
           description
-            ? `
-              <p class="snippet">
+            ? `<p class="snippet">
                 ${window.flibidooRichText(description)}
-              </p>
-            `
+              </p>`
             : ''
         }
-
 
         ${
           age
-            ? `
-              <div class="result-meta">
+            ? `<div class="result-meta">
                 ${esc(age)}
-              </div>
-            `
+              </div>`
             : ''
         }
 
-
         ${
           thumb
-            ? `
-              <div class="result-inline-thumb">
+            ? `<div class="result-inline-thumb">
                 <img
                   src="${esc(thumb)}"
                   alt=""
                   loading="lazy"
                   referrerpolicy="no-referrer"
                 >
-              </div>
-            `
+              </div>`
             : ''
         }
 
@@ -1725,14 +1765,15 @@ function render(data) {
       list.appendChild(el);
 
     });
+
   }
 
 
   /*
-   * ==========================================================
-   * PAGINATION
-   * ==========================================================
-   */
+  |--------------------------------------------------------------------------
+  | Pagination
+  |--------------------------------------------------------------------------
+  */
 
   const hasMore =
     Boolean(
@@ -1749,15 +1790,15 @@ function render(data) {
     b.textContent =
       'Previous';
 
-    b.onclick =
-      () =>
-        search(
-          currentQ,
-          currentPage - 1,
-          currentType
-        );
+    b.onclick = () =>
+      search(
+        currentQ,
+        currentPage - 1,
+        currentType
+      );
 
     pager.appendChild(b);
+
   }
 
 
@@ -1769,15 +1810,15 @@ function render(data) {
     b.textContent =
       'Next';
 
-    b.onclick =
-      () =>
-        search(
-          currentQ,
-          currentPage + 1,
-          currentType
-        );
+    b.onclick = () =>
+      search(
+        currentQ,
+        currentPage + 1,
+        currentType
+      );
 
     pager.appendChild(b);
+
   }
 
 
@@ -1788,30 +1829,29 @@ function render(data) {
       data.query || currentQ
     )}&type=${encodeURIComponent(
       currentType
-    )}${
-      currentPage
-        ? `&page=${currentPage}`
-        : ''
-    }`
+    )}&page=${currentPage}`
   );
+
 }
 
 
 /*
- * ============================================================
- * DICTIONARY RENDERING
- * ============================================================
- */
+|--------------------------------------------------------------------------
+| Dictionary renderer
+|--------------------------------------------------------------------------
+*/
 
 function dictionaryTags(tags) {
 
-  return Array.isArray(tags) && tags.length
-    ? `
-      <span class="dictionary-tags">
+  return Array.isArray(tags) &&
+    tags.length
+
+    ? ` <span class="dictionary-tags">
         (${tags.map(esc).join(', ')})
-      </span>
-    `
+      </span>`
+
     : '';
+
 }
 
 
@@ -1819,12 +1859,11 @@ function renderSense(sense, depth = 0) {
 
   if (!sense) return '';
 
-  let html = `
-    <div
+  let html =
+    `<div
       class="dictionary-sense"
-      style="margin-left:${Math.min(depth,3) * 12}px"
-    >
-  `;
+      style="margin-left:${Math.min(depth,3)*12}px"
+    >`;
 
 
   if (sense.definition) {
@@ -1835,6 +1874,7 @@ function renderSense(sense, depth = 0) {
         ${dictionaryTags(sense.tags)}
       </div>
     `;
+
   }
 
 
@@ -1851,7 +1891,9 @@ function renderSense(sense, depth = 0) {
         `;
 
       }
+
     });
+
   }
 
 
@@ -1873,7 +1915,9 @@ function renderSense(sense, depth = 0) {
         `;
 
       }
+
     });
+
   }
 
 
@@ -1893,6 +1937,7 @@ function renderSense(sense, depth = 0) {
         </div>
       </div>
     `;
+
   }
 
 
@@ -1912,6 +1957,7 @@ function renderSense(sense, depth = 0) {
         </div>
       </div>
     `;
+
   }
 
 
@@ -1930,7 +1976,6 @@ function renderSense(sense, depth = 0) {
         <ul class="dictionary-list">
     `;
 
-
     sense.translations.forEach(t => {
 
       if (t?.word) {
@@ -1948,13 +1993,14 @@ function renderSense(sense, depth = 0) {
         `;
 
       }
-    });
 
+    });
 
     html += `
         </ul>
       </div>
     `;
+
   }
 
 
@@ -1969,10 +2015,12 @@ function renderSense(sense, depth = 0) {
         );
 
     });
+
   }
 
 
   return html + '</div>';
+
 }
 
 
@@ -1983,9 +2031,11 @@ function renderDictionary(data) {
   ) {
 
     dictionary.classList.add('hidden');
+
     dictionary.innerHTML = '';
 
     return;
+
   }
 
 
@@ -2024,6 +2074,7 @@ function renderDictionary(data) {
           }
         </div>
       `;
+
     }
 
 
@@ -2034,6 +2085,7 @@ function renderDictionary(data) {
           ${esc(entry.partOfSpeech)}
         </div>
       `;
+
     }
 
 
@@ -2052,7 +2104,6 @@ function renderDictionary(data) {
           <ul class="dictionary-list">
       `;
 
-
       entry.pronunciations.forEach(p => {
 
         if (p?.text) {
@@ -2068,14 +2119,16 @@ function renderDictionary(data) {
               ${dictionaryTags(p.tags)}
             </li>
           `;
-        }
-      });
 
+        }
+
+      });
 
       html += `
           </ul>
         </div>
       `;
+
     }
 
 
@@ -2094,7 +2147,6 @@ function renderDictionary(data) {
           <ul class="dictionary-list">
       `;
 
-
       entry.forms.forEach(f => {
 
         if (f?.word) {
@@ -2105,14 +2157,16 @@ function renderDictionary(data) {
               ${dictionaryTags(f.tags)}
             </li>
           `;
-        }
-      });
 
+        }
+
+      });
 
       html += `
           </ul>
         </div>
       `;
+
     }
 
 
@@ -2129,18 +2183,16 @@ function renderDictionary(data) {
           </div>
       `;
 
-
       entry.senses.forEach(s => {
 
-        html +=
-          renderSense(s);
+        html += renderSense(s);
 
       });
-
 
       html += `
         </div>
       `;
+
     }
 
 
@@ -2162,6 +2214,7 @@ function renderDictionary(data) {
 
         </div>
       `;
+
     }
 
 
@@ -2183,12 +2236,14 @@ function renderDictionary(data) {
 
         </div>
       `;
+
     }
 
 
     html += `
       </section>
     `;
+
   });
 
 
@@ -2199,66 +2254,62 @@ function renderDictionary(data) {
         Source:
         ${
           data.source.url
-            ? `
-              <a
+            ? `<a
                 href="${esc(data.source.url)}"
                 rel="noopener noreferrer"
               >
                 ${esc(data.source.url)}
-              </a>
-            `
+              </a>`
             : ''
         }
-    `;
 
-
-    if (data.source.license) {
-
-      html += `
-        <br>
-        License:
         ${
-          data.source.license.url
-            ? `
-              <a
-                href="${esc(
-                  data.source.license.url
-                )}"
-                rel="noopener noreferrer"
-              >
-                ${esc(
-                  data.source.license.name ||
-                  'License'
-                )}
-              </a>
-            `
-            : esc(
-                data.source.license.name ||
-                ''
-              )
+          data.source.license
+            ? `<br>
+              License:
+              ${
+                data.source.license.url
+                  ? `<a
+                      href="${esc(
+                        data.source.license.url
+                      )}"
+                      rel="noopener noreferrer"
+                    >
+                      ${esc(
+                        data.source.license.name ||
+                        'License'
+                      )}
+                    </a>`
+                  : esc(
+                      data.source.license.name ||
+                      ''
+                    )
+              }`
+            : ''
         }
-      `;
-    }
 
-
-    html += `
       </div>
     `;
+
   }
 
 
   dictionary.innerHTML = html;
+
   dictionary.classList.remove('hidden');
+
 }
 
 
 /*
- * ============================================================
- * DICTIONARY API
- * ============================================================
- *
- * Browser -> Worker -> FreeDictionaryAPI
- */
+|--------------------------------------------------------------------------
+| Dictionary API
+|--------------------------------------------------------------------------
+|
+| IMPORTANT:
+| This now goes to your Worker.
+|
+*/
 
 async function loadDictionary(q) {
 
@@ -2268,9 +2319,11 @@ async function loadDictionary(q) {
   if (!word) {
 
     dictionary.classList.add('hidden');
+
     dictionary.innerHTML = '';
 
     return;
+
   }
 
 
@@ -2284,18 +2337,17 @@ async function loadDictionary(q) {
 
     const r =
       await fetch(
-        workerUrl(
-          '/api/dictionary',
-          { word }
-        )
+        workerAPI('/api/dictionary', {
+          word
+        })
       );
-
 
     if (!r.ok) {
 
       dictionary.classList.add('hidden');
 
       return;
+
     }
 
 
@@ -2310,29 +2362,32 @@ async function loadDictionary(q) {
     } else {
 
       dictionary.classList.add('hidden');
+
       dictionary.innerHTML = '';
 
     }
 
-  } catch (_) {
+  } catch (error) {
+
+    console.error(
+      'Dictionary request failed:',
+      error
+    );
 
     dictionary.classList.add('hidden');
+
     dictionary.innerHTML = '';
 
   }
+
 }
 
 
 /*
- * ============================================================
- * MAIN SEARCH
- * ============================================================
- *
- * Browser -> Worker -> Tiago
- *
- * Maps:
- * Browser -> Worker -> OpenStreetMap
- */
+|--------------------------------------------------------------------------
+| Main search
+|--------------------------------------------------------------------------
+*/
 
 async function search(
   q,
@@ -2346,11 +2401,14 @@ async function search(
 
 
   currentQ = q;
+
   currentPage = page;
+
   currentType = type;
 
 
   input.value = q;
+
   resultsInput.value = q;
 
 
@@ -2366,6 +2424,7 @@ async function search(
 
 
   home.classList.add('hidden');
+
   results.classList.remove('hidden');
 
 
@@ -2391,8 +2450,11 @@ async function search(
 
 
   /*
-   * Start dictionary independently.
-   */
+  |--------------------------------------------------------------------------
+  | Start dictionary independently
+  |--------------------------------------------------------------------------
+  */
+
   const dictionaryPromise =
     currentType === 'web'
       ? loadDictionary(q)
@@ -2401,16 +2463,23 @@ async function search(
 
   try {
 
+    /*
+     * THIS IS THE IMPORTANT CHANGE:
+     *
+     * Before:
+     * fetch(`/api/search?...`)
+     *
+     * Now:
+     * fetch(`https://ancient-unit-5007...workers.dev/api/search?...`)
+     */
+
     const r =
       await fetch(
-        workerUrl(
-          '/api/search',
-          {
-            q,
-            page,
-            type: currentType
-          }
-        )
+        workerAPI('/api/search', {
+          q,
+          page,
+          type: currentType
+        })
       );
 
 
@@ -2421,9 +2490,9 @@ async function search(
     if (!r.ok) {
 
       throw new Error(
-        d.error ||
-        'Search failed'
+        d.error || 'Search failed'
       );
+
     }
 
 
@@ -2431,26 +2500,32 @@ async function search(
 
   } catch (e) {
 
-    list.innerHTML = `
-      <div class="error">
+    console.error(
+      'Search request failed:',
+      e
+    );
+
+    list.innerHTML =
+      `<div class="error">
         ${esc(
           e.message ||
           'Search failed. Please try again.'
         )}
-      </div>
-    `;
+      </div>`;
+
   }
 
 
   await dictionaryPromise;
+
 }
 
 
 /*
- * ============================================================
- * INPUT EVENTS
- * ============================================================
- */
+|--------------------------------------------------------------------------
+| Input state
+|--------------------------------------------------------------------------
+*/
 
 input.addEventListener(
   'input',
@@ -2483,10 +2558,10 @@ updateButtonState(
 
 
 /*
- * ============================================================
- * SEARCH FORM
- * ============================================================
- */
+|--------------------------------------------------------------------------
+| Search forms
+|--------------------------------------------------------------------------
+*/
 
 form.addEventListener(
   'submit',
@@ -2521,15 +2596,17 @@ resultsForm.addEventListener(
 
 
 /*
- * ============================================================
- * CLEAR
- * ============================================================
- */
+|--------------------------------------------------------------------------
+| Clear
+|--------------------------------------------------------------------------
+*/
 
-document.querySelector('#clear').onclick =
-  () => {
+document
+  .querySelector('#clear')
+  .onclick = () => {
 
     input.value = '';
+
     input.focus();
 
     updateButtonState(
@@ -2541,13 +2618,14 @@ document.querySelector('#clear').onclick =
 
 
 /*
- * ============================================================
- * I'M FEELING LUCKY
- * ============================================================
- */
+|--------------------------------------------------------------------------
+| I'm Feeling Lucky
+|--------------------------------------------------------------------------
+*/
 
-document.querySelector('#lucky').onclick =
-  async () => {
+document
+  .querySelector('#lucky')
+  .onclick = async () => {
 
     const q =
       input.value.trim();
@@ -2559,14 +2637,11 @@ document.querySelector('#lucky').onclick =
 
       const r =
         await fetch(
-          workerUrl(
-            '/api/search',
-            {
-              q,
-              page: 1,
-              type: currentType
-            }
-          )
+          workerAPI('/api/search', {
+            q,
+            page: 1,
+            type: currentType
+          })
         );
 
 
@@ -2574,7 +2649,9 @@ document.querySelector('#lucky').onclick =
         await r.json();
 
 
-      if (d.results?.[0]?.url) {
+      if (
+        d.results?.[0]?.url
+      ) {
 
         location.href =
           d.results[0].url;
@@ -2589,7 +2666,7 @@ document.querySelector('#lucky').onclick =
 
       }
 
-    } catch (_) {
+    } catch {
 
       search(
         q,
@@ -2598,38 +2675,42 @@ document.querySelector('#lucky').onclick =
       );
 
     }
+
   };
 
 
 /*
- * ============================================================
- * SEARCH TYPE BUTTONS
- * ============================================================
- */
+|--------------------------------------------------------------------------
+| Search type buttons
+|--------------------------------------------------------------------------
+*/
 
 document
   .querySelectorAll('.search-type')
-  .forEach(btn =>
+  .forEach(btn => {
 
     btn.addEventListener(
       'click',
-      () =>
+      () => {
 
         search(
           resultsInput.value ||
           currentQ,
           0,
           btn.dataset.type
-        )
-    )
-  );
+        );
+
+      }
+    );
+
+  });
 
 
 /*
- * ============================================================
- * INITIAL URL QUERY
- * ============================================================
- */
+|--------------------------------------------------------------------------
+| URL query initialization
+|--------------------------------------------------------------------------
+*/
 
 const params =
   new URLSearchParams(
@@ -2651,12 +2732,16 @@ const initialPage =
 
 
 const initialType =
-  ['web','images','news','map']
-    .includes(
-      params.get('type')
-    )
-      ? params.get('type')
-      : 'web';
+  [
+    'web',
+    'images',
+    'news',
+    'map'
+  ].includes(
+    params.get('type')
+  )
+    ? params.get('type')
+    : 'web';
 
 
 if (initialQuery) {
@@ -2666,6 +2751,7 @@ if (initialQuery) {
     initialPage,
     initialType
   );
+
 }
 
 </script>
@@ -2680,17 +2766,18 @@ function flibidooFavicon(url) {
     const u =
       new URL(url);
 
-    return `
-      https://www.google.com/s2/favicons
-      ?domain=${encodeURIComponent(u.hostname)}
-      &sz=64
-    `.replace(/\s+/g,'');
+    return (
+      `https://www.google.com/s2/favicons` +
+      `?domain=${encodeURIComponent(u.hostname)}` +
+      `&sz=64`
+    );
 
   } catch (_) {
 
     return '';
 
   }
+
 }
 
 
@@ -2700,16 +2787,15 @@ function flibidooResultIcon(url) {
     flibidooFavicon(url);
 
   return src
-    ? `
-      <img
+    ? `<img
         class="result-site-icon"
         src="${src}"
         alt=""
         loading="lazy"
         referrerpolicy="no-referrer"
-      >
-    `
+      >`
     : '';
+
 }
 
 </script>
@@ -2719,20 +2805,8 @@ function flibidooResultIcon(url) {
 
 (() => {
 
-  /*
-   * IMPORTANT:
-   *
-   * Dictionary requests now go through the Worker.
-   *
-   * Browser
-   *   ↓
-   * Flibidoo Worker
-   *   ↓
-   * FreeDictionaryAPI
-   */
-
   const DICT_BASE =
-    'https://ancient-unit-5007.daniel-torres-a95.workers.dev/api/dictionary?word=';
+    'https://freedictionaryapi.com/api/v1/entries/all/';
 
 
   const qEl =
@@ -2749,11 +2823,9 @@ function flibidooResultIcon(url) {
 
   function dictionaryQuery(q) {
 
-    q =
-      (q || '').trim();
+    q = (q || '').trim();
 
     if (!q) return '';
-
 
     const m =
       q.match(
@@ -2763,10 +2835,10 @@ function flibidooResultIcon(url) {
         /^(.+?)\s+(?:meaning|means|definition)$/i
       );
 
-
     return m
       ? m[1].trim()
       : q;
+
   }
 
 
@@ -2775,42 +2847,41 @@ function flibidooResultIcon(url) {
     const clean =
       (q || '').trim();
 
-
     return (
       /^[A-Za-z][A-Za-z'-]{0,31}$/.test(clean) ||
-
-      /^(?:meaning of|definition of)\s+[A-Za-z][A-Za-z'-]{0,31}$/i
-        .test(clean) ||
-
-      /^[A-Za-z][A-Za-z'-]{0,31}\s+(?:meaning|means|definition)$/i
-        .test(clean)
+      /^(?:meaning of|definition of)\s+[A-Za-z][A-Za-z'-]{0,31}$/i.test(clean) ||
+      /^[A-Za-z][A-Za-z'-]{0,31}\s+(?:meaning|means|definition)$/i.test(clean)
     );
+
   }
 
 
-  async function loadDictionary(q) {
+  async function loadDictionaryIndependent(q) {
 
     if (
       !dictEl ||
       !looksLikeDefinition(q)
-    ) {
-      return;
-    }
+    ) return;
 
 
     const word =
       dictionaryQuery(q);
-
 
     if (!word) return;
 
 
     try {
 
+      /*
+       * This independent dictionary request
+       * also goes directly to your Worker.
+       */
+
       const r =
         await fetch(
-          DICT_BASE +
-          encodeURIComponent(word)
+          workerAPI('/api/dictionary', {
+            word
+          })
         );
 
 
@@ -2825,14 +2896,8 @@ function flibidooResultIcon(url) {
         !data ||
         !Array.isArray(data.entries) ||
         !data.entries.length
-      ) {
-        return;
-      }
+      ) return;
 
-
-      /*
-       * Use existing renderer.
-       */
 
       if (
         typeof window.showDictionary ===
@@ -2842,6 +2907,7 @@ function flibidooResultIcon(url) {
         window.showDictionary(data);
 
         return;
+
       }
 
 
@@ -2853,34 +2919,27 @@ function flibidooResultIcon(url) {
         window.renderDictionary(data);
 
         return;
+
       }
 
 
-      /*
-       * Fallback renderer.
-       */
-
       const entries =
         data.entries
-          .flatMap(e =>
-            (e.senses || []).map(
-              sense => ({
-                pos:
-                  e.partOfSpeech || '',
-
-                definition:
-                  sense.definition || '',
-
-                examples:
-                  sense.examples || [],
-
-                synonyms:
-                  sense.synonyms || [],
-
-                antonyms:
-                  sense.antonyms || []
-              })
-            )
+          .flatMap(
+            e =>
+              (e.senses || [])
+                .map(sense => ({
+                  pos:
+                    e.partOfSpeech || '',
+                  definition:
+                    sense.definition || '',
+                  examples:
+                    sense.examples || [],
+                  synonyms:
+                    sense.synonyms || [],
+                  antonyms:
+                    sense.antonyms || []
+                }))
           )
           .filter(
             x =>
@@ -2892,7 +2951,6 @@ function flibidooResultIcon(url) {
 
 
       dictEl.innerHTML = `
-
         <div class="dictionary-fallback">
 
           <div class="dictionary-word">
@@ -2901,62 +2959,56 @@ function flibidooResultIcon(url) {
             )}
           </div>
 
-
           ${entries.map(e => `
 
             <section>
 
               ${
                 e.pos
-                  ? `
-                    <div class="dictionary-pos">
+                  ? `<div class="dictionary-pos">
                       ${escapeHtml(e.pos)}
-                    </div>
-                  `
+                    </div>`
                   : ''
               }
-
 
               ${
                 e.definition
-                  ? `
-                    <div class="dictionary-definition">
-                      ${escapeHtml(e.definition)}
-                    </div>
-                  `
+                  ? `<div class="dictionary-definition">
+                      ${escapeHtml(
+                        e.definition
+                      )}
+                    </div>`
                   : ''
               }
 
-
-              ${e.examples.map(
-                x => `
-                  <div class="dictionary-example">
-                    “${escapeHtml(x)}”
-                  </div>
-                `
-              ).join('')}
-
+              ${e.examples
+                .map(
+                  x =>
+                    `<div class="dictionary-example">
+                      “${escapeHtml(x)}”
+                    </div>`
+                )
+                .join('')}
 
               ${
                 e.synonyms.length
-                  ? `
-                    <div class="dictionary-line">
+                  ? `<div class="dictionary-line">
                       <b>Synonyms:</b>
-                      ${e.synonyms.map(escapeHtml).join(', ')}
-                    </div>
-                  `
+                      ${e.synonyms
+                        .map(escapeHtml)
+                        .join(', ')}
+                    </div>`
                   : ''
               }
 
-
               ${
                 e.antonyms.length
-                  ? `
-                    <div class="dictionary-line">
+                  ? `<div class="dictionary-line">
                       <b>Antonyms:</b>
-                      ${e.antonyms.map(escapeHtml).join(', ')}
-                    </div>
-                  `
+                      ${e.antonyms
+                        .map(escapeHtml)
+                        .join(', ')}
+                    </div>`
                   : ''
               }
 
@@ -2965,18 +3017,16 @@ function flibidooResultIcon(url) {
           `).join('')}
 
         </div>
-
       `;
 
 
       dictEl.hidden = false;
 
-
     } catch (_) {
 
       /*
        * Dictionary failure must never
-       * block normal web search.
+       * break normal search.
        */
 
     }
@@ -3001,12 +3051,8 @@ function flibidooResultIcon(url) {
 
 
   window.flibidooLoadDictionary =
-    loadDictionary;
+    loadDictionaryIndependent;
 
-
-  /*
-   * Capture Enter before search handlers.
-   */
 
   document.addEventListener(
     'keydown',
@@ -3022,14 +3068,14 @@ function flibidooResultIcon(url) {
         const q =
           e.target.value;
 
-
         if (
           looksLikeDefinition(q)
         ) {
 
-          loadDictionary(q);
+          loadDictionaryIndependent(q);
 
         }
+
       }
 
     },
@@ -3037,14 +3083,10 @@ function flibidooResultIcon(url) {
   );
 
 
-  /*
-   * Expose event hook.
-   */
-
   window.addEventListener(
     'flibidoo:search',
     e =>
-      loadDictionary(
+      loadDictionaryIndependent(
         e.detail?.query || ''
       )
   );
@@ -3125,8 +3167,11 @@ function flibidooResultIcon(url) {
 
 
   let timer = null;
+
   let controller = null;
+
   let selected = -1;
+
   let items = [];
 
 
@@ -3159,13 +3204,10 @@ function flibidooResultIcon(url) {
     const box =
       document.createElement('div');
 
-
     box.className =
       'flibidoo-suggestions';
 
-
     box.hidden = true;
-
 
     wrap.appendChild(box);
 
@@ -3173,7 +3215,9 @@ function flibidooResultIcon(url) {
     function close() {
 
       box.hidden = true;
+
       box.innerHTML = '';
+
       selected = -1;
 
     }
@@ -3185,14 +3229,13 @@ function flibidooResultIcon(url) {
 
       close();
 
-
       const f =
         input.closest('form');
-
 
       if (f) {
         f.requestSubmit();
       }
+
     }
 
 
@@ -3207,6 +3250,7 @@ function flibidooResultIcon(url) {
         close();
 
         return;
+
       }
 
 
@@ -3224,23 +3268,16 @@ function flibidooResultIcon(url) {
       try {
 
         /*
-         * IMPORTANT:
+         * AUTOCOMPLETE NOW USES:
          *
-         * Suggestions now go through:
-         *
-         * Browser
-         *   ↓
-         * Worker /api/suggest
-         *   ↓
-         * search.tiago.zip/suggest
+         * https://ancient-unit-5007.daniel-torres-a95.workers.dev/api/suggest
          */
 
         const r =
           await fetch(
-            workerUrl(
-              '/api/suggest',
-              { q }
-            ),
+            workerAPI('/api/suggest', {
+              q
+            }),
             {
               signal:
                 controller.signal
@@ -3249,7 +3286,9 @@ function flibidooResultIcon(url) {
 
 
         if (!r.ok) {
+
           throw new Error();
+
         }
 
 
@@ -3261,7 +3300,10 @@ function flibidooResultIcon(url) {
           Array.isArray(
             d.suggestions
           )
-            ? d.suggestions.slice(0,8)
+            ? d.suggestions.slice(
+                0,
+                8
+              )
             : [];
 
 
@@ -3270,55 +3312,51 @@ function flibidooResultIcon(url) {
           close();
 
           return;
+
         }
 
 
         box.innerHTML =
-          items.map(
-            (x,i) => `
+          items
+            .map(
+              (x,i) => `
 
-              <button
-                class="flibidoo-suggestion"
-                type="button"
-                data-i="${i}"
-              >
-
-                ${
-                  x.img
-                    ? `
-                      <img
-                        src="${esc(x.img)}"
-                        alt=""
-                        loading="lazy"
-                        referrerpolicy="no-referrer"
-                      >
-                    `
-                    : ''
-                }
-
-
-                <span>
-
-                  ${esc(x.query)}
+                <button
+                  class="flibidoo-suggestion"
+                  type="button"
+                  data-i="${i}"
+                >
 
                   ${
-                    x.entity &&
-                    x.desc
-                      ? `
-                        <small>
-                          ${esc(x.desc)}
-                        </small>
-                      `
+                    x.img
+                      ? `<img
+                          src="${esc(x.img)}"
+                          alt=""
+                          loading="lazy"
+                          referrerpolicy="no-referrer"
+                        >`
                       : ''
                   }
 
-                </span>
+                  <span>
+                    ${esc(x.query)}
 
-              </button>
+                    ${
+                      x.entity &&
+                      x.desc
+                        ? `<small>
+                            ${esc(x.desc)}
+                          </small>`
+                        : ''
+                    }
 
-            `
-          )
-          .join('');
+                  </span>
+
+                </button>
+
+              `
+            )
+            .join('');
 
 
         box.hidden = false;
@@ -3326,14 +3364,13 @@ function flibidooResultIcon(url) {
 
         box
           .querySelectorAll('button')
-          .forEach(btn =>
+          .forEach(btn => {
 
             btn.addEventListener(
               'mousedown',
               e => {
 
                 e.preventDefault();
-
 
                 choose(
                   items[
@@ -3344,9 +3381,9 @@ function flibidooResultIcon(url) {
                 );
 
               }
-            )
+            );
 
-          );
+          });
 
 
       } catch (_) {
@@ -3354,6 +3391,7 @@ function flibidooResultIcon(url) {
         close();
 
       }
+
     }
 
 
@@ -3380,9 +3418,7 @@ function flibidooResultIcon(url) {
         if (box.hidden) return;
 
 
-        if (
-          e.key === 'ArrowDown'
-        ) {
+        if (e.key === 'ArrowDown') {
 
           e.preventDefault();
 
@@ -3393,7 +3429,6 @@ function flibidooResultIcon(url) {
             );
 
         }
-
 
         else if (
           e.key === 'ArrowUp'
@@ -3409,7 +3444,6 @@ function flibidooResultIcon(url) {
 
         }
 
-
         else if (
           e.key === 'Enter' &&
           selected >= 0
@@ -3422,7 +3456,6 @@ function flibidooResultIcon(url) {
           );
 
         }
-
 
         else if (
           e.key === 'Escape'
@@ -3484,28 +3517,18 @@ function flibidooResultIcon(url) {
       let src =
         String(value ?? '');
 
-
       if (!src) return '';
 
-
-      /*
-       * Decode common HTML entities.
-       */
 
       const ta =
         document.createElement(
           'textarea'
         );
 
-
       ta.innerHTML = src;
 
       src = ta.value;
 
-
-      /*
-       * Strip dangerous elements.
-       */
 
       src =
         src
@@ -3531,10 +3554,6 @@ function flibidooResultIcon(url) {
           );
 
 
-      /*
-       * Protect allowed HTML.
-       */
-
       const allowed = [];
 
 
@@ -3546,9 +3565,9 @@ function flibidooResultIcon(url) {
             const idx =
               allowed.push(m) - 1;
 
-            return `
-              @@FLIBIDOO_TAG_${idx}@@
-            `.trim();
+            return (
+              `@@FLIBIDOO_TAG_${idx}@@`
+            );
 
           }
         );
@@ -3556,13 +3575,15 @@ function flibidooResultIcon(url) {
 
       src =
         src
-          .replace(/</g,'&lt;')
-          .replace(/>/g,'&gt;');
+          .replace(
+            /</g,
+            '&lt;'
+          )
+          .replace(
+            />/g,
+            '&gt;'
+          );
 
-
-      /*
-       * Markdown links.
-       */
 
       src =
         src.replace(
@@ -3570,10 +3591,6 @@ function flibidooResultIcon(url) {
           '<a href="$2" rel="noopener noreferrer">$1</a>'
         );
 
-
-      /*
-       * Inline formatting.
-       */
 
       src =
         src.replace(
@@ -3617,20 +3634,12 @@ function flibidooResultIcon(url) {
         );
 
 
-      /*
-       * Headings.
-       */
-
       src =
         src.replace(
           /^#{1,6}\s+(.+)$/gm,
           '<strong>$1</strong>'
         );
 
-
-      /*
-       * Lists.
-       */
 
       src =
         src.replace(
@@ -3646,23 +3655,15 @@ function flibidooResultIcon(url) {
         );
 
 
-      /*
-       * Restore safe HTML.
-       */
-
       src =
         src.replace(
           /@@FLIBIDOO_TAG_(\d+)@@/g,
-          (_,i) =>
+          (_, i) =>
             allowed[
               Number(i)
             ] || ''
         );
 
-
-      /*
-       * Preserve line breaks.
-       */
 
       return src.replace(
         /\r?\n/g,
@@ -3674,7 +3675,6 @@ function flibidooResultIcon(url) {
 })();
 
 </script>
-
 
 </body>
 </html>
