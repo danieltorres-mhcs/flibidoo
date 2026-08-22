@@ -7,15 +7,9 @@
 
   <title>FlibidooSearch</title>
 
-  <!-- FlibidooSearch favicon -->
   <link
     rel="icon"
     type="image/png"
-    href="https://github.com/danieltorres-mhcs/assets/blob/main/flibidoo.PNG?raw=true"
-  />
-
-  <link
-    rel="apple-touch-icon"
     href="https://github.com/danieltorres-mhcs/assets/blob/main/flibidoo.PNG?raw=true"
   />
 
@@ -30,6 +24,7 @@
       --result:#e7dce9;
       --url:#b8a2bc;
       --focus:#cdb8d1;
+      --translate:#a9c7e8;
     }
 
     *{
@@ -56,7 +51,7 @@
     }
 
     .shell{
-      width:min(100% - 40px,1120px);
+      width:min(calc(100% - 40px),1120px);
       margin:0 auto;
     }
 
@@ -81,19 +76,21 @@
       height:34px;
       object-fit:contain;
       display:block;
-      mask-image:linear-gradient(
-        to bottom,
-        #000 0%,
-        #000 74%,
-        transparent 100%
-      );
-      -webkit-mask-image:linear-gradient(
-        to bottom,
-        #000 0%,
-        #000 74%,
-        transparent 100%
-      );
-      border-radius:0 0 11px 11px;
+      border-radius:0;
+      -webkit-mask-image:
+        linear-gradient(to right,transparent 0%,black 7%,black 93%,transparent 100%),
+        linear-gradient(to bottom,transparent 0%,black 7%,black 93%,transparent 100%);
+      mask-image:
+        linear-gradient(to right,transparent 0%,black 7%,black 93%,transparent 100%),
+        linear-gradient(to bottom,transparent 0%,black 7%,black 93%,transparent 100%);
+      -webkit-mask-composite:source-in;
+      mask-composite:intersect;
+    }
+
+    .brand-flibidoo,
+    .results-brand-flibidoo{
+      font-weight:700;
+      font-style:italic;
     }
 
     main{
@@ -106,7 +103,7 @@
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      padding:54px 0 100px;
+      padding:54px 20px 100px;
     }
 
     .hero-logo{
@@ -114,19 +111,15 @@
       height:auto;
       display:block;
       margin-bottom:12px;
-      mask-image:linear-gradient(
-        to bottom,
-        #000 0%,
-        #000 78%,
-        transparent 100%
-      );
-      -webkit-mask-image:linear-gradient(
-        to bottom,
-        #000 0%,
-        #000 78%,
-        transparent 100%
-      );
-      border-radius:0 0 34px 34px;
+      border-radius:0;
+      -webkit-mask-image:
+        linear-gradient(to right,transparent 0%,black 7%,black 93%,transparent 100%),
+        linear-gradient(to bottom,transparent 0%,black 7%,black 93%,transparent 100%);
+      mask-image:
+        linear-gradient(to right,transparent 0%,black 7%,black 93%,transparent 100%),
+        linear-gradient(to bottom,transparent 0%,black 7%,black 93%,transparent 100%);
+      -webkit-mask-composite:source-in;
+      mask-composite:intersect;
     }
 
     h1{
@@ -197,20 +190,23 @@
       padding:0;
       display:grid;
       place-items:center;
-      font-size:20px;
-      line-height:1;
       cursor:pointer;
       transition:
         color .15s ease,
-        border-color .15s ease;
+        border-color .15s ease,
+        transform .12s ease;
+    }
+
+    .submit:hover{
+      border-color:var(--focus);
+    }
+
+    .submit:active{
+      transform:scale(.96);
     }
 
     .submit.has-input{
       color:var(--text);
-      border-color:var(--focus);
-    }
-
-    .submit:hover{
       border-color:var(--focus);
     }
 
@@ -219,12 +215,19 @@
       outline-offset:2px;
     }
 
+    .submit-icon{
+      width:18px;
+      height:18px;
+      display:block;
+    }
+
     .links{
       display:flex;
       gap:18px;
       margin-top:20px;
       color:var(--muted);
       font-size:13px;
+      justify-content:center;
     }
 
     .links button{
@@ -239,31 +242,64 @@
       color:var(--text);
     }
 
-    /* =====================================================
-       RESULTS
-       ===================================================== */
+    /* RESULTS */
 
     .results{
-      padding:30px 0 70px;
+      padding:30px 20px 70px;
     }
 
     .results-head{
       display:flex;
       align-items:center;
-      justify-content:space-between;
+      gap:18px;
+      min-height:44px;
       border-bottom:1px solid var(--line2);
       padding-bottom:14px;
       margin-bottom:14px;
     }
 
+    .results-brand{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      text-decoration:none;
+      color:inherit;
+      white-space:nowrap;
+      flex:0 0 auto;
+    }
+
+    .results-brand img{
+      width:28px;
+      height:28px;
+      object-fit:contain;
+      display:block;
+    }
+
+    .results-brand span{
+      font-size:15px;
+      font-weight:600;
+      letter-spacing:-.01em;
+    }
+
+    .results-query{
+      font-size:14px;
+      color:var(--muted);
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      flex:1;
+      min-width:0;
+    }
+
     .count{
       font-size:13px;
       color:var(--muted);
+      flex:0 0 auto;
     }
 
     .results-search{
       width:min(100%,680px);
-      margin:0 0 28px;
+      margin:0 0 10px;
     }
 
     .results-search form{
@@ -280,44 +316,127 @@
       margin-right:6px;
     }
 
-    /* =====================================================
-       RESULTS LAYOUT
+    /* SEARCH TYPE TABS */
 
-       Desktop:
-       results | dictionary
+    .search-types{
+      display:flex;
+      align-items:flex-end;
+      gap:0;
+      margin:8px 0 18px;
+      border-bottom:1px solid rgba(255,255,255,.12);
+      height:36px;
+      overflow-x:auto;
+      scrollbar-width:none;
+    }
 
-       Portrait tablet/phone:
-       dictionary
-       results
-       ===================================================== */
+    .search-types::-webkit-scrollbar{
+      display:none;
+    }
+
+    .search-type{
+      position:relative;
+      appearance:none;
+      border:0;
+      background:transparent;
+      color:rgba(255,255,255,.62);
+      font:inherit;
+      font-size:13px;
+      line-height:20px;
+      padding:0 12px 10px;
+      margin:0;
+      border-radius:0;
+      cursor:pointer;
+      transition:
+        color .12s ease,
+        opacity .12s ease;
+      white-space:nowrap;
+    }
+
+    .search-type:hover{
+      color:rgba(255,255,255,.9);
+      background:transparent;
+    }
+
+    .search-type.active{
+      color:#fff;
+      background:transparent;
+    }
+
+    .search-type.active::after{
+      content:"";
+      position:absolute;
+      left:10px;
+      right:10px;
+      bottom:-1px;
+      height:2px;
+      border-radius:2px 2px 0 0;
+      background:currentColor;
+    }
+
+    .search-type:focus-visible{
+      outline:1px solid rgba(255,255,255,.55);
+      outline-offset:-2px;
+    }
+
+    /* TRANSLATE MESSAGE */
+
+    .translate-message{
+      display:none;
+      width:min(100%,680px);
+      margin:0 0 22px;
+      padding:11px 14px;
+      border:1px solid var(--line2);
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+      border-radius:8px;
+      background:rgba(255,255,255,.015);
+    }
+
+    .translate-message.show{
+      display:block;
+    }
+
+    .translate-message a{
+      color:var(--translate);
+      text-decoration:underline;
+      text-decoration-thickness:1px;
+      text-underline-offset:2px;
+    }
+
+    .translate-message a:hover{
+      color:#c4dcf3;
+    }
+
+    /* RESULTS LAYOUT */
 
     .results-layout{
       display:grid;
       grid-template-columns:minmax(0,1fr) 330px;
-      grid-template-areas:"results dictionary";
       gap:42px;
       align-items:start;
-      transition:
-        grid-template-columns .25s ease,
-        gap .25s ease;
     }
 
-    .results-layout > div:first-child{
-      grid-area:results;
+    .results-main{
       min-width:0;
     }
 
     .dictionary{
-      grid-area:dictionary;
-      min-width:0;
-
       border-left:1px solid var(--line2);
       padding-left:28px;
-
-      max-height:50vh;
+      max-height:calc(100vh - 60px);
       overflow-y:auto;
       overscroll-behavior:contain;
       scrollbar-width:thin;
+
+      /* Sticky on desktop/tablet */
+      position:sticky;
+      top:24px;
+
+      transition:
+        top .25s ease,
+        max-height .25s ease,
+        opacity .2s ease;
     }
 
     .dictionary::-webkit-scrollbar{
@@ -439,139 +558,7 @@
       line-height:1.5;
     }
 
-    /* =====================================================
-       STICKY DICTIONARY
-       Desktop = sticky
-       ===================================================== */
-
-    @media (min-width:861px){
-
-      .dictionary{
-        position:sticky;
-        top:24px;
-        align-self:start;
-      }
-    }
-
-    /* =====================================================
-       TABLET LANDSCAPE
-       Sticky dictionary stays on right
-       ===================================================== */
-
-    @media (min-width:641px) and (max-width:860px) and (orientation:landscape){
-
-      .results-layout{
-        grid-template-columns:minmax(0,1fr) 300px;
-        grid-template-areas:"results dictionary";
-        gap:30px;
-      }
-
-      .dictionary{
-        position:sticky;
-        top:20px;
-        align-self:start;
-
-        border-left:1px solid var(--line2);
-        border-top:0;
-        padding:0 0 0 24px;
-
-        max-height:calc(100vh - 40px);
-      }
-    }
-
-    /* =====================================================
-       PORTRAIT TABLET + PHONE
-
-       Dictionary ABOVE results
-       NOT sticky
-       ===================================================== */
-
-    @media (max-width:860px) and (orientation:portrait){
-
-      .results-layout{
-        grid-template-columns:minmax(0,1fr);
-        grid-template-areas:
-          "dictionary"
-          "results";
-
-        gap:28px;
-      }
-
-      .dictionary{
-        position:static;
-
-        border-left:0;
-        border-top:1px solid var(--line2);
-        padding:26px 0 0;
-
-        max-height:45vh;
-        overflow-y:auto;
-      }
-
-      .results-layout > div:first-child{
-        width:100%;
-      }
-    }
-
-    /* Also handle narrow screens that don't report orientation */
-    @media (max-width:640px){
-
-      .results-layout{
-        grid-template-columns:minmax(0,1fr);
-        grid-template-areas:
-          "dictionary"
-          "results";
-
-        gap:22px;
-      }
-
-      .dictionary{
-        position:static;
-
-        border-left:0;
-        border-top:1px solid var(--line2);
-        padding:22px 0 0;
-
-        max-height:42vh;
-      }
-    }
-
-    /* =====================================================
-       TRANSLATE SUGGESTION
-       ===================================================== */
-
-    .translate-message{
-      display:none;
-      margin:0 0 22px;
-      padding:12px 14px;
-
-      border:1px solid var(--line2);
-      border-radius:10px;
-
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.5;
-
-      background:rgba(255,255,255,.018);
-    }
-
-    .translate-message.visible{
-      display:block;
-    }
-
-    .translate-message a{
-      color:var(--text);
-      text-decoration:none;
-      font-weight:600;
-    }
-
-    .translate-message a:hover{
-      text-decoration:underline;
-    }
-
-    /* =====================================================
-       RESULT ITEMS
-       ===================================================== */
+    /* NORMAL RESULTS */
 
     .result{
       padding:0 0 26px;
@@ -612,268 +599,6 @@
       max-width:760px;
     }
 
-    .empty,
-    .error{
-      padding:70px 0;
-      color:var(--muted);
-      text-align:center;
-    }
-
-    .error{
-      color:#d9bfcf;
-    }
-
-    .pager{
-      display:flex;
-      gap:8px;
-      padding-top:10px;
-    }
-
-    .pager button{
-      border:1px solid var(--line);
-      background:transparent;
-      color:var(--text);
-      border-radius:4px;
-      padding:8px 12px;
-      cursor:pointer;
-    }
-
-    .pager button:hover{
-      border-color:var(--focus);
-    }
-
-    /* =====================================================
-       FOOTER
-       ===================================================== */
-
-    footer{
-      height:56px;
-      border-top:1px solid var(--line2);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      color:var(--muted);
-      font-size:12px;
-    }
-
-    .footer-links{
-      display:flex;
-      gap:16px;
-    }
-
-    .footer-links a{
-      text-decoration:none;
-    }
-
-    .footer-links a:hover{
-      text-decoration:underline;
-      color:var(--text);
-    }
-
-    .hidden{
-      display:none!important;
-    }
-
-    /* =====================================================
-       LOGO UPDATE
-       ===================================================== */
-
-    .logo,
-    .brand-logo,
-    img[alt*="Flibidoo" i],
-    img[src*="flibidoo" i]{
-      border-radius:0!important;
-
-      -webkit-mask-image:
-        linear-gradient(
-          to right,
-          transparent 0%,
-          black 7%,
-          black 93%,
-          transparent 100%
-        ),
-        linear-gradient(
-          to bottom,
-          transparent 0%,
-          black 7%,
-          black 93%,
-          transparent 100%
-        );
-
-      mask-image:
-        linear-gradient(
-          to right,
-          transparent 0%,
-          black 7%,
-          black 93%,
-          transparent 100%
-        ),
-        linear-gradient(
-          to bottom,
-          transparent 0%,
-          black 7%,
-          black 93%,
-          transparent 100%
-        );
-
-      -webkit-mask-composite:source-in;
-      mask-composite:intersect;
-    }
-
-    /* =====================================================
-       SUBMIT ICON
-       ===================================================== */
-
-    .submit-icon{
-      width:18px;
-      height:18px;
-      display:block;
-      transition:
-        color .15s ease,
-        opacity .15s ease;
-    }
-
-    .submit{
-      color:var(--muted);
-    }
-
-    .submit.has-input{
-      color:var(--text);
-    }
-
-    /* =====================================================
-       RESULTS HEADER
-       ===================================================== */
-
-    .results-header{
-      display:flex;
-      align-items:center;
-      gap:18px;
-      min-height:44px;
-    }
-
-    .results-brand{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      text-decoration:none;
-      color:inherit;
-      white-space:nowrap;
-    }
-
-    .results-brand img{
-      width:28px;
-      height:28px;
-      object-fit:contain;
-      display:block;
-    }
-
-    .results-brand span{
-      font-size:15px;
-      font-weight:600;
-      letter-spacing:-.01em;
-    }
-
-    .results-query-label{
-      font-size:14px;
-      color:var(--muted);
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-
-    /* =====================================================
-       SEARCH TYPE NAVIGATION
-       ===================================================== */
-
-    .search-types{
-      display:flex;
-      align-items:flex-end;
-      gap:0;
-      margin:8px 0 18px;
-      border-bottom:1px solid rgba(255,255,255,.12);
-      height:36px;
-    }
-
-    .search-type{
-      position:relative;
-      appearance:none;
-      border:0;
-      background:transparent;
-      color:rgba(255,255,255,.62);
-      font:inherit;
-      font-size:13px;
-      line-height:20px;
-      padding:0 12px 10px;
-      margin:0;
-      border-radius:0;
-      cursor:pointer;
-      transition:color .12s ease;
-    }
-
-    .search-type:hover{
-      color:rgba(255,255,255,.9);
-      background:transparent;
-    }
-
-    .search-type.active{
-      color:#fff;
-      background:transparent;
-    }
-
-    .search-type.active::after{
-      content:"";
-      position:absolute;
-      left:10px;
-      right:10px;
-      bottom:-1px;
-      height:2px;
-      border-radius:2px 2px 0 0;
-      background:currentColor;
-    }
-
-    .search-type:focus-visible{
-      outline:1px solid rgba(255,255,255,.55);
-      outline-offset:-2px;
-    }
-
-    /* =====================================================
-       FAVICONS
-       ===================================================== */
-
-    .result-item{
-      position:relative;
-    }
-
-    .result-site-icon{
-      width:28px;
-      height:28px;
-      flex:0 0 28px;
-      object-fit:contain;
-      border-radius:4px;
-      display:block;
-    }
-
-    .result-url-row{
-      display:flex;
-      align-items:center;
-      gap:7px;
-      min-width:0;
-    }
-
-    .result-url-row .result-url{
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-
-    .result-meta{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      min-width:0;
-    }
-
     .result-favicon{
       width:18px;
       height:18px;
@@ -882,9 +607,25 @@
       margin-right:7px;
     }
 
-    /* =====================================================
-       RESULT TYPE LAYOUTS
-       ===================================================== */
+    .result-meta{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:7px;
+    }
+
+    .result-inline-thumb{
+      margin-top:10px;
+      max-width:260px;
+    }
+
+    .result-inline-thumb img{
+      display:block;
+      width:100%;
+      max-height:150px;
+      object-fit:cover;
+    }
+
+    /* IMAGE RESULTS */
 
     .image-grid{
       display:grid;
@@ -928,6 +669,8 @@
       text-overflow:ellipsis;
     }
 
+    /* MAP RESULTS */
+
     .map-result{
       padding:0 0 22px;
       margin-bottom:22px;
@@ -961,21 +704,51 @@
       margin-top:6px;
     }
 
-    /* =====================================================
-       MEDIA
-       ===================================================== */
+    /* EMPTY / ERROR */
 
-    .result-inline-thumb{
-      margin-top:10px;
-      max-width:260px;
+    .empty{
+      padding:70px 0;
+      color:var(--muted);
+      text-align:center;
     }
 
-    .result-inline-thumb img{
-      display:block;
-      width:100%;
-      max-height:150px;
-      object-fit:cover;
+    .error{
+      min-height:120px;
+      max-width:680px;
+      margin:0;
+      padding:28px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      border:1px solid var(--line2);
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.5;
     }
+
+    /* PAGER */
+
+    .pager{
+      display:flex;
+      gap:8px;
+      padding-top:10px;
+    }
+
+    .pager button{
+      border:1px solid var(--line);
+      background:transparent;
+      color:var(--text);
+      border-radius:4px;
+      padding:8px 12px;
+      cursor:pointer;
+    }
+
+    .pager button:hover{
+      border-color:var(--focus);
+    }
+
+    /* AUTOCOMPLETE */
 
     .flibidoo-suggest-wrap{
       position:relative;
@@ -989,33 +762,13 @@
       z-index:100;
       background:#1d0c22;
       border:1px solid rgba(255,255,255,.14);
-      overflow:hidden;
-    }
-
-    /* =====================================================
-       DICTIONARY FALLBACK
-       ===================================================== */
-
-    .dictionary-fallback{
-      max-height:50vh;
-      overflow-y:auto;
-      padding:14px 16px;
-      box-sizing:border-box;
-    }
-
-    .dictionary-line{
-      font-size:13px;
-      line-height:1.5;
-      margin-top:7px;
-    }
-
-    /* =====================================================
-       AUTOCOMPLETE
-       ===================================================== */
-
-    .flibidoo-suggestions{
       border-radius:8px;
+      overflow:hidden;
       box-shadow:0 8px 20px rgba(0,0,0,.25);
+    }
+
+    .flibidoo-suggestions[hidden]{
+      display:none;
     }
 
     .flibidoo-suggestion{
@@ -1051,49 +804,85 @@
       margin-top:2px;
     }
 
-    /* =====================================================
-       RESPONSIVE PADDING
-       ===================================================== */
+    /* FOOTER */
 
-    @media(max-width:1120px){
-
-      .shell{
-        width:min(
-          calc(100% - 48px),
-          1120px
-        );
-      }
+    footer{
+      height:56px;
+      border-top:1px solid var(--line2);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      color:var(--muted);
+      font-size:12px;
+      padding:0 20px;
     }
 
-    @media(max-width:860px){
+    .footer-links{
+      display:flex;
+      gap:16px;
+    }
+
+    .footer-links a{
+      text-decoration:none;
+    }
+
+    .footer-links a:hover{
+      text-decoration:underline;
+      color:var(--text);
+    }
+
+    .hidden{
+      display:none!important;
+    }
+
+    /*
+      TABLET
+      Dictionary remains on the right and sticky.
+    */
+
+    @media(max-width:900px) and (min-width:701px){
 
       .shell{
-        width:min(
-          calc(100% - 40px),
-          1120px
-        );
+        width:min(calc(100% - 48px),1120px);
       }
 
       .results{
-        padding-top:26px;
+        padding-left:24px;
+        padding-right:24px;
+      }
+
+      .results-layout{
+        grid-template-columns:minmax(0,1fr) 290px;
+        gap:28px;
+      }
+
+      .dictionary{
+        top:20px;
+        max-height:calc(100vh - 40px);
+      }
+
+      .image-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
       }
     }
 
-    @media(max-width:640px){
+    /*
+      PHONE / VERTICAL DEVICES
+      Dictionary becomes the first item above results.
+      Sticky is explicitly disabled.
+    */
+
+    @media(max-width:700px){
 
       .shell{
         width:calc(100% - 28px);
-        max-width:none;
-      }
-
-      header{
-        height:58px;
       }
 
       .home{
-        padding-top:25px;
-        padding-left:7px;
-        padding-right:7px;
+        min-height:calc(100vh - 58px);
+        padding:
+          30px 14px
+          80px;
       }
 
       .hero-logo{
@@ -1109,38 +898,15 @@
         height:50px;
       }
 
-      .submit{
-        width:38px;
-        padding:0;
-      }
-
       .results{
-        padding-top:22px;
-        padding-left:2px;
-        padding-right:2px;
-      }
-
-      .results-search{
-        width:100%;
-      }
-
-      .search-types{
-        overflow-x:auto;
-        scrollbar-width:none;
-      }
-
-      .search-types::-webkit-scrollbar{
-        display:none;
-      }
-
-      .search-type{
-        padding-left:10px;
-        padding-right:10px;
-        font-size:12px;
+        padding:
+          22px 14px
+          60px;
       }
 
       .results-head{
-        gap:10px;
+        gap:12px;
+        flex-wrap:wrap;
       }
 
       .results-brand img{
@@ -1152,14 +918,84 @@
         font-size:14px;
       }
 
-      .results-query-label,
       .results-query{
+        order:3;
+        flex-basis:100%;
         font-size:13px;
+      }
+
+      .count{
+        margin-left:auto;
+      }
+
+      .results-search{
+        width:100%;
+      }
+
+      .search-types{
+        margin-top:8px;
+      }
+
+      .search-type{
+        padding-left:10px;
+        padding-right:10px;
+        font-size:12px;
+      }
+
+      /*
+        Important:
+        Grid order puts dictionary ABOVE results.
+      */
+
+      .results-layout{
+        display:flex;
+        flex-direction:column;
+        gap:26px;
+      }
+
+      .dictionary{
+        order:1;
+        width:100%;
+        border-left:0;
+        border-top:1px solid var(--line2);
+        padding:
+          24px 0 0;
+
+        /*
+          No sticky behavior on phones.
+        */
+        position:static;
+        top:auto;
+
+        max-height:none;
+        overflow:visible;
+
+        transition:
+          padding .25s ease,
+          opacity .2s ease;
+      }
+
+      .results-main{
+        order:2;
+        width:100%;
+      }
+
+      .dictionary-title{
+        font-size:21px;
+      }
+
+      .translate-message{
+        width:100%;
+        margin-bottom:18px;
       }
 
       .image-grid{
         grid-template-columns:repeat(2,minmax(0,1fr));
         gap:22px 14px;
+      }
+
+      .footer-links{
+        gap:10px;
       }
     }
 
@@ -1169,12 +1005,62 @@
         width:calc(100% - 24px);
       }
 
+      .home{
+        padding-left:12px;
+        padding-right:12px;
+      }
+
+      .results{
+        padding-left:12px;
+        padding-right:12px;
+      }
+
       .image-grid{
         grid-template-columns:1fr;
       }
 
-      .dictionary{
-        max-height:40vh;
+      .links{
+        gap:15px;
+      }
+
+      .results-brand span{
+        font-size:13px;
+      }
+
+      .count{
+        font-size:12px;
+      }
+    }
+
+    /*
+      EXTRA SMALL DEVICES
+      Gives search controls breathing room.
+    */
+
+    @media(max-width:360px){
+
+      .home{
+        padding-left:8px;
+        padding-right:8px;
+      }
+
+      .results{
+        padding-left:8px;
+        padding-right:8px;
+      }
+
+      input{
+        font-size:15px;
+        padding-left:10px;
+        padding-right:8px;
+      }
+
+      .search-icon{
+        margin-left:13px;
+      }
+
+      .submit{
+        margin-right:6px;
       }
     }
   </style>
@@ -1184,9 +1070,7 @@
 
 <main>
 
-  <!-- =====================================================
-       HOME
-       ===================================================== -->
+  <!-- HOME -->
 
   <section id="home" class="home shell">
 
@@ -1196,7 +1080,9 @@
       alt="FlibidooSearch logo"
     />
 
-    <h1>FlibidooSearch</h1>
+    <h1>
+      <span class="brand-flibidoo">Flibidoo</span>Search
+    </h1>
 
     <div class="search-wrap">
 
@@ -1276,9 +1162,7 @@
   </section>
 
 
-  <!-- =====================================================
-       RESULTS
-       ===================================================== -->
+  <!-- RESULTS -->
 
   <section id="results" class="results shell hidden">
 
@@ -1289,12 +1173,16 @@
         href="/"
         aria-label="FlibidooSearch home"
       >
+
         <img
           src="https://github.com/danieltorres-mhcs/assets/blob/main/flibidoo.PNG?raw=true"
           alt="FlibidooSearch"
         />
 
-        <span>FlibidooSearch</span>
+        <span>
+          <span class="results-brand-flibidoo">Flibidoo</span>Search
+        </span>
+
       </a>
 
       <div
@@ -1381,7 +1269,7 @@
     </div>
 
 
-    <!-- Search category navigation -->
+    <!-- SEARCH TYPE NAV -->
 
     <nav
       class="search-types"
@@ -1423,7 +1311,7 @@
     </nav>
 
 
-    <!-- Automatic translation suggestion -->
+    <!-- TRANSLATE DETECTION MESSAGE -->
 
     <div
       id="translateMessage"
@@ -1443,11 +1331,13 @@
     </div>
 
 
-    <!-- Results + Dictionary -->
+    <!-- MAIN RESULTS + DICTIONARY -->
 
     <div class="results-layout">
 
-      <div>
+      <!-- MAIN SEARCH RESULTS -->
+
+      <div class="results-main">
 
         <div id="resultList"></div>
 
@@ -1458,6 +1348,8 @@
 
       </div>
 
+
+      <!-- DICTIONARY -->
 
       <aside
         id="dictionary"
@@ -1473,17 +1365,21 @@
 
 
 <script>
-/* =========================================================
-   FLIBIDOO SEARCH WORKER
-   ========================================================= */
+/*
+==========================================================
+FLIBIDOOSEARCH CONFIGURATION
+==========================================================
+*/
 
-const WORKER_BASE =
+const WORKER_URL =
   'https://ancient-unit-5007.daniel-torres-a95.workers.dev';
 
 
-/* =========================================================
-   ELEMENTS
-   ========================================================= */
+/*
+==========================================================
+DOM
+==========================================================
+*/
 
 const form =
   document.querySelector('#searchForm');
@@ -1529,15 +1425,44 @@ const translateMessage =
 
 
 let currentQ = '';
-let currentPage = 1;
+let currentPage = 0;
 let currentType = 'web';
 
 
-/* =========================================================
-   UTILITIES
-   ========================================================= */
+/*
+==========================================================
+UTILITY
+==========================================================
+*/
 
-function esc(s=''){
+function api(path, params = {}) {
+
+  const url =
+    new URL(
+      path,
+      WORKER_URL
+    );
+
+  Object.entries(params).forEach(
+    ([key,value]) => {
+      if(
+        value !== undefined &&
+        value !== null
+      ){
+        url.searchParams.set(
+          key,
+          value
+        );
+      }
+    }
+  );
+
+  return url.toString();
+}
+
+
+function esc(s = '') {
+
   return String(s).replace(
     /[&<>'"]/g,
     c => ({
@@ -1551,7 +1476,11 @@ function esc(s=''){
 }
 
 
-function updateButtonState(button,value){
+function updateButtonState(
+  button,
+  value
+){
+
   button.classList.toggle(
     'has-input',
     value.trim().length > 0
@@ -1559,46 +1488,69 @@ function updateButtonState(button,value){
 }
 
 
-function normalize(s=''){
+function normalize(s = ''){
+
   return s
     .toLowerCase()
     .trim()
-    .replace(/[“”"'.,!?;:()[\]{}]/g,'')
-    .replace(/\s+/g,' ');
+    .replace(
+      /[“”"'.,!?;:()[\]{}]/g,
+      ''
+    )
+    .replace(
+      /\s+/g,
+      ' '
+    );
 }
 
+
+/*
+==========================================================
+DICTIONARY WORD DETECTION
+==========================================================
+*/
 
 function levenshtein(a,b){
 
   const prev =
     Array.from(
-      {length:b.length+1},
-      (_,i)=>i
+      {length:b.length + 1},
+      (_,i) => i
     );
 
-  for(let i=1;i<=a.length;i++){
+  for(
+    let i = 1;
+    i <= a.length;
+    i++
+  ){
 
-    let cur=[i];
+    const cur = [i];
 
-    for(let j=1;j<=b.length;j++){
+    for(
+      let j = 1;
+      j <= b.length;
+      j++
+    ){
 
-      cur[j]=Math.min(
-        cur[j-1]+1,
-        prev[j]+1,
-        prev[j-1]+(
-          a[i-1]===b[j-1]
-            ?0
-            :1
-        )
-      );
+      cur[j] =
+        Math.min(
+          cur[j - 1] + 1,
+          prev[j] + 1,
+          prev[j - 1] +
+          (
+            a[i - 1] === b[j - 1]
+              ? 0
+              : 1
+          )
+        );
     }
 
     for(
-      let j=0;
-      j<=b.length;
+      let j = 0;
+      j <= b.length;
       j++
     ){
-      prev[j]=cur[j];
+      prev[j] = cur[j];
     }
   }
 
@@ -1606,34 +1558,33 @@ function levenshtein(a,b){
 }
 
 
-/* =========================================================
-   DICTIONARY QUERY DETECTION
-   ========================================================= */
-
 function dictionaryWord(query){
 
-  const q=normalize(query);
+  const q =
+    normalize(query);
 
   if(!q){
     return null;
   }
 
-  if(q.split(' ').length===1){
+  const words =
+    q.split(' ');
+
+  if(words.length === 1){
     return q;
   }
 
-  const tokens=q
-    .split(' ')
-    .filter(Boolean);
+  const candidates =
+    new Set();
 
-  const candidates=new Set();
+  for(const word of words){
 
-  for(const t of tokens){
-
-    if(/^[a-z][a-z'-]*$/i.test(t)){
+    if(
+      /^[a-z][a-z'-]*$/i.test(word)
+    ){
 
       candidates.add(
-        t.replace(
+        word.replace(
           /^['-]+|['-]+$/g,
           ''
         )
@@ -1643,12 +1594,18 @@ function dictionaryWord(query){
 
   for(const word of candidates){
 
-    const templates=[
+    const templates = [
+
       `meaning of ${word}`,
+
       `${word} meaning`,
+
       `${word} means`,
+
       `${word} definition`,
+
       `definition of ${word}`
+
     ];
 
     for(
@@ -1659,8 +1616,9 @@ function dictionaryWord(query){
         levenshtein(
           q,
           template
-        )<=3
+        ) <= 3
       ){
+
         return word;
       }
     }
@@ -1670,26 +1628,82 @@ function dictionaryWord(query){
 }
 
 
-/* =========================================================
-   TRANSLATE REQUEST DETECTION
-   =========================================================
+/*
+==========================================================
+ENGLISH-FIRST DICTIONARY
+==========================================================
+*/
 
-   Detects things such as:
+function prioritizeEnglish(entries){
 
-   translate hello to spanish
-   translator english to french
-   translated to english
-   hello to english
-   english to japanese
-   say hello in spanish
-   say hello in japanese
-   ========================================================= */
+  if(
+    !Array.isArray(entries) ||
+    !entries.length
+  ){
+    return [];
+  }
+
+  return [...entries].sort(
+    (a,b) => {
+
+      const aCode =
+        String(
+          a?.language?.code || ''
+        ).toLowerCase();
+
+      const aName =
+        String(
+          a?.language?.name || ''
+        ).toLowerCase();
+
+      const bCode =
+        String(
+          b?.language?.code || ''
+        ).toLowerCase();
+
+      const bName =
+        String(
+          b?.language?.name || ''
+        ).toLowerCase();
+
+      const aEnglish =
+        aCode === 'en' ||
+        aName === 'english';
+
+      const bEnglish =
+        bCode === 'en' ||
+        bName === 'english';
+
+      if(
+        aEnglish &&
+        !bEnglish
+      ){
+        return -1;
+      }
+
+      if(
+        bEnglish &&
+        !aEnglish
+      ){
+        return 1;
+      }
+
+      return 0;
+    }
+  );
+}
+
+
+/*
+==========================================================
+TRANSLATE QUERY DETECTION
+==========================================================
+*/
 
 function isTranslationQuery(query){
 
-  const q = String(query || '')
-    .trim()
-    .toLowerCase();
+  const q =
+    normalize(query);
 
   if(!q){
     return false;
@@ -1697,59 +1711,37 @@ function isTranslationQuery(query){
 
 
   /*
-   * Explicit translation words
-   */
+    Examples:
+
+    translate hello
+    translator
+    translated word
+    translate this to english
+    hello to english
+    english to spanish
+  */
 
   if(
-    /\btranslate\b/.test(q) ||
-    /\btranslator\b/.test(q) ||
-    /\btranslated\b/.test(q)
+    /\bto english\b/i.test(q) ||
+    /\benglish to\b/i.test(q) ||
+    /\btranslate\b/i.test(q) ||
+    /\btranslator\b/i.test(q) ||
+    /\btranslated\b/i.test(q)
   ){
     return true;
   }
 
 
   /*
-   * "... to english"
-   *
-   * Example:
-   * hello to english
-   * translate this to english
-   */
+    Examples:
+
+    say hello in spanish
+    say good morning in japanese
+    say hello in french
+  */
 
   if(
-    /\bto\s+(?:the\s+)?english\b/.test(q)
-  ){
-    return true;
-  }
-
-
-  /*
-   * "english to ..."
-   *
-   * Example:
-   * english to spanish
-   * english to japanese
-   */
-
-  if(
-    /\benglish\s+to\s+[a-z-]+/.test(q)
-  ){
-    return true;
-  }
-
-
-  /*
-   * "say ____ in ____"
-   *
-   * Example:
-   * say hello in spanish
-   * say good morning in japanese
-   * say thank you in french
-   */
-
-  if(
-    /\bsay\s+.+\s+in\s+[a-z][a-z-]*(?:\s+[a-z][a-z-]*)?$/i.test(q)
+    /^say\s+.+\s+in\s+.+$/i.test(q)
   ){
     return true;
   }
@@ -1762,425 +1754,214 @@ function isTranslationQuery(query){
 function updateTranslateMessage(query){
 
   if(
-    translateMessage &&
     isTranslationQuery(query)
   ){
-    translateMessage.classList.add('visible');
-  }else if(translateMessage){
-    translateMessage.classList.remove('visible');
+
+    translateMessage.classList.add(
+      'show'
+    );
+
+  }else{
+
+    translateMessage.classList.remove(
+      'show'
+    );
   }
 }
 
 
-/* =========================================================
-   RENDER SEARCH RESULTS
-   ========================================================= */
+/*
+==========================================================
+RICH TEXT
+==========================================================
+*/
 
-function render(data){
+window.flibidooRichText =
+function(value){
 
-  home.classList.add('hidden');
-  results.classList.remove('hidden');
+  let src =
+    String(value ?? '');
 
-  currentType =
-    data.type || currentType;
-
-  label.textContent =
-    data.query
-      ? `Results for “${data.query}”`
-      : '';
-
-  const resultsArray =
-    Array.isArray(data.results)
-      ? data.results
-      : [];
-
-  count.textContent =
-    resultsArray.length
-      ? `${resultsArray.length} results`
-      : '';
-
-  resultsInput.value =
-    data.query || '';
-
-  updateButtonState(
-    resultsSubmitButton,
-    resultsInput.value
-  );
-
-  updateTranslateMessage(
-    data.query || currentQ
-  );
-
-  document
-    .querySelectorAll('.search-type')
-    .forEach(
-      b =>
-        b.classList.toggle(
-          'active',
-          b.dataset.type===currentType
-        )
-    );
-
-  list.innerHTML='';
-  pager.innerHTML='';
-
-
-  if(!resultsArray.length){
-
-    list.innerHTML =
-      '<div class="empty">No results found.</div>';
-
-    return;
+  if(!src){
+    return '';
   }
 
 
-  /* =======================================================
-     IMAGES
-     ======================================================= */
+  const ta =
+    document.createElement(
+      'textarea'
+    );
 
-  if(currentType==='images'){
+  ta.innerHTML = src;
 
-    const grid =
-      document.createElement('div');
+  src = ta.value;
 
-    grid.className='image-grid';
 
-    resultsArray.forEach(r=>{
+  src = src
+    .replace(
+      /<\s*(script|iframe|object|embed|form|input|button|textarea|select|style|link|meta|svg|math)[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi,
+      ''
+    )
+    .replace(
+      /<\s*(script|iframe|object|embed|form|input|button|textarea|select|style|link|meta|svg|math)[^>]*\/?>/gi,
+      ''
+    )
+    .replace(
+      /\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi,
+      ''
+    )
+    .replace(
+      /\s+(href|src)\s*=\s*(['"])\s*javascript:[\s\S]*?\2/gi,
+      ''
+    );
 
-      const u =
-        r.url ||
-        r.properties?.url ||
-        '';
 
-      const img =
-        r.thumbnail ||
-        r.properties?.url ||
-        '';
+  const allowed = [];
 
-      if(!img){
-        return;
+
+  src =
+    src.replace(
+      /<\/?(strong|b|em|i|u|s|del|mark|small|br|code|kbd|sub|sup|a)(?:\s+[^>]*)?>/gi,
+      m => {
+
+        const idx =
+          allowed.push(m) - 1;
+
+        return `@@FLIBIDOO_TAG_${idx}@@`;
       }
-
-      const el =
-        document.createElement('article');
-
-      el.className='image-result';
-
-      el.innerHTML=`
-        <a
-          href="${esc(u)}"
-          rel="noopener noreferrer"
-        >
-          <img
-            src="${esc(img)}"
-            alt="${esc(r.title||'')}"
-            loading="lazy"
-            referrerpolicy="no-referrer"
-          >
-        </a>
-
-        <div class="image-result-title">
-          ${esc(r.title||u)}
-        </div>
-
-        <div class="image-result-source">
-          ${esc(
-            r.source ||
-            r.meta_url?.hostname ||
-            ''
-          )}
-        </div>
-      `;
-
-      grid.appendChild(el);
-    });
-
-
-    if(grid.children.length){
-
-      list.appendChild(grid);
-
-    }else{
-
-      list.innerHTML =
-        '<div class="empty">No images found.</div>';
-    }
-
-  }
-
-
-  /* =======================================================
-     MAPS
-     ======================================================= */
-
-  else if(currentType==='map'){
-
-    resultsArray.forEach(r=>{
-
-      const el =
-        document.createElement('article');
-
-      el.className='map-result';
-
-      const u =
-        r.url || '';
-
-      const title =
-        r.title || 'Map result';
-
-      const address =
-        r.address
-          ? Object
-              .values(r.address)
-              .filter(Boolean)
-              .join(', ')
-          : (
-              r.description || ''
-            );
-
-      el.innerHTML=`
-        <h2 class="map-result-title">
-          <a
-            href="${esc(u)}"
-            rel="noopener noreferrer"
-          >
-            ${esc(title)}
-          </a>
-        </h2>
-
-        <div class="map-result-address">
-          ${esc(address)}
-        </div>
-
-        ${
-          r.lat && r.lon
-            ? `
-              <div class="map-result-coords">
-                ${esc(r.lat)}, ${esc(r.lon)}
-              </div>
-            `
-            : ''
-        }
-      `;
-
-      list.appendChild(el);
-    });
-
-  }
-
-
-  /* =======================================================
-     WEB / NEWS
-     ======================================================= */
-
-  else{
-
-    resultsArray.forEach(r=>{
-
-      const el =
-        document.createElement('article');
-
-      el.className='result';
-
-      const u =
-        r.url || '';
-
-      const favicon =
-        r.meta_url?.favicon || '';
-
-      const host =
-        r.meta_url?.hostname || '';
-
-      const title =
-        r.title || u;
-
-      const description =
-        r.description ||
-        r.content ||
-        '';
-
-      const age =
-        r.age ||
-        r.publishedDate ||
-        '';
-
-      const thumb =
-        r.thumbnail?.src ||
-        r.thumbnail ||
-        '';
-
-
-      el.innerHTML=`
-
-        <div class="result-url">
-
-          ${
-            favicon
-              ? `
-                <img
-                  class="result-favicon"
-                  src="${esc(favicon)}"
-                  alt=""
-                  loading="lazy"
-                  referrerpolicy="no-referrer"
-                >
-              `
-              : ''
-          }
-
-          <span>
-            ${esc(host || u)}
-          </span>
-
-        </div>
-
-
-        <h2>
-          <a
-            href="${esc(u)}"
-            rel="noopener noreferrer"
-          >
-            ${esc(title)}
-          </a>
-        </h2>
-
-
-        ${
-          description
-            ? `
-              <p class="snippet">
-                ${window.flibidooRichText(description)}
-              </p>
-            `
-            : ''
-        }
-
-
-        ${
-          age
-            ? `
-              <div class="result-meta">
-                ${esc(age)}
-              </div>
-            `
-            : ''
-        }
-
-
-        ${
-          thumb
-            ? `
-              <div class="result-inline-thumb">
-                <img
-                  src="${esc(thumb)}"
-                  alt=""
-                  loading="lazy"
-                  referrerpolicy="no-referrer"
-                >
-              </div>
-            `
-            : ''
-        }
-
-      `;
-
-      list.appendChild(el);
-    });
-  }
-
-
-  /* =======================================================
-     PAGINATION
-     ======================================================= */
-
-  const hasMore =
-    Boolean(
-      data.more_results_available ||
-      data.hasMore
     );
 
 
-  if(currentPage>0){
-
-    const b =
-      document.createElement('button');
-
-    b.textContent='Previous';
-
-    b.onclick=() =>
-      search(
-        currentQ,
-        currentPage-1,
-        currentType
+  src =
+    src
+      .replace(
+        /</g,
+        '&lt;'
+      )
+      .replace(
+        />/g,
+        '&gt;'
       );
 
-    pager.appendChild(b);
-  }
+
+  src =
+    src.replace(
+      /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,
+      '<a href="$2" rel="noopener noreferrer">$1</a>'
+    );
 
 
-  if(hasMore){
-
-    const b =
-      document.createElement('button');
-
-    b.textContent='Next';
-
-    b.onclick=() =>
-      search(
-        currentQ,
-        currentPage+1,
-        currentType
-      );
-
-    pager.appendChild(b);
-  }
+  src =
+    src.replace(
+      /`([^`]+)`/g,
+      '<code>$1</code>'
+    );
 
 
-  history.replaceState(
-    {},
-    '',
-    `/?q=${encodeURIComponent(
-      data.query || currentQ
-    )}&type=${encodeURIComponent(
-      currentType
-    )}${
-      currentPage
-        ? `&page=${currentPage}`
-        : ''
-    }`
+  src =
+    src.replace(
+      /\*\*([^*]+)\*\*/g,
+      '<strong>$1</strong>'
+    );
+
+
+  src =
+    src.replace(
+      /__([^_]+)__/g,
+      '<strong>$1</strong>'
+    );
+
+
+  src =
+    src.replace(
+      /~~([^~]+)~~/g,
+      '<del>$1</del>'
+    );
+
+
+  src =
+    src.replace(
+      /(^|[\s(])\*([^*\n]+)\*(?=$|[\s).,!?:;])/g,
+      '$1<em>$2</em>'
+    );
+
+
+  src =
+    src.replace(
+      /(^|[\s(])_([^_\n]+)_(?=$|[\s).,!?:;])/g,
+      '$1<em>$2</em>'
+    );
+
+
+  src =
+    src.replace(
+      /^#{1,6}\s+(.+)$/gm,
+      '<strong>$1</strong>'
+    );
+
+
+  src =
+    src.replace(
+      /^\s*[-*]\s+(.+)$/gm,
+      '• $1'
+    );
+
+
+  src =
+    src.replace(
+      /^\s*\d+\.\s+(.+)$/gm,
+      '$1'
+    );
+
+
+  src =
+    src.replace(
+      /@@FLIBIDOO_TAG_(\d+)@@/g,
+      (_,i) =>
+        allowed[Number(i)] || ''
+    );
+
+
+  return src.replace(
+    /\r?\n/g,
+    '<br>'
   );
-}
+};
 
 
-/* =========================================================
-   DICTIONARY
-   ========================================================= */
+/*
+==========================================================
+DICTIONARY RENDERING
+==========================================================
+*/
 
 function dictionaryTags(tags){
 
-  return Array.isArray(tags) &&
-    tags.length
+  if(
+    !Array.isArray(tags) ||
+    !tags.length
+  ){
+    return '';
+  }
 
-    ? `
-      <span class="dictionary-tags">
-        (${tags.map(esc).join(', ')})
-      </span>
-    `
-
-    : '';
+  return `
+    <span class="dictionary-tags">
+      (${tags.map(esc).join(', ')})
+    </span>
+  `;
 }
 
 
 function renderSense(
   sense,
-  depth=0
+  depth = 0
 ){
 
   if(!sense){
     return '';
   }
 
-  let html=`
+  let html = `
     <div
       class="dictionary-sense"
       style="margin-left:${Math.min(depth,3)*12}px"
@@ -2199,40 +1980,48 @@ function renderSense(
   }
 
 
-  if(Array.isArray(sense.examples)){
+  if(
+    Array.isArray(sense.examples)
+  ){
 
-    sense.examples.forEach(x=>{
+    sense.examples.forEach(
+      example => {
 
-      if(x){
+        if(example){
 
-        html += `
-          <div class="dictionary-example">
-            “${esc(x)}”
-          </div>
-        `;
+          html += `
+            <div class="dictionary-example">
+              “${esc(example)}”
+            </div>
+          `;
+        }
       }
-    });
+    );
   }
 
 
-  if(Array.isArray(sense.quotes)){
+  if(
+    Array.isArray(sense.quotes)
+  ){
 
-    sense.quotes.forEach(q=>{
+    sense.quotes.forEach(
+      quote => {
 
-      if(q?.text){
+        if(quote?.text){
 
-        html += `
-          <div class="dictionary-quote">
-            “${esc(q.text)}”
-            ${
-              q.reference
-                ? ` — ${esc(q.reference)}`
-                : ''
-            }
-          </div>
-        `;
+          html += `
+            <div class="dictionary-quote">
+              “${esc(quote.text)}”
+              ${
+                quote.reference
+                  ? ` — ${esc(quote.reference)}`
+                  : ''
+              }
+            </div>
+          `;
+        }
       }
-    });
+    );
   }
 
 
@@ -2243,7 +2032,6 @@ function renderSense(
 
     html += `
       <div class="dictionary-relations">
-
         <div class="dictionary-label">
           Synonyms
         </div>
@@ -2251,7 +2039,6 @@ function renderSense(
         <div>
           ${sense.synonyms.map(esc).join(', ')}
         </div>
-
       </div>
     `;
   }
@@ -2264,7 +2051,6 @@ function renderSense(
 
     html += `
       <div class="dictionary-relations">
-
         <div class="dictionary-label">
           Antonyms
         </div>
@@ -2272,7 +2058,6 @@ function renderSense(
         <div>
           ${sense.antonyms.map(esc).join(', ')}
         </div>
-
       </div>
     `;
   }
@@ -2294,47 +2079,53 @@ function renderSense(
     `;
 
 
-    sense.translations.forEach(t=>{
+    sense.translations.forEach(
+      translation => {
 
-      if(t?.word){
+        if(translation?.word){
 
-        html += `
-          <li>
-            ${esc(
-              t.language?.name ||
-              t.language?.code ||
-              ''
-            )}
-            —
-            ${esc(t.word)}
-          </li>
-        `;
+          html += `
+            <li>
+              ${
+                esc(
+                  translation.language?.name ||
+                  translation.language?.code ||
+                  ''
+                )
+              }
+
+              —
+
+              ${esc(translation.word)}
+            </li>
+          `;
+        }
       }
-    });
+    );
 
 
     html += `
         </ul>
-
       </div>
     `;
   }
 
 
-  if(Array.isArray(sense.subsenses)){
+  if(
+    Array.isArray(sense.subsenses)
+  ){
 
     sense.subsenses.forEach(
       sub =>
-        html +=
-          renderSense(
-            sub,
-            depth+1
-          )
+        html += renderSense(
+          sub,
+          depth + 1
+        )
     );
   }
 
 
-  return html+'</div>';
+  return html + '</div>';
 }
 
 
@@ -2348,212 +2139,239 @@ function renderDictionary(data){
       'hidden'
     );
 
-    dictionary.innerHTML='';
+    dictionary.innerHTML = '';
 
     return;
   }
 
 
-  let html=`
+  /*
+    English entries are intentionally
+    moved to the top.
+  */
+
+  const entries =
+    prioritizeEnglish(
+      data.entries
+    );
+
+
+  let html = `
+
     <h2 class="dictionary-title">
-      ${esc(data.word||'')}
+      ${esc(data.word || '')}
     </h2>
 
     <div class="dictionary-word">
       Dictionary
     </div>
+
   `;
 
 
-  data.entries.forEach(entry=>{
-
-    html += `
-      <section class="dictionary-entry">
-    `;
-
-
-    const language =
-      entry.language?.name ||
-      entry.language?.code;
-
-
-    if(language){
+  entries.forEach(
+    entry => {
 
       html += `
-        <div class="dictionary-language">
-          ${esc(language)}
-          ${
-            entry.language?.code
-              ? ` (${esc(entry.language.code)})`
-              : ''
+        <section class="dictionary-entry">
+      `;
+
+
+      const language =
+        entry.language?.name ||
+        entry.language?.code;
+
+
+      if(language){
+
+        html += `
+          <div class="dictionary-language">
+            ${esc(language)}
+            ${
+              entry.language?.code
+                ? ` (${esc(entry.language.code)})`
+                : ''
+            }
+          </div>
+        `;
+      }
+
+
+      if(entry.partOfSpeech){
+
+        html += `
+          <div class="dictionary-pos">
+            ${esc(entry.partOfSpeech)}
+          </div>
+        `;
+      }
+
+
+      if(
+        Array.isArray(
+          entry.pronunciations
+        ) &&
+        entry.pronunciations.length
+      ){
+
+        html += `
+          <div class="dictionary-pronunciations">
+
+            <div class="dictionary-label">
+              Pronunciations
+            </div>
+
+            <ul class="dictionary-list">
+        `;
+
+
+        entry.pronunciations.forEach(
+          pronunciation => {
+
+            if(
+              pronunciation?.text
+            ){
+
+              html += `
+                <li>
+                  ${esc(pronunciation.text)}
+                  ${
+                    pronunciation.type
+                      ? ` — ${esc(pronunciation.type)}`
+                      : ''
+                  }
+                  ${dictionaryTags(
+                    pronunciation.tags
+                  )}
+                </li>
+              `;
+            }
           }
-        </div>
+        );
+
+
+        html += `
+            </ul>
+          </div>
+        `;
+      }
+
+
+      if(
+        Array.isArray(entry.forms) &&
+        entry.forms.length
+      ){
+
+        html += `
+          <div class="dictionary-forms">
+
+            <div class="dictionary-label">
+              Forms
+            </div>
+
+            <ul class="dictionary-list">
+        `;
+
+
+        entry.forms.forEach(
+          form => {
+
+            if(form?.word){
+
+              html += `
+                <li>
+                  ${esc(form.word)}
+                  ${dictionaryTags(form.tags)}
+                </li>
+              `;
+            }
+          }
+        );
+
+
+        html += `
+            </ul>
+          </div>
+        `;
+      }
+
+
+      if(
+        Array.isArray(entry.senses) &&
+        entry.senses.length
+      ){
+
+        html += `
+          <div class="dictionary-senses">
+
+            <div class="dictionary-label">
+              Definitions
+            </div>
+        `;
+
+
+        entry.senses.forEach(
+          sense => {
+            html += renderSense(
+              sense
+            );
+          }
+        );
+
+
+        html += `
+          </div>
+        `;
+      }
+
+
+      if(
+        Array.isArray(entry.synonyms) &&
+        entry.synonyms.length
+      ){
+
+        html += `
+          <div class="dictionary-relations">
+
+            <div class="dictionary-label">
+              Synonyms
+            </div>
+
+            <div>
+              ${entry.synonyms.map(esc).join(', ')}
+            </div>
+
+          </div>
+        `;
+      }
+
+
+      if(
+        Array.isArray(entry.antonyms) &&
+        entry.antonyms.length
+      ){
+
+        html += `
+          <div class="dictionary-relations">
+
+            <div class="dictionary-label">
+              Antonyms
+            </div>
+
+            <div>
+              ${entry.antonyms.map(esc).join(', ')}
+            </div>
+
+          </div>
+        `;
+      }
+
+
+      html += `
+        </section>
       `;
     }
-
-
-    if(entry.partOfSpeech){
-
-      html += `
-        <div class="dictionary-pos">
-          ${esc(entry.partOfSpeech)}
-        </div>
-      `;
-    }
-
-
-    if(
-      Array.isArray(entry.pronunciations) &&
-      entry.pronunciations.length
-    ){
-
-      html += `
-        <div class="dictionary-pronunciations">
-
-          <div class="dictionary-label">
-            Pronunciations
-          </div>
-
-          <ul class="dictionary-list">
-      `;
-
-
-      entry.pronunciations.forEach(p=>{
-
-        if(p?.text){
-
-          html += `
-            <li>
-              ${esc(p.text)}
-              ${
-                p.type
-                  ? ` — ${esc(p.type)}`
-                  : ''
-              }
-              ${dictionaryTags(p.tags)}
-            </li>
-          `;
-        }
-      });
-
-
-      html += `
-          </ul>
-        </div>
-      `;
-    }
-
-
-    if(
-      Array.isArray(entry.forms) &&
-      entry.forms.length
-    ){
-
-      html += `
-        <div class="dictionary-forms">
-
-          <div class="dictionary-label">
-            Forms
-          </div>
-
-          <ul class="dictionary-list">
-      `;
-
-
-      entry.forms.forEach(f=>{
-
-        if(f?.word){
-
-          html += `
-            <li>
-              ${esc(f.word)}
-              ${dictionaryTags(f.tags)}
-            </li>
-          `;
-        }
-      });
-
-
-      html += `
-          </ul>
-
-        </div>
-      `;
-    }
-
-
-    if(
-      Array.isArray(entry.senses) &&
-      entry.senses.length
-    ){
-
-      html += `
-        <div class="dictionary-senses">
-
-          <div class="dictionary-label">
-            Definitions
-          </div>
-      `;
-
-
-      entry.senses.forEach(
-        s =>
-          html += renderSense(s)
-      );
-
-
-      html += `
-        </div>
-      `;
-    }
-
-
-    if(
-      Array.isArray(entry.synonyms) &&
-      entry.synonyms.length
-    ){
-
-      html += `
-        <div class="dictionary-relations">
-
-          <div class="dictionary-label">
-            Synonyms
-          </div>
-
-          <div>
-            ${entry.synonyms.map(esc).join(', ')}
-          </div>
-
-        </div>
-      `;
-    }
-
-
-    if(
-      Array.isArray(entry.antonyms) &&
-      entry.antonyms.length
-    ){
-
-      html += `
-        <div class="dictionary-relations">
-
-          <div class="dictionary-label">
-            Antonyms
-          </div>
-
-          <div>
-            ${entry.antonyms.map(esc).join(', ')}
-          </div>
-
-        </div>
-      `;
-    }
-
-
-    html += `
-      </section>
-    `;
-  });
+  );
 
 
   if(data.source){
@@ -2562,6 +2380,7 @@ function renderDictionary(data){
       <div class="dictionary-source">
 
         Source:
+
         ${
           data.source.url
             ? `
@@ -2607,13 +2426,20 @@ function renderDictionary(data){
   }
 
 
-  dictionary.innerHTML=html;
+  dictionary.innerHTML =
+    html;
 
   dictionary.classList.remove(
     'hidden'
   );
 }
 
+
+/*
+==========================================================
+LOAD DICTIONARY
+==========================================================
+*/
 
 async function loadDictionary(q){
 
@@ -2627,7 +2453,7 @@ async function loadDictionary(q){
       'hidden'
     );
 
-    dictionary.innerHTML='';
+    dictionary.innerHTML = '';
 
     return;
   }
@@ -2637,19 +2463,25 @@ async function loadDictionary(q){
     'hidden'
   );
 
-  dictionary.innerHTML =
-    '<div class="dictionary-loading">Looking up the definition…</div>';
+
+  dictionary.innerHTML = `
+    <div class="dictionary-loading">
+      Looking up the definition…
+    </div>
+  `;
 
 
   try{
 
-    const r =
+    const response =
       await fetch(
-        `${WORKER_BASE}/api/dictionary?word=${encodeURIComponent(word)}`
+        api('/api/dictionary',{
+          word
+        })
       );
 
 
-    if(!r.ok){
+    if(!response.ok){
 
       dictionary.classList.add(
         'hidden'
@@ -2660,12 +2492,16 @@ async function loadDictionary(q){
 
 
     const data =
-      await r.json();
+      await response.json();
 
 
-    if(data?.entries?.length){
+    if(
+      data?.entries?.length
+    ){
 
-      renderDictionary(data);
+      renderDictionary(
+        data
+      );
 
     }else{
 
@@ -2673,44 +2509,529 @@ async function loadDictionary(q){
         'hidden'
       );
 
-      dictionary.innerHTML='';
+      dictionary.innerHTML = '';
     }
 
-  }catch{
+  }catch(error){
 
     dictionary.classList.add(
       'hidden'
     );
 
-    dictionary.innerHTML='';
+    dictionary.innerHTML = '';
   }
 }
 
 
-/* =========================================================
-   SEARCH
-   ========================================================= */
+/*
+==========================================================
+RENDER SEARCH RESULTS
+==========================================================
+*/
+
+function render(data){
+
+  home.classList.add(
+    'hidden'
+  );
+
+  results.classList.remove(
+    'hidden'
+  );
+
+
+  currentType =
+    data.type ||
+    currentType;
+
+
+  label.textContent =
+    data.query
+      ? `Results for “${data.query}”`
+      : '';
+
+
+  const resultsArray =
+    Array.isArray(data.results)
+      ? data.results
+      : [];
+
+
+  count.textContent =
+    resultsArray.length
+      ? `${resultsArray.length} results`
+      : '';
+
+
+  resultsInput.value =
+    data.query || '';
+
+
+  updateButtonState(
+    resultsSubmitButton,
+    resultsInput.value
+  );
+
+
+  updateTranslateMessage(
+    data.query || currentQ
+  );
+
+
+  document
+    .querySelectorAll(
+      '.search-type'
+    )
+    .forEach(
+      button =>
+        button.classList.toggle(
+          'active',
+          button.dataset.type ===
+          currentType
+        )
+    );
+
+
+  list.innerHTML = '';
+
+  pager.innerHTML = '';
+
+
+  if(!resultsArray.length){
+
+    list.innerHTML =
+      '<div class="empty">No results found.</div>';
+
+    return;
+  }
+
+
+  /*
+  IMAGES
+  */
+
+  if(currentType === 'images'){
+
+    const grid =
+      document.createElement(
+        'div'
+      );
+
+    grid.className =
+      'image-grid';
+
+
+    resultsArray.forEach(
+      result => {
+
+        const url =
+          result.url ||
+          result.properties?.url ||
+          '';
+
+        const image =
+          result.thumbnail ||
+          result.properties?.url ||
+          '';
+
+
+        if(!image){
+          return;
+        }
+
+
+        const element =
+          document.createElement(
+            'article'
+          );
+
+        element.className =
+          'image-result';
+
+
+        element.innerHTML = `
+
+          <a
+            href="${esc(url)}"
+            rel="noopener noreferrer"
+          >
+
+            <img
+              src="${esc(image)}"
+              alt="${esc(result.title || '')}"
+              loading="lazy"
+              referrerpolicy="no-referrer"
+            />
+
+          </a>
+
+          <div class="image-result-title">
+            ${esc(result.title || url)}
+          </div>
+
+          <div class="image-result-source">
+            ${esc(
+              result.source ||
+              result.meta_url?.hostname ||
+              ''
+            )}
+          </div>
+
+        `;
+
+
+        grid.appendChild(
+          element
+        );
+      }
+    );
+
+
+    if(grid.children.length){
+
+      list.appendChild(
+        grid
+      );
+
+    }else{
+
+      list.innerHTML =
+        '<div class="empty">No images found.</div>';
+    }
+
+
+  /*
+  MAPS
+  */
+
+  }else if(currentType === 'map'){
+
+    resultsArray.forEach(
+      result => {
+
+        const element =
+          document.createElement(
+            'article'
+          );
+
+        element.className =
+          'map-result';
+
+
+        const url =
+          result.url || '';
+
+        const title =
+          result.title ||
+          'Map result';
+
+
+        const address =
+          result.address
+            ? Object.values(
+                result.address
+              )
+              .filter(Boolean)
+              .join(', ')
+            : (
+                result.description ||
+                ''
+              );
+
+
+        element.innerHTML = `
+
+          <h2 class="map-result-title">
+
+            <a
+              href="${esc(url)}"
+              rel="noopener noreferrer"
+            >
+              ${esc(title)}
+            </a>
+
+          </h2>
+
+          <div class="map-result-address">
+            ${esc(address)}
+          </div>
+
+          ${
+            result.lat &&
+            result.lon
+              ? `
+                <div class="map-result-coords">
+                  ${esc(result.lat)},
+                  ${esc(result.lon)}
+                </div>
+              `
+              : ''
+          }
+
+        `;
+
+
+        list.appendChild(
+          element
+        );
+      }
+    );
+
+
+  /*
+  WEB + NEWS
+  */
+
+  }else{
+
+    resultsArray.forEach(
+      result => {
+
+        const element =
+          document.createElement(
+            'article'
+          );
+
+        element.className =
+          'result';
+
+
+        const url =
+          result.url || '';
+
+        const favicon =
+          result.meta_url?.favicon ||
+          '';
+
+        const host =
+          result.meta_url?.hostname ||
+          '';
+
+        const title =
+          result.title ||
+          url;
+
+        const description =
+          result.description ||
+          result.content ||
+          '';
+
+        const age =
+          result.age ||
+          result.publishedDate ||
+          '';
+
+        const thumb =
+          result.thumbnail?.src ||
+          result.thumbnail ||
+          '';
+
+
+        element.innerHTML = `
+
+          <div class="result-url">
+
+            ${
+              favicon
+                ? `
+                  <img
+                    class="result-favicon"
+                    src="${esc(favicon)}"
+                    alt=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer"
+                  />
+                `
+                : ''
+            }
+
+            <span>
+              ${esc(host || url)}
+            </span>
+
+          </div>
+
+
+          <h2>
+
+            <a
+              href="${esc(url)}"
+              rel="noopener noreferrer"
+            >
+              ${esc(title)}
+            </a>
+
+          </h2>
+
+
+          ${
+            description
+              ? `
+                <p class="snippet">
+                  ${window.flibidooRichText(description)}
+                </p>
+              `
+              : ''
+          }
+
+
+          ${
+            age
+              ? `
+                <div class="result-meta">
+                  ${esc(age)}
+                </div>
+              `
+              : ''
+          }
+
+
+          ${
+            thumb
+              ? `
+                <div class="result-inline-thumb">
+
+                  <img
+                    src="${esc(thumb)}"
+                    alt=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer"
+                  />
+
+                </div>
+              `
+              : ''
+          }
+
+        `;
+
+
+        list.appendChild(
+          element
+        );
+      }
+    );
+  }
+
+
+  /*
+  PAGINATION
+  */
+
+  const hasMore =
+    Boolean(
+      data.more_results_available ||
+      data.hasMore
+    );
+
+
+  if(currentPage > 0){
+
+    const button =
+      document.createElement(
+        'button'
+      );
+
+    button.textContent =
+      'Previous';
+
+
+    button.onclick =
+      () =>
+        search(
+          currentQ,
+          currentPage - 1,
+          currentType
+        );
+
+
+    pager.appendChild(
+      button
+    );
+  }
+
+
+  if(hasMore){
+
+    const button =
+      document.createElement(
+        'button'
+      );
+
+    button.textContent =
+      'Next';
+
+
+    button.onclick =
+      () =>
+        search(
+          currentQ,
+          currentPage + 1,
+          currentType
+        );
+
+
+    pager.appendChild(
+      button
+    );
+  }
+
+
+  /*
+  UPDATE URL
+
+  This uses the normal site URL,
+  not the Worker URL.
+  */
+
+  history.replaceState(
+    {},
+    '',
+    `/?q=${encodeURIComponent(
+      data.query || currentQ
+    )}&type=${encodeURIComponent(
+      currentType
+    )}&page=${currentPage}`
+  );
+}
+
+
+/*
+==========================================================
+SEARCH
+==========================================================
+*/
 
 async function search(
   q,
-  page=0,
-  type=currentType
+  page = 0,
+  type = currentType
 ){
 
-  q=q.trim();
+  q =
+    q.trim();
+
 
   if(!q){
     return;
   }
 
 
-  currentQ=q;
-  currentPage=page;
-  currentType=type;
+  currentQ =
+    q;
+
+  currentPage =
+    page;
+
+  currentType =
+    type;
 
 
-  input.value=q;
-  resultsInput.value=q;
+  input.value =
+    q;
+
+  resultsInput.value =
+    q;
 
 
   updateButtonState(
@@ -2724,9 +3045,6 @@ async function search(
   );
 
 
-  updateTranslateMessage(q);
-
-
   home.classList.add(
     'hidden'
   );
@@ -2736,71 +3054,103 @@ async function search(
   );
 
 
+  updateTranslateMessage(
+    q
+  );
+
+
   list.innerHTML =
     '<div class="empty">Searching…</div>';
 
 
-  count.textContent='';
+  count.textContent =
+    '';
+
 
   label.textContent =
     `Results for “${q}”`;
 
-  pager.innerHTML='';
+
+  pager.innerHTML =
+    '';
 
 
   document
-    .querySelectorAll('.search-type')
+    .querySelectorAll(
+      '.search-type'
+    )
     .forEach(
-      b =>
-        b.classList.toggle(
+      button =>
+        button.classList.toggle(
           'active',
-          b.dataset.type===currentType
+          button.dataset.type ===
+          currentType
         )
     );
 
 
   /*
-   * Dictionary runs independently.
-   */
+    Dictionary starts independently.
+    It doesn't prevent web search.
+  */
 
   const dictionaryPromise =
-    currentType==='web'
+    currentType === 'web'
       ? loadDictionary(q)
       : Promise.resolve();
 
 
   try{
 
-    const r =
+    const response =
       await fetch(
-        `${WORKER_BASE}/api/search?q=${encodeURIComponent(q)}&page=${page}&type=${encodeURIComponent(currentType)}`
+        api('/api/search',{
+          q,
+          page,
+          type:currentType
+        })
       );
 
 
-    const d =
-      await r.json();
+    let data;
 
+    try{
 
-    if(!r.ok){
+      data =
+        await response.json();
+
+    }catch(error){
 
       throw new Error(
-        d.error ||
-        'Search failed'
+        'Search server returned invalid data.'
       );
     }
 
 
-    render(d);
+    if(!response.ok){
 
-  }catch(e){
+      throw new Error(
+        data.error ||
+        'Search failed.'
+      );
+    }
 
-    list.innerHTML =
-      `<div class="error">
+
+    render(
+      data
+    );
+
+
+  }catch(error){
+
+    list.innerHTML = `
+      <div class="error">
         ${esc(
-          e.message ||
+          error.message ||
           'Search failed. Please try again.'
         )}
-      </div>`;
+      </div>
+    `;
   }
 
 
@@ -2808,22 +3158,19 @@ async function search(
 }
 
 
-/* =========================================================
-   INPUT EVENTS
-   ========================================================= */
+/*
+==========================================================
+INPUT EVENTS
+==========================================================
+*/
 
 input.addEventListener(
   'input',
-  ()=>{
+  () =>
     updateButtonState(
       submitButton,
       input.value
-    );
-
-    updateTranslateMessage(
-      input.value
-    );
-  }
+    )
 );
 
 
@@ -2835,16 +3182,11 @@ updateButtonState(
 
 resultsInput.addEventListener(
   'input',
-  ()=>{
+  () =>
     updateButtonState(
       resultsSubmitButton,
       resultsInput.value
-    );
-
-    updateTranslateMessage(
-      resultsInput.value
-    );
-  }
+    )
 );
 
 
@@ -2854,18 +3196,21 @@ updateButtonState(
 );
 
 
-/* =========================================================
-   FORMS
-   ========================================================= */
+/*
+==========================================================
+FORMS
+==========================================================
+*/
 
 form.addEventListener(
   'submit',
-  e=>{
-    e.preventDefault();
+  event => {
+
+    event.preventDefault();
 
     search(
       input.value,
-      1,
+      0,
       currentType
     );
   }
@@ -2874,8 +3219,9 @@ form.addEventListener(
 
 resultsForm.addEventListener(
   'submit',
-  e=>{
-    e.preventDefault();
+  event => {
+
+    event.preventDefault();
 
     search(
       resultsInput.value,
@@ -2886,15 +3232,17 @@ resultsForm.addEventListener(
 );
 
 
-/* =========================================================
-   CLEAR
-   ========================================================= */
+/*
+==========================================================
+CLEAR
+==========================================================
+*/
 
 document
   .querySelector('#clear')
-  .onclick=()=>{
+  .onclick = () => {
 
-    input.value='';
+    input.value = '';
 
     input.focus();
 
@@ -2902,105 +3250,146 @@ document
       submitButton,
       input.value
     );
-
-    updateTranslateMessage('');
   };
 
 
-/* =========================================================
-   I'M FEELING LUCKY
-   ========================================================= */
+/*
+==========================================================
+I'M FEELING LUCKY
+==========================================================
+*/
 
 document
   .querySelector('#lucky')
-  .onclick=async()=>{
+  .onclick = async () => {
 
     const q =
       input.value.trim();
+
 
     if(!q){
       return;
     }
 
 
+    /*
+      Translation queries should go
+      to FlibidooTranslate instead.
+    */
+
+    if(
+      isTranslationQuery(q)
+    ){
+
+      window.location.href =
+        'https://flibidoo-translate.devs.surf';
+
+      return;
+    }
+
+
     try{
 
-      const r =
+      const response =
         await fetch(
-          `${WORKER_BASE}/api/search?q=${encodeURIComponent(q)}&page=1&type=${encodeURIComponent(currentType)}`
+          api('/api/search',{
+            q,
+            page:0,
+            type:currentType
+          })
         );
 
 
-      const d =
-        await r.json();
+      const data =
+        await response.json();
 
 
-      if(d.results?.[0]?.url){
+      if(
+        data.results?.[0]?.url
+      ){
 
         location.href =
-          d.results[0].url;
+          data.results[0].url;
 
       }else{
 
         search(
           q,
-          1,
+          0,
           currentType
         );
       }
 
-    }catch{
+
+    }catch(error){
 
       search(
         q,
-        1,
+        0,
         currentType
       );
     }
   };
 
 
-/* =========================================================
-   SEARCH TYPES
-   ========================================================= */
+/*
+==========================================================
+SEARCH TYPE BUTTONS
+==========================================================
+*/
 
 document
-  .querySelectorAll('.search-type')
-  .forEach(btn=>{
+  .querySelectorAll(
+    '.search-type'
+  )
+  .forEach(
+    button => {
 
-    btn.addEventListener(
-      'click',
-      ()=>{
-        search(
-          resultsInput.value ||
-          currentQ,
-          0,
-          btn.dataset.type
-        );
-      }
-    );
-  });
+      button.addEventListener(
+        'click',
+        () => {
+
+          const q =
+            resultsInput.value ||
+            currentQ;
 
 
-/* =========================================================
-   INITIAL URL SEARCH
-   ========================================================= */
+          search(
+            q,
+            0,
+            button.dataset.type
+          );
+        }
+      );
+    }
+  );
+
+
+/*
+==========================================================
+INITIAL URL SEARCH
+==========================================================
+*/
 
 const params =
   new URLSearchParams(
     location.search
   );
 
+
 const initialQuery =
   params.get('q');
+
 
 const initialPage =
   Math.max(
     0,
     Number(
-      params.get('page') || 0
+      params.get('page') ||
+      0
     )
   );
+
 
 const initialType =
   [
@@ -3023,388 +3412,21 @@ if(initialQuery){
     initialType
   );
 }
-</script>
 
 
-<!-- =======================================================
-     FAVICON HELPERS
-     ======================================================= -->
+/*
+==========================================================
+AUTOCOMPLETE
+==========================================================
+*/
 
-<script>
-function flibidooFavicon(url){
-
-  try{
-
-    const u =
-      new URL(url);
-
-    return (
-      `https://www.google.com/s2/favicons?domain=` +
-      `${encodeURIComponent(u.hostname)}` +
-      `&sz=64`
-    );
-
-  }catch(_){
-
-    return '';
-  }
-}
-
-
-function flibidooResultIcon(url){
-
-  const src =
-    flibidooFavicon(url);
-
-  return src
-    ? `
-      <img
-        class="result-site-icon"
-        src="${src}"
-        alt=""
-        loading="lazy"
-        referrerpolicy="no-referrer"
-      >
-    `
-    : '';
-}
-</script>
-
-
-<!-- =======================================================
-     INDEPENDENT DICTIONARY FALLBACK
-     ======================================================= -->
-
-<script>
 (() => {
 
-  const DICT_BASE =
-    'https://freedictionaryapi.com/api/v1/entries/all/';
-
-
-  const qEl =
-    document.querySelector(
-      '#searchInput, input[name="q"], input[type="search"]'
-    );
-
-
-  const dictEl =
-    document.querySelector(
-      '#dictionary, .dictionary, .definition-panel, .dictionary-panel'
-    );
-
-
-  function dictionaryQuery(q){
-
-    q=(q||'').trim();
-
-    if(!q){
-      return '';
-    }
-
-
-    const m =
-      q.match(
-        /^(?:meaning of|definition of)\s+(.+)$/i
-      ) ||
-      q.match(
-        /^(.+?)\s+(?:meaning|means|definition)$/i
-      );
-
-
-    return m
-      ? m[1].trim()
-      : q;
-  }
-
-
-  function looksLikeDefinition(q){
-
-    const clean =
-      (q||'').trim();
-
-
-    return (
-      /^[A-Za-z][A-Za-z'-]{0,31}$/.test(clean) ||
-
-      /^(?:meaning of|definition of)\s+[A-Za-z][A-Za-z'-]{0,31}$/i
-        .test(clean) ||
-
-      /^[A-Za-z][A-Za-z'-]{0,31}\s+(?:meaning|means|definition)$/i
-        .test(clean)
-    );
-  }
-
-
-  async function loadDictionary(q){
-
-    if(
-      !dictEl ||
-      !looksLikeDefinition(q)
-    ){
-      return;
-    }
-
-
-    const word =
-      dictionaryQuery(q);
-
-
-    if(!word){
-      return;
-    }
-
-
-    try{
-
-      const r =
-        await fetch(
-          DICT_BASE +
-          encodeURIComponent(word)
-        );
-
-
-      if(!r.ok){
-        return;
-      }
-
-
-      const data =
-        await r.json();
-
-
-      if(
-        !data ||
-        !Array.isArray(data.entries) ||
-        !data.entries.length
-      ){
-        return;
-      }
-
-
-      if(
-        typeof window.showDictionary ===
-        'function'
-      ){
-
-        window.showDictionary(data);
-
-        return;
-      }
-
-
-      if(
-        typeof window.renderDictionary ===
-        'function'
-      ){
-
-        window.renderDictionary(data);
-
-        return;
-      }
-
-
-      const entries =
-        data.entries
-          .flatMap(
-            e =>
-              (e.senses || [])
-                .map(
-                  sense=>({
-
-                    pos:
-                      e.partOfSpeech ||
-                      '',
-
-                    definition:
-                      sense.definition ||
-                      '',
-
-                    examples:
-                      sense.examples ||
-                      [],
-
-                    synonyms:
-                      sense.synonyms ||
-                      [],
-
-                    antonyms:
-                      sense.antonyms ||
-                      []
-                  })
-                )
-          )
-          .filter(
-            x =>
-              x.definition ||
-              x.examples.length ||
-              x.synonyms.length ||
-              x.antonyms.length
-          );
-
-
-      dictEl.innerHTML=`
-        <div class="dictionary-fallback">
-
-          <div class="dictionary-word">
-            ${escapeHtml(
-              data.word ||
-              word
-            )}
-          </div>
-
-          ${
-            entries.map(
-              e => `
-
-                <section>
-
-                  ${
-                    e.pos
-                      ? `
-                        <div class="dictionary-pos">
-                          ${escapeHtml(e.pos)}
-                        </div>
-                      `
-                      : ''
-                  }
-
-                  ${
-                    e.definition
-                      ? `
-                        <div class="dictionary-definition">
-                          ${escapeHtml(e.definition)}
-                        </div>
-                      `
-                      : ''
-                  }
-
-                  ${
-                    e.examples
-                      .map(
-                        x =>
-                          `
-                            <div class="dictionary-example">
-                              “${escapeHtml(x)}”
-                            </div>
-                          `
-                      )
-                      .join('')
-                  }
-
-                  ${
-                    e.synonyms.length
-                      ? `
-                        <div class="dictionary-line">
-                          <b>Synonyms:</b>
-                          ${e.synonyms.map(escapeHtml).join(', ')}
-                        </div>
-                      `
-                      : ''
-                  }
-
-                  ${
-                    e.antonyms.length
-                      ? `
-                        <div class="dictionary-line">
-                          <b>Antonyms:</b>
-                          ${e.antonyms.map(escapeHtml).join(', ')}
-                        </div>
-                      `
-                      : ''
-                  }
-
-                </section>
-              `
-            ).join('')
-          }
-
-        </div>
-      `;
-
-
-      dictEl.hidden=false;
-
-    }catch(_){
-
-      /*
-       * Dictionary failure never blocks
-       * web search.
-       */
-    }
-  }
-
-
-  function escapeHtml(v){
-
-    return String(v).replace(
-      /[&<>"']/g,
-      c=>({
-        '&':'&amp;',
-        '<':'&lt;',
-        '>':'&gt;',
-        '"':'&quot;',
-        "'":'&#39;'
-      }[c])
-    );
-  }
-
-
-  window.flibidooLoadDictionary =
-    loadDictionary;
-
-
-  document.addEventListener(
-    'keydown',
-    e=>{
-
-      if(
-        e.key==='Enter' &&
-        e.target.matches(
-          'input,textarea'
-        )
-      ){
-
-        const q =
-          e.target.value;
-
-        if(
-          looksLikeDefinition(q)
-        ){
-
-          loadDictionary(q);
-        }
-      }
-    },
-    true
-  );
-
-
-  window.addEventListener(
-    'flibidoo:search',
-    e =>
-      loadDictionary(
-        e.detail?.query || ''
-      )
-  );
-
-})();
-</script>
-
-
-<!-- =======================================================
-     AUTOCOMPLETE
-     ======================================================= -->
-
-<script>
-(() => {
-
-  const inputs =
-    [
-      ...document.querySelectorAll(
-        '#q, #resultsQ'
-      )
-    ];
+  const inputs = [
+    ...document.querySelectorAll(
+      '#q,#resultsQ'
+    )
+  ];
 
 
   if(!inputs.length){
@@ -3412,23 +3434,13 @@ function flibidooResultIcon(url){
   }
 
 
-  let timer=null;
-  let controller=null;
-  let selected=-1;
-  let items=[];
+  let timer = null;
 
+  let controller = null;
 
-  const esc=v =>
-    String(v??'').replace(
-      /[&<>"']/g,
-      c=>({
-        '&':'&amp;',
-        '<':'&lt;',
-        '>':'&gt;',
-        '"':'&quot;',
-        "'":'&#39;'
-      }[c])
-    );
+  let selected = -1;
+
+  let items = [];
 
 
   function setup(input){
@@ -3444,36 +3456,50 @@ function flibidooResultIcon(url){
 
 
     const box =
-      document.createElement('div');
+      document.createElement(
+        'div'
+      );
 
 
     box.className =
       'flibidoo-suggestions';
 
-    box.hidden=true;
+    box.hidden =
+      true;
 
-    wrap.appendChild(box);
+
+    wrap.appendChild(
+      box
+    );
 
 
     function close(){
 
-      box.hidden=true;
-      box.innerHTML='';
-      selected=-1;
+      box.hidden =
+        true;
+
+      box.innerHTML =
+        '';
+
+      selected =
+        -1;
     }
 
 
     function choose(q){
 
-      input.value=q;
+      input.value =
+        q;
 
       close();
 
-      const f =
+
+      const form =
         input.closest('form');
 
-      if(f){
-        f.requestSubmit();
+
+      if(form){
+        form.requestSubmit();
       }
     }
 
@@ -3484,7 +3510,7 @@ function flibidooResultIcon(url){
         input.value.trim();
 
 
-      if(q.length<2){
+      if(q.length < 2){
 
         close();
 
@@ -3493,6 +3519,7 @@ function flibidooResultIcon(url){
 
 
       if(controller){
+
         controller.abort();
       }
 
@@ -3503,9 +3530,11 @@ function flibidooResultIcon(url){
 
       try{
 
-        const r =
+        const response =
           await fetch(
-            `${WORKER_BASE}/api/suggest?q=${encodeURIComponent(q)}`,
+            api('/api/suggest',{
+              q
+            }),
             {
               signal:
                 controller.signal
@@ -3513,18 +3542,24 @@ function flibidooResultIcon(url){
           );
 
 
-        if(!r.ok){
+        if(!response.ok){
+
           throw new Error();
         }
 
 
-        const d =
-          await r.json();
+        const data =
+          await response.json();
 
 
         items =
-          Array.isArray(d.suggestions)
-            ? d.suggestions.slice(0,8)
+          Array.isArray(
+            data.suggestions
+          )
+            ? data.suggestions.slice(
+                0,
+                8
+              )
             : [];
 
 
@@ -3538,37 +3573,39 @@ function flibidooResultIcon(url){
 
         box.innerHTML =
           items.map(
-            (x,i)=>`
+            (item,index) => `
 
               <button
                 class="flibidoo-suggestion"
                 type="button"
-                data-i="${i}"
+                data-i="${index}"
               >
 
                 ${
-                  x.img
+                  item.img
                     ? `
                       <img
-                        src="${esc(x.img)}"
+                        src="${esc(item.img)}"
                         alt=""
                         loading="lazy"
                         referrerpolicy="no-referrer"
-                      >
+                      />
                     `
                     : ''
                 }
 
                 <span>
 
-                  ${esc(x.query)}
+                  ${esc(
+                    item.query
+                  )}
 
                   ${
-                    x.entity &&
-                    x.desc
+                    item.entity &&
+                    item.desc
                       ? `
                         <small>
-                          ${esc(x.desc)}
+                          ${esc(item.desc)}
                         </small>
                       `
                       : ''
@@ -3577,37 +3614,49 @@ function flibidooResultIcon(url){
                 </span>
 
               </button>
-
             `
           ).join('');
 
 
-        box.hidden=false;
+        box.hidden =
+          false;
 
 
         box
-          .querySelectorAll('button')
-          .forEach(btn=>{
+          .querySelectorAll(
+            'button'
+          )
+          .forEach(
+            button => {
 
-            btn.addEventListener(
-              'mousedown',
-              e=>{
+              button.addEventListener(
+                'mousedown',
+                event => {
 
-                e.preventDefault();
-
-                choose(
-                  items[
-                    Number(
-                      btn.dataset.i
-                    )
-                  ].query
-                );
-              }
-            );
-          });
+                  event.preventDefault();
 
 
-      }catch(_){
+                  const item =
+                    items[
+                      Number(
+                        button.dataset.i
+                      )
+                    ];
+
+
+                  if(item){
+
+                    choose(
+                      item.query
+                    );
+                  }
+                }
+              );
+            }
+          );
+
+
+      }catch(error){
 
         close();
       }
@@ -3616,9 +3665,12 @@ function flibidooResultIcon(url){
 
     input.addEventListener(
       'input',
-      ()=>{
+      () => {
 
-        clearTimeout(timer);
+        clearTimeout(
+          timer
+        );
+
 
         timer =
           setTimeout(
@@ -3631,46 +3683,54 @@ function flibidooResultIcon(url){
 
     input.addEventListener(
       'keydown',
-      e=>{
+      event => {
 
         if(box.hidden){
           return;
         }
 
 
-        if(e.key==='ArrowDown'){
+        if(
+          event.key ===
+          'ArrowDown'
+        ){
 
-          e.preventDefault();
+          event.preventDefault();
 
           selected =
             Math.min(
-              selected+1,
-              items.length-1
+              selected + 1,
+              items.length - 1
             );
 
-        }else if(e.key==='ArrowUp'){
+        }else if(
+          event.key ===
+          'ArrowUp'
+        ){
 
-          e.preventDefault();
+          event.preventDefault();
 
           selected =
             Math.max(
-              selected-1,
+              selected - 1,
               -1
             );
 
         }else if(
-          e.key==='Enter' &&
-          selected>=0
+          event.key ===
+          'Enter' &&
+          selected >= 0
         ){
 
-          e.preventDefault();
+          event.preventDefault();
 
           choose(
             items[selected].query
           );
 
         }else if(
-          e.key==='Escape'
+          event.key ===
+          'Escape'
         ){
 
           close();
@@ -3680,13 +3740,17 @@ function flibidooResultIcon(url){
 
 
         box
-          .querySelectorAll('button')
+          .querySelectorAll(
+            'button'
+          )
           .forEach(
-            (btn,i)=>
-              btn.classList.toggle(
+            (button,index) => {
+
+              button.classList.toggle(
                 'active',
-                i===selected
-              )
+                index === selected
+              );
+            }
           );
       }
     );
@@ -3694,9 +3758,14 @@ function flibidooResultIcon(url){
 
     document.addEventListener(
       'click',
-      e=>{
+      event => {
 
-        if(!wrap.contains(e.target)){
+        if(
+          !wrap.contains(
+            event.target
+          )
+        ){
+
           close();
         }
       }
@@ -3704,179 +3773,12 @@ function flibidooResultIcon(url){
   }
 
 
-  inputs.forEach(setup);
+  inputs.forEach(
+    setup
+  );
 
 })();
-</script>
 
-
-<!-- =======================================================
-     RICH DESCRIPTION RENDERER
-     ======================================================= -->
-
-<script>
-(() => {
-
-  window.flibidooRichText =
-    function(value){
-
-      let src =
-        String(value ?? '');
-
-
-      if(!src){
-        return '';
-      }
-
-
-      const ta =
-        document.createElement(
-          'textarea'
-        );
-
-
-      ta.innerHTML=src;
-
-      src=ta.value;
-
-
-      src =
-        src
-          .replace(
-            /<\s*(script|iframe|object|embed|form|input|button|textarea|select|style|link|meta|svg|math)[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi,
-            ''
-          )
-          .replace(
-            /<\s*(script|iframe|object|embed|form|input|button|textarea|select|style|link|meta|svg|math)[^>]*\/?>/gi,
-            ''
-          )
-          .replace(
-            /\s+on[a-z]+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi,
-            ''
-          )
-          .replace(
-            /\s+(href|src)\s*=\s*(['"])\s*javascript:[\s\S]*?\2/gi,
-            ''
-          );
-
-
-      const allowed=[];
-
-
-      src =
-        src.replace(
-          /<\/?(strong|b|em|i|u|s|del|mark|small|br|code|kbd|sub|sup|a)(?:\s+[^>]*)?>/gi,
-          m=>{
-
-            const idx =
-              allowed.push(m)-1;
-
-            return `
-              @@FLIBIDOO_TAG_${idx}@@
-            `;
-          }
-        );
-
-
-      src =
-        src
-          .replace(
-            /</g,
-            '&lt;'
-          )
-          .replace(
-            />/g,
-            '&gt;'
-          );
-
-
-      src =
-        src.replace(
-          /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,
-          '<a href="$2" rel="noopener noreferrer">$1</a>'
-        );
-
-
-      src =
-        src.replace(
-          /`([^`]+)`/g,
-          '<code>$1</code>'
-        );
-
-
-      src =
-        src.replace(
-          /\*\*([^*]+)\*\*/g,
-          '<strong>$1</strong>'
-        );
-
-
-      src =
-        src.replace(
-          /__([^_]+)__/g,
-          '<strong>$1</strong>'
-        );
-
-
-      src =
-        src.replace(
-          /~~([^~]+)~~/g,
-          '<del>$1</del>'
-        );
-
-
-      src =
-        src.replace(
-          /(^|[\s(])\*([^*\n]+)\*(?=$|[\s).,!?:;])/g,
-          '$1<em>$2</em>'
-        );
-
-
-      src =
-        src.replace(
-          /(^|[\s(])_([^_\n]+)_(?=$|[\s).,!?:;])/g,
-          '$1<em>$2</em>'
-        );
-
-
-      src =
-        src.replace(
-          /^#{1,6}\s+(.+)$/gm,
-          '<strong>$1</strong>'
-        );
-
-
-      src =
-        src.replace(
-          /^\s*[-*]\s+(.+)$/gm,
-          '• $1'
-        );
-
-
-      src =
-        src.replace(
-          /^\s*\d+\.\s+(.+)$/gm,
-          '$1'
-        );
-
-
-      src =
-        src.replace(
-          /@@FLIBIDOO_TAG_(\d+)@@/g,
-          (_,i)=>
-            allowed[
-              Number(i)
-            ] || ''
-        );
-
-
-      return src.replace(
-        /\r?\n/g,
-        '<br>'
-      );
-    };
-
-})();
 </script>
 
 </body>
