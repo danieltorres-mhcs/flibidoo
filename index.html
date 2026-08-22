@@ -91,7 +91,86 @@ input{
   align-items:center;
   justify-content:center;
 }
+/* Long-press image download */
+.image-result {
+  position: relative;
+  min-width: 0;
+}
 
+.image-result-image-wrap {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: rgba(255,255,255,.02);
+  border: 1px solid var(--line2);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.image-result-image-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.longpress-progress {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .12s ease;
+  background: rgba(0,0,0,.18);
+}
+
+.longpress-progress.active {
+  opacity: 1;
+}
+
+.longpress-ring {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      rgba(255,255,255,.95) var(--progress, 0%),
+      rgba(255,255,255,.18) var(--progress, 0%)
+    );
+  padding: 4px;
+  transform: scale(.9);
+}
+
+.longpress-ring::after {
+  content: "↓";
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(29,12,34,.94);
+  color: white;
+  font-size: 25px;
+  line-height: 1;
+}
+
+.image-result-image-wrap.downloading .longpress-ring {
+  animation: downloadPulse .35s ease;
+}
+
+@keyframes downloadPulse {
+  0% { transform: scale(.9); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
 /*
   Large logo.
 
@@ -2809,90 +2888,54 @@ async function render(data){
      IMAGES
   ======================================================= */
 
-  if(currentType === 'images'){
+  if(currentType==='images'){
+  const grid=document.createElement('div');
+  grid.className='image-grid';
 
-    const grid =
-      document.createElement('div');
+  a.forEach(r=>{
+    const u=r.url || r.properties?.url || '';
+    const img=r.thumbnail || r.properties?.url || '';
 
-    grid.className =
-      'image-grid';
+    if(!img) return;
 
+    const el=document.createElement('article');
+    el.className='image-result';
 
-    array.forEach(result=>{
+    const title=r.title || u;
+    const source=r.source || r.meta_url?.hostname || '';
 
-      const url =
-        firstValue(
-          result.url,
-          result.properties?.url
-        );
-
-      const image =
-        firstValue(
-          result.thumbnail,
-          result.thumbnail_url,
-          result.image,
-          result.image_url,
-          result.properties?.url
-        );
-
-
-      if(!image)return;
-
-
-      const article =
-        document.createElement('article');
-
-      article.className =
-        'image-result';
-
-
-      article.innerHTML = `
-        <a
-          href="${esc(decodeText(url))}"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+    el.innerHTML=`
+      <a href="${esc(u)}" class="image-result-link">
+        <div class="image-result-image-wrap">
           <img
-            src="${esc(decodeText(image))}"
-            alt="${esc(decodeText(result.title || ''))}"
+            src="${esc(img)}"
+            alt="${esc(title)}"
             loading="lazy"
             referrerpolicy="no-referrer"
+            draggable="false"
           >
-        </a>
 
-        <div class="image-result-title">
-          ${esc(decodeText(result.title || url))}
+          <div class="longpress-progress">
+            <div class="longpress-ring"></div>
+          </div>
         </div>
+      </a>
 
-        <div class="image-result-source">
-          ${esc(
-            decodeText(
-              result.source ||
-              result.meta_url?.hostname ||
-              getHostname(url)
-            )
-          )}
-        </div>
-      `;
+      <div class="image-result-title">${esc(title)}</div>
+      <div class="image-result-source">${esc(source)}</div>
+    `;
 
+    grid.appendChild(el);
 
-      grid.appendChild(article);
+    setupImageLongPress(el, img, title);
+  });
 
-    });
-
-
-    if(grid.children.length){
-
-      list.appendChild(grid);
-
-    }else{
-
-      list.innerHTML =
-        '<div class="empty">No images found.</div>';
-
-    }
-
-
+  if(grid.children.length){
+    list.appendChild(grid);
+  }else{
+    list.innerHTML='<div class="empty">No images found.</div>';
+  }
+        
   /* =======================================================
      WEB / NEWS
   ======================================================= */
@@ -3113,7 +3156,224 @@ async function render(data){
 
 }
 
+const LONG_PRESS_TIME = 2000;
 
+function setupImageLongPress(el, imageUrl, title){
+  const wrap = el.querySelector('.image-result-image-wrap');
+  const progress = el.querySelector('.longpress-progress');
+  const ring = el.querySelector('.longpress-ring');
+  const link = el.querySelector('.image-result-link');
+
+  let timer = null;
+  let animation = null;
+  let startTime = 0;
+  let longPressTriggered = false;
+
+  function resetPress(){
+    if(timer){
+      clearTimeout(timer);
+      timer = null;
+    }
+
+    if(animation){
+      cancelAnimationFrame(animation);
+      animation = null;
+    }
+
+    wrap.classList.remove('downloading');
+    progress.classList.remove('active');
+    ring.style.setProperty('--progress', '0%');
+    startTime = 0;
+  }
+
+  function updateProgress(){
+    if(!startTime) return;
+
+    const elapsed = performance.now() - startTime;
+    const percent = Math.min(elapsed / LONG_PRESS_TIME, 1);
+
+    ring.style.setProperty('--progress', `${percent * 100}%`);
+
+    if(percent < 1){
+      animation = requestAnimationFrame(updateProgress);
+    }
+  }
+
+  function beginPress(e){
+    /*
+     * Only treat the primary mouse button as a long press.
+     * Touch/pen are also supported.
+     */
+    if(e.type === 'mousedown' && e.button !== 0) return;
+
+    longPressTriggered = false;
+
+    if(timer) clearTimeout(timer);
+    if(animation) cancelAnimationFrame(animation);
+
+    startTime = performance.now();
+
+    progress.classList.add('active');
+    ring.style.setProperty('--progress', '0%');
+
+    animation = requestAnimationFrame(updateProgress);
+
+    timer = setTimeout(async ()=>{
+      longPressTriggered = true;
+
+      ring.style.setProperty('--progress', '100%');
+      wrap.classList.add('downloading');
+
+      await downloadImage(imageUrl, title);
+
+      setTimeout(()=>{
+        resetPress();
+      }, 250);
+
+    }, LONG_PRESS_TIME);
+  }
+
+  function endPress(e){
+    /*
+     * If the 2-second gesture completed, don't follow the image link.
+     */
+    if(longPressTriggered){
+      if(e){
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      resetPress();
+      return;
+    }
+
+    resetPress();
+  }
+
+  /*
+   * Prevent the browser's native context menu on long press.
+   */
+  wrap.addEventListener('contextmenu', e=>{
+    e.preventDefault();
+  });
+
+  /*
+   * Touch.
+   */
+  wrap.addEventListener('touchstart', beginPress, {
+    passive: true
+  });
+
+  wrap.addEventListener('touchend', endPress, {
+    passive: false
+  });
+
+  wrap.addEventListener('touchcancel', resetPress, {
+    passive: true
+  });
+
+  /*
+   * Mouse / trackpad.
+   */
+  wrap.addEventListener('mousedown', beginPress);
+
+  wrap.addEventListener('mouseup', endPress);
+
+  wrap.addEventListener('mouseleave', ()=>{
+    if(!longPressTriggered) resetPress();
+  });
+
+  /*
+   * Don't let the browser start dragging the image.
+   */
+  wrap.addEventListener('dragstart', e=>{
+    e.preventDefault();
+  });
+
+  /*
+   * If the long press fired, prevent the click from navigating.
+   */
+  link.addEventListener('click', e=>{
+    if(longPressTriggered){
+      e.preventDefault();
+      e.stopPropagation();
+      longPressTriggered = false;
+    }
+  });
+}
+
+
+async function downloadImage(url, title='image'){
+  try{
+    /*
+     * Try fetching the image as a blob first.
+     * This works when the image host permits CORS.
+     */
+    const response = await fetch(url, {
+      mode: 'cors',
+      credentials: 'omit'
+    });
+
+    if(!response.ok){
+      throw new Error('Image request failed');
+    }
+
+    const blob = await response.blob();
+
+    const blobUrl = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = blobUrl;
+    a.download = makeFilename(title, blob.type);
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    setTimeout(()=>{
+      URL.revokeObjectURL(blobUrl);
+    }, 5000);
+
+    return true;
+
+  }catch(err){
+    /*
+     * Some image hosts block cross-origin fetches.
+     *
+     * In that case, fall back to the image URL. The browser/site may
+     * decide whether it can download it or simply navigate to it.
+     */
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = makeFilename(title);
+    a.rel = 'noopener';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    return false;
+  }
+}
+
+
+function makeFilename(title, mime=''){
+  let name = String(title || 'image')
+    .replace(/[<>:"/\\|?*\x00-\x1F]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 100);
+
+  if(!name) name = 'image';
+
+  let ext = '';
+
+  if(mime.includes('png')) ext='.png';
+  else if(mime.includes('jpeg') || mime.includes('jpg')) ext='.jpg';
+  else if(mime.includes('webp')) ext='.webp';
+  else if(mime.includes('gif')) ext='.gif';
+
+  return name + ext;
+}
+      
 /* =========================================================
    SEARCH
 ========================================================= */
